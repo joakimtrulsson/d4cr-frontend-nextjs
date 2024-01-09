@@ -1,4 +1,4 @@
 node_modules
-.keystone/admin
-keystone.db
+backend/.keystone/admin
+database.db
 *.log
