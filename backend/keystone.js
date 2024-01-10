@@ -6,10 +6,11 @@ import { withAuth, session } from './auth';
 
 export default withAuth(
   config({
-    db: {
-      provider: 'sqlite',
-      url: 'file:./keystone.db',
-    },
+    // db: {
+    //   provider: 'mqsql',
+    //   url: 'mysql://dbuser:dbpass@localhost:3306/keystone',
+    //   idField: { kind: 'uuid' },
+    // },
     lists,
     session,
   })
