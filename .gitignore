@@ -44,9 +44,12 @@ Thumbs.db
 *.mp4
 *.tiff
 *.avi
-*.flv
+*.flv1
 *.mov
 *.wmv
 
+
 backend/.keystone/admin
 database.db
+keystone.db
+.env
