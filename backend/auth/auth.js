@@ -8,17 +8,45 @@ if (!sessionSecret && process.env.NODE_ENV !== 'production') {
   sessionSecret = randomBytes(32).toString('hex');
 }
 
+const sessionMaxAge = process.env.SESSION_MAX_AGE;
+
 const { withAuth } = createAuth({
   listKey: 'User',
-  identityField: 'email',
-  sessionData: 'name createdAt',
+  // Ett identity field på usern.
+  identityField: 'username',
   secretField: 'password',
   initFirstItem: {
-    fields: ['name', 'email', 'password'],
-  },
-});
+    fields: ['username', 'password'],
 
-const sessionMaxAge = 60 * 60 * 24 * 30;
+    // Följande data sparas som default på den första användaren.
+    itemData: {
+      role: {
+        create: {
+          name: 'Admin Role',
+          canCreateItems: true,
+          canManageAllItems: true,
+          canSeeOtherUsers: true,
+          canEditOtherUsers: true,
+          canManageUsers: true,
+          canManageRoles: true,
+        },
+      },
+    },
+  },
+
+  sessionData: `
+    username
+    role {
+      id
+      name
+      canCreateItems
+      canManageAllItems
+      canSeeOtherUsers
+      canEditOtherUsers
+      canManageUsers
+      canManageRoles
+    }`,
+});
 
 const session = statelessSessions({
   maxAge: sessionMaxAge,
