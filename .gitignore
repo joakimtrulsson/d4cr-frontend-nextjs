@@ -53,3 +53,4 @@ backend/.keystone/admin
 database.db
 keystone.db
 .env
+backend/public/

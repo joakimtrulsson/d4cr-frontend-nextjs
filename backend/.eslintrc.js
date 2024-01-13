@@ -4,7 +4,8 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: 'eslint:recommended',
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  plugins: ['react'],
   overrides: [
     {
       env: {
@@ -19,11 +20,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: { jsx: true },
   },
   rules: {
     'no-console': 'warn',
     'no-unused-vars': 'warn',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
+    'react/prop-types': 'off',
   },
 };

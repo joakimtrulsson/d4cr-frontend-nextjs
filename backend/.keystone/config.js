@@ -32,7 +32,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core3 = require("@keystone-6/core");
+var import_core4 = require("@keystone-6/core");
 var import_dotenv = __toESM(require("dotenv"));
 
 // schemas/userSchema.js
@@ -192,10 +192,42 @@ var roleSchema = (0, import_core2.list)({
   }
 });
 
+// schemas/testSchema.js
+var import_core3 = require("@keystone-6/core");
+var import_fields3 = require("@keystone-6/core/fields");
+var import_access5 = require("@keystone-6/core/access");
+var testSchema = (0, import_core3.list)({
+  access: {
+    operation: {
+      ...(0, import_access5.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields3.text)(),
+    sections: (0, import_fields3.json)({
+      ui: {
+        views: "./customComponents/sections/Main.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    })
+  }
+});
+
 // schema.js
 var lists = {
   User: userSchema,
-  Role: roleSchema
+  Role: roleSchema,
+  Test: testSchema
 };
 
 // auth/auth.js
@@ -247,15 +279,58 @@ var session = (0, import_session.statelessSessions)({
   secret: sessionSecret
 });
 
+// controllers/uploadController.js
+var import_multer = __toESM(require("multer"));
+var import_sharp = __toESM(require("sharp"));
+var multerStorage = import_multer.default.memoryStorage();
+var multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new Error("Not an image. Please upload only images."), false);
+  }
+};
+var upload = (0, import_multer.default)({
+  storage: multerStorage,
+  fileFilter: multerFilter
+});
+var uploadImage = upload.single("image");
+var resizeImage = async (req, res, commonContext) => {
+  try {
+    req.file.filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
+    await (0, import_sharp.default)(req.file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${req.file.filename}`);
+    res.status(200).json({
+      status: "success",
+      data: {
+        filnamn: req.file.filename
+      }
+    });
+  } catch {
+    res.send("error");
+  }
+};
+
 // keystone.js
 import_dotenv.default.config();
 var { ASSET_BASE_URL, PORT, MAX_FILE_SIZE, FRONTEND_URL, DATABASE_URL } = process.env;
+function withContext(commonContext, f) {
+  return async (req, res) => {
+    return f(req, res, await commonContext.withRequest(req, res));
+  };
+}
 var keystone_default = withAuth(
-  (0, import_core3.config)({
+  (0, import_core4.config)({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
-      cors: { origin: [FRONTEND_URL], credentials: true }
+      cors: { origin: ["*"], credentials: true },
+      extendExpressApp: (app, commonContext) => {
+        app.patch(
+          "/api/imageupload",
+          uploadImage,
+          withContext(commonContext, resizeImage)
+        );
+      }
     },
     db: {
       provider: "mysql",
