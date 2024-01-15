@@ -1,0 +1,14 @@
+@import './assets/colors.scss';
+// @import './assets/fonts.scss';
+
+* {
+    // font-style: $font-weight-medium-static;
+}
+
+body {
+    background-color: white;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0; 
+}
+
