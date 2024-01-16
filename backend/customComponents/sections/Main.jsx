@@ -79,6 +79,16 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
 
+      {!editFormData && activeSection === 'BULLETLIST' && (
+        <LargeBulletList
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
       {/* Renderar Edit */}
 
       {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (

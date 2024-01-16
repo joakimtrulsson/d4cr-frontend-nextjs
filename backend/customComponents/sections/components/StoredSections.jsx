@@ -31,10 +31,19 @@ function StoredSections({
         return (
           <li key={section.id} className={styles.list.li}>
             <div className={styles.list.data}>
-              <div>
+              {/* <div>
                 {section.sectionType === 'CHAPTERTEASER'
                   ? 'Chapter Teaser'
                   : `${section.title} ${section.sectionType}`}
+              </div> */}
+              <div>
+                {section.sectionType === 'CHAPTERTEASER'
+                  ? 'Chapter Teaser'
+                  : `${section.title} ${section.sectionType}${
+                      section.sectionType === 'MEDIATEXT'
+                        ? ` Border: ${section.border}`
+                        : ''
+                    }`}
               </div>
             </div>
             {onChange && (
