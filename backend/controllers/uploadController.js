@@ -30,13 +30,15 @@ export const resizeImage = async (req, res, commonContext) => {
       .jpeg({ quality: 90 })
       .toFile(`public/images/sections/${req.file.filename}`);
     // .toFile(`../public_html/public/img/users/${req.file.filename}`);
-    res.status(200).json({
-      status: 'success',
-      data: {
-        filnamn: req.file.filename,
-      },
+
+    res.json({
+      success: 'true',
+      imageUrl: `images/sections/${req.file.filename}`,
     });
   } catch {
-    res.send('error');
+    res.status(400).json({
+      success: 'false',
+      message: 'Something went wrong with the image upload.',
+    });
   }
 };

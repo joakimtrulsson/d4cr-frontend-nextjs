@@ -33,6 +33,7 @@ __export(keystone_exports, {
 });
 module.exports = __toCommonJS(keystone_exports);
 var import_core4 = require("@keystone-6/core");
+var import_express = __toESM(require("express"));
 var import_dotenv = __toESM(require("dotenv"));
 
 // schemas/userSchema.js
@@ -195,6 +196,7 @@ var roleSchema = (0, import_core2.list)({
 // schemas/testSchema.js
 var import_core3 = require("@keystone-6/core");
 var import_fields3 = require("@keystone-6/core/fields");
+var import_fields_document = require("@keystone-6/fields-document");
 var import_access5 = require("@keystone-6/core/access");
 var testSchema = (0, import_core3.list)({
   access: {
@@ -212,6 +214,34 @@ var testSchema = (0, import_core3.list)({
   },
   fields: {
     title: (0, import_fields3.text)(),
+    content: (0, import_fields_document.document)({
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true,
+          code: true,
+          superscript: true,
+          subscript: true,
+          keyboard: true
+        },
+        listTypes: {
+          ordered: true,
+          unordered: true
+        },
+        alignment: {
+          center: true,
+          end: true
+        },
+        headingLevels: [1, 2, 3, 4, 5, 6],
+        blockTypes: {
+          blockquote: true,
+          code: true
+        },
+        softBreaks: true
+      }
+    }),
     sections: (0, import_fields3.json)({
       ui: {
         views: "./customComponents/sections/Main.jsx",
@@ -299,14 +329,15 @@ var resizeImage = async (req, res, commonContext) => {
   try {
     req.file.filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
     await (0, import_sharp.default)(req.file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${req.file.filename}`);
-    res.status(200).json({
-      status: "success",
-      data: {
-        filnamn: req.file.filename
-      }
+    res.json({
+      success: "true",
+      imageUrl: `images/sections/${req.file.filename}`
     });
   } catch {
-    res.send("error");
+    res.status(400).json({
+      success: "false",
+      message: "Something went wrong with the image upload."
+    });
   }
 };
 
@@ -325,6 +356,7 @@ var keystone_default = withAuth(
       maxFileSize: MAX_FILE_SIZE,
       cors: { origin: ["*"], credentials: true },
       extendExpressApp: (app, commonContext) => {
+        app.use("/public", import_express.default.static("public"));
         app.patch(
           "/api/imageupload",
           uploadImage,
@@ -338,7 +370,8 @@ var keystone_default = withAuth(
       idField: { kind: "uuid" }
     },
     lists,
-    session
+    session,
+    ui: { publicPages: ["public"] }
   })
 );
 //# sourceMappingURL=config.js.map

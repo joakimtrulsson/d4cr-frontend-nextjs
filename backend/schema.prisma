@@ -37,5 +37,6 @@ model Role {
 model Test {
   id       String @id @default(uuid())
   title    String @default("")
+  content  Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   sections Json?
 }

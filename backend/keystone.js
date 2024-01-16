@@ -1,4 +1,5 @@
 import { config } from '@keystone-6/core';
+import express from 'express';
 import dotenv from 'dotenv';
 
 import { lists } from './schema';
@@ -21,8 +22,10 @@ export default withAuth(
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
+
       cors: { origin: ['*'], credentials: true },
       extendExpressApp: (app, commonContext) => {
+        app.use('/public', express.static('public'));
         app.patch(
           '/api/imageupload',
           uploadImage,
@@ -37,5 +40,6 @@ export default withAuth(
     },
     lists,
     session,
+    ui: { publicPages: ['public'] },
   })
 );

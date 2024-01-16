@@ -5,7 +5,11 @@ function SelectSections({ activeSection, onChangeActiveSections, options }) {
   return (
     <>
       <FieldLabel>Add section:</FieldLabel>
-      <Select onChange={onChangeActiveSections} value={activeSection} options={options} />
+      <Select
+        onChange={onChangeActiveSections}
+        value={options.find((option) => option.value === activeSection)}
+        options={options}
+      />
     </>
   );
 }

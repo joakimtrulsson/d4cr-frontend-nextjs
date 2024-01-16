@@ -21,23 +21,6 @@ const toolbarGroups = [
       type: 'mark',
     },
   ],
-  [
-    {
-      id: 17,
-      format: 'alignLeft',
-      type: 'block',
-    },
-    {
-      id: 18,
-      format: 'alignCenter',
-      type: 'block',
-    },
-    {
-      id: 19,
-      format: 'alignRight',
-      type: 'block',
-    },
-  ],
 ];
 
 export default toolbarGroups;

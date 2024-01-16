@@ -23,6 +23,11 @@ export const styles = {
       margin: 1rem 0.5rem 0 0;
     `,
   },
+  button: {
+    cancel: css`
+      backroundcolor: #fef3f2;
+    `,
+  },
   list: {
     ul: css`
       list-style: none;

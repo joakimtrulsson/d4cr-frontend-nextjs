@@ -1,11 +1,16 @@
 import React from 'react';
 import { Button } from '@keystone-ui/button';
 import { MinusCircleIcon, EditIcon } from '@keystone-ui/icons';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from '../styles.js';
 
-function StoredSections({ sectionsData, onChange }) {
+function StoredSections({
+  sectionsData,
+  onEditSection,
+  onDelete,
+  onChange,
+  setSectionsData,
+}) {
   const onMoveSection = (currentIndex, direction) => {
     const sectionsCopy = [...sectionsData];
     const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
@@ -14,16 +19,10 @@ function StoredSections({ sectionsData, onChange }) {
       const temp = sectionsCopy[currentIndex];
       sectionsCopy[currentIndex] = sectionsCopy[newIndex];
       sectionsCopy[newIndex] = temp;
-      onChange(JSON.stringify(sectionsCopy));
-    }
-  };
 
-  const onDeleteSection = (id) => {
-    if (onChange) {
-      const sectionsCopy = sectionsData.filter((section) => section.id !== id);
-      onChange(JSON.stringify(sectionsCopy));
-      // const sectionsCopy = [...sectionsData];
-      // sectionsCopy.splice(index, 1);
+      // setSectionsData(() => [...sectionsCopy]);
+      setSectionsData([...sectionsCopy]);
+      onChange(JSON.stringify([...sectionsCopy]));
       // onChange(JSON.stringify(sectionsCopy));
     }
   };
@@ -54,17 +53,17 @@ function StoredSections({ sectionsData, onChange }) {
                 </Button>
                 <Button
                   size='small'
-                  // onClick={() => onEditSection(i)}
+                  onClick={() => onEditSection(section.id)}
                   className={styles.list.optionButton}
                 >
                   <EditIcon size='small' color='blue' />
                 </Button>
-                <Button size='small' className={styles.list.optionButton}>
-                  <MinusCircleIcon
-                    size='small'
-                    color='red'
-                    onClick={() => onDeleteSection(section.id)}
-                  />
+                <Button
+                  onClick={() => onDelete(section.id)}
+                  size='small'
+                  className={styles.list.optionButton}
+                >
+                  <MinusCircleIcon size='small' color='red' />
                 </Button>
               </div>
             )}
