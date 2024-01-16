@@ -1,10 +1,9 @@
-import '../styles/components/chapter-teaser.scss'
-import LocalChaptersData from '../database/local-chapters-data'
+import '../styles/sections/chapter-teaser.scss'
 import Image from 'next/image'
-import ArrowRight from '../features/icons/arrow-right.svg'
 import Mapbase from  '../features/mapbase.png'
-
-const Title = 'Our local chapters'
+import Title from '../database/sections-data/chapter-teaser-title'
+import LocalsCityAndUrl from '../database/sections-data/locals-city-url-data'
+import CountryCard from '../components/country-card'
 
 const ChapterTeaser = () => {
     return (
@@ -14,14 +13,11 @@ const ChapterTeaser = () => {
             </div>
 
             <div className='mapbase-text-container'>
-                <h1>{Title}</h1>
+                <h2>{Title}</h2>
                 <div className='country-card-container'>
-                    {LocalChaptersData.map((item, index) => {
+                    {LocalsCityAndUrl.map((item, index) => {
                         return(
-                        <div className='country-card'>
-                            <p>{item.city}</p>
-                            <Image src={ArrowRight} alt='>' />
-                        </div>
+                            <CountryCard item={item}/>
                     )})}
                 </div>
             </div>
