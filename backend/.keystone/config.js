@@ -214,34 +214,6 @@ var testSchema = (0, import_core3.list)({
   },
   fields: {
     title: (0, import_fields3.text)(),
-    content: (0, import_fields_document.document)({
-      formatting: {
-        inlineMarks: {
-          bold: true,
-          italic: true,
-          underline: true,
-          strikethrough: true,
-          code: true,
-          superscript: true,
-          subscript: true,
-          keyboard: true
-        },
-        listTypes: {
-          ordered: true,
-          unordered: true
-        },
-        alignment: {
-          center: true,
-          end: true
-        },
-        headingLevels: [1, 2, 3, 4, 5, 6],
-        blockTypes: {
-          blockquote: true,
-          code: true
-        },
-        softBreaks: true
-      }
-    }),
     sections: (0, import_fields3.json)({
       ui: {
         views: "./customComponents/sections/Main.jsx",

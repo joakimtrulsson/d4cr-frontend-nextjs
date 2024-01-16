@@ -2,22 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import { FieldContainer, FieldLabel, FieldDescription } from '@keystone-ui/fields';
 
+import { options } from './utils/constants';
+
 import ChapterTeaser from './components/ChapterTeaser';
 import LargeBulletList from './components/LargeBulletList';
 import MediaText from './components/MediaText';
 import SelectSections from './components/SelectSections';
 import StoredSections from './components/StoredSections';
-
-const options = [
-  { value: 'Select', label: 'Select' },
-  { value: 'MEDIATEXT', label: 'Media + Text' },
-  { value: 'CHAPTERTEASER', label: 'Chapter Teaser' },
-  { value: 'NEWSTEASER', label: 'News Teaser' },
-  { value: 'BULLETLIST', label: 'Large Bullet List' },
-  { value: 'ACCORDION', label: 'Accordion' },
-  { value: 'BANNER', label: 'Banner' },
-  { value: 'WYSIWYG', label: 'WYSIWYG' },
-];
+import Accordion from './components/Accordion';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [sectionsData, setSectionsData] = useState(value ? JSON.parse(value) : []);
@@ -77,11 +69,32 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           autoFocus={autoFocus}
         />
       )}
+      {!editFormData && activeSection === 'ACCORDION' && (
+        <Accordion
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
 
       {/* Renderar Edit */}
 
       {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (
         <MediaText
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'ACCORDION' && (
+        <Accordion
           sectionsData={sectionsData}
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}

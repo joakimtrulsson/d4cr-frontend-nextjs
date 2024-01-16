@@ -202,12 +202,7 @@ input UserRelateToManyForCreateInput {
 type Test {
   id: ID!
   title: String
-  content: Test_content_Document
   sections: JSON
-}
-
-type Test_content_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 input TestWhereUniqueInput {
@@ -229,7 +224,6 @@ input TestOrderByInput {
 
 input TestUpdateInput {
   title: String
-  content: JSON
   sections: JSON
 }
 
@@ -240,7 +234,6 @@ input TestUpdateArgs {
 
 input TestCreateInput {
   title: String
-  content: JSON
   sections: JSON
 }
 

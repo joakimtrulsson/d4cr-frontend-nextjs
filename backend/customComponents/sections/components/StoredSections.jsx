@@ -20,10 +20,8 @@ function StoredSections({
       sectionsCopy[currentIndex] = sectionsCopy[newIndex];
       sectionsCopy[newIndex] = temp;
 
-      // setSectionsData(() => [...sectionsCopy]);
       setSectionsData([...sectionsCopy]);
       onChange(JSON.stringify([...sectionsCopy]));
-      // onChange(JSON.stringify(sectionsCopy));
     }
   };
 
@@ -33,7 +31,11 @@ function StoredSections({
         return (
           <li key={section.id} className={styles.list.li}>
             <div className={styles.list.data}>
-              <div className={styles.list.dataLabel}>{section.sectionType}</div>
+              <div>
+                {section.sectionType === 'CHAPTERTEASER'
+                  ? 'Chapter Teaser'
+                  : `${section.title} ${section.sectionType}`}
+              </div>
             </div>
             {onChange && (
               <div>
@@ -71,6 +73,50 @@ function StoredSections({
         );
       })}
     </ol>
+
+    // <ol style={{ paddingLeft: '0', paddingTop: '1rem', borderTop: '1px solid #e1e5e9' }}>
+    //   {sectionsData.map((section, index) => {
+    //     return (
+    //       <li key={section.id} className={styles.list.li}>
+    //         <div className={styles.list.data}>
+    //           <div className={styles.list.dataLabel}>{section.sectionType}</div>
+    //         </div>
+    //         {onChange && (
+    //           <div>
+    //             <Button
+    //               size='small'
+    //               className={styles.list.optionButton}
+    //               onClick={() => onMoveSection(index, 'up')}
+    //             >
+    //               &#9650;
+    //             </Button>
+    //             <Button
+    //               size='small'
+    //               className={styles.list.optionButton}
+    //               onClick={() => onMoveSection(index, 'down')}
+    //             >
+    //               &#9660;
+    //             </Button>
+    //             <Button
+    //               size='small'
+    //               onClick={() => onEditSection(section.id)}
+    //               className={styles.list.optionButton}
+    //             >
+    //               <EditIcon size='small' color='blue' />
+    //             </Button>
+    //             <Button
+    //               onClick={() => onDelete(section.id)}
+    //               size='small'
+    //               className={styles.list.optionButton}
+    //             >
+    //               <MinusCircleIcon size='small' color='red' />
+    //             </Button>
+    //           </div>
+    //         )}
+    //       </li>
+    //     );
+    //   })}
+    // </ol>
   );
 }
 

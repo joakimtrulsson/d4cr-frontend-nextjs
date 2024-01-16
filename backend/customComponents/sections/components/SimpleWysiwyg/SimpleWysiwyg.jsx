@@ -66,8 +66,8 @@ const SimpleWysiwyg = ({ onSetPremble, editData }) => {
       <div
         className='editor-wrapper'
         style={{
-          minHeight: '100px',
-          maxHeight: '300px',
+          minHeight: '200px',
+          maxHeight: '500px',
           overflow: 'auto',
           border: '1px solid #e1e5e9',
           borderRadius: '7px',
