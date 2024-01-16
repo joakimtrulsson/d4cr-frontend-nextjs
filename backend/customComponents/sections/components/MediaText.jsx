@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import FormData from 'form-data';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FieldContainer, FieldLabel, TextInput, Select } from '@keystone-ui/fields';
+import {
+  FieldContainer,
+  FieldLabel,
+  TextInput,
+  Select,
+  FieldDescription,
+} from '@keystone-ui/fields';
 import { Button } from '@keystone-ui/button';
 
 import SimpleWysiwyg from './SimpleWysiwyg/SimpleWysiwyg.jsx';
@@ -19,7 +25,7 @@ function MediaText({
   sectionIndex,
   setSectionsData,
 }) {
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState({ cta: [{}, {}] });
   const [file, setFile] = useState(editData?.image || {});
 
   const [colorOptions] = useState([
@@ -129,6 +135,15 @@ function MediaText({
     }));
   };
 
+  const handleCTAChange = (index, fieldType, fieldValue) => {
+    setValue((prev) => ({
+      ...prev,
+      cta: prev.cta.map((ctaItem, i) =>
+        i === index ? { ...ctaItem, [fieldType]: fieldValue } : ctaItem
+      ),
+    }));
+  };
+
   return (
     <FieldContainer>
       <div className={styles.form.field}>
@@ -193,9 +208,33 @@ function MediaText({
         style={{ flexDirection: 'column', alignItems: 'flex-start' }}
         className={styles.form.field}
       >
-        <FieldLabel style={{ marginRight: 'auto' }}>Preamble:</FieldLabel>
+        <FieldLabel style={{ marginRight: 'auto' }}>Premble:</FieldLabel>
         <SimpleWysiwyg onSetPremble={setPremble} editData={editData?.premble} />
       </div>
+      <div style={{ marginTop: '1rem' }}>
+        <FieldLabel>Call to action 1</FieldLabel>
+        {value.cta.map((ctaItem, index) => (
+          <div key={index}>
+            <FieldDescription>Anchor text:</FieldDescription>
+            <TextInput
+              autoFocus={autoFocus}
+              onChange={(event) =>
+                handleCTAChange(index, 'anchorText', event.target.value)
+              }
+              value={ctaItem.anchorText}
+              style={{ marginBottom: '0.5rem' }}
+            />
+            <FieldDescription>Url/Page:</FieldDescription>
+            <TextInput
+              style={{ marginBottom: '1rem' }}
+              autoFocus={autoFocus}
+              onChange={(event) => handleCTAChange(index, 'url', event.target.value)}
+              value={ctaItem.url}
+            />
+          </div>
+        ))}
+      </div>
+
       {editData ? (
         <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
           Update
