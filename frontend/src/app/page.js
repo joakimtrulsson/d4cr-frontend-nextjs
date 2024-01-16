@@ -1,14 +1,17 @@
-import Navbar from '../components/navbar'
-import Footer from '../components/footer'
-import ChapterTeaser from '../sections/chapter-teaser'
 import '../styles/home.scss'
+import TextAndMedia from '../pages/sections/text-media'
+import Item from '../database/sections-data/text-and-media-data'
 
 export default function Home() {
   return (
     <main className='main'>
-      <Navbar />
-      <ChapterTeaser />
-      { /* <Footer /> */}  
+
+      {Item.map((item, key) => {
+        return(
+          <TextAndMedia key={key} data={item} />
+        )
+      })}
+
     </main>
   )
 }

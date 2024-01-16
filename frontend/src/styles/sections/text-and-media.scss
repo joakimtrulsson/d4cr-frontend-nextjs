@@ -1,0 +1,25 @@
+@import '../assets/colors.scss';
+
+.text-and-media-container {
+
+    padding: 3rem 2rem;
+    background-color: $-yellow-50;
+    
+    /* flexbox */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.text-and-media-content-button-container {
+
+    /* flexbox */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.text-and-media-image {
+    border-radius: 24px;
+}
+

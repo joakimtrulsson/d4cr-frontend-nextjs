@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 const LocalChapters = () => {
 
+  /* this is a slug page, edit this later when all sections is completed */
 
   return (
     <div>

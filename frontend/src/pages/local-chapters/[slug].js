@@ -4,8 +4,7 @@ import NotFound from '../not-found'
 // import { notFound } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
-import LocalChaptersData from '../../components/data/local-chapters-data'
-
+import LocalChaptersData from '../../database/sections-data/locals-city-url-data'
 
 const SlugPage = () => {
 
