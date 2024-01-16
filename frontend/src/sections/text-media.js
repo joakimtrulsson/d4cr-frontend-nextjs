@@ -1,10 +1,10 @@
-import TopWave from '../../components/wave/top-wave'
-import BottomWave from '../../components/wave/bottom-wave'
+import TopWave from '../components/wave/top-wave'
+import BottomWave from '../components/wave/bottom-wave'
 import Image from 'next/image'
-import DefaultImage from '../../features/img-default.svg'
-import PrimaryButton from '../../components/buttons/primary-button'
-import SecondaryButton from '../../components/buttons/secondary-button'
-import '../../styles/sections/text-and-media.scss'
+import DefaultImage from '../features/img-default.svg'
+import PrimaryButton from '../components/buttons/primary-button'
+import SecondaryButton from '../components/buttons/secondary-button'
+import '../styles/sections/text-and-media.scss'
 
 
 const TextAndMedia = ({ data }) => {

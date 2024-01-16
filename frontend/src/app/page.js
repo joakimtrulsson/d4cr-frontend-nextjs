@@ -1,5 +1,5 @@
 import '../styles/home.scss'
-import TextAndMedia from '../pages/sections/text-media'
+import TextAndMedia from '../sections/text-media'
 import Item from '../database/sections-data/text-and-media-data'
 
 export default function Home() {
