@@ -79,7 +79,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
 
-      {!editFormData && activeSection === 'BULLETLIST' && (
+      {/* {!editFormData && activeSection === 'BULLETLIST' && (
         <LargeBulletList
           sectionsData={sectionsData}
           setSectionsData={setSectionsData}
@@ -87,7 +87,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           onChange={onChange}
           autoFocus={autoFocus}
         />
-      )}
+      )} */}
 
       {/* Renderar Edit */}
 
