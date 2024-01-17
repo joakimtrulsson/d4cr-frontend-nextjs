@@ -1,22 +1,40 @@
 @import '../../assets/colors.scss';
 
-.secondary-button   {
+.secondary-button  {
+    height: 2.83rem;
+    width: 9rem;
+
     /* Flexbox */
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
 }
 
+.secondary-button img  {
+    height: 2.83rem;
+    display: block;
+    margin: 0;
+}
+
 .secondary-button button {
     cursor: pointer;
-    padding: 8px 20px;
+    padding: 0rem 1rem;
     background-color: transparent;
+    border-top: 2.18px solid $-orange-200;
+    border-bottom: 2.18px solid $-orange-200;
+    border-left: none;
+    border-right: none;
+    margin-left: -0.1rem;
+    margin-right: -0.1rem;
+
+    /* font style*/
+    white-space: nowrap;  
     color: $-orange-500;
-    border-top: 2px solid $-orange-100;
-    border-bottom: 2px solid $-orange-100;
-    border-left: white;
-    border-right: white;
-    
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.02rem;
+    text-transform: uppercase;
+
     /* Flexbox */
     display: flex;
     align-items: center;

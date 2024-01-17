@@ -1,8 +1,7 @@
 @import '../../assets/colors.scss';
 
 .primary-button {
-    padding: 10px 30px;
-    margin: 5px 10px;
+    padding: 0.7rem 2rem;
     color: $-orange-700;
     background-color: $-orange-300;
     font-weight: bold;
@@ -10,6 +9,5 @@
     cursor: pointer;
     border: solid 3px $-orange-300;
     white-space: nowrap;
-
-    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
 }
