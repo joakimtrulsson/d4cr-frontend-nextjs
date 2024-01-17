@@ -9,8 +9,6 @@ import '../styles/sections/text-and-media.scss'
 
 const TextAndMedia = ({ data }) => {
 
-    const bgColor = data.bgcolor
-
     return(
         <div className="text-and-media-body">
             <TopWave bgColor={data.bgColor} />
@@ -36,7 +34,7 @@ const TextAndMedia = ({ data }) => {
 
                 </div>
 
-            <BottomWave bgColor={bgColor} />
+            <BottomWave bgColor={data.bgColor} />
         </div>
     )
 }

@@ -10,19 +10,12 @@ export default function Home() {
   return (
     <main className='main'>
 
-      <ChapterTeaser />
-
-
-      { /* 
 
       {Item.map((item, key) => {
         return(
           
           <TextAndMedia key={key} data={item} />
-        )
-      })}
-
-       */ }
+        )})}
 
     </main>
   )
