@@ -1,11 +1,13 @@
-import '../../styles/components/wave.scss'
+import '../../styles/components/bottom-wave.scss'
+import BottomWaveSvg from '../../features/bottom-wave.svg'
+import Image from 'next/image'
 
 const BottomWave = ({bgColor}) => {
 
-    // göra något åt olika background color.... 
-
     return (
-        <div className='bottom-wave' />
+        <div className='bottom-wave'>
+            <Image className='bottom-wave' src={BottomWaveSvg} />
+        </div>
     )
 }
 
