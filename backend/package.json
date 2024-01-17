@@ -17,15 +17,16 @@
     "@reduxjs/toolkit": "^2.0.1",
     "dotenv": "^16.3.1",
     "interweave": "^13.1.0",
+    "multer": "^1.4.5-lts.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-katex": "^3.0.1",
+    "sharp": "^0.31.3",
     "slate": "^0.101.5",
     "slate-react": "^0.101.5",
     "typescript": "^4.9.5",
-    "uuid": "^9.0.1",
-    "multer": "^1.4.5-lts.1",
-    "sharp": "^0.31.3"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
