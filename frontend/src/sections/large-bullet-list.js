@@ -12,19 +12,18 @@ const LargeBulletList = () => {
     const { title, subHeader, bullets } = data.sections[0];
 
     return (
-        <div className="large-bullet-list-body">
-            <div className='large-bullet-list-container'>
-                <h2>{title}</h2>
-                <p>{subHeader}</p>
+        <div className='large-bullet-list-container'>
+            <h2>{title}</h2>
+            <p>{subHeader}</p>
 
-                { bullets.map((bullet, index) => {
-                    return (
-                        <div className='bullet-content' key={index} >
-                            <Image src={ArrowRight} />
-                            <p>{bullet.bodyText[0].children[0].text}</p>
-                        </div>
-                    )})}
-            </div>
+            {bullets.map((bullet, index) => {
+                return (
+                    <div className='bullet-content' key={index} >
+                        <Image src={ArrowRight} />
+                        <p>{bullet.bodyText[0].children[0].text}</p>
+                    </div>
+                )
+            })}
         </div>
     )
 }

@@ -1,12 +1,12 @@
 import '../styles/home.scss'
-import BulletList from '../sections/large-bullet-list'
+import Accordion from '../sections/accordion'
 
 
 export default function Home() {
   return (
     <main className='main'>
 
-      <BulletList />
+      <Accordion />
 
 
     </main>
