@@ -1,7 +1,7 @@
 @import '../../assets/colors.scss';
 
 .secondary-button  {
-    height: 2.83rem;
+    height: 2.1rem;
     width: 9rem;
 
     /* Flexbox */
@@ -11,7 +11,7 @@
 }
 
 .secondary-button img  {
-    height: 2.83rem;
+    height: 2.1rem;
     display: block;
     margin: 0;
 }
@@ -24,15 +24,15 @@
     border-bottom: 2.18px solid $-orange-200;
     border-left: none;
     border-right: none;
-    margin-left: -0.1rem;
-    margin-right: -0.1rem;
+    margin-left: -0.3rem;
+    margin-right: -0.3rem;
 
     /* font style*/
     white-space: nowrap;  
     color: $-orange-500;
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 0.02rem;
+    font-weight: 680;
+    font-size: 0.6rem;
+    letter-spacing: 0.045rem;
     text-transform: uppercase;
 
     /* Flexbox */
