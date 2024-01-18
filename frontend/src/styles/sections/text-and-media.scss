@@ -1,8 +1,11 @@
 @import '../assets/colors.scss';
 
-.text-and-media-container {
+.text-and-media-section{
+    padding: 2rem;
+    background-color: $-yellow-300;
+}
 
-    padding: 0rem 2rem;
+.text-and-media-container {
     background-color: $-yellow-50;
     
     /* flexbox */
@@ -11,12 +14,36 @@
     flex-wrap: nowrap;
 }
 
-.text-and-media-content-button-container {
+.text-content {
+    height: auto;
+    width: 30rem;
+
+    /* flexbox */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.button-container {
+    width: 100%;
+    height: auto;
+    padding: 1rem 3rem 2rem 0;
 
     /* flexbox */
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: start;
+}
+
+.media-content {
+    padding: 2rem;
+    background-color: orange;
+
+    /* flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 
 .sub-heading {
@@ -34,8 +61,8 @@
     font-weight: 610;
 }
 
-.text-and-media-image {
-    border-radius: 24px;
+.media-content img {
+    height: 100%;
+    width: 100%;
+    border-radius: 24px;    
 }
-
-
