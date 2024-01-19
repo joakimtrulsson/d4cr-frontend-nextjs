@@ -1,4 +1,4 @@
-import '../../../themes/sources/scss/components/waves/top-wave.scss'
+import '../../sources/scss/base/layout.scss'
 import WaveSvg from '../../sources/assets/graphics/wave.svg'
 import Image from 'next/image'
 
@@ -6,7 +6,7 @@ import Image from 'next/image'
 const TopWave = ({bgColor}) => {
 
     return (
-        <Image className='top-wave' style={{ backgroundColor: bgColor }} src={WaveSvg} />
+        <Image className='coverage' style={{ backgroundColor: '#fff' }} src={WaveSvg} />
     )
 }
 
