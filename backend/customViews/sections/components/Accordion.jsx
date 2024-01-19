@@ -6,7 +6,7 @@ import { Button } from '@keystone-ui/button';
 
 import SimpleWysiwyg from './SimpleWysiwyg/SimpleWysiwyg.jsx';
 
-function BulletList({
+function Accordion({
   onCloseSection,
   onChange,
   sectionsData,
@@ -29,7 +29,7 @@ function BulletList({
   function handleSave() {
     if (onChange) {
       const newItem = {
-        sectionType: 'BULLETLIST',
+        sectionType: 'ACCORDION',
         id: uuidv4(),
         ...value,
       };
@@ -104,34 +104,6 @@ function BulletList({
         />
       </div>
 
-      <div
-        style={{
-          marginBottom: '2rem',
-          marginTop: '1rem',
-        }}
-      >
-        <FieldLabel style={{ paddingTop: '0.5rem', borderTop: '1px solid #e1e5e9' }}>
-          Subheader:
-        </FieldLabel>
-        <TextInput
-          autoFocus={autoFocus}
-          onChange={(event) => handleChange('subHeader', event.target.value)}
-          value={value.subHeader}
-        />
-      </div>
-
-      <div>
-        <FieldLabel>List type:</FieldLabel>
-
-        <Select
-          value={imageOptions.find((option) => option.value === value.imagePosition)}
-          options={imageOptions}
-          onChange={(selectedOption) =>
-            handleChange('imagePosition', selectedOption.value)
-          }
-        />
-      </div>
-
       {value.fields.map((field, index) => (
         <div key={index} style={{ marginBottom: '1rem' }}>
           <FieldLabel
@@ -149,7 +121,7 @@ function BulletList({
           />
           <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
           <SimpleWysiwyg
-            onSetPremble={(premble) => handleFieldChange(index, 'bodyText', premble)}
+            onSetPreamble={(preamble) => handleFieldChange(index, 'bodyText', preamble)}
             editData={field.bodyText}
           />
           <Button
@@ -199,7 +171,7 @@ function BulletList({
           </Button>
         ) : (
           <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-            Add Accordion
+            Add Accordion section
           </Button>
         )}
         {editData && (
@@ -220,4 +192,4 @@ function BulletList({
   );
 }
 
-export default BulletList;
+export default Accordion;
