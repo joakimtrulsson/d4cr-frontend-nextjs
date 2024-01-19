@@ -1,11 +1,22 @@
 import React, { useRef, useState } from 'react';
-import Button from '../../common/Button.jsx';
+// import Button from '../../common/Button.jsx';
 import Icon from '../../common/Icon.jsx';
 import { isBlockActive } from '../../utils/SlateUtilityFunctions.js';
 import usePopup from '../../utils/customHooks/usePopup.jsx';
 import { insertEmbed } from '../../utils/embed.js';
 import { Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
+
+import {
+  FieldContainer,
+  FieldLabel,
+  FieldLegend,
+  TextInput,
+  Select,
+  FieldDescription,
+} from '@keystone-ui/fields';
+
+import { Button } from '@keystone-ui/button';
 
 import './Embed.css';
 const Embed = ({ editor, format }) => {
@@ -33,24 +44,29 @@ const Embed = ({ editor, format }) => {
     setShowInput(false);
     setFormData({
       url: '',
-      alt: '',
     });
   };
   const handleImageUpload = () => {
     setShowInput(false);
   };
+
   return (
     <div ref={urlInputRef} className='popup-wrapper'>
       <Button
         active={isBlockActive(editor, format)}
-        style={{ border: showInput ? '1px solid lightgray' : '', borderBottom: 'none' }}
+        style={{
+          width: '32px',
+          height: '32px',
+          border: showInput ? '1px solid lightgray' : '',
+          borderBottom: 'none',
+        }}
         format={format}
         onClick={handleButtonClick}
       >
         <Icon icon={format} />
       </Button>
       {showInput && (
-        <div className='popup'>
+        <div className='popup' style={{ borderRadius: '7px' }}>
           {format === 'image' && (
             <div>
               <div style={{ display: 'flex', gap: '10px' }} onClick={handleImageUpload}>
@@ -61,20 +77,37 @@ const Embed = ({ editor, format }) => {
             </div>
           )}
           <form onSubmit={handleFormSubmit}>
-            <input
+            <FieldLegend size='small'>Enter url:</FieldLegend>
+            <TextInput
+              placeholder='Enter url'
+              value={formData.url}
+              onChange={(e) => setFormData((prev) => ({ ...prev, url: e.target.value }))}
+              // autoFocus={autoFocus}
+              // onChange={(event) => handleChange('anchorText', event.target.value)}
+              // value={value.cta?.anchorText}
+              size='small'
+              style={{ marginBottom: '0.5rem', width: '350px' }}
+            />
+            {/* <input
               type='text'
               placeholder='Enter url'
               value={formData.url}
               onChange={(e) => setFormData((prev) => ({ ...prev, url: e.target.value }))}
-            />
-            <input
+            /> */}
+            {/* <input
               type='text'
               placeholder='Enter alt'
               value={formData.alt}
               onChange={(e) => setFormData((prev) => ({ ...prev, alt: e.target.value }))}
-            />
+            /> */}
 
-            <Button type='submit'>Save</Button>
+            <Button
+              size='small'
+              style={{ width: '75px', borderRadius: '5px', color: '#6b7280' }}
+              type='submit'
+            >
+              Save
+            </Button>
           </form>
         </div>
       )}

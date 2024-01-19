@@ -23,6 +23,7 @@ import Id from '../Elements/ID/Id.jsx';
 import TableContextMenu from '../Elements/TableContextMenu/TableContextMenu.jsx';
 import CodeToTextButton from '../Elements/CodeToText/CodeToTextButton.jsx';
 import HtmlContextMenu from '../Elements/CodeToText/HtmlContextMenu.jsx';
+
 const Toolbar = (props) => {
   const { handleCodeToText } = props;
   const editor = useSlate();
@@ -43,7 +44,6 @@ const Toolbar = (props) => {
       filteredGroups = filteredGroups.filter((elem) => elem.length);
     }
     setToolbarGroups(filteredGroups);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTable]);
 
   const BlockButton = ({ format }) => {

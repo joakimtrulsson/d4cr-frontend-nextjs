@@ -60,15 +60,28 @@ const ExtendedWysiwyg = ({ onSetPreamble }) => {
 
   return (
     <Slate editor={editor} initialValue={value} onChange={handleEditorChange}>
-      <Toolbar handleCodeToText={handleCodeToText} />
       <div
         className='editor-wrapper'
-        style={{ border: '1px solid #f3f3f3', padding: '0 10px' }}
+        style={{
+          minHeight: '600px',
+          maxHeight: '500px',
+          overflow: 'auto',
+          border: '1px solid #e1e5e9',
+          borderRadius: '7px',
+          padding: '0 00px',
+        }}
       >
+        <Toolbar handleCodeToText={handleCodeToText} />
         <Editable
           placeholder='Write something...'
           renderElement={renderElement}
           renderLeaf={renderLeaf}
+          style={{
+            borderTop: '1px solid #e1e5e9',
+            // padding: '0px',
+            paddingLeft: '10px',
+            margin: '0px',
+          }}
         />
       </div>
       {htmlAction.showInput && (

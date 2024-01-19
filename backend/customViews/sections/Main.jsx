@@ -13,6 +13,7 @@ import Accordion from './components/Accordion';
 import Image from './components/Image';
 import Banner from './components/Banner';
 import NewsTeaser from './components/NewsTeaser';
+import Wysiwyg from './components/Wysiwyg';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [sectionsData, setSectionsData] = useState(value ? JSON.parse(value) : []);
@@ -115,6 +116,16 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
 
       {!editFormData && activeSection === 'NEWSTEASER' && (
         <NewsTeaser
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {!editFormData && activeSection === 'WYSIWYG' && (
+        <Wysiwyg
           sectionsData={sectionsData}
           setSectionsData={setSectionsData}
           onCloseSection={handleCloseSection}

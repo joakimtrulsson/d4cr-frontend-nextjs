@@ -17,8 +17,14 @@ import {
   MdKeyboardArrowRight,
   MdArrowForward,
 } from 'react-icons/md';
-import { BsTypeH1, BsTypeH2, BsTypeH3, BsCameraVideoFill } from 'react-icons/bs';
-import { FaSuperscript, FaSubscript } from 'react-icons/fa';
+import {
+  BsTypeH1,
+  BsTypeH2,
+  BsTypeH3,
+  BsTypeH4,
+  BsCameraVideoFill,
+} from 'react-icons/bs';
+import { FaSuperscript, FaSubscript, FaSpotify, FaYoutube, FaLink } from 'react-icons/fa';
 import {
   AiFillEdit,
   AiOutlineTable,
@@ -41,7 +47,7 @@ const iconList = {
   headingOne: <BsTypeH1 size={20} />,
   headingTwo: <BsTypeH2 size={20} />,
   headingThree: <BsTypeH3 size={20} />,
-
+  headingFour: <BsTypeH4 size={20} />,
   blockquote: <MdFormatQuote size={20} />,
   superscript: <FaSuperscript size={15} />,
   subscript: <FaSubscript size={15} />,
@@ -50,9 +56,10 @@ const iconList = {
   alignRight: <MdFormatAlignRight size={20} />,
   orderedList: <MdFormatListNumbered size={20} />,
   unorderedList: <MdFormatListBulleted size={20} />,
-  link: <MdInsertLink size={20} />,
+  link: <FaLink size={20} />,
   image: <MdImage size={20} />,
-  video: <MdVideoLibrary size={20} />,
+  spotify: <FaSpotify size={20} />,
+  video: <FaYoutube size={20} />,
   add: <MdAdd size={20} />,
   table: <AiOutlineTable size={20} />,
   insertRowBelow: <AiOutlineInsertRowBelow size={25} />,
