@@ -121,10 +121,10 @@ function MediaText({
     }
   }
 
-  function setPremble(premble) {
+  function setPreamble(preamble) {
     setValue((prev) => ({
       ...prev,
-      premble,
+      preamble,
     }));
   }
 
@@ -208,8 +208,8 @@ function MediaText({
         style={{ flexDirection: 'column', alignItems: 'flex-start' }}
         className={styles.form.field}
       >
-        <FieldLabel style={{ marginRight: 'auto' }}>Premble:</FieldLabel>
-        <SimpleWysiwyg onSetPremble={setPremble} editData={editData?.premble} />
+        <FieldLabel style={{ marginRight: 'auto' }}>Preamble:</FieldLabel>
+        <SimpleWysiwyg onSetPreamble={setPreamble} editData={editData?.preamble} />
       </div>
       <div style={{ marginTop: '1rem' }}>
         <FieldLabel>Call to action 1</FieldLabel>

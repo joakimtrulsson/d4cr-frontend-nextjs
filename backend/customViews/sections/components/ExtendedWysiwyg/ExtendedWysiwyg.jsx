@@ -8,7 +8,7 @@ import withLinks from './plugins/withLinks.js';
 import withTables from './plugins/withTable.js';
 import withEmbeds from './plugins/withEmbeds.js';
 import withEquation from './plugins/withEquation.js';
-import './editor.css';
+import './Editor.css';
 import CodeToText from './Elements/CodeToText/CodeToText.jsx';
 import { serialize } from './utils/serializer.js';
 
@@ -19,7 +19,7 @@ const Leaf = ({ attributes, children, leaf }) => {
   children = getMarked(leaf, children);
   return <span {...attributes}>{children}</span>;
 };
-const SimpleWysiwyg = ({ onSetPremble, editData }) => {
+const ExtendedWysiwyg = ({ onSetPreamble }) => {
   const editor = useMemo(
     () =>
       withEquation(
@@ -27,19 +27,16 @@ const SimpleWysiwyg = ({ onSetPremble, editData }) => {
       ),
     []
   );
-
-  const [value, setValue] = useState(
-    editData || [
-      {
-        type: 'paragaph',
-        children: [{ text: '' }],
-      },
-    ]
-  );
+  const [value, setValue] = useState([
+    {
+      type: 'paragraph',
+      children: [{ text: '' }],
+    },
+  ]);
 
   const handleEditorChange = (newValue) => {
     setValue(newValue);
-    onSetPremble(newValue);
+    onSetPreamble(newValue);
   };
 
   const renderElement = useCallback((props) => <Element {...props} />, []);
@@ -63,35 +60,22 @@ const SimpleWysiwyg = ({ onSetPremble, editData }) => {
 
   return (
     <Slate editor={editor} initialValue={value} onChange={handleEditorChange}>
+      <Toolbar handleCodeToText={handleCodeToText} />
       <div
         className='editor-wrapper'
-        style={{
-          minHeight: '200px',
-          maxHeight: '500px',
-          overflow: 'auto',
-          border: '1px solid #e1e5e9',
-          borderRadius: '7px',
-          padding: '0 00px',
-        }}
+        style={{ border: '1px solid #f3f3f3', padding: '0 10px' }}
       >
-        <Toolbar handleCodeToText={handleCodeToText} />
         <Editable
-          style={{
-            borderTop: '1px solid #e1e5e9',
-            // padding: '0px',
-            paddingLeft: '10px',
-            margin: '0px',
-          }}
           placeholder='Write something...'
           renderElement={renderElement}
           renderLeaf={renderLeaf}
         />
       </div>
-      {/* {htmlAction.showInput && (
+      {htmlAction.showInput && (
         <CodeToText {...htmlAction} handleCodeToText={handleCodeToText} />
-      )} */}
+      )}
     </Slate>
   );
 };
 
-export default SimpleWysiwyg;
+export default ExtendedWysiwyg;

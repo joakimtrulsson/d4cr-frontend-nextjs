@@ -74,7 +74,7 @@ function ImageUpload({ setFile, editData }) {
         ></div>
       )}
 
-      <div>
+      <div style={{ display: 'flex' }}>
         {/* {fileInfo && (
           <p>
             Size: {(fileInfo.size / 1024).toFixed(2)}KB <br />
@@ -83,7 +83,7 @@ function ImageUpload({ setFile, editData }) {
         )} */}
 
         <Button
-          style={{ marginTop: '0.6rem' }}
+          style={{ alignSelf: 'flex-end' }}
           onClick={() => fileInputRef.current.click()}
         >
           Choose Image

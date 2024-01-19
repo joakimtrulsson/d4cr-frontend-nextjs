@@ -36,7 +36,7 @@ function ChapterTeaser({ onCloseSection, onChange, sectionsData, setSectionsData
 
   return (
     <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-      Add a Chapter Teaser
+      Add a Chapter Teaser section
     </Button>
   );
 }

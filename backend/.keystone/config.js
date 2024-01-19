@@ -216,7 +216,7 @@ var testSchema = (0, import_core3.list)({
     title: (0, import_fields3.text)(),
     sections: (0, import_fields3.json)({
       ui: {
-        views: "./customComponents/sections/Main.jsx",
+        views: "./customViews/sections/Main.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -296,16 +296,21 @@ var upload = (0, import_multer.default)({
   storage: multerStorage,
   fileFilter: multerFilter
 });
-var uploadImage = upload.single("image");
+var uploadImage = upload.array("image", 3);
 var resizeImage = async (req, res, commonContext) => {
   try {
-    req.file.filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
-    await (0, import_sharp.default)(req.file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${req.file.filename}`);
+    const imageUrls = [];
+    for (const file of req.files) {
+      const filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
+      await (0, import_sharp.default)(file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${filename}`);
+      imageUrls.push(`images/sections/${filename}`);
+    }
     res.json({
       success: "true",
-      imageUrl: `images/sections/${req.file.filename}`
+      imageUrls
     });
-  } catch {
+  } catch (error) {
+    console.log(error);
     res.status(400).json({
       success: "false",
       message: "Something went wrong with the image upload."

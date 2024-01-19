@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
+import { FieldContainer, FieldLabel, TextInput, Select } from '@keystone-ui/fields';
 import { Button } from '@keystone-ui/button';
 
 import SimpleWysiwyg from './SimpleWysiwyg/SimpleWysiwyg.jsx';
 
-function Accordion({
+const listOptions = [
+  { value: 'ORDERED', label: 'Ordered list' },
+  { value: 'UNORDERED', label: 'Unordered list' },
+];
+
+function BulletList({
   onCloseSection,
   onChange,
   sectionsData,
@@ -17,7 +22,7 @@ function Accordion({
 }) {
   const [value, setValue] = useState({
     title: '',
-    fields: [{ heading: '', bodyText: '' }],
+    bullets: [{ bodyText: '' }],
   });
 
   useEffect(() => {
@@ -29,7 +34,7 @@ function Accordion({
   function handleSave() {
     if (onChange) {
       const newItem = {
-        sectionType: 'ACCORDION',
+        sectionType: 'BULLETLIST',
         id: uuidv4(),
         ...value,
       };
@@ -66,14 +71,14 @@ function Accordion({
   const handleAddField = () => {
     setValue((prev) => ({
       ...prev,
-      fields: [...prev.fields, { heading: '', bodyText: '' }],
+      bullets: [...prev.bullets, { bodyText: '' }],
     }));
   };
 
   const handleFieldChange = (index, fieldType, fieldValue) => {
     setValue((prev) => ({
       ...prev,
-      fields: prev.fields.map((field, i) =>
+      bullets: prev.bullets.map((field, i) =>
         i === index ? { ...field, [fieldType]: fieldValue } : field
       ),
     }));
@@ -82,7 +87,7 @@ function Accordion({
   const handleRemoveField = (indexToRemove) => {
     setValue((prev) => ({
       ...prev,
-      fields: prev.fields.filter((_, index) => index !== indexToRemove),
+      bullets: prev.bullets.filter((_, index) => index !== indexToRemove),
     }));
   };
 
@@ -104,24 +109,38 @@ function Accordion({
         />
       </div>
 
-      {value.fields.map((field, index) => (
-        <div key={index} style={{ marginBottom: '1rem' }}>
-          <FieldLabel
-            style={{
-              paddingTop: '1rem',
+      <div
+        style={{
+          marginBottom: '2rem',
+          marginTop: '1rem',
+        }}
+      >
+        <FieldLabel style={{ paddingTop: '0.5rem', borderTop: '1px solid #e1e5e9' }}>
+          Subheader:
+        </FieldLabel>
+        <TextInput
+          autoFocus={autoFocus}
+          onChange={(event) => handleChange('subHeader', event.target.value)}
+          value={value.subHeader}
+        />
+      </div>
 
-              borderTop: '1px solid #e1e5e9',
-            }}
-          >{`Heading ${index + 1}`}</FieldLabel>
-          <TextInput
-            style={{ marginBottom: '1rem' }}
-            autoFocus={autoFocus}
-            onChange={(event) => handleFieldChange(index, 'heading', event.target.value)}
-            value={field.heading}
-          />
+      <div>
+        <FieldLabel style={{ paddingTop: '0.5rem', borderTop: '1px solid #e1e5e9' }}>
+          List type:
+        </FieldLabel>
+        <Select
+          value={listOptions.find((option) => option.value === value.listType)}
+          options={listOptions}
+          onChange={(selectedOption) => handleChange('listType', selectedOption.value)}
+        />
+      </div>
+
+      {value.bullets.map((field, index) => (
+        <div key={index} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
           <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
           <SimpleWysiwyg
-            onSetPremble={(premble) => handleFieldChange(index, 'bodyText', premble)}
+            onSetPreamble={(preamble) => handleFieldChange(index, 'bodyText', preamble)}
             editData={field.bodyText}
           />
           <Button
@@ -171,7 +190,7 @@ function Accordion({
           </Button>
         ) : (
           <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-            Add Accordion
+            Add Bulletlist section
           </Button>
         )}
         {editData && (
@@ -192,4 +211,4 @@ function Accordion({
   );
 }
 
-export default Accordion;
+export default BulletList;

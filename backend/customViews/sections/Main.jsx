@@ -10,6 +10,9 @@ import MediaText from './components/MediaText';
 import SelectSections from './components/SelectSections';
 import StoredSections from './components/StoredSections';
 import Accordion from './components/Accordion';
+import Image from './components/Image';
+import Banner from './components/Banner';
+import NewsTeaser from './components/NewsTeaser';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [sectionsData, setSectionsData] = useState(value ? JSON.parse(value) : []);
@@ -25,6 +28,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
     const sectionToEditData = sectionsData.find((section) => section.id === sectionId);
     const sectionIndex = sectionsData.findIndex((section) => section.id === sectionId);
     setEditFormData({ sectionData: sectionToEditData, sectionIndex });
+    setActiveSection(sectionToEditData.sectionType);
   };
 
   const handleDeleteSection = (sectionId) => {
@@ -32,7 +36,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
       const updatedSectionsData = sectionsData.filter((item) => item.id !== sectionId);
       // setSectionsData(updatedSectionsData);
       setSectionsData(() => [...updatedSectionsData]);
-      onChange(JSON.stringify(sectionsData));
+      onChange(JSON.stringify(updatedSectionsData));
     }
   };
 
@@ -79,7 +83,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
 
-      {/* {!editFormData && activeSection === 'BULLETLIST' && (
+      {!editFormData && activeSection === 'BULLETLIST' && (
         <LargeBulletList
           sectionsData={sectionsData}
           setSectionsData={setSectionsData}
@@ -87,7 +91,37 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           onChange={onChange}
           autoFocus={autoFocus}
         />
-      )} */}
+      )}
+
+      {!editFormData && activeSection === 'IMAGE' && (
+        <Image
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {!editFormData && activeSection === 'BANNER' && (
+        <Banner
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {!editFormData && activeSection === 'NEWSTEASER' && (
+        <NewsTeaser
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
 
       {/* Renderar Edit */}
 
@@ -105,6 +139,54 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
 
       {editFormData && editFormData.sectionData.sectionType === 'ACCORDION' && (
         <Accordion
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'BULLETLIST' && (
+        <LargeBulletList
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'IMAGE' && (
+        <Image
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'BANNER' && (
+        <Banner
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'NEWSTEASER' && (
+        <NewsTeaser
           sectionsData={sectionsData}
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}

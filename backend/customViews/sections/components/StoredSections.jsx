@@ -2,6 +2,7 @@ import React from 'react';
 
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
+import { FieldDescription } from '@keystone-ui/fields';
 import { Button } from '@keystone-ui/button';
 import { MinusCircleIcon, EditIcon, MoveIcon } from '@keystone-ui/icons';
 
@@ -65,7 +66,7 @@ function StoredSections({
                       <div>
                         {section.sectionType === 'CHAPTERTEASER'
                           ? 'Chapter Teaser'
-                          : `${section.title} ${section.sectionType}${
+                          : ` ${section.sectionType} - ${section.title}${
                               section.sectionType === 'MEDIATEXT'
                                 ? ` Border: ${section.border}`
                                 : ''
