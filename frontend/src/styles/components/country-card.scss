@@ -1,12 +1,12 @@
 @import '../assets/colors.scss';
 
 .country-card {
-    margin: 10px;
-    height: 20px;
-    width: 200px;
+    margin: 0.7rem;
+    height: 1.4rem;
+    width: 12rem;
     background-color: #fff;
-    padding: 16px 16px 16px 24px; 
-    border: 1px solid $-turquoise-300;
+    padding: 1rem 1rem 1rem 1.5rem; 
+    border: 2px solid $-turquoise-300;
     border-radius: 8px;
 
     /* Flexbox */
@@ -24,7 +24,7 @@
 
         img {
             margin-right: 0;
-            transition: margin-right 0.3s ease;
+            transition: margin-right 1s ease;
         }
     }
 }
@@ -35,13 +35,13 @@
 
 .country-card p {
     color: $-grey-600;
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 600;
     text-decoration: none;
 }
 
 .country-card img {
-    margin-right: 10px;
+    margin-right: 0.7rem;
     transition: margin-right 0.3s ease;
 }
     

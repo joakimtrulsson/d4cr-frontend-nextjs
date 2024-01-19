@@ -28,5 +28,3 @@ export const Data = [
         subItemUrl:'/tel-aviv',
     },
 ]
-
-export default Data
