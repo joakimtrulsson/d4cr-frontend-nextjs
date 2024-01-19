@@ -1,0 +1,73 @@
+/* navbar.css */
+
+@import '../variables/colors.scss';
+
+.navbar {
+    display: flex;
+    position: sticky;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: $-grey-500;
+  }
+    
+  .nav-menu-container {
+    display: flex;
+  }
+  
+  .nav-menu-dropdown {
+    position: relative;
+    margin-right: 20px;
+  }
+  
+  .nav-menu-dropdown p {
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  .dropdown-design-guide-content,
+  .dropdown-local-chapters-content,
+  .dropdown-about-us-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .nav-menu-dropdown:hover .dropdown-design-guide-content,
+  .nav-menu-dropdown:hover .dropdown-local-chapters-content,
+  .nav-menu-dropdown:hover .dropdown-about-us-content {
+    display: block;
+  }
+  
+  .dropdown-design-guide-content ul,
+  .dropdown-local-chapters-content ul,
+  .dropdown-about-us-content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dropdown-design-guide-content li,
+  .dropdown-local-chapters-content li,
+  .dropdown-about-us-content li {
+    margin-bottom: 8px;
+  }
+  
+  .dropdown-design-guide-content a,
+  .dropdown-local-chapters-content a,
+  .dropdown-about-us-content a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown-design-guide-content a:hover,
+  .dropdown-local-chapters-content a:hover,
+  .dropdown-about-us-content a:hover {
+    color: blue;
+  }
+  

@@ -1,0 +1,14 @@
+@import '../variables/colors.scss';
+@import '../base/fonts.scss';
+
+* {
+    font-family: $-montserrat-normal;
+}
+
+body {
+    background-color: white;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0; 
+}
+
