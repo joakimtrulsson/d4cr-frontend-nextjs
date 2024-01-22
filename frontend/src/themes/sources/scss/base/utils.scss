@@ -1,0 +1,125 @@
+@import './fonts.scss';
+
+* {
+    font-family: $-montserrat-normal;
+}
+
+.min-width-m {
+    min-width: 25rem;
+}
+
+.max-width-m {
+    max-width: 41rem;
+}
+
+.full-width-height {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.obj-cover {
+    object-fit: cover;
+}
+
+
+.updown-reverse-direction {
+    transform: scale(-1, -1);
+}
+
+/* flexbox */
+
+.flex {
+    display: flex;
+
+    &-wrap {
+        flex-wrap: wrap;
+    }
+
+    &-nowrap {
+        flex-wrap: nowrap;
+    }
+
+    &-row {
+        flex-direction: row;
+    }
+
+    &-reverse-row {
+        flex-direction: row-reverse;
+    }
+
+    &-column {
+        flex-direction: column;
+    }
+
+    &-align-center {
+        align-items: center;
+    }
+
+    &-justify-center {
+        justify-content: center;
+    }
+
+    &-align-start {
+        align-items: start;
+    }
+
+    &-justify-start {
+        justify-content: start;
+    }
+
+    &-align-end {
+        align-items: end;
+    }
+
+    &-justify-end {
+        justify-content: end;
+    }
+}
+
+/* font style */
+
+h1, .heading-1 {
+    font-size: 3rem;
+    font-weight: 620;
+    letter-spacing: -0.06rem;
+}
+
+h2, .heading-2 {
+    font-size: 2rem;
+    font-weight: 625;
+    letter-spacing: -0.04rem;
+}
+
+h3, .heading-3 {
+    font-size: 1.6rem;
+    font-weight: 620;
+    letter-spacing: -0.03rem;
+}
+
+h4, .heading-4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.01rem;
+}
+
+.sub-heading-m {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08rem;
+
+}
+
+.large-text {
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+    letter-spacing: 0.025rem;
+}
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}

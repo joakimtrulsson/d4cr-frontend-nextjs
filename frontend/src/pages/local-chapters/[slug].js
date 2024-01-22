@@ -1,5 +1,5 @@
-import Navbar from '../../components/navbar'
-import Footer from '../../components/footer'
+import Navbar from '../../themes/components/navbar'
+import Footer from '../../themes/components/footer'
 import { notFound } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';

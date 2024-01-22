@@ -1,7 +1,7 @@
 @import '../variables/colors.scss';
 @import '../base/fonts.scss';
 
-.chapter-teaser-body {
+.chapter-teaser {
     padding-top: 3rem;
     gap: 0.8rem;
     width: 100%;
@@ -12,35 +12,23 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
 
-.mapbase-image-container {
-    margin: 0 8rem; 
-}
+    .image-container {
+        margin: 0 8rem; 
+    }
 
-#mapbase-image {
-    width: 100%; 
-    height: 100%; 
-    display: block;
-}
+    .text-container {
+        padding: 0 10rem 6rem 10rem;
+    
+        /* flexbox */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-.mapbase-text-container {
-    padding: 0 10rem 6rem 10rem;
-
-    /* flexbox */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.mapbase-text-container h2 {
-    color: $-turquoise-700;
-    font-size: 3rem;
-    font-style: normal;
-    font-weight: 620;
-    line-height: 2rem; 
-    letter-spacing: -0.08rem;
-    white-space: nowrap;
+        h1 {
+            color: $-turquoise-700;
+        }
+    }
 }
 
 .country-card-container {

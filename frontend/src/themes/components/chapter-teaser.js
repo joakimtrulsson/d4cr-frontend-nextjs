@@ -7,13 +7,13 @@ import CountryCard from './country-card'
 
 const ChapterTeaser = () => {
     return (
-        <div className="chapter-teaser-body">
-            <div className='mapbase-image-container'>
-                <Image id='mapbase-image' src={Mapbase} alt='A map of the world' />
+        <div className="chapter-teaser">
+            <div className='image-container'>
+                <Image className='full-width-height' src={Mapbase} alt='A map of the world' />
             </div>
 
-            <div className='mapbase-text-container'>
-                <h2>{Title}</h2>
+            <div className='text-container'>
+                <h1 className='heading-2' >{Title}</h1>
                 <div className='country-card-container'>
                     { LocalsCityAndUrl.map((item, index) => {
                         return(
