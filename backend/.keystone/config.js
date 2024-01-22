@@ -310,7 +310,6 @@ var resizeImage = async (req, res, commonContext) => {
       imageUrls
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       success: "false",
       message: "Something went wrong with the image upload."

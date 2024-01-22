@@ -54,3 +54,4 @@ database.db
 keystone.db
 .env
 backend/public/
+backend/todo.md

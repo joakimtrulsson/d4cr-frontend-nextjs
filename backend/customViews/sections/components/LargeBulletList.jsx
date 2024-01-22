@@ -20,9 +20,21 @@ function BulletList({
   autoFocus,
   editData,
 }) {
-  const [value, setValue] = useState({
-    title: '',
-    bullets: [{ bodyText: '' }],
+  // const [value, setValue] = useState({
+  //   title: '',
+  //   bullets: [{ bodyText: '' }],
+  // });
+
+  // Inte optimalt att göra så här.
+  const [value, setValue] = useState(() => {
+    if (editData) {
+      return editData;
+    } else {
+      return {
+        title: '',
+        bullets: [{ bodyText: '' }],
+      };
+    }
   });
 
   useEffect(() => {
@@ -136,45 +148,54 @@ function BulletList({
         />
       </div>
 
-      {value.bullets.map((field, index) => (
-        <div key={index} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
-          <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
-          <SimpleWysiwyg
-            onSetPreamble={(preamble) => handleFieldChange(index, 'bodyText', preamble)}
-            editData={field.bodyText}
-          />
-          <Button
-            onClick={() => handleRemoveField(index)}
-            style={{
-              marginTop: '1rem',
-              backgroundColor: '#fef3f2',
-              color: '#dc2627',
-            }}
-          >
-            Remove Entry
-          </Button>
-        </div>
-      ))}
-
-      {/* {editData &&
-        editData.fields.map((field, index) => (
-          <div key={index}>
-
-            <FieldLabel>{`Heading ${index + 1}`}</FieldLabel>
-            <TextInput
-              autoFocus={autoFocus}
-              onChange={(event) =>
-                handleFieldChange(index, 'heading', event.target.value)
-              }
-              value={field.heading}
-            />
+      {value.bullets.map((field, index) => {
+        console.log(field);
+        return (
+          <div key={index} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
             <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
             <SimpleWysiwyg
-              onSetPremble={(premble) => handleFieldChange(index, 'bodyText', premble)}
+              onSetPreamble={(preamble) => handleFieldChange(index, 'bodyText', preamble)}
               editData={field.bodyText}
             />
+            <Button
+              onClick={() => handleRemoveField(index)}
+              style={{
+                marginTop: '1rem',
+                backgroundColor: '#fef3f2',
+                color: '#dc2627',
+              }}
+            >
+              Remove Entry
+            </Button>
           </div>
-        ))} */}
+        );
+      })}
+
+      {/* {editData &&
+        value.bullets.map((field, index) => {
+          console.log(field);
+          return (
+            <div key={index} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
+              <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
+              <SimpleWysiwyg
+                onSetPreamble={(preamble) =>
+                  handleFieldChange(index, 'bodyText', preamble)
+                }
+                editData={field.bodyText}
+              />
+              <Button
+                onClick={() => handleRemoveField(index)}
+                style={{
+                  marginTop: '1rem',
+                  backgroundColor: '#fef3f2',
+                  color: '#dc2627',
+                }}
+              >
+                Remove Entry
+              </Button>
+            </div>
+          );
+        })} */}
 
       <div style={{ borderTop: '1px solid #e1e5e9' }}>
         <Button

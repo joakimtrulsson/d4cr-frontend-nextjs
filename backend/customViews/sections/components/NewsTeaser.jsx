@@ -13,6 +13,8 @@ import { Button } from '@keystone-ui/button';
 
 import SimpleWysiwyg from './SimpleWysiwyg/SimpleWysiwyg.jsx';
 
+import { mockNewsData } from '../../../data/newsData.js';
+
 function NewsTeaser({
   onCloseSection,
   sectionsData,
@@ -22,13 +24,29 @@ function NewsTeaser({
   sectionIndex,
   setSectionsData,
 }) {
-  const [value, setValue] = useState({
-    title: '',
-    subHeading: '',
-    selectedNews: {
-      chapter: 'ALLCHAPTERS',
-      category: 'ALL',
-    },
+  // const [value, setValue] = useState({
+  //   title: '',
+  //   subHeading: '',
+  //   selectedNews: {
+  //     chapter: 'ALLCHAPTERS',
+  //     category: 'ALL',
+  //   },
+  // });
+
+  // Inte optimalt att göra så här.
+  const [value, setValue] = useState(() => {
+    if (editData) {
+      return editData;
+    } else {
+      return {
+        title: '',
+        subHeading: '',
+        selectedNews: {
+          chapter: 'ALLCHAPTERS',
+          category: 'ALL',
+        },
+      };
+    }
   });
 
   const [mockChaptersSelection] = useState([
@@ -62,6 +80,7 @@ function NewsTeaser({
         sectionType: 'NEWSTEASER',
         id: newId,
         ...value,
+        news: mockNewsData,
       };
 
       setSectionsData((prevSectionsData) => [...prevSectionsData, newItem]);
@@ -133,12 +152,7 @@ function NewsTeaser({
       </div>
       <div>
         <FieldLabel>Subheading:</FieldLabel>
-        <SimpleWysiwyg onSetPreamble={setPreamble} editData={editData?.preamble} />
-        {/* <TextInput
-          autoFocus={autoFocus}
-          onChange={(event) => handleChange('subHeading', event.target.value)}
-          value={value.subHeading}
-        /> */}
+        <SimpleWysiwyg onSetPreamble={setPreamble} editData={editData?.subHeading} />
       </div>
 
       <div>

@@ -35,7 +35,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const handleDeleteSection = (sectionId) => {
     if (onChange) {
       const updatedSectionsData = sectionsData.filter((item) => item.id !== sectionId);
-      // setSectionsData(updatedSectionsData);
+
       setSectionsData(() => [...updatedSectionsData]);
       onChange(JSON.stringify(updatedSectionsData));
     }
@@ -142,7 +142,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -154,7 +153,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -166,7 +164,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -178,7 +175,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -190,7 +186,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -202,7 +197,17 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'WYSIWYG' && (
+        <Wysiwyg
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />

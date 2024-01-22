@@ -15,9 +15,21 @@ function Accordion({
   autoFocus,
   editData,
 }) {
-  const [value, setValue] = useState({
-    title: '',
-    fields: [{ heading: '', bodyText: '' }],
+  // const [value, setValue] = useState({
+  //   title: '',
+  //   fields: [{ heading: '', bodyText: '' }],
+  // });
+
+  // Inte optimalt att göra så här.
+  const [value, setValue] = useState(() => {
+    if (editData) {
+      return editData;
+    } else {
+      return {
+        title: '',
+        fields: [{ heading: '', bodyText: '' }],
+      };
+    }
   });
 
   useEffect(() => {

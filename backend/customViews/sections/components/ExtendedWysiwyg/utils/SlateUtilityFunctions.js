@@ -4,9 +4,9 @@ import { useSlateStatic } from 'slate-react';
 import Link from '../Elements/Link/Link';
 import Image from '../Elements/Embed/Image';
 import Video from '../Elements/Embed/Video';
-import Equation from '../Elements/Equation/Equation';
-import HtmlCode from '../Elements/CodeToText/HtmlCode';
-import Table from '../Elements/Table/Table';
+// import Equation from '../Elements/Equation/Equation';
+// import HtmlCode from '../Elements/CodeToText/HtmlCode';
+// import Table from '../Elements/Table/Table';
 import Spotify from '../Elements/Embed/Spotify';
 
 const alignment = ['alignLeft', 'alignRight', 'alignCenter'];
@@ -232,26 +232,26 @@ export const getBlock = (props) => {
       return <ul {...attributes}>{children}</ul>;
     case 'link':
       return <Link {...props} />;
-    case 'table':
-      return <Table {...props} />;
-    case 'table-row':
-      return <tr {...attributes}>{children}</tr>;
-    case 'table-cell':
-      return (
-        <td {...element.attr} {...attributes}>
-          {children}
-        </td>
-      );
+    // case 'table':
+    //   return <Table {...props} />;
+    // case 'table-row':
+    //   return <tr {...attributes}>{children}</tr>;
+    // case 'table-cell':
+    //   return (
+    //     <td {...element.attr} {...attributes}>
+    //       {children}
+    //     </td>
+    //   );
     case 'spotify':
       return <Spotify {...props}></Spotify>;
     case 'image':
       return <Image {...props} />;
     case 'video':
       return <Video {...props} />;
-    case 'equation':
-      return <Equation {...props} />;
-    case 'htmlCode':
-      return <HtmlCode {...props} />;
+    // case 'equation':
+    //   return <Equation {...props} />;
+    // case 'htmlCode':
+    //   return <HtmlCode {...props} />;
     default:
       return (
         <div {...element.attr} {...attributes}>

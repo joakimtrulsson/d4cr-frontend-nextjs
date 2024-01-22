@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-// import Button from '../../common/Button.jsx';
+
 import Icon from '../../common/Icon.jsx';
 import { isBlockActive } from '../../utils/SlateUtilityFunctions.js';
 import usePopup from '../../utils/customHooks/usePopup.jsx';
@@ -7,14 +7,7 @@ import { insertEmbed } from '../../utils/embed.js';
 import { Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
-import {
-  FieldContainer,
-  FieldLabel,
-  FieldLegend,
-  TextInput,
-  Select,
-  FieldDescription,
-} from '@keystone-ui/fields';
+import { FieldLegend, TextInput } from '@keystone-ui/fields';
 
 import { Button } from '@keystone-ui/button';
 

@@ -72,7 +72,7 @@ function MediaText({
       const data = await response.json();
 
       if (data.success === 'true') {
-        return data.imageUrl;
+        return data.imageUrls;
       }
     } catch (error) {
       return error.message;

@@ -1,22 +1,22 @@
 const toolbarGroups = [
   [
     {
-      id: 3,
+      id: 1,
       format: 'bold',
       type: 'mark',
     },
     {
-      id: 4,
+      id: 2,
       format: 'italic',
       type: 'mark',
     },
     {
-      id: 5,
+      id: 3,
       format: 'underline',
       type: 'mark',
     },
     {
-      id: 6,
+      id: 4,
       format: 'strikethrough',
       type: 'mark',
     },

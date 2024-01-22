@@ -2,11 +2,6 @@ import React from 'react';
 import { Editor, Transforms, Element as SlateElement } from 'slate';
 import { useSlateStatic } from 'slate-react';
 import Link from '../Elements/Link/Link';
-import Image from '../Elements/Embed/Image';
-import Video from '../Elements/Embed/Video';
-import Equation from '../Elements/Equation/Equation';
-import HtmlCode from '../Elements/CodeToText/HtmlCode';
-import Table from '../Elements/Table/Table';
 
 const alignment = ['alignLeft', 'alignRight', 'alignCenter'];
 const list_types = ['orderedList', 'unorderedList'];
@@ -168,82 +163,9 @@ export const getBlock = (props) => {
         </h3>
       );
 
-    case 'blockquote':
-      return (
-        <blockquote {...attributes} {...element.attr}>
-          {children}
-        </blockquote>
-      );
-    case 'alignLeft':
-      return (
-        <div style={{ listStylePosition: 'inside' }} {...attributes} {...element.attr}>
-          {children}
-        </div>
-      );
-    case 'alignCenter':
-      return (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            listStylePosition: 'inside',
-            flexDirection: 'column',
-          }}
-          {...attributes}
-          {...element.attr}
-        >
-          {children}
-        </div>
-      );
-    case 'alignRight':
-      return (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-end',
-            listStylePosition: 'inside',
-            flexDirection: 'column',
-          }}
-          {...attributes}
-          {...element.attr}
-        >
-          {children}
-        </div>
-      );
-    case 'list-item':
-      return (
-        <li {...attributes} {...element.attr}>
-          {children}
-        </li>
-      );
-    case 'orderedList':
-      return (
-        <ol type='1' {...attributes}>
-          {children}
-        </ol>
-      );
-    case 'unorderedList':
-      return <ul {...attributes}>{children}</ul>;
     case 'link':
       return <Link {...props} />;
-    case 'table':
-      return <Table {...props} />;
-    case 'table-row':
-      return <tr {...attributes}>{children}</tr>;
-    case 'table-cell':
-      return (
-        <td {...element.attr} {...attributes}>
-          {children}
-        </td>
-      );
-    case 'image':
-      return <Image {...props} />;
-    case 'video':
-      return <Video {...props} />;
-    case 'equation':
-      return <Equation {...props} />;
-    case 'htmlCode':
-      return <HtmlCode {...props} />;
+
     default:
       return (
         <div {...element.attr} {...attributes}>
