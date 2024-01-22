@@ -1,0 +1,47 @@
+@import '../variables/colors.scss';
+
+.country-card {
+    margin: 0.7rem;
+    height: 1.4rem;
+    width: 12rem;
+    background-color: #fff;
+    padding: 1rem 1rem 1rem 1.5rem; 
+    border: 2px solid $-turquoise-300;
+    border-radius: 8px;
+
+    /* Flexbox */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+
+    &:hover {
+        background-color: $-yellow-50;
+        border: 2px solid $-orange-500;
+        transition: background-color 0.3s, border 0.3s ease-in;
+
+        img {
+            margin-right: 0;
+            transition: margin-right 1s ease;
+        }
+    }
+}
+
+.country-card-link {
+    text-decoration: none;
+}
+
+.country-card p {
+    color: $-grey-600;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.country-card img {
+    margin-right: 0.7rem;
+    transition: margin-right 0.3s ease;
+}
+    
