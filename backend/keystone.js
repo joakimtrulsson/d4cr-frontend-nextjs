@@ -6,6 +6,7 @@ import { lists } from './schema';
 import { withAuth, session } from './auth/auth';
 
 import { uploadImage, resizeImage } from './controllers/uploadController';
+import { deleteImages } from './controllers/deleteController';
 
 dotenv.config();
 
@@ -22,15 +23,17 @@ export default withAuth(
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
-
       cors: { origin: ['*'], credentials: true },
       extendExpressApp: (app, commonContext) => {
+        app.use(express.json());
         app.use('/public', express.static('public'));
+        // Auth saknas
         app.patch(
           '/api/imageupload',
           uploadImage,
           withContext(commonContext, resizeImage)
         );
+        app.delete('/api/delete-images', withContext(commonContext, deleteImages));
       },
     },
     db: {

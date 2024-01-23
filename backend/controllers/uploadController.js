@@ -1,50 +1,6 @@
-// import multer from 'multer';
-// // const sharp = require('sharp');
-// import sharp from 'sharp';
-
-// // Sparar bilden i memory buffer. Då är bilden tillgänglig i req.file.buffer
-// const multerStorage = multer.memoryStorage();
-
-// const multerFilter = (req, file, cb) => {
-//   // Kollar om det är en bild. Skickar true eller false till cb ovanför. Null = no error
-//   if (file.mimetype.startsWith('image')) {
-//     cb(null, true);
-//   } else {
-//     cb(new Error('Not an image. Please upload only images.'), false);
-//   }
-// };
-
-// const upload = multer({
-//   storage: multerStorage,
-//   fileFilter: multerFilter,
-// });
-
-// export const uploadImage = upload.single('image');
-
-// export const resizeImage = async (req, res, commonContext) => {
-//   try {
-//     req.file.filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
-//     await sharp(req.file.buffer)
-//       .resize(500, 500)
-//       .toFormat('jpeg')
-//       .jpeg({ quality: 90 })
-//       .toFile(`public/images/sections/${req.file.filename}`);
-//     // .toFile(`../public_html/public/img/users/${req.file.filename}`);
-
-//     res.json({
-//       success: 'true',
-//       imageUrl: `images/sections/${req.file.filename}`,
-//     });
-//   } catch {
-//     res.status(400).json({
-//       success: 'false',
-//       message: 'Something went wrong with the image upload.',
-//     });
-//   }
-// };
-
 import multer from 'multer';
 import sharp from 'sharp';
+import { v4 as uuidv4 } from 'uuid';
 
 const multerStorage = multer.memoryStorage();
 
@@ -56,8 +12,6 @@ const multerFilter = (req, file, cb) => {
   }
 };
 
-const maxImageCount = 3; // Set your desired maximum image count
-
 const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
@@ -67,18 +21,48 @@ export const uploadImage = upload.array('image', 3);
 
 export const resizeImage = async (req, res, commonContext) => {
   try {
-    const imageUrls = [];
+    const imageObjects = {};
 
     for (const file of req.files) {
-      const filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
+      const fileId = Date.now();
+
+      // Small size
+      const smallFilename = `sectionid-${req.body.id}-${fileId}-s.jpeg`;
+      await sharp(file.buffer)
+        .resize(100, 100)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`public/images/sections/${smallFilename}`);
+
+      // Medium size
+      const mediumFilename = `sectionid-${req.body.id}-${fileId}-m.jpeg`;
+      await sharp(file.buffer)
+        .resize(300, 300)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`public/images/sections/${mediumFilename}`);
+
+      // Large size
+      const largeFilename = `sectionid-${req.body.id}-${fileId}-l.jpeg`;
       await sharp(file.buffer)
         .resize(500, 500)
         .toFormat('jpeg')
         .jpeg({ quality: 90 })
-        .toFile(`public/images/sections/${filename}`);
+        .toFile(`public/images/sections/${largeFilename}`);
 
-      imageUrls.push(`images/sections/${filename}`);
+      const imageId = uuidv4();
+
+      imageObjects[imageId] = {
+        id: imageId,
+        imageUrls: {
+          small: `images/sections/${smallFilename}`,
+          medium: `images/sections/${mediumFilename}`,
+          large: `images/sections/${largeFilename}`,
+        },
+      };
     }
+
+    const imageUrls = Object.values(imageObjects);
 
     res.json({
       success: 'true',

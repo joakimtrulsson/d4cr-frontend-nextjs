@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FieldContainer, FieldLabel, FieldDescription } from '@keystone-ui/fields';
 
 import { options } from './utils/constants';
+import { deleteImages } from './utils/deleteImages';
 
 import ChapterTeaser from './components/ChapterTeaser';
 import LargeBulletList from './components/LargeBulletList';
@@ -28,16 +29,29 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const handleEditSection = (sectionId) => {
     const sectionToEditData = sectionsData.find((section) => section.id === sectionId);
     const sectionIndex = sectionsData.findIndex((section) => section.id === sectionId);
+
     setEditFormData({ sectionData: sectionToEditData, sectionIndex });
     setActiveSection(sectionToEditData.sectionType);
   };
 
-  const handleDeleteSection = (sectionId) => {
+  const handleDeleteSection = async (sectionId) => {
+    const sectionToDelete = sectionsData.find((section) => section.id === sectionId);
+
     if (onChange) {
       const updatedSectionsData = sectionsData.filter((item) => item.id !== sectionId);
 
       setSectionsData(() => [...updatedSectionsData]);
       onChange(JSON.stringify(updatedSectionsData));
+
+      if (sectionToDelete.sectionType === 'IMAGE') {
+        const imageUrlsToDelete = sectionToDelete.images.map((image) => image.imageUrls);
+
+        const responses = await Promise.all(imageUrlsToDelete.map(deleteImages));
+      }
+      if (sectionToDelete.sectionType === 'MEDIATEXT') {
+        const imageUrlsToDelete = sectionToDelete.image[0].imageUrls;
+        const responses = await deleteImages(imageUrlsToDelete);
+      }
     }
   };
 

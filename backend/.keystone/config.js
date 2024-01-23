@@ -284,6 +284,7 @@ var session = (0, import_session.statelessSessions)({
 // controllers/uploadController.js
 var import_multer = __toESM(require("multer"));
 var import_sharp = __toESM(require("sharp"));
+var import_uuid = require("uuid");
 var multerStorage = import_multer.default.memoryStorage();
 var multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
@@ -299,12 +300,26 @@ var upload = (0, import_multer.default)({
 var uploadImage = upload.array("image", 3);
 var resizeImage = async (req, res, commonContext) => {
   try {
-    const imageUrls = [];
+    const imageObjects = {};
     for (const file of req.files) {
-      const filename = `sectionid-${req.body.id}-${Date.now()}.jpeg`;
-      await (0, import_sharp.default)(file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${filename}`);
-      imageUrls.push(`images/sections/${filename}`);
+      const fileId = Date.now();
+      const smallFilename = `sectionid-${req.body.id}-${fileId}-s.jpeg`;
+      await (0, import_sharp.default)(file.buffer).resize(100, 100).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${smallFilename}`);
+      const mediumFilename = `sectionid-${req.body.id}-${fileId}-m.jpeg`;
+      await (0, import_sharp.default)(file.buffer).resize(300, 300).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${mediumFilename}`);
+      const largeFilename = `sectionid-${req.body.id}-${fileId}-l.jpeg`;
+      await (0, import_sharp.default)(file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${largeFilename}`);
+      const imageId = (0, import_uuid.v4)();
+      imageObjects[imageId] = {
+        id: imageId,
+        imageUrls: {
+          small: `images/sections/${smallFilename}`,
+          medium: `images/sections/${mediumFilename}`,
+          large: `images/sections/${largeFilename}`
+        }
+      };
     }
+    const imageUrls = Object.values(imageObjects);
     res.json({
       success: "true",
       imageUrls
@@ -313,6 +328,30 @@ var resizeImage = async (req, res, commonContext) => {
     res.status(400).json({
       success: "false",
       message: "Something went wrong with the image upload."
+    });
+  }
+};
+
+// controllers/deleteController.js
+var import_fs = require("fs");
+var deleteImages = async (req, res, commonContext) => {
+  try {
+    const imagePaths = Object.values(req.body);
+    await Promise.all(
+      imagePaths.map(async (imagePath) => {
+        try {
+          await import_fs.promises.unlink(`public/${imagePath}`);
+        } catch (error) {
+          console.error(`Error deleting file: ${imagePath}`, error);
+        }
+      })
+    );
+    res.status(200).json({ success: true, message: "Images were deleted." });
+  } catch (error) {
+    console.error("Error deleting images:", error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong when removing the images."
     });
   }
 };
@@ -332,12 +371,14 @@ var keystone_default = withAuth(
       maxFileSize: MAX_FILE_SIZE,
       cors: { origin: ["*"], credentials: true },
       extendExpressApp: (app, commonContext) => {
+        app.use(import_express.default.json());
         app.use("/public", import_express.default.static("public"));
         app.patch(
           "/api/imageupload",
           uploadImage,
           withContext(commonContext, resizeImage)
         );
+        app.delete("/api/delete-images", withContext(commonContext, deleteImages));
       }
     },
     db: {

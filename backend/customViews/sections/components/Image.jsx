@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import FormData from 'form-data';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
 import { Button } from '@keystone-ui/button';
 
 import ImageUpload from './ImageUpload/ImageUpload.jsx';
+
+import { deleteImages } from '../utils/deleteImages';
+import { uploadImages } from '../utils/uploadImages';
 
 import { styles } from '../styles.js';
 
@@ -20,69 +22,30 @@ function Image({
 }) {
   const [title, setTitle] = useState();
   const [prevFiles, setPrevFiles] = useState();
-  const [files, setFiles] = useState(editData?.imageUrl || [{}]);
-  const [fields, setFields] = useState([{ image: '' }]);
-  // const [isUploading, setIsUploading] = useState(false);
+
+  const [newFile1, setNewFile1] = useState();
+  const [newFile2, setNewFile2] = useState();
+  const [newFile3, setNewFile3] = useState();
 
   useEffect(() => {
     if (!editData) {
       return;
     }
     setTitle(editData.title);
-    setPrevFiles(editData.imageUrl);
-    setFields(editData.imageUrl.map((imageUrl) => ({ imageUrl })));
+    setPrevFiles(editData.images);
   }, [editData]);
-
-  async function uploadImages(id) {
-    if (!files) {
-      return;
-    }
-
-    const formData = new FormData();
-    files.forEach((file, index) => {
-      formData.append('image', file.file);
-    });
-    formData.append('id', id);
-
-    try {
-      const response = await fetch('http://localhost:3000/api/imageupload', {
-        method: 'PATCH',
-        headers: {
-          ...(formData instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
-        },
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (data.success === 'true') {
-        return data.imageUrls;
-      }
-    } catch (error) {
-      return error.message;
-    }
-  }
 
   async function handleSave() {
     if (onChange) {
       const newId = uuidv4();
-      if (!files) {
-        return;
-      }
 
-      const imageUrl = await uploadImages(newId);
-
-      // Test
-      const imagesWithId = imageUrl.map((image, index) => ({
-        image,
-        id: uuidv4(), // Adjust as needed based on your requirements
-      }));
+      const imageUrls = await uploadImages([newFile1, newFile2, newFile3], newId);
 
       const newItem = {
         sectionType: 'IMAGE',
         id: newId,
         title,
-        imageUrl: imagesWithId,
+        images: imageUrls,
       };
 
       setSectionsData((prevSectionsData) => [...prevSectionsData, newItem]);
@@ -94,27 +57,46 @@ function Image({
   async function handleSaveUpdate(event) {
     event.preventDefault();
 
-    if (!files) return;
+    // Om Files1, files2 eller files3 finns så ladda upp dem
+    const filesToUpload = [newFile1, newFile2, newFile3].filter((file) => file);
 
-    const newImageUrl = await uploadImages(editData.id);
-    // Test
-    const imagesWithId = newImageUrl.map((image, index) => ({
-      image,
-      id: uuidv4(), // Adjust as needed based on your requirements
-    }));
+    if (filesToUpload.length > 0) {
+      const newImageUrl = await uploadImages(editData.id);
 
-    if (onChange) {
-      const updatedSection = {
-        sectionType: 'IMAGE',
-        id: editData.id,
-        title,
-        imageUrl: [...prevFiles, imagesWithId[0]],
-      };
+      // Test
+      const imagesWithId = newImageUrl.map((image) => ({
+        ...image,
+      }));
 
-      sectionsData[sectionIndex] = updatedSection;
+      if (onChange) {
+        const updatedSection = {
+          sectionType: 'IMAGE',
+          // id: editData.id,
+          id: editData.id,
+          title,
+          images: [...prevFiles, ...imagesWithId],
+        };
 
-      onChange(JSON.stringify(sectionsData));
-      onCloseSection();
+        sectionsData[sectionIndex] = updatedSection;
+
+        onChange(JSON.stringify(sectionsData));
+        onCloseSection();
+      }
+    } else {
+      // Om det inte finns några nya bilder att ladda upp
+      if (onChange) {
+        const updatedSection = {
+          sectionType: 'IMAGE',
+          id: editData.id,
+          title,
+          images: [...prevFiles],
+        };
+
+        sectionsData[sectionIndex] = updatedSection;
+
+        onChange(JSON.stringify(sectionsData));
+        onCloseSection();
+      }
     }
   }
 
@@ -122,47 +104,29 @@ function Image({
     setTitle(inputValue);
   };
 
-  const handleAddField = () => {
-    if (fields.length < 3) {
-      setFields((prev) => [...prev, { image: '' }]);
+  const handleDeleteImage = async (indexToRemove) => {
+    // Först ta bort bilden från servern
+    const imagesToDelete = prevFiles[indexToRemove].imageUrls;
+
+    const response = await deleteImages(imagesToDelete);
+
+    // Ta bort bilden från prevFiles
+    const updatedPrevFiles = [...prevFiles];
+    updatedPrevFiles.splice(indexToRemove, 1);
+    setPrevFiles(updatedPrevFiles);
+
+    // Om bilden finns i files, ta bort den där också
+    if (newFile1 && indexToRemove === 0) {
+      setNewFile1(null);
+    }
+    if (newFile2 && indexToRemove === 1) {
+      setNewFile2(null);
+    }
+    if (newFile3 && indexToRemove === 2) {
+      setNewFile3(null);
     }
   };
 
-  // const handleRemoveField = (indexToRemove) => {
-  //   // Tar bort fältet
-  //   console.log(indexToRemove);
-  //   setFields((prevFields) => prevFields.filter((_, index) => index !== indexToRemove));
-
-  //   // Tar bort filen från files om det finns en
-
-  //   const updatedFiles = [...files];
-  //   updatedFiles.splice(indexToRemove, 1);
-  //   setFiles(updatedFiles);
-
-  //   // Tar bort filen från prevFiles om det finns en
-  //   const updatedPrevFiles = [...prevFiles];
-  //   updatedPrevFiles.splice(indexToRemove, 1);
-  //   setPrevFiles(updatedPrevFiles);
-  // };
-
-  const handleRemoveField = (indexToRemove) => {
-    setFields((prevFields) => prevFields.filter((_, index) => index !== indexToRemove));
-
-    // Check if the file exists in the 'files' array
-    if (files && files.length > indexToRemove) {
-      const updatedFiles = [...files];
-      updatedFiles.splice(indexToRemove, 1);
-      setFiles(updatedFiles);
-    }
-
-    // Check if the file exists in the 'prevFiles' array
-    if (prevFiles && prevFiles.length > indexToRemove) {
-      const updatedPrevFiles = [...prevFiles];
-      updatedPrevFiles.splice(indexToRemove, 1);
-      setPrevFiles(updatedPrevFiles);
-    }
-  };
-  console.log(editData);
   return (
     <FieldContainer>
       <div className={styles.form.field}>
@@ -178,52 +142,74 @@ function Image({
         className={styles.form.field}
         style={{ flexDirection: 'column', alignItems: 'flex-start' }}
       >
-        {fields.map((file, index) => (
-          <div key={index} style={{ marginBottom: '1rem' }}>
-            <FieldLabel>Image {index + 1}:</FieldLabel>
-            <div style={{ display: 'flex' }}>
-              <ImageUpload
-                key={index}
-                file={file}
-                setFile={(newFile) => {
-                  const updatedFiles = [...files];
-                  updatedFiles[index] = newFile;
-                  setFiles(updatedFiles);
-                }}
-                // editData={editData?.imageUrl}
-                editData={editData?.imageUrl?.[index].image}
-              />
-              {fields.length > 1 ? (
-                <Button
-                  onClick={() => handleRemoveField(index)}
-                  style={{
-                    marginTop: '1rem',
-                    marginLeft: '0.5rem',
-                    backgroundColor: '#fef3f2',
-                    color: '#dc2627',
-                    alignSelf: 'flex-end',
-                  }}
-                >
-                  Remove Image
-                </Button>
-              ) : null}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {fields.length < 3 ? (
-        <Button
-          style={{ marginTop: '1rem', marginRight: '0.5rem' }}
-          onClick={handleAddField}
+        <div
+          className={styles.form.field}
+          style={{ flexDirection: 'column', alignItems: 'flex-start' }}
         >
-          Add Additional Image
-        </Button>
-      ) : (
-        <Button style={{ marginTop: '1rem', marginRight: '0.5rem' }} disabled={true}>
-          Max 3 images
-        </Button>
-      )}
+          <FieldLabel>Image 1:</FieldLabel>
+          <div style={{ display: 'flex', marginBottom: '1rem' }}>
+            <ImageUpload
+              file={newFile1}
+              setFile={setNewFile1}
+              editData={prevFiles?.[0]?.imageUrls?.large}
+            />
+            <Button
+              onClick={() => handleDeleteImage(0)}
+              style={{
+                marginTop: '1rem',
+                marginLeft: '0.5rem',
+                backgroundColor: '#fef3f2',
+                color: '#dc2627',
+                alignSelf: 'flex-end',
+              }}
+            >
+              Delete Image
+            </Button>
+          </div>
+
+          <FieldLabel>Image 2:</FieldLabel>
+          <div style={{ display: 'flex', marginBottom: '1rem' }}>
+            <ImageUpload
+              file={newFile2}
+              setFile={setNewFile2}
+              editData={prevFiles?.[1]?.imageUrls?.large}
+            />
+            <Button
+              onClick={() => handleDeleteImage(1)}
+              style={{
+                marginTop: '1rem',
+                marginLeft: '0.5rem',
+                backgroundColor: '#fef3f2',
+                color: '#dc2627',
+                alignSelf: 'flex-end',
+              }}
+            >
+              Delete Image
+            </Button>
+          </div>
+
+          <FieldLabel>Image 3:</FieldLabel>
+          <div style={{ display: 'flex', marginBottom: '1rem' }}>
+            <ImageUpload
+              file={newFile3}
+              setFile={setNewFile3}
+              editData={prevFiles?.[2]?.imageUrls?.large}
+            />
+            <Button
+              onClick={() => handleDeleteImage(2)}
+              style={{
+                marginTop: '1rem',
+                marginLeft: '0.5rem',
+                backgroundColor: '#fef3f2',
+                color: '#dc2627',
+                alignSelf: 'flex-end',
+              }}
+            >
+              Delete Image
+            </Button>
+          </div>
+        </div>
+      </div>
 
       {editData ? (
         <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
