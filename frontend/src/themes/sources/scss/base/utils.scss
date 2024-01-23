@@ -1,16 +1,45 @@
 @import './fonts.scss';
+@import '../variables/colors.scss';
+@import '../variables/spacing.scss';
 
 * {
     font-family: $-montserrat-normal;
 }
 
-.min-width-m {
-    min-width: 25rem;
+/*
+    1. width and height
+    2. margin
+    3. padding
+    4. layout
+    5. flexbox
+    6. grid
+    7. font style
+    8. colors
+*/
+
+/* width and height */
+
+.min-width{
+
+    &-25 {
+        min-width: 25rem;
+    }
 }
 
-.max-width-m {
-    max-width: 41rem;
-}
+.max-width{
+
+    &-40 {
+        max-width: 41rem;
+    }
+
+    &-45 {
+        max-width: 41rem;
+    }
+    
+    &-50 {
+        max-width: 50rem;
+    }
+} 
 
 .full-width-height {
     width: 100%;
@@ -18,10 +47,126 @@
     display: block;
 }
 
+/* margin */ 
+
+// (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (negative) 
+
+.margin {
+
+    &--zero {
+      margin: 0;
+    }
+  
+    &--xxs {
+      margin: $-spacing-2;
+    }
+  
+    &-tb { // top & bottom
+
+      &--xxxs-negative {
+        margin-top: -$-spacing-1;
+        margin-bottom: -$-spacing-1;
+      }
+  
+      &--xxs {
+        margin-top: $-spacing-2;
+        margin-bottom: $-spacing-2;
+      }
+    }
+  
+    &-lr { // left & right
+      &--xl {
+        margin-left: $-spacing-6;
+        margin-right: $-spacing-6;
+      }
+    }
+  
+    &-t { // top
+      &--xxxs-negative {
+        margin-top: -$-spacing-1; // not in use
+      }
+  
+      &--zero {
+        margin-top: 0;
+      }
+  
+      &--xxxs {
+        margin-top: $-spacing-1;
+      }
+
+      &--xxs {
+        margin-top: $-spacing-2;
+      }
+    }
+  
+    &-b { // bottom
+      &--xxxs-negative {
+        margin-bottom: -$-spacing-1; // not in use
+      }
+  
+      &--zero {
+        margin-bottom: 0;
+      }
+  
+      &--m {
+        margin-bottom: $-spacing-5;
+      }
+    }
+  
+    &-r { // right
+      &--xxxs-negative {
+        margin-right: -$-spacing-1; // not in use
+      }
+    }
+  }
+
+
+/* padding */
+
+// (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (negative) 
+
+.padding {
+    &--xxs {
+      padding: #{$-spacing-2};
+    }
+  
+    &--xs {
+      padding: $-spacing;
+    }
+  
+    &--l {
+      padding: $-spacing-5;
+    }
+  
+    &-tb { // top & bottom
+      &--xs {
+        padding-top: $-spacing;
+        padding-bottom: $-spacing;
+      }
+  
+      &--xxl {
+        padding-top: $-spacing-7;
+        padding-bottom: $-spacing-7;
+      }
+    }
+  }
+
+/* layout */
+
+.boderradius {
+
+    &-5-precent {
+        border-radius: 5%;
+    }
+    
+    &-50-precent {
+        border-radius: 50%;
+    }
+}
+
 .obj-cover {
     object-fit: cover;
 }
-
 
 .updown-reverse-direction {
     transform: scale(-1, -1);
@@ -75,7 +220,59 @@
     &-justify-end {
         justify-content: end;
     }
+
+    &-justify-around {
+        justify-content: space-around;
+    }
 }
+
+/* grid */
+
+.grid {
+
+    display: grid;
+
+    &-auto-cols {
+        grid-template-columns: repeat(auto-fill, minmax(min-content, 1fr));
+    }
+
+    &-col-gap {
+        column-gap: 1rem;
+    }
+
+    &-row-gap {
+        row-gap: 1rem;
+    }
+
+    &-auto-rows {
+        grid-auto-rows: minmax(min-content, max-content);
+    }
+
+    &-align-center {
+        align-items: center;
+    }
+
+    &-justify-center {
+        justify-content: center;
+    }
+
+    &-align-start {
+        align-items: start;
+    }
+
+    &-justify-start {
+        justify-content: start;
+    }
+
+    &-align-end {
+        align-items: end;
+    }
+
+    &-justify-end {
+        justify-content: end;
+    }
+}
+
 
 /* font style */
 
@@ -107,7 +304,6 @@ h4, .heading-4 {
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.08rem;
-
 }
 
 .large-text {
@@ -116,10 +312,71 @@ h4, .heading-4 {
     letter-spacing: 0.025rem;
 }
 
+.description-text {
+    font-weight: 400;
+    font-size: 0.73rem;
+    line-height: 1.2rem;
+    letter-spacing: 0.02rem;
+}
+
 .no-decoration {
     text-decoration: none;
 }
 
+.bold {
+    font-weight: 900;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.uppercase {
+    text-transform: uppercase; // not in use
+}
+
 .whitespace-nowrap {
     white-space: nowrap;
+}
+
+/* colors */
+
+.color-orange-500 {
+    color: $-orange-500;
+}
+
+.bg-yellow-50 {
+    background-color: $-yellow-50;
+}
+
+.bg-orange-50 {
+    background-color: $-orange-50;
+}
+
+.bg-orange-100 {
+    background-color: $-orange-100;
+}
+
+.bg-purple-50 {
+    background-color: $-purple-50;
+}
+
+.bg-grey-500 {
+    background-color: $-grey-500;
+}
+
+.bg-transparent {
+    background-color: rgba(0, 0, 0, 0); 
+}
+
+.fill-orange-50 {
+    fill: $-orange-50;
+}
+
+.fill-yellow-50 {
+    fill: $-yellow-50;
+}
+
+.fill-purple-50 {
+    fill: $-purple-50;
 }

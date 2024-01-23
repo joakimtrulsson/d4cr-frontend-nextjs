@@ -4,7 +4,7 @@ const data = [
         cta: [
             {
                 url: "our-community",
-                anchorText: "our-community",
+                anchorText: "OUR COMMUNITY",
             },
             {
                 url: "get-involed",
@@ -29,7 +29,7 @@ const data = [
         subHeading: "WHO WE ARE",
         sectionType: "MEDIATEXT",
         isImagePositionLeft: true,
-        backgroundColor: "red",
+        backgroundColor: "orange",
     },
     {
         id: "3ea6850a-4080-4285-9171-55972fe6b522",

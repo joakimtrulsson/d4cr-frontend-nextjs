@@ -10,35 +10,57 @@ import '../sources/scss/base/utils.scss'
 
 const TextAndMedia = ({ data }) => {
 
+    var bgColorClass, fillColorClass
+
+    // ta reda på vilka färger ska användas (!)
+
+    /* "bg" is for the body, and "fill" is for the wave */
+    if (data.backgroundColor === 'orange') {
+        bgColorClass = 'bg-orange-50'
+        fillColorClass = 'fill-orange-50'
+    } else if (data.backgroundColor === 'yellow') {
+        bgColorClass = 'bg-yellow-50'
+        fillColorClass = 'fill-yellow-50'
+    } else {
+        bgColorClass = 'bg-purple-50'
+        fillColorClass = 'fill-purple-50'
+    }
+
+    // bg-transparent
+
     return (
-        <div className="text-and-media-body" >
+        <div className="text-and-media-body bg-transparent margin-tb--xxs" >
 
-            { (data.border === 'TOP' || data.border === 'BOTH' ) ? <TopWave bgColor={data.backgroundColor} /> : null }
+            {(data.border === 'TOP' || data.border === 'BOTH') ?
+                <TopWave fillColorClass={fillColorClass} />
+                :
+                null
+            }
 
-            <div className={`text-and-media-container flex flex-row flex-nowrap 
-            ${ data.isImagePositionLeft ? 'flex-reverse-row' : null}`}
-            style={{ backgroundColor: data.backgroundColor }} >
+            <div className={`text-and-media-container flex flex-row flex-nowrap padding-tb--xxl margin-tb--xxxs-negative ${bgColorClass}
+            ${data.isImagePositionLeft ? 'flex-reverse-row' : null}`} >
 
-                <div className='text-content flex flex-column flex-nowrap'>
-                    <h2 className='sub-heading-m'>{data.subHeading}</h2>
-                    <h3 className='heading2-lineheight-l'>{data.title}</h3>
+                <div className='text-content flex flex-column flex-nowrap margin-lr--xl'>
+                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero'>{data.subHeading}</h2>
+                    <h3 className='heading2-lineheight-l margin--zero'>{data.title}</h3>
 
-                    { data.preamble.map((font, fontIndex) => (
-                        
+                    {data.preamble.map((font, fontIndex) => (
+
                         font.children.map((child, childIndex) => (
 
-                            font.type === "paragraph" ? 
-                            ( <p key={fontIndex}>{font.children[0].text}</p> ) : null )
-                            
+                            font.type === "paragraph" ?
+                                (<p key={fontIndex} className='description-text margin-b--m'>{font.children[0].text}</p>) : null)
+
                         )))
                     }
 
                     <p>{data.description}</p>
-                    <div className='button-container flex flex-row flex-nowrap flex-justify-start' >
+
+                    <div className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center' >
                         <a href={data.cta[1].url}>
                             <PrimaryButton title={data.cta[0].anchorText} />
                         </a>
-                        <a href={data.cta[1].url}>
+                        <a className='no-decoration' href={data.cta[1].url}>
                             <SecondaryButton title={data.cta[1].anchorText} />
                         </a>
                     </div>
@@ -53,7 +75,11 @@ const TextAndMedia = ({ data }) => {
 
             </div>
 
-            { (data.border === 'BOTTOM' || data.border === 'BOTH' ) ? <BottomWave bgColor={data.backgroundColor} /> : null }
+            {(data.border === 'BOTTOM' || data.border === 'BOTH') ?
+                <BottomWave fillColorClass={fillColorClass} />
+                :
+                null
+            }
 
         </div>
     )

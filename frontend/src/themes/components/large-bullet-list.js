@@ -13,13 +13,13 @@ const LargeBulletList = () => {
     const { title, subHeader, bullets } = data.sections[0];
 
     return (
-        <div className='large-bullet-list-container min-width-m flex flex-column  flex-align-center'>
+        <div className='large-bullet-list-container min-width-25 flex flex-column  flex-align-center'>
             <h2>{title}</h2>
             <p className='large-text'>{subHeader}</p>
 
             {bullets.map((bullet, index) => {
                 return (
-                    <div className='bullet-content full-width-height max-width-m flex flex-row flex-align-center flex-justify-start' key={index} >
+                    <div className='bullet-content full-width-height max-width-45 flex flex-row flex-align-center flex-justify-start' key={index} >
                         <Image src={ArrowRight} />
                         <p>{bullet.bodyText[0].children[0].text}</p>
                     </div>
