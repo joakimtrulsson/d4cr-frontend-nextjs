@@ -1,0 +1,31 @@
+@import '../variables/colors.scss';
+@import '../variables/spacing.scss';
+
+.banner {
+
+    transition: transform 0.2s ease-in-out;
+
+    .earth-icon-wrapper {
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    .primary-button {
+        transition: background-color 0.2s ease-in-out
+    }
+
+    &:hover, &:focus {
+
+        transform: scale(1.04);
+        transition: transform 0.2s ease-in-out;
+
+        .earth-icon-wrapper {
+            background-color: $-orange-200;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .primary-button {
+            background-color: $-orange-200;
+            transition: background-color 0.2s ease-in-out;
+        }
+    }
+}

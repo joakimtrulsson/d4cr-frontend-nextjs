@@ -2,6 +2,7 @@ import PrimaryButton from './buttons/primary-button'
 import EarthSvg from '../sources/assets/graphics/icons/earth.svg'
 import Image from 'next/image'
 import '../sources/scss/base/utils.scss'
+import '../sources/scss/components/banner.scss'
 
 const Banner = () => {
 
@@ -15,7 +16,7 @@ const Banner = () => {
         <div className='banner flex flex-row flex-justify-between flex-align-center bg-yellow-50 
         padding--s max-width-45 boderradius--xxs'>
 
-            <div className='icon flex flex-justify-center flex-align-center bg-orange-100 
+            <div className='earth-icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
             boderradius--half padding--xxxs'>
                 <Image className='full-width-height' src={EarthSvg} />
             </div>
