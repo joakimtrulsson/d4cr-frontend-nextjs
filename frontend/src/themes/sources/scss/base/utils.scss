@@ -33,7 +33,7 @@
     }
 
     &-45 {
-        max-width: 41rem;
+        max-width: 45rem;
     }
     
     &-50 {
@@ -75,10 +75,16 @@
     }
   
     &-lr { // left & right
-      &--xl {
-        margin-left: $-spacing-6;
-        margin-right: $-spacing-6;
-      }
+
+        &--xxxs {
+            margin-left: $-spacing;
+            margin-right: $-spacing;
+          }
+        
+        &--xl {
+            margin-left: $-spacing-6;
+            margin-right: $-spacing-6;
+        }
     }
   
     &-t { // top
@@ -114,8 +120,17 @@
     }
   
     &-r { // right
+
       &--xxxs-negative {
         margin-right: -$-spacing-1; // not in use
+      }
+
+      &--xxxs {
+        margin-right: $-spacing-1; // not in use
+      }
+
+      &--xxs {
+        margin-right: $-spacing-2; // not in use
       }
     }
   }
@@ -132,6 +147,14 @@
   
     &--xs {
       padding: $-spacing;
+    }
+
+    &--s {
+        padding: $-spacing-3;
+    }
+
+    &--m {
+        padding: $-spacing-4;
     }
   
     &--l {
@@ -155,11 +178,11 @@
 
 .boderradius {
 
-    &-5-precent {
-        border-radius: 5%;
+    &--xxs {
+        border-radius: $-spacing-2;
     }
     
-    &-50-precent {
+    &--half {
         border-radius: 50%;
     }
 }
@@ -223,6 +246,18 @@
 
     &-justify-around {
         justify-content: space-around;
+    }
+
+    &-align-around {
+        align-items: space-around;
+    }
+
+    &-justify-between {
+        justify-content: space-between;
+    }
+
+    &-align-between {
+        align-items: space-between;
     }
 }
 
@@ -343,6 +378,14 @@ h4, .heading-4 {
 
 .color-orange-500 {
     color: $-orange-500;
+}
+
+.color-grey-500 {
+    color: $-grey-500;
+}
+
+.color-grey-700 {
+    color: $-grey-700;
 }
 
 .bg-yellow-50 {
