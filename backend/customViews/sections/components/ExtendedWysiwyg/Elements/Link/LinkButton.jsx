@@ -1,10 +1,14 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { insertLink } from '../../utils/link.js';
-import Button from '../../common/Button.jsx';
+
 import Icon from '../../common/Icon.jsx';
 import { isBlockActive } from '../../utils/SlateUtilityFunctions.js';
 import usePopup from '../../utils/customHooks/usePopup.jsx';
 import { Transforms } from 'slate';
+
+import { TextInput, FieldLegend } from '@keystone-ui/fields';
+
+import { Button } from '@keystone-ui/button';
 
 const LinkButton = (props) => {
   const { editor } = props;
@@ -38,25 +42,50 @@ const LinkButton = (props) => {
         active={isBlockActive(editor, 'link')}
         format={'link'}
         onClick={toggleLink}
+        style={{ height: '32px', width: '32px' }}
       >
         <Icon icon='link' />
       </Button>
       {showInput && (
         <div className='popup'>
-          <div style={{ display: 'flex', gap: '4px', margin: '5px 2px' }}>
-            <input
-              type='text'
-              placeholder='https://google.com'
+          <div
+            style={{
+              display: 'flex',
+              gap: '4px',
+              flexDirection: 'column',
+              margin: '5px 2px',
+            }}
+          >
+            <FieldLegend>Add Link</FieldLegend>
+            <TextInput
+              placeholder='Enter url'
               value={url}
               onChange={handleInputChange}
+              // onChange={(e) => setFormData((prev) => ({ ...prev, url: e.target.value }))}
+              // autoFocus={autoFocus}
+              // onChange={(event) => handleChange('anchorText', event.target.value)}
+              // value={value.cta?.anchorText}
+              size='small'
+              style={{ marginBottom: '0.5rem', width: '350px' }}
             />
-            <div onClick={handleInsertLink}>
-              <Icon icon='add' />
-            </div>
+            {/* <input
+              type='text'
+              placeholder='Url'
+              value={url}
+              onChange={handleInputChange}
+            /> */}
+            <Button
+              onClick={handleInsertLink}
+              size='small'
+              style={{ width: '75px', borderRadius: '5px', color: '#6b7280' }}
+              type='submit'
+            >
+              Save
+            </Button>
           </div>
           <label>
             <input type='checkbox' checked={showInNewTab} onChange={handleInputChange} />
-            <span style={{ fontSize: '0.8em' }}>Open in new tab</span>
+            <span style={{ fontSize: '0.8em' }}> Open in new tab</span>
           </label>
         </div>
       )}

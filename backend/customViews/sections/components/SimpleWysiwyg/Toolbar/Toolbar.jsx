@@ -14,18 +14,9 @@ import {
 import useFormat from '../utils/customHooks/useFormat.js';
 import defaultToolbarGroups from './toolbarGroups.js';
 import './toolbar.css';
-import ColorPicker from '../Elements/Color Picker/ColorPicker.jsx';
 import LinkButton from '../Elements/Link/LinkButton.jsx';
-import Embed from '../Elements/Embed/Embed.jsx';
-import TableSelector from '../Elements/Table/TableSelector.jsx';
-import EquationButton from '../Elements/Equation/EquationButton.jsx';
-import Id from '../Elements/ID/Id.jsx';
-import TableContextMenu from '../Elements/TableContextMenu/TableContextMenu.jsx';
-import CodeToTextButton from '../Elements/CodeToText/CodeToTextButton.jsx';
-import HtmlContextMenu from '../Elements/CodeToText/HtmlContextMenu.jsx';
 
 const Toolbar = (props) => {
-  const { handleCodeToText } = props;
   const editor = useSlate();
   const isTable = useFormat(editor, 'table');
   const [toolbarGroups, setToolbarGroups] = useState(defaultToolbarGroups);
@@ -114,33 +105,12 @@ const Toolbar = (props) => {
                     editor={editor}
                   />
                 );
-              case 'embed':
-                return <Embed key={element.id} format={element.format} editor={editor} />;
-              case 'color-picker':
-                return (
-                  <ColorPicker
-                    key={element.id}
-                    activeMark={activeMark}
-                    format={element.format}
-                    editor={editor}
-                  />
-                );
-              case 'table':
-                return <TableSelector key={element.id} editor={editor} />;
-              case 'id':
-                return <Id editor={editor} />;
-              case 'equation':
-                return <EquationButton editor={editor} />;
-              case 'codeToText':
-                return <CodeToTextButton handleButtonClick={handleCodeToText} />;
               default:
                 return null;
             }
           })}
         </span>
       ))}
-      <TableContextMenu editor={editor} />
-      <HtmlContextMenu editor={editor} handleCodeToText={handleCodeToText} />
     </div>
   );
 };

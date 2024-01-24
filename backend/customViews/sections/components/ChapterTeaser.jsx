@@ -3,20 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@keystone-ui/button';
 
-const mockData = [
-  {
-    title: 'Chapter 1',
-    slug: 'chapter-1',
-  },
-  {
-    title: 'Chapter 2',
-    slug: 'chapter-2',
-  },
-  {
-    title: 'Chapter 3',
-    slug: 'chapter-3',
-  },
-];
+import { mockChapterData } from '../../../data/chapterData.js';
 
 function ChapterTeaser({ onCloseSection, onChange, sectionsData, setSectionsData }) {
   // Hämta alla chapters och skicka med till frontend
@@ -26,7 +13,7 @@ function ChapterTeaser({ onCloseSection, onChange, sectionsData, setSectionsData
       const newItem = {
         sectionType: 'CHAPTERTEASER',
         id: uuidv4(),
-        chapters: mockData,
+        chapters: mockChapterData,
       };
       setSectionsData((prevSectionsData) => [...prevSectionsData, newItem]);
       onChange(JSON.stringify([...sectionsData, newItem]));

@@ -1,26 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 //This hook returns if the click was inside the popUp ref or outside it .
 function usePopup(popupRef) {
-    const [showPopup,setShowPopup] = useState(false);
-    
-    useEffect(()=>{
-        const handleDocumentClick = (e)=>{
-            const clickedComponent = e.target;
-            if(!popupRef?.current?.contains(clickedComponent)){
-                setShowPopup(false);
-            }
-        }
-        document.addEventListener('click',handleDocumentClick);
+  const [showPopup, setShowPopup] = useState(false);
 
-        return ()=>{
-            document.removeEventListener('click',handleDocumentClick)
-        }
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  useEffect(() => {
+    const handleDocumentClick = (e) => {
+      const clickedComponent = e.target;
+      if (!popupRef?.current?.contains(clickedComponent)) {
+        setShowPopup(false);
+      }
+    };
+    document.addEventListener('click', handleDocumentClick);
 
-    return [showPopup,setShowPopup];
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
+  return [showPopup, setShowPopup];
 }
 
-export default usePopup
-
+export default usePopup;

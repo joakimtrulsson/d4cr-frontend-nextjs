@@ -15,6 +15,8 @@ import SimpleWysiwyg from './SimpleWysiwyg/SimpleWysiwyg.jsx';
 import ImageUpload from './ImageUpload/ImageUpload.jsx';
 
 import { styles } from '../styles.js';
+import { deleteImages } from '../utils/deleteImages.js';
+import { uploadImage } from '../utils/uploadImage.js';
 
 function MediaText({
   onCloseSection,
@@ -26,7 +28,8 @@ function MediaText({
   setSectionsData,
 }) {
   const [value, setValue] = useState({ cta: [{}, {}] });
-  const [file, setFile] = useState(editData?.image || {});
+  // const [file, setFile] = useState(editData?.image || {});
+  const [file, setFile] = useState({});
 
   const [colorOptions] = useState([
     { value: 'ORANGE', label: 'Orange' },
@@ -51,33 +54,33 @@ function MediaText({
     setValue(editData);
   }, [editData]);
 
-  async function uploadImage(id) {
-    if (!file) {
-      return;
-    }
+  // async function uploadImage(id) {
+  //   if (!file) {
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    formData.append('image', file.file);
-    formData.append('id', id);
+  //   const formData = new FormData();
+  //   formData.append('image', file.file);
+  //   formData.append('id', id);
 
-    try {
-      const response = await fetch('http://localhost:3000/api/imageupload', {
-        method: 'PATCH',
-        headers: {
-          ...(formData instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
-        },
-        body: formData,
-      });
+  //   try {
+  //     const response = await fetch('http://localhost:3000/api/imageupload', {
+  //       method: 'PATCH',
+  //       headers: {
+  //         ...(formData instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+  //       },
+  //       body: formData,
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (data.success === 'true') {
-        return data.imageUrl;
-      }
-    } catch (error) {
-      return error.message;
-    }
-  }
+  //     if (data.success === 'true') {
+  //       return data.imageUrls;
+  //     }
+  //   } catch (error) {
+  //     return error.message;
+  //   }
+  // }
 
   async function handleSave() {
     if (onChange) {
@@ -86,14 +89,14 @@ function MediaText({
         return;
       }
 
-      const imageUrl = await uploadImage(newId);
+      const imageUrl = await uploadImage(file, newId);
 
       // Kontrollera att fält i är ifyllda innan du lägger till i sectionsData
 
       const newItem = {
         sectionType: 'MEDIATEXT',
         id: newId,
-        imageUrl,
+        image: imageUrl,
         ...value,
       };
 
@@ -105,13 +108,23 @@ function MediaText({
 
   async function handleSaveUpdate(event) {
     event.preventDefault();
-    const imageUrl = await uploadImage(editData.id);
+
+    console.log(editData, file);
+    // Om bilden har blivit uppdaterad så ska den gamla bilden raderas.
+    if (file) {
+      // Delete old image here
+      const imageUrlsToDelete = editData.image[0].imageUrls;
+      const responses = await deleteImages(imageUrlsToDelete);
+    }
+
+    const imageUrl = await uploadImage(file, editData.id);
+
     if (onChange) {
       const updatedSection = {
         sectionType: 'MEDIATEXT',
         id: editData.id,
         ...value,
-        imageUrl,
+        image: imageUrl,
       };
 
       sectionsData[sectionIndex] = updatedSection;
@@ -201,7 +214,11 @@ function MediaText({
       >
         <FieldLabel>Image:</FieldLabel>
 
-        <ImageUpload file={file} setFile={setFile} editData={editData?.imageUrl} />
+        <ImageUpload
+          file={file}
+          setFile={setFile}
+          editData={editData?.image[0]?.imageUrls?.large}
+        />
       </div>
 
       <div

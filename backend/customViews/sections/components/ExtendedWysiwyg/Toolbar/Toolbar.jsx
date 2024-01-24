@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSlate } from 'slate-react';
-import { Range } from 'slate';
+
 import Button from '../common/Button.jsx';
 import Icon from '../common/Icon.jsx';
 import {
@@ -14,17 +14,13 @@ import {
 import useFormat from '../utils/customHooks/useFormat.js';
 import defaultToolbarGroups from './toolbarGroups.js';
 import './toolbar.css';
-import ColorPicker from '../Elements/Color Picker/ColorPicker.jsx';
+
 import LinkButton from '../Elements/Link/LinkButton.jsx';
 import Embed from '../Elements/Embed/Embed.jsx';
-import TableSelector from '../Elements/Table/TableSelector.jsx';
-import EquationButton from '../Elements/Equation/EquationButton.jsx';
+
 import Id from '../Elements/ID/Id.jsx';
-import TableContextMenu from '../Elements/TableContextMenu/TableContextMenu.jsx';
-import CodeToTextButton from '../Elements/CodeToText/CodeToTextButton.jsx';
-import HtmlContextMenu from '../Elements/CodeToText/HtmlContextMenu.jsx';
+
 const Toolbar = (props) => {
-  const { handleCodeToText } = props;
   const editor = useSlate();
   const isTable = useFormat(editor, 'table');
   const [toolbarGroups, setToolbarGroups] = useState(defaultToolbarGroups);
@@ -43,7 +39,6 @@ const Toolbar = (props) => {
       filteredGroups = filteredGroups.filter((elem) => elem.length);
     }
     setToolbarGroups(filteredGroups);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTable]);
 
   const BlockButton = ({ format }) => {
@@ -60,6 +55,7 @@ const Toolbar = (props) => {
       </Button>
     );
   };
+
   const MarkButton = ({ format }) => {
     return (
       <Button
@@ -74,6 +70,7 @@ const Toolbar = (props) => {
       </Button>
     );
   };
+
   const Dropdown = ({ format, options }) => {
     return (
       <select
@@ -88,6 +85,7 @@ const Toolbar = (props) => {
       </select>
     );
   };
+
   const changeMarkData = (event, format) => {
     event.preventDefault();
     const value = event.target.value;
@@ -116,31 +114,31 @@ const Toolbar = (props) => {
                 );
               case 'embed':
                 return <Embed key={element.id} format={element.format} editor={editor} />;
-              case 'color-picker':
-                return (
-                  <ColorPicker
-                    key={element.id}
-                    activeMark={activeMark}
-                    format={element.format}
-                    editor={editor}
-                  />
-                );
-              case 'table':
-                return <TableSelector key={element.id} editor={editor} />;
+              // case 'color-picker':
+              //   return (
+              //     <ColorPicker
+              //       key={element.id}
+              //       activeMark={activeMark}
+              //       format={element.format}
+              //       editor={editor}
+              //     />
+              //   );
+              // case 'table':
+              //   return <TableSelector key={element.id} editor={editor} />;
               case 'id':
                 return <Id editor={editor} />;
-              case 'equation':
-                return <EquationButton editor={editor} />;
-              case 'codeToText':
-                return <CodeToTextButton handleButtonClick={handleCodeToText} />;
+              // case 'equation':
+              //   return <EquationButton editor={editor} />;
+              // case 'codeToText':
+              //   return <CodeToTextButton handleButtonClick={handleCodeToText} />;
               default:
                 return null;
             }
           })}
         </span>
       ))}
-      <TableContextMenu editor={editor} />
-      <HtmlContextMenu editor={editor} handleCodeToText={handleCodeToText} />
+      {/* <TableContextMenu editor={editor} />
+      <HtmlContextMenu editor={editor} handleCodeToText={handleCodeToText} /> */}
     </div>
   );
 };

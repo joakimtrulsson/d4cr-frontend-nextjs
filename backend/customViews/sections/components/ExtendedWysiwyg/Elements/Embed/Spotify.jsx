@@ -3,8 +3,8 @@ import { useSelected, useFocused } from 'slate-react';
 import Icon from '../../common/Icon.jsx';
 import useResize from '../../utils/customHooks/useResize.js';
 
-const Image = ({ attributes, element, children }) => {
-  const { url, alt } = element;
+const SpotifyEmbed = ({ attributes, element, children }) => {
+  const { url } = element;
   const selected = useSelected();
   const focused = useFocused();
   const [size, onMouseDown] = useResize();
@@ -12,18 +12,30 @@ const Image = ({ attributes, element, children }) => {
   return (
     <div
       {...attributes}
-      className='embed'
       style={{
         display: 'flex',
-        boxShadow: selected && focused && '0 0 3px 3px lightgray',
+
+        justifyContent: 'center',
       }}
       {...element.attr}
     >
       <div
         contentEditable={false}
-        style={{ width: `${size.width}px`, height: `${size.height}px` }}
+        // style={{ width: `${size.width}px`, height: `${size.height}px` }}
       >
-        <img alt={alt} src={url} />
+        <iframe
+          title='Spotify Embed'
+          src={url}
+          // src='https://open.spotify.com/embed/track/0qCQg5TkfBfkTsQP3IhAmC?utm_source=generator'
+
+          width='620px'
+          height='152'
+          frameBorder='0'
+          allowFullScreen
+          allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+          loading='lazy'
+          style={{ borderRadius: '12px' }}
+        />
         {selected && (
           <button
             onMouseDown={onMouseDown}
@@ -42,4 +54,5 @@ const Image = ({ attributes, element, children }) => {
     </div>
   );
 };
-export default Image;
+
+export default SpotifyEmbed;

@@ -5,12 +5,8 @@ import { Slate, Editable, withReact } from 'slate-react';
 import Toolbar from './Toolbar/Toolbar.jsx';
 import { getMarked, getBlock } from './utils/SlateUtilityFunctions.js';
 import withLinks from './plugins/withLinks.js';
-import withTables from './plugins/withTable.js';
-import withEmbeds from './plugins/withEmbeds.js';
-import withEquation from './plugins/withEquation.js';
+
 import './editor.css';
-import CodeToText from './Elements/CodeToText/CodeToText.jsx';
-import { serialize } from './utils/serializer.js';
 
 const Element = (props) => {
   return getBlock(props);
@@ -19,14 +15,9 @@ const Leaf = ({ attributes, children, leaf }) => {
   children = getMarked(leaf, children);
   return <span {...attributes}>{children}</span>;
 };
+
 const SimpleWysiwyg = ({ onSetPreamble, editData }) => {
-  const editor = useMemo(
-    () =>
-      withEquation(
-        withHistory(withEmbeds(withTables(withLinks(withReact(createEditor())))))
-      ),
-    []
-  );
+  const editor = useMemo(() => withHistory(withLinks(withReact(createEditor()))), []);
 
   const [value, setValue] = useState(
     editData || [
@@ -48,19 +39,6 @@ const SimpleWysiwyg = ({ onSetPreamble, editData }) => {
     return <Leaf {...props} />;
   }, []);
 
-  const [htmlAction, setHtmlAction] = useState({
-    showInput: false,
-    html: '',
-    action: '',
-    location: '',
-  });
-  const handleCodeToText = (partialState) => {
-    setHtmlAction((prev) => ({
-      ...prev,
-      ...partialState,
-    }));
-  };
-
   return (
     <Slate editor={editor} initialValue={value} onChange={handleEditorChange}>
       <div
@@ -74,7 +52,7 @@ const SimpleWysiwyg = ({ onSetPreamble, editData }) => {
           padding: '0 00px',
         }}
       >
-        <Toolbar handleCodeToText={handleCodeToText} />
+        <Toolbar />
         <Editable
           style={{
             borderTop: '1px solid #e1e5e9',
@@ -87,9 +65,6 @@ const SimpleWysiwyg = ({ onSetPreamble, editData }) => {
           renderLeaf={renderLeaf}
         />
       </div>
-      {/* {htmlAction.showInput && (
-        <CodeToText {...htmlAction} handleCodeToText={handleCodeToText} />
-      )} */}
     </Slate>
   );
 };

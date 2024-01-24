@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FieldContainer, FieldLabel, FieldDescription } from '@keystone-ui/fields';
 
 import { options } from './utils/constants';
+import { deleteImages } from './utils/deleteImages';
 
 import ChapterTeaser from './components/ChapterTeaser';
 import LargeBulletList from './components/LargeBulletList';
@@ -13,6 +14,7 @@ import Accordion from './components/Accordion';
 import Image from './components/Image';
 import Banner from './components/Banner';
 import NewsTeaser from './components/NewsTeaser';
+import Wysiwyg from './components/Wysiwyg';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [sectionsData, setSectionsData] = useState(value ? JSON.parse(value) : []);
@@ -27,16 +29,29 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const handleEditSection = (sectionId) => {
     const sectionToEditData = sectionsData.find((section) => section.id === sectionId);
     const sectionIndex = sectionsData.findIndex((section) => section.id === sectionId);
+
     setEditFormData({ sectionData: sectionToEditData, sectionIndex });
     setActiveSection(sectionToEditData.sectionType);
   };
 
-  const handleDeleteSection = (sectionId) => {
+  const handleDeleteSection = async (sectionId) => {
+    const sectionToDelete = sectionsData.find((section) => section.id === sectionId);
+
     if (onChange) {
       const updatedSectionsData = sectionsData.filter((item) => item.id !== sectionId);
-      // setSectionsData(updatedSectionsData);
+
       setSectionsData(() => [...updatedSectionsData]);
       onChange(JSON.stringify(updatedSectionsData));
+
+      if (sectionToDelete.sectionType === 'IMAGE') {
+        const imageUrlsToDelete = sectionToDelete.images.map((image) => image.imageUrls);
+
+        const responses = await Promise.all(imageUrlsToDelete.map(deleteImages));
+      }
+      if (sectionToDelete.sectionType === 'MEDIATEXT') {
+        const imageUrlsToDelete = sectionToDelete.image[0].imageUrls;
+        const responses = await deleteImages(imageUrlsToDelete);
+      }
     }
   };
 
@@ -123,6 +138,16 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
 
+      {!editFormData && activeSection === 'WYSIWYG' && (
+        <Wysiwyg
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
       {/* Renderar Edit */}
 
       {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (
@@ -131,7 +156,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -143,7 +167,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -155,7 +178,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -167,7 +189,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -179,7 +200,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />
@@ -191,7 +211,17 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}
           onCloseSection={handleCloseSection}
-          // onUpdateSection={handleUpdateSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'WYSIWYG' && (
+        <Wysiwyg
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
           onChange={onChange}
           autoFocus={autoFocus}
         />

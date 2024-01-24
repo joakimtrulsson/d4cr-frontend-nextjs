@@ -2,15 +2,13 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import { Slate, Editable, withReact } from 'slate-react';
+
 import Toolbar from './Toolbar/Toolbar.jsx';
 import { getMarked, getBlock } from './utils/SlateUtilityFunctions.js';
 import withLinks from './plugins/withLinks.js';
-import withTables from './plugins/withTable.js';
 import withEmbeds from './plugins/withEmbeds.js';
 import withEquation from './plugins/withEquation.js';
 import './Editor.css';
-import CodeToText from './Elements/CodeToText/CodeToText.jsx';
-import { serialize } from './utils/serializer.js';
 
 const Element = (props) => {
   return getBlock(props);
@@ -21,12 +19,10 @@ const Leaf = ({ attributes, children, leaf }) => {
 };
 const ExtendedWysiwyg = ({ onSetPreamble }) => {
   const editor = useMemo(
-    () =>
-      withEquation(
-        withHistory(withEmbeds(withTables(withLinks(withReact(createEditor())))))
-      ),
+    () => withEquation(withHistory(withEmbeds(withLinks(withReact(createEditor()))))),
     []
   );
+
   const [value, setValue] = useState([
     {
       type: 'paragraph',
@@ -45,35 +41,31 @@ const ExtendedWysiwyg = ({ onSetPreamble }) => {
     return <Leaf {...props} />;
   }, []);
 
-  const [htmlAction, setHtmlAction] = useState({
-    showInput: false,
-    html: '',
-    action: '',
-    location: '',
-  });
-  const handleCodeToText = (partialState) => {
-    setHtmlAction((prev) => ({
-      ...prev,
-      ...partialState,
-    }));
-  };
-
   return (
     <Slate editor={editor} initialValue={value} onChange={handleEditorChange}>
-      <Toolbar handleCodeToText={handleCodeToText} />
       <div
         className='editor-wrapper'
-        style={{ border: '1px solid #f3f3f3', padding: '0 10px' }}
+        style={{
+          minHeight: '600px',
+          overflow: 'auto',
+          border: '1px solid #e1e5e9',
+          borderRadius: '7px',
+          padding: '0 00px',
+        }}
       >
+        <Toolbar />
         <Editable
+          className='editor'
           placeholder='Write something...'
           renderElement={renderElement}
           renderLeaf={renderLeaf}
+          style={{
+            borderTop: '1px solid #e1e5e9',
+            paddingLeft: '10px',
+            margin: '0px',
+          }}
         />
       </div>
-      {htmlAction.showInput && (
-        <CodeToText {...htmlAction} handleCodeToText={handleCodeToText} />
-      )}
     </Slate>
   );
 };

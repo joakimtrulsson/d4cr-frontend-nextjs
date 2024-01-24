@@ -1,10 +1,19 @@
-export async function uploadImage(file, id) {
-  if (!file) {
+import FormData from 'form-data';
+
+export async function uploadImages([newFile1, newFile2, newFile3], id) {
+  // Om Files1, files2 eller files3 finns så ladda upp dem
+  const filesToUpload = [newFile1, newFile2, newFile3].filter((file) => file);
+
+  if (filesToUpload.length === 0) {
     return;
   }
 
   const formData = new FormData();
-  formData.append('image', file.file);
+
+  filesToUpload.forEach((file, index) => {
+    formData.append('image', file.file);
+  });
+
   formData.append('id', id);
 
   try {

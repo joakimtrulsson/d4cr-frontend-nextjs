@@ -17,7 +17,7 @@ table {
 td {
   padding: 0 5px;
 }
-.popup-wrapper {
+/* .popup-wrapper {
   display: inline;
   position: relative;
 }
@@ -29,7 +29,7 @@ td {
   border: 1px solid lightgray;
   height: fit-content;
   z-index: 1;
-}
+} */
 button {
   cursor: pointer;
 }

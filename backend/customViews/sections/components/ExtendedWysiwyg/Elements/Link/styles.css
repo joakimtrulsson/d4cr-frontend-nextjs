@@ -1,9 +1,9 @@
-.link{
+.link {
   display: inline;
   position: relative;
 }
-.link-popup{
-    position: absolute;
+.link-popup {
+  position: absolute;
   left: 0;
   display: flex;
   align-items: center;
@@ -15,6 +15,6 @@
   width: fit-content;
   z-index: 1;
 }
-img{
+img {
   height: 15px;
 }

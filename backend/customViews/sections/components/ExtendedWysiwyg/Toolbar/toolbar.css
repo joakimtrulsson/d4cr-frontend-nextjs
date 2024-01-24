@@ -1,12 +1,13 @@
 .toolbar {
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background: #ffffff;
   /* margin: 5% 0; */
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  /* padding: 15px 10px; */
-  row-gap: 15px;
+  align-items: center; */
+
+  /* padding: 10px 10px; */
+  /* row-gap: 15px; */
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -15,12 +16,35 @@
 .toolbar-grp > * {
   margin-right: 10px;
   cursor: pointer;
+  border-radius: 5px;
+  background: #fff;
 }
+
+.toolbar-grp > *:hover {
+  background: #edeef1;
+}
+
 .toolbar-grp {
-  /* margin: 0 10px; */
+  margin: 5px 5px;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  /* width: 100%; */
 }
+
 select {
-  height: 30px;
+  /* height: 30px; */
   border: none;
   width: 6.9rem;
+}
+
+.btnActive {
+  background-color: #000;
+  color: #fff;
+}
+
+.btnActive:hover {
+  background-color: #000;
+  color: #fff;
 }
