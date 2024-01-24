@@ -1,6 +1,6 @@
 @import './fonts.scss';
-@import '../variables/colors.scss';
-@import '../variables/spacing.scss';
+@import '../variables/color-variables.scss';
+@import '../variables/layout-variables.scss';
 
 * {
     font-family: $-montserrat-normal;
@@ -13,33 +13,82 @@
     4. layout
     5. flexbox
     6. grid
-    7. font style
-    8. colors
+    7. headings
+    8. text layout & style 
+    9. colors
+    10. z-index
 */
 
 /* width and height */
 
-.min-width{
+.width {
+
+    &--xxs {
+        width: 20%;
+    }
+
+    &--xs {
+        width: 30%;
+    }
+
+    &--s {
+        width: 40%;
+    }
+
+    &--m {
+        width: 50%;
+    }
+
+    &--l {
+        width: 60%;
+    }
+
+    &--xl {
+        width: 70%;
+    }
+
+    &--xxl {
+        width: 80%;
+    }
+}
+
+.min-width {
+
+    &-20 {
+        min-width: 20rem;
+    }
 
     &-25 {
         min-width: 25rem;
     }
+
+    &-30 {
+        min-width: 30rem;
+    }
 }
 
-.max-width{
+.max-width {
+
+    &-30 {
+        max-width: 30rem;
+    }
 
     &-40 {
-        max-width: 41rem;
+        max-width: 40rem; // ändrade fråm 41 till 40
     }
 
     &-45 {
         max-width: 45rem;
     }
-    
+
     &-50 {
         max-width: 50rem;
     }
-} 
+
+    &-60 {
+        max-width: 60rem;
+    }
+}
 
 .full-width-height {
     width: 100%;
@@ -47,93 +96,114 @@
     display: block;
 }
 
-/* margin */ 
+/* margin */
 
 // (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (negative) 
 
 .margin {
 
     &--zero {
-      margin: 0;
+        margin: 0;
     }
-  
-    &--xxs {
-      margin: $-spacing-2;
-    }
-  
-    &-tb { // top & bottom
 
-      &--xxxs-negative {
-        margin-top: -$-spacing-1;
-        margin-bottom: -$-spacing-1;
-      }
-  
-      &--xxs {
-        margin-top: $-spacing-2;
-        margin-bottom: $-spacing-2;
-      }
+    &--xxs {
+        margin: $-spacing-2;
     }
-  
-    &-lr { // left & right
+
+    &-tb {
+        // top & bottom
+
+        &--xxxs-negative {
+            margin-top: -$-spacing-1;
+            margin-bottom: -$-spacing-1;
+        }
+
+        &--xxs {
+            margin-top: $-spacing-2;
+            margin-bottom: $-spacing-2;
+        }
+
+        &--xxl {
+            margin-top: $-spacing-7;
+            margin-bottom: $-spacing-7;
+        }
+    }
+
+    &-lr {
+        // left & right
 
         &--xxxs {
+            margin-left: $-spacing-1; // ändrat från $-spacing
+            margin-right: $-spacing-1; // (se om andra fil blev påverkade)
+        }
+
+        &--xs {
             margin-left: $-spacing;
             margin-right: $-spacing;
-          }
-        
+        }
+
         &--xl {
             margin-left: $-spacing-6;
             margin-right: $-spacing-6;
         }
     }
-  
-    &-t { // top
-      &--xxxs-negative {
-        margin-top: -$-spacing-1; // not in use
-      }
-  
-      &--zero {
-        margin-top: 0;
-      }
-  
-      &--xxxs {
-        margin-top: $-spacing-1;
-      }
 
-      &--xxs {
-        margin-top: $-spacing-2;
-      }
+    &-t {
+
+        // top
+        &--xxxs-negative {
+            margin-top: -$-spacing-1; // not in use
+        }
+
+        &--zero {
+            margin-top: 0;
+        }
+
+        &--xxxs {
+            margin-top: $-spacing-1;
+        }
+
+        &--xxs {
+            margin-top: $-spacing-2;
+        }
+
+        &--s {
+            margin-top: $-spacing-3;
+        }
     }
-  
-    &-b { // bottom
-      &--xxxs-negative {
-        margin-bottom: -$-spacing-1; // not in use
-      }
-  
-      &--zero {
-        margin-bottom: 0;
-      }
-  
-      &--m {
-        margin-bottom: $-spacing-5;
-      }
+
+    &-b {
+
+        // bottom
+        &--xxxs-negative {
+            margin-bottom: -$-spacing-1; // not in use
+        }
+
+        &--zero {
+            margin-bottom: 0;
+        }
+
+        &--m {
+            margin-bottom: $-spacing-5;
+        }
     }
-  
-    &-r { // right
 
-      &--xxxs-negative {
-        margin-right: -$-spacing-1; // not in use
-      }
+    &-r {
+        // right
 
-      &--xxxs {
-        margin-right: $-spacing-1; // not in use
-      }
+        &--xxxs-negative {
+            margin-right: -$-spacing-1; // not in use
+        }
 
-      &--xxs {
-        margin-right: $-spacing-2; // not in use
-      }
+        &--xxxs {
+            margin-right: $-spacing-1; // not in use
+        }
+
+        &--xxs {
+            margin-right: $-spacing-2; // not in use
+        }
     }
-  }
+}
 
 
 /* padding */
@@ -141,12 +211,13 @@
 // (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (negative) 
 
 .padding {
+
     &--xxs {
-      padding: $-spacing-2;
+        padding: $-spacing-2;
     }
-  
+
     &--xs {
-      padding: $-spacing;
+        padding: $-spacing;
     }
 
     &--s {
@@ -156,35 +227,65 @@
     &--m {
         padding: $-spacing-4;
     }
-  
+
     &--l {
-      padding: $-spacing-5;
+        padding: $-spacing-5;
     }
-  
-    &-tb { // top & bottom
-      &--xs {
-        padding-top: $-spacing;
-        padding-bottom: $-spacing;
-      }
-  
-      &--xxl {
-        padding-top: $-spacing-7;
-        padding-bottom: $-spacing-7;
-      }
+
+    &--xl {
+        padding: $-spacing-6;
     }
-  }
+
+    &-tb {
+        // top & bottom
+
+        &--xs {
+            padding-top: $-spacing;
+            padding-bottom: $-spacing;
+        }
+
+        &--xxl {
+            padding-top: $-spacing-7;
+            padding-bottom: $-spacing-7;
+        }
+    }
+
+    &-lr {
+
+        // left and right
+        &--xs {
+            padding-left: $-spacing;
+            padding-right: $-spacing;
+        }
+
+    }
+}
 
 /* layout */
 
-.boderradius {
+.test-border {
+    border: 2px black solid;
+}
+
+.borderradius { // ändrade till bo(r)derradius 
 
     &--xxs {
         border-radius: $-spacing-2;
     }
-    
+
     &--half {
         border-radius: 50%;
     }
+
+    &-tl--xxs {
+        border-top-left-radius: $-spacing-2;
+    }
+
+    &-bl--xxs {
+        border-bottom-left-radius: $-spacing-2;
+    }
+
+
 }
 
 .obj-cover {
@@ -261,7 +362,7 @@
     }
 }
 
-/* grid */
+/* grid (no in use) */
 
 .grid {
 
@@ -309,28 +410,32 @@
 }
 
 
-/* font style */
+/* headings */
 
-h1, .heading-1 {
+h1,
+.heading-1 {
     font-size: 3rem;
     font-weight: 620;
     letter-spacing: -0.06rem;
 }
 
-h2, .heading-2 {
+h2,
+.heading-2 {
     font-size: 2rem;
     font-weight: 625;
     letter-spacing: -0.04rem;
 }
 
-h3, .heading-3 {
+h3,
+.heading-3 {
     font-size: 1.6rem;
     font-weight: 620;
     letter-spacing: -0.03rem;
 }
 
-h4, .heading-4 {
-    font-size: 1.1rem;
+h4,
+.heading-4 {
+    font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.01rem;
 }
@@ -342,9 +447,10 @@ h4, .heading-4 {
 }
 
 .large-text {
-    font-size: 0.8rem;
-    line-height: 1.3rem;
-    letter-spacing: 0.025rem;
+    font-size: 1.05rem;
+    line-height: 1.4rem;
+    letter-spacing: 0.04rem;
+    font-weight: 400;
 }
 
 .description-text {
@@ -352,6 +458,12 @@ h4, .heading-4 {
     font-size: 0.73rem;
     line-height: 1.2rem;
     letter-spacing: 0.02rem;
+}
+
+// text layout & style
+
+.text-align-center {
+    text-align: center;
 }
 
 .no-decoration {
@@ -374,7 +486,17 @@ h4, .heading-4 {
     white-space: nowrap;
 }
 
+.no-bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 /* colors */
+
+.color-yellow-700 {
+    color: $-yellow-700;
+}
 
 .color-orange-500 {
     color: $-orange-500;
@@ -390,6 +512,14 @@ h4, .heading-4 {
 
 .bg-yellow-50 {
     background-color: $-yellow-50;
+}
+
+.bg-yellow-200 {
+    background-color: $-yellow-200;
+}
+
+.bg-yellow-700 {
+    background-color: $-yellow-700;
 }
 
 .bg-orange-50 {
@@ -409,7 +539,7 @@ h4, .heading-4 {
 }
 
 .bg-transparent {
-    background-color: rgba(0, 0, 0, 0); 
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .fill-orange-50 {
@@ -422,4 +552,10 @@ h4, .heading-4 {
 
 .fill-purple-50 {
     fill: $-purple-50;
+}
+
+/* z-index */
+
+.background-layer {
+    z-index: $-z-index-background;
 }
