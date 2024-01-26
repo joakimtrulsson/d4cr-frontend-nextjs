@@ -1,4 +1,4 @@
-import ImageComponent from '../themes/components/image-component.js'
+import ImagesComponent from '../themes/components/images-component.js'
 import Image1 from '../themes/sources/assets/graphics/placeholder/dummy-image2.jpeg'
 import Image2 from '../themes/sources/assets/graphics/placeholder/dummy-image3.webp'
 import Image3 from '../themes/sources/assets/graphics/placeholder/dummy-image4.png'
@@ -13,9 +13,9 @@ export default function ImagePage() {
   return (
     <main>
 
-        <ImageComponent images={Images1} />
-        <ImageComponent images={Images2} />
-        <ImageComponent images={Images3} />
+        <ImagesComponent images={Images1} />
+        <ImagesComponent images={Images2} />
+        <ImagesComponent images={Images3} />
 
     </main>
   )

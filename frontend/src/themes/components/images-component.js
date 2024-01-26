@@ -2,7 +2,7 @@ import Image from 'next/image'
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/image-component.scss'
 
-const ImageComponent = ({images}) => {
+const ImagesComponent = ({images}) => {
 
     var containerClass;
 
@@ -28,4 +28,4 @@ const ImageComponent = ({images}) => {
     )
 }
 
-export default ImageComponent
+export default ImagesComponent
