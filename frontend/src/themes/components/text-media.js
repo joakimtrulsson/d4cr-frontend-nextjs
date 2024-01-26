@@ -29,7 +29,7 @@ const TextAndMedia = ({ data }) => {
     // bg-transparent
 
     return (
-        <div className="text-and-media-body bg-transparent margin-tb--xxs" >
+        <div className="text-and-media-body bg-transparent" >
 
             {(data.border === 'TOP' || data.border === 'BOTH') ?
                 <TopWave fillColorClass={fillColorClass} />

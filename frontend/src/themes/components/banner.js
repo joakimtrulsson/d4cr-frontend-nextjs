@@ -14,14 +14,14 @@ const Banner = () => {
 
     return (
         <div className='banner flex flex-row flex-justify-between flex-align-center bg-yellow-50 
-        padding--s max-width-45 boderradius--xxs'>
+        padding--s max-width-45 borderradius--xxs'>
 
             <div className='earth-icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
-            boderradius--half padding--xxxs'>
+            borderradius--half padding--xxxs'>
                 <Image className='full-width-height' src={EarthSvg} />
             </div>
 
-            <div className="margin-lr--xxxs">
+            <div className="margin-lr--xs">
                 <h4 className='margin--zero color-grey-700'>{title}</h4>
                 <p className='margin--zero color-grey-500 large-text margin-t--xxxs'>{text}</p>
             </div>

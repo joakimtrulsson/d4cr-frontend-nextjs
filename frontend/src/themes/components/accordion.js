@@ -14,7 +14,7 @@ const Accordion = () => {
         <div className="accordion-container flex flex-column flex-justify-center flex-align-center 
         padding-tb--xxl">
 
-            <div className='animation'>
+            <div className='animation-background'>
                 <Image src={Animation} alt="Animated GIF" />
             </div>
 
