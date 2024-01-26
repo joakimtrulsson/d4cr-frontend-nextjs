@@ -34,6 +34,23 @@ model Role {
   assignedTo        User[]  @relation("User_role")
 }
 
+model Chapter {
+  id                              String    @id @default(uuid())
+  title                           String    @default("")
+  slug                            String    @unique @default("")
+  preamble                        Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  heroImage_filesize              Int?
+  heroImage_extension             String?
+  heroImage_width                 Int?
+  heroImage_height                Int?
+  heroImage_id                    String?
+  chapterLanguage                 String?   @default("EN-GB")
+  translatedChapters              Chapter[] @relation("Chapter_translatedChapters")
+  status                          String    @default("draft")
+  sections                        Json?
+  from_Chapter_translatedChapters Chapter[] @relation("Chapter_translatedChapters")
+}
+
 model Test {
   id       String @id @default(uuid())
   title    String @default("")

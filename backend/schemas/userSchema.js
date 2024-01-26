@@ -23,6 +23,7 @@ export const userSchema = list({
     },
     hideCreate: (args) => !permissions.canManageUsers(args),
     hideDelete: (args) => !permissions.canManageUsers(args),
+    labelField: 'username',
     listView: {
       initialColumns: ['username', 'email', 'role'],
     },
