@@ -43,6 +43,17 @@ export default withAuth(
     },
     lists,
     session,
+    storage: {
+      heroImages: {
+        kind: 'local',
+        type: 'image',
+        generateUrl: (path) => `${ASSET_BASE_URL}/public/images/hero-images${path}`,
+        serverRoute: {
+          path: 'public/images/hero-images',
+        },
+        storagePath: 'public/images/hero-images',
+      },
+    },
     ui: { publicPages: ['public'] },
   })
 );
