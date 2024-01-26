@@ -17,6 +17,15 @@
     align-items: center;
     flex-shrink: 0;
 
+    h2 {
+        color: $-grey-600;
+    }
+
+    img {
+        margin-right: 0.7rem;
+        transition: margin-right 0.3s ease;
+    }
+
     &:hover {
         background-color: $-yellow-50;
         border: 2px solid $-orange-500;
@@ -28,20 +37,3 @@
         }
     }
 }
-
-.country-card-link {
-    text-decoration: none;
-}
-
-.country-card p {
-    color: $-grey-600;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.country-card img {
-    margin-right: 0.7rem;
-    transition: margin-right 0.3s ease;
-}
-    

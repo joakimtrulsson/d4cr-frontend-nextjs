@@ -1,7 +1,6 @@
 import DesignGuideList from '../../database/footer-data/design-guide-list'
 import LocalChaptersList from '../../database/footer-data/local-chapter-list'
 import AboutUsList from '../../database/footer-data/about-us-list'
-import BecomeMemberForm from './become-member-form'
 import Wave from '../components/waves/top-wave'
 import Icon from '../sources/assets/graphics/icons/d4cr-icon.png'
 import Image from 'next/image'
@@ -11,8 +10,6 @@ const Footer = () => {
 
     return (
         <div className='footer'>
-
-            <BecomeMemberForm /> 
 
             <Wave color={null} bgColor={null} />
 

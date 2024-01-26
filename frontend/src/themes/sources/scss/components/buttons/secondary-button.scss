@@ -1,41 +1,33 @@
-@import '../../assets/colors.scss';
+@import '../../variables/colors.scss';
 
 .secondary-button  {
     height: 2.1rem;
     width: 9rem;
 
-    /* Flexbox */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
+    img  {
+        height: 2.1rem;
+        display: block;
+        margin: 0;
+    }
 
-.secondary-button img  {
-    height: 2.1rem;
-    display: block;
-    margin: 0;
-}
-
-.secondary-button button {
-    cursor: pointer;
-    padding: 0rem 1rem;
-    background-color: transparent;
-    border-top: 2.18px solid $-orange-200;
-    border-bottom: 2.18px solid $-orange-200;
-    border-left: none;
-    border-right: none;
-    margin-left: -0.3rem;
-    margin-right: -0.3rem;
-
-    /* font style*/
-    white-space: nowrap;  
-    color: $-orange-500;
-    font-weight: 680;
-    font-size: 0.6rem;
-    letter-spacing: 0.045rem;
-    text-transform: uppercase;
-
-    /* Flexbox */
-    display: flex;
-    align-items: center;
+    button {
+        cursor: pointer;
+        padding: 0rem 1rem;
+        background-color: transparent;
+        border-top: 2.18px solid $-orange-200;
+        border-bottom: 2.18px solid $-orange-200;
+        border-left: none;
+        border-right: none;
+        margin-left: -0.35rem;
+        margin-right: -0.35rem;
+    
+        /* font style*/
+        white-space: nowrap;  
+        color: $-orange-500;
+        font-weight: 680;
+        font-size: 0.6rem;
+        letter-spacing: 0.045rem;
+        text-transform: uppercase;
+    
+    }
 }

@@ -1,38 +1,24 @@
 @import '../variables/colors.scss';
 
 .large-bullet-list-container {
-    padding: 2rem 12rem 3rem 12rem;
-
-    /* flexbox */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    
+    margin: 2rem 12rem 3rem 12rem;
 
     h2 {
-        margin-bottom: 0;
         color: $-grey-700;
+        margin-bottom: 0rem;
     }
 
     p {
-        margin-top: 0.65rem;
-        font-size: 0.8rem;
+        margin-top: 0.6rem;
         color: $-grey-700;
     }
 
     .bullet-content {
-        width: 100%;
-        max-width: 45rem;
-        height: auto;
         padding: 1rem;
         margin: 0.3rem 0;
         background-color: $-grey-25;
         border-radius: 0.5rem;
-
-        /* flexbox */
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: start;
 
         img {
             width: 0.9rem;
