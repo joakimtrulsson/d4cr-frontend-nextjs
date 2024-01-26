@@ -32,7 +32,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core5 = require("@keystone-6/core");
+var import_core6 = require("@keystone-6/core");
 var import_express = __toESM(require("express"));
 var import_dotenv = __toESM(require("dotenv"));
 
@@ -439,6 +439,9 @@ function buildSlug(input, subUrlType = "") {
   } else {
     result = `/${subUrlType}/${output}`;
   }
+  if (!subUrlType) {
+    result = `/${output}`;
+  }
   return result;
 }
 
@@ -533,12 +536,11 @@ var chapterSchema = (0, import_core3.list)({
   }
 });
 
-// schemas/testSchema.js
+// schemas/pageSchema.js
 var import_core4 = require("@keystone-6/core");
 var import_fields4 = require("@keystone-6/core/fields");
-var import_fields_document2 = require("@keystone-6/fields-document");
 var import_access7 = require("@keystone-6/core/access");
-var testSchema = (0, import_core4.list)({
+var pageSchema = (0, import_core4.list)({
   access: {
     operation: {
       ...(0, import_access7.allOperations)(isSignedIn),
@@ -552,9 +554,77 @@ var testSchema = (0, import_core4.list)({
       delete: rules.canManageItems
     }
   },
+  ui: {
+    labelField: "title",
+    listView: {
+      initialColumns: ["title", "slug", "status"],
+      initialSort: { field: "title", direction: "ASC" },
+      pageSize: 50
+    }
+  },
   fields: {
-    title: (0, import_fields4.text)(),
+    title: (0, import_fields4.text)({ validation: { isRequired: true } }),
+    slug: (0, import_fields4.text)({
+      isIndexed: "unique",
+      ui: {
+        description: "The path name for the chapter. Must be unique. If not supplied, it will be generated from the title."
+      },
+      hooks: {
+        resolveInput: ({ operation, resolvedData, inputData }) => {
+          if (operation === "create" && !inputData.slug) {
+            return buildSlug(inputData.title);
+          }
+          if (operation === "create" && inputData.slug) {
+            return buildSlug(inputData.slug);
+          }
+          if (operation === "update" && inputData.slug) {
+            return buildSlug(inputData.slug);
+          }
+        }
+      }
+    }),
+    status: (0, import_fields4.select)({
+      options: [
+        { label: "Published", value: "published" },
+        { label: "Draft", value: "draft" }
+      ],
+      validation: { isRequired: true },
+      defaultValue: "draft",
+      ui: { displayMode: "segmented-control" }
+    }),
     sections: (0, import_fields4.json)({
+      ui: {
+        views: "./customViews/Main.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    })
+  }
+});
+
+// schemas/testSchema.js
+var import_core5 = require("@keystone-6/core");
+var import_fields5 = require("@keystone-6/core/fields");
+var import_fields_document2 = require("@keystone-6/fields-document");
+var import_access9 = require("@keystone-6/core/access");
+var testSchema = (0, import_core5.list)({
+  access: {
+    operation: {
+      ...(0, import_access9.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields5.text)(),
+    sections: (0, import_fields5.json)({
       ui: {
         views: "./customViews/Main.jsx",
         createView: { fieldMode: "edit" },
@@ -570,6 +640,7 @@ var lists = {
   User: userSchema,
   Role: roleSchema,
   Chapter: chapterSchema,
+  Page: pageSchema,
   Test: testSchema
 };
 
@@ -706,7 +777,7 @@ function withContext(commonContext, f) {
   };
 }
 var keystone_default = withAuth(
-  (0, import_core5.config)({
+  (0, import_core6.config)({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,

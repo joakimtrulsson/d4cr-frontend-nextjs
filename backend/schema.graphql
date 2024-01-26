@@ -323,6 +323,55 @@ input ChapterRelateToManyForCreateInput {
   connect: [ChapterWhereUniqueInput!]
 }
 
+type Page {
+  id: ID!
+  title: String
+  slug: String
+  status: String
+  sections: JSON
+}
+
+input PageWhereUniqueInput {
+  id: ID
+  slug: String
+}
+
+input PageWhereInput {
+  AND: [PageWhereInput!]
+  OR: [PageWhereInput!]
+  NOT: [PageWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  slug: StringFilter
+  status: StringFilter
+}
+
+input PageOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  slug: OrderDirection
+  status: OrderDirection
+}
+
+input PageUpdateInput {
+  title: String
+  slug: String
+  status: String
+  sections: JSON
+}
+
+input PageUpdateArgs {
+  where: PageWhereUniqueInput!
+  data: PageUpdateInput!
+}
+
+input PageCreateInput {
+  title: String
+  slug: String
+  status: String
+  sections: JSON
+}
+
 type Test {
   id: ID!
   title: String
@@ -385,6 +434,12 @@ type Mutation {
   updateChapters(data: [ChapterUpdateArgs!]!): [Chapter]
   deleteChapter(where: ChapterWhereUniqueInput!): Chapter
   deleteChapters(where: [ChapterWhereUniqueInput!]!): [Chapter]
+  createPage(data: PageCreateInput!): Page
+  createPages(data: [PageCreateInput!]!): [Page]
+  updatePage(where: PageWhereUniqueInput!, data: PageUpdateInput!): Page
+  updatePages(data: [PageUpdateArgs!]!): [Page]
+  deletePage(where: PageWhereUniqueInput!): Page
+  deletePages(where: [PageWhereUniqueInput!]!): [Page]
   createTest(data: TestCreateInput!): Test
   createTests(data: [TestCreateInput!]!): [Test]
   updateTest(where: TestWhereUniqueInput!, data: TestUpdateInput!): Test
@@ -422,6 +477,9 @@ type Query {
   chapters(where: ChapterWhereInput! = {}, orderBy: [ChapterOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ChapterWhereUniqueInput): [Chapter!]
   chapter(where: ChapterWhereUniqueInput!): Chapter
   chaptersCount(where: ChapterWhereInput! = {}): Int
+  pages(where: PageWhereInput! = {}, orderBy: [PageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PageWhereUniqueInput): [Page!]
+  page(where: PageWhereUniqueInput!): Page
+  pagesCount(where: PageWhereInput! = {}): Int
   tests(where: TestWhereInput! = {}, orderBy: [TestOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestWhereUniqueInput): [Test!]
   test(where: TestWhereUniqueInput!): Test
   testsCount(where: TestWhereInput! = {}): Int

@@ -51,6 +51,14 @@ model Chapter {
   from_Chapter_translatedChapters Chapter[] @relation("Chapter_translatedChapters")
 }
 
+model Page {
+  id       String @id @default(uuid())
+  title    String @default("")
+  slug     String @unique @default("")
+  status   String @default("draft")
+  sections Json?
+}
+
 model Test {
   id       String @id @default(uuid())
   title    String @default("")

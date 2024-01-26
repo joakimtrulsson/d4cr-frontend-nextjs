@@ -43,5 +43,9 @@ export function buildSlug(input, subUrlType = '') {
     result = `/${subUrlType}/${output}`;
   }
 
+  if (!subUrlType) {
+    result = `/${output}`;
+  }
+
   return result;
 }

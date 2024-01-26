@@ -24,8 +24,8 @@ const useFetchLinkOptions = () => {
 
         const { data } = await response.json();
         const options = data.chapters.map((chapter) => ({
-          label: `/${chapter.slug}`,
-          value: `/${chapter.slug}`,
+          label: `${chapter.slug}`,
+          value: `${chapter.slug}`,
         }));
 
         options.unshift({ label: 'Select', value: '' });

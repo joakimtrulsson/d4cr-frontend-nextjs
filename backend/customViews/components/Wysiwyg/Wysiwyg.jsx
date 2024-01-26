@@ -62,7 +62,6 @@ const Wysiwyg = ({ onSetPreamble, editData, extended }) => {
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           style={{
-            backgroundColor: 'red',
             height: '300px',
             // width: '550px',
             borderTop: '1px solid #e1e5e9',
