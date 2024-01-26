@@ -23,7 +23,7 @@ export const testSchema = list({
 
     sections: json({
       ui: {
-        views: './customViews/sections/Main.jsx',
+        views: './customViews/Main.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
