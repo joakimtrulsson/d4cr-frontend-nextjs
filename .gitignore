@@ -53,5 +53,8 @@ backend/.keystone/admin
 database.db
 keystone.db
 .env
-backend/public/
+backend/public/*
+!backend/public/images/
+backend/public/images/*
+!backend/public/images/logo/
 backend/todo.md
