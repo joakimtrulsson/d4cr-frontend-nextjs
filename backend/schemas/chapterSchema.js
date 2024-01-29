@@ -24,7 +24,13 @@ export const chapterSchema = list({
   ui: {
     labelField: 'title',
     listView: {
-      initialColumns: ['title', 'slug', 'status', 'translatedChapters'],
+      initialColumns: [
+        'title',
+        'slug',
+        'status',
+        'chapterLanguage',
+        'translatedChapters',
+      ],
       initialSort: { field: 'title', direction: 'ASC' },
       pageSize: 50,
     },

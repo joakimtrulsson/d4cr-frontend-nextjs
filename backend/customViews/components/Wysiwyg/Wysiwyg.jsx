@@ -48,7 +48,7 @@ const Wysiwyg = ({ onSetPreamble, editData, extended }) => {
       <div
         className='editor-wrapper'
         style={{
-          // minHeight: extended ? '600px' : '300px',
+          minHeight: extended ? '600px' : '300px',
           // overflow: 'auto',
           border: '1px solid #e1e5e9',
           borderRadius: '7px',
@@ -62,8 +62,7 @@ const Wysiwyg = ({ onSetPreamble, editData, extended }) => {
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           style={{
-            height: '300px',
-            // width: '550px',
+            minHeight: '300px',
             borderTop: '1px solid #e1e5e9',
             paddingLeft: '10px',
             margin: '0px',

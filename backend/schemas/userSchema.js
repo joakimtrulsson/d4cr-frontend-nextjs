@@ -59,7 +59,14 @@ export const userSchema = list({
       },
       validation: { isRequired: true },
     }),
-
+    chapters: relationship({
+      ref: 'Chapter',
+      many: true,
+      access: {
+        create: permissions.canManageUsers,
+        update: permissions.canManageUsers,
+      },
+    }),
     //  Rolen som är kopplad till användare.
     role: relationship({
       ref: 'Role.assignedTo',

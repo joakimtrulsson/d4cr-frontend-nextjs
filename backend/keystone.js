@@ -53,6 +53,15 @@ export default withAuth(
         },
         storagePath: 'public/images/hero-images',
       },
+      frontPageHero: {
+        kind: 'local',
+        type: 'file',
+        generateUrl: (path) => `${ASSET_BASE_URL}/public/media/frontpage/${path}`,
+        serverRoute: {
+          path: 'public/images/hero-images',
+        },
+        storagePath: 'public/media/',
+      },
     },
     ui: { publicPages: ['public'] },
   })

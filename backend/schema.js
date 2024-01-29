@@ -1,9 +1,10 @@
-import { User, Role, Test, Chapter, Page } from './schemas/index';
+import { User, Role, Test, Chapter, Page, FrontPage } from './schemas/index';
 
 export const lists = {
   User,
   Role,
   Chapter,
   Page,
-  Test,
+  FrontPage,
+  // Test,
 };

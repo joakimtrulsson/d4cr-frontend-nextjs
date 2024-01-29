@@ -42,14 +42,14 @@ html {
   scroll-behavior: smooth;
 } */
 
-blockquote {
+/* blockquote {
   border-left: 2px solid #ddd;
   margin-left: 0;
   margin-right: 0;
   padding-left: 10px;
   color: #aaa;
   font-style: italic;
-}
+} */
 
 .btnActive {
   opacity: 1;
@@ -58,7 +58,6 @@ blockquote {
   font-family: 'Helvetica', 'Arial', sans-serif;
   border-radius: 10px;
   background: #ffffff;
-  box-shadow: -8px 8px 13px #ededed, 8px -8px 13px #ffffff;
   min-height: 400px;
   min-width: 100%;
   width: fit-content;
@@ -85,9 +84,17 @@ button {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
 [data-slate-node='element'] {
   margin: 10px 0;
 }
 html {
   scroll-behavior: smooth;
+}
+
+textarea:focus,
+input:focus,
+select:focus,
+div[contenteditable='true']:focus {
+  outline: none;
 }

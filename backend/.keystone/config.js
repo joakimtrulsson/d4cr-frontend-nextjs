@@ -32,7 +32,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core6 = require("@keystone-6/core");
+var import_core7 = require("@keystone-6/core");
 var import_express = __toESM(require("express"));
 var import_dotenv = __toESM(require("dotenv"));
 
@@ -135,6 +135,14 @@ var userSchema = (0, import_core.list)({
         update: ({ session: session2, item }) => permissions.canManageUsers({ session: session2 }) || session2?.itemId === item.id
       },
       validation: { isRequired: true }
+    }),
+    chapters: (0, import_fields.relationship)({
+      ref: "Chapter",
+      many: true,
+      access: {
+        create: permissions.canManageUsers,
+        update: permissions.canManageUsers
+      }
     }),
     //  Rolen som är kopplad till användare.
     role: (0, import_fields.relationship)({
@@ -463,7 +471,13 @@ var chapterSchema = (0, import_core3.list)({
   ui: {
     labelField: "title",
     listView: {
-      initialColumns: ["title", "slug", "status", "translatedChapters"],
+      initialColumns: [
+        "title",
+        "slug",
+        "status",
+        "chapterLanguage",
+        "translatedChapters"
+      ],
       initialSort: { field: "title", direction: "ASC" },
       pageSize: 50
     }
@@ -539,6 +553,7 @@ var chapterSchema = (0, import_core3.list)({
 // schemas/pageSchema.js
 var import_core4 = require("@keystone-6/core");
 var import_fields4 = require("@keystone-6/core/fields");
+var import_fields_document2 = require("@keystone-6/fields-document");
 var import_access7 = require("@keystone-6/core/access");
 var pageSchema = (0, import_core4.list)({
   access: {
@@ -567,7 +582,7 @@ var pageSchema = (0, import_core4.list)({
     slug: (0, import_fields4.text)({
       isIndexed: "unique",
       ui: {
-        description: "The path name for the chapter. Must be unique. If not supplied, it will be generated from the title."
+        description: "The path name for the page. Must be unique. If not supplied, it will be generated from the title."
       },
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
@@ -581,6 +596,46 @@ var pageSchema = (0, import_core4.list)({
             return buildSlug(inputData.slug);
           }
         }
+      }
+    }),
+    heroPreamble: (0, import_fields_document2.document)({
+      links: true,
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true
+        },
+        softBreaks: true
+      }
+    }),
+    ctaOneAnchorText: (0, import_fields4.text)({
+      label: "Call to action 1",
+      ui: {
+        description: "Anchor text for the call to action button."
+      }
+    }),
+    ctaOneUrl: (0, import_fields4.json)({
+      ui: {
+        views: "./customViews/DynamicLinkSelect.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    ctaTwoUrlAnchorText: (0, import_fields4.text)({
+      label: "Call to action 2",
+      ui: {
+        description: "Anchor text for the call to action button."
+      }
+    }),
+    ctaTwoUrl: (0, import_fields4.json)({
+      ui: {
+        views: "./customViews/DynamicLinkSelect.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
       }
     }),
     status: (0, import_fields4.select)({
@@ -603,12 +658,12 @@ var pageSchema = (0, import_core4.list)({
   }
 });
 
-// schemas/testSchema.js
+// schemas/frontPageSchema.js
 var import_core5 = require("@keystone-6/core");
 var import_fields5 = require("@keystone-6/core/fields");
-var import_fields_document2 = require("@keystone-6/fields-document");
+var import_fields_document3 = require("@keystone-6/fields-document");
 var import_access9 = require("@keystone-6/core/access");
-var testSchema = (0, import_core5.list)({
+var frontPageSchema = (0, import_core5.list)({
   access: {
     operation: {
       ...(0, import_access9.allOperations)(isSignedIn),
@@ -622,9 +677,95 @@ var testSchema = (0, import_core5.list)({
       delete: rules.canManageItems
     }
   },
+  isSingleton: true,
   fields: {
-    title: (0, import_fields5.text)(),
+    heroTitle: (0, import_fields5.text)({ validation: { isRequired: true } }),
+    heroPreamble: (0, import_fields_document3.document)({
+      links: true,
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true
+        },
+        softBreaks: true
+      }
+    }),
+    heroMedia: (0, import_fields5.file)({
+      storage: "frontPageHero",
+      validation: { isRequired: true }
+    }),
+    ctaOneAnchorText: (0, import_fields5.text)({
+      label: "Call to action 1",
+      ui: {
+        description: "Anchor text for the call to action button."
+      }
+    }),
+    ctaOneUrl: (0, import_fields5.json)({
+      ui: {
+        views: "./customViews/DynamicLinkSelect.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    ctaTwoUrlAnchorText: (0, import_fields5.text)({
+      label: "Call to action 2",
+      ui: {
+        description: "Anchor text for the call to action button."
+      }
+    }),
+    ctaTwoUrl: (0, import_fields5.json)({
+      ui: {
+        views: "./customViews/DynamicLinkSelect.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    status: (0, import_fields5.select)({
+      options: [
+        { label: "Published", value: "published" },
+        { label: "Draft", value: "draft" }
+      ],
+      validation: { isRequired: true },
+      defaultValue: "draft",
+      ui: { displayMode: "segmented-control" }
+    }),
     sections: (0, import_fields5.json)({
+      ui: {
+        views: "./customViews/Main.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    })
+  }
+});
+
+// schemas/testSchema.js
+var import_core6 = require("@keystone-6/core");
+var import_fields6 = require("@keystone-6/core/fields");
+var import_fields_document4 = require("@keystone-6/fields-document");
+var import_access11 = require("@keystone-6/core/access");
+var testSchema = (0, import_core6.list)({
+  access: {
+    operation: {
+      ...(0, import_access11.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields6.text)(),
+    sections: (0, import_fields6.json)({
       ui: {
         views: "./customViews/Main.jsx",
         createView: { fieldMode: "edit" },
@@ -641,7 +782,8 @@ var lists = {
   Role: roleSchema,
   Chapter: chapterSchema,
   Page: pageSchema,
-  Test: testSchema
+  FrontPage: frontPageSchema
+  // Test,
 };
 
 // auth/auth.js
@@ -698,8 +840,8 @@ var import_multer = __toESM(require("multer"));
 var import_sharp = __toESM(require("sharp"));
 var import_uuid = require("uuid");
 var multerStorage = import_multer.default.memoryStorage();
-var multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
+var multerFilter = (req, file2, cb) => {
+  if (file2.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
     cb(new Error("Not an image. Please upload only images."), false);
@@ -713,14 +855,14 @@ var uploadImage = upload.array("image", 3);
 var resizeImage = async (req, res, commonContext) => {
   try {
     const imageObjects = {};
-    for (const file of req.files) {
+    for (const file2 of req.files) {
       const fileId = Date.now();
       const smallFilename = `sectionid-${req.body.id}-${fileId}-s.jpeg`;
-      await (0, import_sharp.default)(file.buffer).resize(100, 100).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${smallFilename}`);
+      await (0, import_sharp.default)(file2.buffer).resize(100, 100).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${smallFilename}`);
       const mediumFilename = `sectionid-${req.body.id}-${fileId}-m.jpeg`;
-      await (0, import_sharp.default)(file.buffer).resize(300, 300).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${mediumFilename}`);
+      await (0, import_sharp.default)(file2.buffer).resize(300, 300).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${mediumFilename}`);
       const largeFilename = `sectionid-${req.body.id}-${fileId}-l.jpeg`;
-      await (0, import_sharp.default)(file.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${largeFilename}`);
+      await (0, import_sharp.default)(file2.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${largeFilename}`);
       const imageId = (0, import_uuid.v4)();
       imageObjects[imageId] = {
         id: imageId,
@@ -777,7 +919,7 @@ function withContext(commonContext, f) {
   };
 }
 var keystone_default = withAuth(
-  (0, import_core6.config)({
+  (0, import_core7.config)({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
@@ -809,6 +951,15 @@ var keystone_default = withAuth(
           path: "public/images/hero-images"
         },
         storagePath: "public/images/hero-images"
+      },
+      frontPageHero: {
+        kind: "local",
+        type: "file",
+        generateUrl: (path) => `${ASSET_BASE_URL}/public/media/frontpage/${path}`,
+        serverRoute: {
+          path: "public/images/hero-images"
+        },
+        storagePath: "public/media/"
       }
     },
     ui: { publicPages: ["public"] }

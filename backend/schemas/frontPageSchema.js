@@ -1,13 +1,11 @@
 import { list } from '@keystone-6/core';
-import { text, json, select } from '@keystone-6/core/fields';
+import { text, json, select, file } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
 
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
 
-import { buildSlug } from '../utils/buildSlug';
-
-export const pageSchema = list({
+export const frontPageSchema = list({
   access: {
     operation: {
       ...allOperations(isSignedIn),
@@ -21,42 +19,9 @@ export const pageSchema = list({
       delete: rules.canManageItems,
     },
   },
-  ui: {
-    labelField: 'title',
-    listView: {
-      initialColumns: ['title', 'slug', 'status'],
-      initialSort: { field: 'title', direction: 'ASC' },
-      pageSize: 50,
-    },
-  },
+  isSingleton: true,
   fields: {
-    title: text({ validation: { isRequired: true } }),
-    slug: text({
-      isIndexed: 'unique',
-      ui: {
-        description:
-          'The path name for the page. Must be unique. If not supplied, it will be generated from the title.',
-      },
-      hooks: {
-        resolveInput: ({ operation, resolvedData, inputData }) => {
-          if (operation === 'create' && !inputData.slug) {
-            return buildSlug(inputData.title);
-          }
-
-          if (operation === 'create' && inputData.slug) {
-            return buildSlug(inputData.slug);
-          }
-
-          if (operation === 'update' && inputData.slug) {
-            return buildSlug(inputData.slug);
-          }
-
-          // if (operation === 'update' && !inputData.slug && inputData.title) {
-          //   return buildSlug(inputData.title, 'chapters');
-          // }
-        },
-      },
-    }),
+    heroTitle: text({ validation: { isRequired: true } }),
     heroPreamble: document({
       links: true,
       formatting: {
@@ -68,6 +33,10 @@ export const pageSchema = list({
         },
         softBreaks: true,
       },
+    }),
+    heroMedia: file({
+      storage: 'frontPageHero',
+      validation: { isRequired: true },
     }),
     ctaOneAnchorText: text({
       label: 'Call to action 1',
@@ -97,6 +66,7 @@ export const pageSchema = list({
         itemView: { fieldMode: 'edit' },
       },
     }),
+
     status: select({
       options: [
         { label: 'Published', value: 'published' },
