@@ -1,5 +1,5 @@
 import '../../sources/scss/base/utils.scss'
-import '../../sources/scss/variables/colors.scss'
+import '../../sources/scss/variables/color-variables.scss'
 
 
 const TopWave = ({fillColorClass}) => {

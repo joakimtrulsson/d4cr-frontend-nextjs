@@ -9,16 +9,16 @@ export const accordionSection = {
                     type: "paragaph",
                     children: [
                         {
-                            text: "Why did the child bring a ladder to the design class? To reach new heights of creativity! "
+                            text: "Lorem ipsum dolor sit amet consectetur. Et sed eget posuere integer egestas id cursus tellus. Ultrices integer in scelerisque donec sit facilisis eget arcu vulputate. Eget odio quis nec leo. Nulla interdum iaculis quis quisque lobortis. Blandit in mattis platea enim sollicitudin. Adipiscing nunc ullamcorper vehicula fames. Ac enim semper ipsum ac tellus cras mauris. "
                         },
                         {
                             bold: true,
-                            text: "What did the font say to the paragraph? You've got a lot of bold statements! "
+                            text: "Lorem ipsum dolor sit amet consectetur. Sit turpis elementum magna urna molestie sed odio. Est massa semper eget viverra diam metus sed. Magna vitae eu sed vitae odio. Amet et purus eu in gravida donec pretium quis malesuada. Orci pellentesque neque elit vitae elementum feugiat. Odio in morbi sodales morbi vulputate ipsum fames eu euismod. Vitae risus id donec risus sed eros vehicula."
                         },
                         {
-                            text: "Why did the italicized text get invited to all the parties? Because it leaned in all the right directions! ",
+                            text: "Lorem ipsum dolor sit amet consectetur. Sit turpis elementum magna urna molestie sed odio. Est massa semper eget viverra diam metus sed. Magna vitae eu sed vitae odio. Amet et purus eu in gravida donec pretium quis malesuada. Orci pellentesque neque elit vitae elementum feugiat. Odio in morbi sodales morbi vulputate ipsum fames eu euismod. Vitae risus id donec risus sed eros vehicula.",
                             italic: true
-                        }
+                        },
                     ]
                 }
             ]

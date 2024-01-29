@@ -5,7 +5,7 @@ export default function BannerPage() {
   return (
     <main>
 
-      <Banner title={"test"} text={"text"} />
+      <Banner title={null} text={null} />
 
     </main>
   )

@@ -1,6 +1,30 @@
-@import '../variables/colors.scss';
+@import '../variables/color-variables.scss';
+@import '../variables/layout-variables.scss';
 
 .accordion-container {
-    display: grid;
 
+    .content-list {
+
+        li:first-child {
+            border-top-left-radius: $-spacing-2;
+        } 
+
+        li:last-child {
+            border-bottom-left-radius: $-spacing-2;
+        } 
+
+    }
+
+    .content-text {
+
+        p {
+            color: $-grey-700;
+        }
+
+
+        p:first-child {
+            margin-top: 0;
+        }
+    }
+    
 }
