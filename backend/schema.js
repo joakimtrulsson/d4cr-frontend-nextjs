@@ -1,4 +1,13 @@
-import { User, Role, Test, Chapter, Page, FrontPage } from './schemas/index';
+import {
+  User,
+  Role,
+  Chapter,
+  Page,
+  FrontPage,
+  ResourceCategory,
+  ResourceType,
+  Resource,
+} from './schemas/index';
 
 export const lists = {
   User,
@@ -6,5 +15,7 @@ export const lists = {
   Chapter,
   Page,
   FrontPage,
-  // Test,
+  Resource,
+  ResourceCategory,
+  ResourceType,
 };

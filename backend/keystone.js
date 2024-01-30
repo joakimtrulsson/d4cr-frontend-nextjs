@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import { lists } from './schema';
+import { storage } from './storage';
 import { withAuth, session } from './auth/auth';
 
 import { uploadImage, resizeImage } from './controllers/uploadController';
@@ -43,26 +44,45 @@ export default withAuth(
     },
     lists,
     session,
-    storage: {
-      heroImages: {
-        kind: 'local',
-        type: 'image',
-        generateUrl: (path) => `${ASSET_BASE_URL}/public/images/hero-images${path}`,
-        serverRoute: {
-          path: 'public/images/hero-images',
-        },
-        storagePath: 'public/images/hero-images',
-      },
-      frontPageHero: {
-        kind: 'local',
-        type: 'file',
-        generateUrl: (path) => `${ASSET_BASE_URL}/public/media/frontpage/${path}`,
-        serverRoute: {
-          path: 'public/images/hero-images',
-        },
-        storagePath: 'public/media/',
-      },
-    },
+    storage,
+    // storage: {
+    //   heroImages: {
+    //     kind: 'local',
+    //     type: 'image',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/images/hero-images${path}`,
+    //     serverRoute: {
+    //       path: 'public/images/hero-images',
+    //     },
+    //     storagePath: 'public/images/hero-images',
+    //   },
+    //   frontPageHero: {
+    //     kind: 'local',
+    //     type: 'file',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/media/frontpage/${path}`,
+    //     serverRoute: {
+    //       path: 'public/images/hero-images',
+    //     },
+    //     storagePath: 'public/media/',
+    //   },
+    //   resourceImages: {
+    //     kind: 'local',
+    //     type: 'image',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/images/resources/${path}`,
+    //     serverRoute: {
+    //       path: 'public/images/resources',
+    //     },
+    //     storagePath: 'public/images/resources',
+    //   },
+    //   resourceFiles: {
+    //     kind: 'local',
+    //     type: 'file',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/files/resources/${path}`,
+    //     serverRoute: {
+    //       path: 'public/files/resources',
+    //     },
+    //     storagePath: 'public/files/resources',
+    //   },
+    // },
     ui: { publicPages: ['public'] },
   })
 );

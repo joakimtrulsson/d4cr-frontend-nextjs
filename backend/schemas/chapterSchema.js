@@ -103,7 +103,7 @@ export const chapterSchema = list({
     }),
     sections: json({
       ui: {
-        views: './customViews/Main.jsx',
+        views: './customViews/AllSections.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },

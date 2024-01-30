@@ -32,9 +32,9 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core7 = require("@keystone-6/core");
+var import_core10 = require("@keystone-6/core");
 var import_express = __toESM(require("express"));
-var import_dotenv = __toESM(require("dotenv"));
+var import_dotenv5 = __toESM(require("dotenv"));
 
 // schemas/userSchema.js
 var import_core = require("@keystone-6/core");
@@ -541,7 +541,7 @@ var chapterSchema = (0, import_core3.list)({
     }),
     sections: (0, import_fields3.json)({
       ui: {
-        views: "./customViews/Main.jsx",
+        views: "./customViews/AllSections.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -618,7 +618,7 @@ var pageSchema = (0, import_core4.list)({
     }),
     ctaOneUrl: (0, import_fields4.json)({
       ui: {
-        views: "./customViews/DynamicLinkSelect.jsx",
+        views: "./customViews/DynamicLinkSection.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -632,7 +632,7 @@ var pageSchema = (0, import_core4.list)({
     }),
     ctaTwoUrl: (0, import_fields4.json)({
       ui: {
-        views: "./customViews/DynamicLinkSelect.jsx",
+        views: "./customViews/DynamicLinkSection.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -649,7 +649,7 @@ var pageSchema = (0, import_core4.list)({
     }),
     sections: (0, import_fields4.json)({
       ui: {
-        views: "./customViews/Main.jsx",
+        views: "./customViews/AllSections.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -704,7 +704,7 @@ var frontPageSchema = (0, import_core5.list)({
     }),
     ctaOneUrl: (0, import_fields5.json)({
       ui: {
-        views: "./customViews/DynamicLinkSelect.jsx",
+        views: "./customViews/DynamicLinkSection.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -718,7 +718,7 @@ var frontPageSchema = (0, import_core5.list)({
     }),
     ctaTwoUrl: (0, import_fields5.json)({
       ui: {
-        views: "./customViews/DynamicLinkSelect.jsx",
+        views: "./customViews/DynamicLinkSection.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -735,7 +735,7 @@ var frontPageSchema = (0, import_core5.list)({
     }),
     sections: (0, import_fields5.json)({
       ui: {
-        views: "./customViews/Main.jsx",
+        views: "./customViews/AllSections.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -744,12 +744,11 @@ var frontPageSchema = (0, import_core5.list)({
   }
 });
 
-// schemas/testSchema.js
+// schemas/resourceSchema.js
 var import_core6 = require("@keystone-6/core");
 var import_fields6 = require("@keystone-6/core/fields");
-var import_fields_document4 = require("@keystone-6/fields-document");
 var import_access11 = require("@keystone-6/core/access");
-var testSchema = (0, import_core6.list)({
+var resourceSchema = (0, import_core6.list)({
   access: {
     operation: {
       ...(0, import_access11.allOperations)(isSignedIn),
@@ -763,11 +762,144 @@ var testSchema = (0, import_core6.list)({
       delete: rules.canManageItems
     }
   },
+  ui: {
+    labelField: "title",
+    listView: {
+      initialColumns: ["title", "category", "type", "createdAt"],
+      initialSort: { field: "title", direction: "ASC" },
+      pageSize: 50
+    }
+  },
   fields: {
-    title: (0, import_fields6.text)(),
-    sections: (0, import_fields6.json)({
+    title: (0, import_fields6.text)({ isIndexed: "unique", validation: { isRequired: true } }),
+    url: (0, import_fields6.text)({ validation: { isRequired: true } }),
+    image: (0, import_fields6.image)({
+      storage: "resourceImages"
+    }),
+    file: (0, import_fields6.file)({
+      storage: "resourceFiles"
+    }),
+    category: (0, import_fields6.relationship)({
+      validation: { isRequired: true },
+      ref: "ResourceCategory.resources",
+      many: false,
       ui: {
-        views: "./customViews/Main.jsx",
+        description: "Reference to a category."
+      }
+    }),
+    type: (0, import_fields6.relationship)({
+      validation: { isRequired: true },
+      ref: "ResourceType.resources",
+      many: false,
+      ui: {
+        description: "Reference to a type."
+      }
+    }),
+    createdAt: (0, import_fields6.timestamp)({
+      isRequired: true,
+      defaultValue: { kind: "now" }
+    })
+  }
+});
+
+// schemas/resourceCategorySchema.js
+var import_core7 = require("@keystone-6/core");
+var import_fields7 = require("@keystone-6/core/fields");
+var import_access13 = require("@keystone-6/core/access");
+var resourceCategorySchema = (0, import_core7.list)({
+  access: {
+    operation: {
+      ...(0, import_access13.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields7.text)({ isIndexed: "unique", validation: { isRequired: true } }),
+    createdAt: (0, import_fields7.timestamp)({
+      isRequired: true,
+      defaultValue: { kind: "now" }
+    }),
+    resources: (0, import_fields7.relationship)({
+      ref: "Resource.category",
+      many: true,
+      ui: {
+        description: "Resources belonging to this category."
+      }
+    })
+  }
+});
+
+// schemas/resourceTypeSchema.js
+var import_core8 = require("@keystone-6/core");
+var import_fields8 = require("@keystone-6/core/fields");
+var import_access15 = require("@keystone-6/core/access");
+var resourceTypeSchema = (0, import_core8.list)({
+  access: {
+    operation: {
+      ...(0, import_access15.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields8.text)({ isIndexed: "unique", validation: { isRequired: true } }),
+    icon: (0, import_fields8.json)({
+      label: "Icon",
+      validation: { isRequired: true },
+      ui: {
+        views: "./customViews/IconPickerSection.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    resources: (0, import_fields8.relationship)({
+      ref: "Resource.type",
+      many: true,
+      ui: {
+        description: "Resources belonging to this type."
+      }
+    })
+  }
+});
+
+// schemas/testSchema.js
+var import_core9 = require("@keystone-6/core");
+var import_fields9 = require("@keystone-6/core/fields");
+var import_fields_document4 = require("@keystone-6/fields-document");
+var import_access17 = require("@keystone-6/core/access");
+var testSchema = (0, import_core9.list)({
+  access: {
+    operation: {
+      ...(0, import_access17.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields9.text)(),
+    sections: (0, import_fields9.json)({
+      ui: {
+        views: "./customViews/AllSections.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -782,8 +914,74 @@ var lists = {
   Role: roleSchema,
   Chapter: chapterSchema,
   Page: pageSchema,
-  FrontPage: frontPageSchema
-  // Test,
+  FrontPage: frontPageSchema,
+  Resource: resourceSchema,
+  ResourceCategory: resourceCategorySchema,
+  ResourceType: resourceTypeSchema
+};
+
+// storage/heroImages.js
+var import_dotenv = __toESM(require("dotenv"));
+import_dotenv.default.config();
+var { ASSET_BASE_URL } = process.env;
+var heroImagesStorage = {
+  kind: "local",
+  type: "image",
+  generateUrl: (path) => `${ASSET_BASE_URL}/public/images/hero-images${path}`,
+  serverRoute: {
+    path: "public/images/hero-images"
+  },
+  storagePath: "public/images/hero-images"
+};
+
+// storage/resourceFilesStorage.js
+var import_dotenv2 = __toESM(require("dotenv"));
+import_dotenv2.default.config();
+var { ASSET_BASE_URL: ASSET_BASE_URL2 } = process.env;
+var resourceFilesStorage = {
+  kind: "local",
+  type: "file",
+  generateUrl: (path) => `${ASSET_BASE_URL2}/public/files/resources/${path}`,
+  serverRoute: {
+    path: "public/files/resources"
+  },
+  storagePath: "public/files/resources"
+};
+
+// storage/resourceImagesStorage.js
+var import_dotenv3 = __toESM(require("dotenv"));
+import_dotenv3.default.config();
+var { ASSET_BASE_URL: ASSET_BASE_URL3 } = process.env;
+var resourceImagesStorage = {
+  kind: "local",
+  type: "image",
+  generateUrl: (path) => `${ASSET_BASE_URL3}/public/images/resources/${path}`,
+  serverRoute: {
+    path: "public/images/resources"
+  },
+  storagePath: "public/images/resources"
+};
+
+// storage/frontPageHeroFile.js
+var import_dotenv4 = __toESM(require("dotenv"));
+import_dotenv4.default.config();
+var { ASSET_BASE_URL: ASSET_BASE_URL4 } = process.env;
+var frontPageHeroStorage = {
+  kind: "local",
+  type: "file",
+  generateUrl: (path) => `${ASSET_BASE_URL4}/public/media/frontpage/${path}`,
+  serverRoute: {
+    path: "public/images/hero-images"
+  },
+  storagePath: "public/media/"
+};
+
+// storage.js
+var storage = {
+  heroImages: heroImagesStorage,
+  frontPageHero: frontPageHeroStorage,
+  resourceFiles: resourceFilesStorage,
+  resourceImages: resourceImagesStorage
 };
 
 // auth/auth.js
@@ -840,8 +1038,8 @@ var import_multer = __toESM(require("multer"));
 var import_sharp = __toESM(require("sharp"));
 var import_uuid = require("uuid");
 var multerStorage = import_multer.default.memoryStorage();
-var multerFilter = (req, file2, cb) => {
-  if (file2.mimetype.startsWith("image")) {
+var multerFilter = (req, file3, cb) => {
+  if (file3.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
     cb(new Error("Not an image. Please upload only images."), false);
@@ -855,14 +1053,14 @@ var uploadImage = upload.array("image", 3);
 var resizeImage = async (req, res, commonContext) => {
   try {
     const imageObjects = {};
-    for (const file2 of req.files) {
+    for (const file3 of req.files) {
       const fileId = Date.now();
       const smallFilename = `sectionid-${req.body.id}-${fileId}-s.jpeg`;
-      await (0, import_sharp.default)(file2.buffer).resize(100, 100).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${smallFilename}`);
+      await (0, import_sharp.default)(file3.buffer).resize(100, 100).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${smallFilename}`);
       const mediumFilename = `sectionid-${req.body.id}-${fileId}-m.jpeg`;
-      await (0, import_sharp.default)(file2.buffer).resize(300, 300).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${mediumFilename}`);
+      await (0, import_sharp.default)(file3.buffer).resize(300, 300).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${mediumFilename}`);
       const largeFilename = `sectionid-${req.body.id}-${fileId}-l.jpeg`;
-      await (0, import_sharp.default)(file2.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${largeFilename}`);
+      await (0, import_sharp.default)(file3.buffer).resize(500, 500).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/images/sections/${largeFilename}`);
       const imageId = (0, import_uuid.v4)();
       imageObjects[imageId] = {
         id: imageId,
@@ -911,15 +1109,15 @@ var deleteImages = async (req, res, commonContext) => {
 };
 
 // keystone.js
-import_dotenv.default.config();
-var { ASSET_BASE_URL, PORT, MAX_FILE_SIZE, FRONTEND_URL, DATABASE_URL } = process.env;
+import_dotenv5.default.config();
+var { ASSET_BASE_URL: ASSET_BASE_URL5, PORT, MAX_FILE_SIZE, FRONTEND_URL, DATABASE_URL } = process.env;
 function withContext(commonContext, f) {
   return async (req, res) => {
     return f(req, res, await commonContext.withRequest(req, res));
   };
 }
 var keystone_default = withAuth(
-  (0, import_core7.config)({
+  (0, import_core10.config)({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
@@ -942,26 +1140,45 @@ var keystone_default = withAuth(
     },
     lists,
     session,
-    storage: {
-      heroImages: {
-        kind: "local",
-        type: "image",
-        generateUrl: (path) => `${ASSET_BASE_URL}/public/images/hero-images${path}`,
-        serverRoute: {
-          path: "public/images/hero-images"
-        },
-        storagePath: "public/images/hero-images"
-      },
-      frontPageHero: {
-        kind: "local",
-        type: "file",
-        generateUrl: (path) => `${ASSET_BASE_URL}/public/media/frontpage/${path}`,
-        serverRoute: {
-          path: "public/images/hero-images"
-        },
-        storagePath: "public/media/"
-      }
-    },
+    storage,
+    // storage: {
+    //   heroImages: {
+    //     kind: 'local',
+    //     type: 'image',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/images/hero-images${path}`,
+    //     serverRoute: {
+    //       path: 'public/images/hero-images',
+    //     },
+    //     storagePath: 'public/images/hero-images',
+    //   },
+    //   frontPageHero: {
+    //     kind: 'local',
+    //     type: 'file',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/media/frontpage/${path}`,
+    //     serverRoute: {
+    //       path: 'public/images/hero-images',
+    //     },
+    //     storagePath: 'public/media/',
+    //   },
+    //   resourceImages: {
+    //     kind: 'local',
+    //     type: 'image',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/images/resources/${path}`,
+    //     serverRoute: {
+    //       path: 'public/images/resources',
+    //     },
+    //     storagePath: 'public/images/resources',
+    //   },
+    //   resourceFiles: {
+    //     kind: 'local',
+    //     type: 'file',
+    //     generateUrl: (path) => `${ASSET_BASE_URL}/public/files/resources/${path}`,
+    //     serverRoute: {
+    //       path: 'public/files/resources',
+    //     },
+    //     storagePath: 'public/files/resources',
+    //   },
+    // },
     ui: { publicPages: ["public"] }
   })
 );

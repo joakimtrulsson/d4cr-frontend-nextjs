@@ -79,3 +79,38 @@ model FrontPage {
   status              String  @default("draft")
   sections            Json?
 }
+
+model Resource {
+  id              String            @id @default(uuid())
+  title           String            @unique @default("")
+  url             String            @default("")
+  image_filesize  Int?
+  image_extension String?
+  image_width     Int?
+  image_height    Int?
+  image_id        String?
+  file_filesize   Int?
+  file_filename   String?
+  category        ResourceCategory? @relation("Resource_category", fields: [categoryId], references: [id])
+  categoryId      String?           @map("category")
+  type            ResourceType?     @relation("Resource_type", fields: [typeId], references: [id])
+  typeId          String?           @map("type")
+  createdAt       DateTime?         @default(now())
+
+  @@index([categoryId])
+  @@index([typeId])
+}
+
+model ResourceCategory {
+  id        String     @id @default(uuid())
+  title     String     @unique @default("")
+  createdAt DateTime?  @default(now())
+  resources Resource[] @relation("Resource_category")
+}
+
+model ResourceType {
+  id        String     @id @default(uuid())
+  title     String     @unique @default("")
+  icon      Json?
+  resources Resource[] @relation("Resource_type")
+}

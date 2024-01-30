@@ -1,10 +1,10 @@
 import { list } from '@keystone-6/core';
-import { text, json } from '@keystone-6/core/fields';
-import { document } from '@keystone-6/fields-document';
+import { text, timestamp, relationship } from '@keystone-6/core/fields';
+
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
 
-export const testSchema = list({
+export const resourceCategorySchema = list({
   access: {
     operation: {
       ...allOperations(isSignedIn),
@@ -19,14 +19,16 @@ export const testSchema = list({
     },
   },
   fields: {
-    title: text(),
-
-    sections: json({
+    title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+    createdAt: timestamp({
+      isRequired: true,
+      defaultValue: { kind: 'now' },
+    }),
+    resources: relationship({
+      ref: 'Resource.category',
+      many: true,
       ui: {
-        views: './customViews/AllSections.jsx',
-        createView: { fieldMode: 'edit' },
-        listView: { fieldMode: 'hidden' },
-        itemView: { fieldMode: 'edit' },
+        description: 'Resources belonging to this category.',
       },
     }),
   },

@@ -77,7 +77,7 @@ export const pageSchema = list({
     }),
     ctaOneUrl: json({
       ui: {
-        views: './customViews/DynamicLinkSelect.jsx',
+        views: './customViews/DynamicLinkSection.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
@@ -91,7 +91,7 @@ export const pageSchema = list({
     }),
     ctaTwoUrl: json({
       ui: {
-        views: './customViews/DynamicLinkSelect.jsx',
+        views: './customViews/DynamicLinkSection.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
@@ -108,7 +108,7 @@ export const pageSchema = list({
     }),
     sections: json({
       ui: {
-        views: './customViews/Main.jsx',
+        views: './customViews/AllSections.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },

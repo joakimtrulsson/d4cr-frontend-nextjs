@@ -479,6 +479,209 @@ input FrontPageCreateInput {
   sections: JSON
 }
 
+type Resource {
+  id: ID!
+  title: String
+  url: String
+  image: ImageFieldOutput
+  file: FileFieldOutput
+  category: ResourceCategory
+  type: ResourceType
+  createdAt: DateTime
+}
+
+scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+input ResourceWhereUniqueInput {
+  id: ID
+  title: String
+}
+
+input ResourceWhereInput {
+  AND: [ResourceWhereInput!]
+  OR: [ResourceWhereInput!]
+  NOT: [ResourceWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  url: StringFilter
+  category: ResourceCategoryWhereInput
+  type: ResourceTypeWhereInput
+  createdAt: DateTimeNullableFilter
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: DateTimeNullableFilter
+}
+
+input ResourceOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  url: OrderDirection
+  createdAt: OrderDirection
+}
+
+input ResourceUpdateInput {
+  title: String
+  url: String
+  image: ImageFieldInput
+  file: FileFieldInput
+  category: ResourceCategoryRelateToOneForUpdateInput
+  type: ResourceTypeRelateToOneForUpdateInput
+  createdAt: DateTime
+}
+
+input ResourceCategoryRelateToOneForUpdateInput {
+  create: ResourceCategoryCreateInput
+  connect: ResourceCategoryWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ResourceTypeRelateToOneForUpdateInput {
+  create: ResourceTypeCreateInput
+  connect: ResourceTypeWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ResourceUpdateArgs {
+  where: ResourceWhereUniqueInput!
+  data: ResourceUpdateInput!
+}
+
+input ResourceCreateInput {
+  title: String
+  url: String
+  image: ImageFieldInput
+  file: FileFieldInput
+  category: ResourceCategoryRelateToOneForCreateInput
+  type: ResourceTypeRelateToOneForCreateInput
+  createdAt: DateTime
+}
+
+input ResourceCategoryRelateToOneForCreateInput {
+  create: ResourceCategoryCreateInput
+  connect: ResourceCategoryWhereUniqueInput
+}
+
+input ResourceTypeRelateToOneForCreateInput {
+  create: ResourceTypeCreateInput
+  connect: ResourceTypeWhereUniqueInput
+}
+
+type ResourceCategory {
+  id: ID!
+  title: String
+  createdAt: DateTime
+  resources(where: ResourceWhereInput! = {}, orderBy: [ResourceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceWhereUniqueInput): [Resource!]
+  resourcesCount(where: ResourceWhereInput! = {}): Int
+}
+
+input ResourceCategoryWhereUniqueInput {
+  id: ID
+  title: String
+}
+
+input ResourceCategoryWhereInput {
+  AND: [ResourceCategoryWhereInput!]
+  OR: [ResourceCategoryWhereInput!]
+  NOT: [ResourceCategoryWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  createdAt: DateTimeNullableFilter
+  resources: ResourceManyRelationFilter
+}
+
+input ResourceManyRelationFilter {
+  every: ResourceWhereInput
+  some: ResourceWhereInput
+  none: ResourceWhereInput
+}
+
+input ResourceCategoryOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  createdAt: OrderDirection
+}
+
+input ResourceCategoryUpdateInput {
+  title: String
+  createdAt: DateTime
+  resources: ResourceRelateToManyForUpdateInput
+}
+
+input ResourceRelateToManyForUpdateInput {
+  disconnect: [ResourceWhereUniqueInput!]
+  set: [ResourceWhereUniqueInput!]
+  create: [ResourceCreateInput!]
+  connect: [ResourceWhereUniqueInput!]
+}
+
+input ResourceCategoryUpdateArgs {
+  where: ResourceCategoryWhereUniqueInput!
+  data: ResourceCategoryUpdateInput!
+}
+
+input ResourceCategoryCreateInput {
+  title: String
+  createdAt: DateTime
+  resources: ResourceRelateToManyForCreateInput
+}
+
+input ResourceRelateToManyForCreateInput {
+  create: [ResourceCreateInput!]
+  connect: [ResourceWhereUniqueInput!]
+}
+
+type ResourceType {
+  id: ID!
+  title: String
+  icon: JSON
+  resources(where: ResourceWhereInput! = {}, orderBy: [ResourceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceWhereUniqueInput): [Resource!]
+  resourcesCount(where: ResourceWhereInput! = {}): Int
+}
+
+input ResourceTypeWhereUniqueInput {
+  id: ID
+  title: String
+}
+
+input ResourceTypeWhereInput {
+  AND: [ResourceTypeWhereInput!]
+  OR: [ResourceTypeWhereInput!]
+  NOT: [ResourceTypeWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  resources: ResourceManyRelationFilter
+}
+
+input ResourceTypeOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+}
+
+input ResourceTypeUpdateInput {
+  title: String
+  icon: JSON
+  resources: ResourceRelateToManyForUpdateInput
+}
+
+input ResourceTypeUpdateArgs {
+  where: ResourceTypeWhereUniqueInput!
+  data: ResourceTypeUpdateInput!
+}
+
+input ResourceTypeCreateInput {
+  title: String
+  icon: JSON
+  resources: ResourceRelateToManyForCreateInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -515,6 +718,24 @@ type Mutation {
   updateFrontPages(data: [FrontPageUpdateArgs!]!): [FrontPage]
   deleteFrontPage(where: FrontPageWhereUniqueInput! = {id: 1}): FrontPage
   deleteFrontPages(where: [FrontPageWhereUniqueInput!]!): [FrontPage]
+  createResource(data: ResourceCreateInput!): Resource
+  createResources(data: [ResourceCreateInput!]!): [Resource]
+  updateResource(where: ResourceWhereUniqueInput!, data: ResourceUpdateInput!): Resource
+  updateResources(data: [ResourceUpdateArgs!]!): [Resource]
+  deleteResource(where: ResourceWhereUniqueInput!): Resource
+  deleteResources(where: [ResourceWhereUniqueInput!]!): [Resource]
+  createResourceCategory(data: ResourceCategoryCreateInput!): ResourceCategory
+  createResourceCategories(data: [ResourceCategoryCreateInput!]!): [ResourceCategory]
+  updateResourceCategory(where: ResourceCategoryWhereUniqueInput!, data: ResourceCategoryUpdateInput!): ResourceCategory
+  updateResourceCategories(data: [ResourceCategoryUpdateArgs!]!): [ResourceCategory]
+  deleteResourceCategory(where: ResourceCategoryWhereUniqueInput!): ResourceCategory
+  deleteResourceCategories(where: [ResourceCategoryWhereUniqueInput!]!): [ResourceCategory]
+  createResourceType(data: ResourceTypeCreateInput!): ResourceType
+  createResourceTypes(data: [ResourceTypeCreateInput!]!): [ResourceType]
+  updateResourceType(where: ResourceTypeWhereUniqueInput!, data: ResourceTypeUpdateInput!): ResourceType
+  updateResourceTypes(data: [ResourceTypeUpdateArgs!]!): [ResourceType]
+  deleteResourceType(where: ResourceTypeWhereUniqueInput!): ResourceType
+  deleteResourceTypes(where: [ResourceTypeWhereUniqueInput!]!): [ResourceType]
   endSession: Boolean!
   authenticateUserWithPassword(username: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -552,6 +773,15 @@ type Query {
   frontPages(where: FrontPageWhereInput! = {id: {equals: 1}}, orderBy: [FrontPageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FrontPageWhereUniqueInput): [FrontPage!]
   frontPage(where: FrontPageWhereUniqueInput! = {id: 1}): FrontPage
   frontPagesCount(where: FrontPageWhereInput! = {id: {equals: 1}}): Int
+  resources(where: ResourceWhereInput! = {}, orderBy: [ResourceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceWhereUniqueInput): [Resource!]
+  resource(where: ResourceWhereUniqueInput!): Resource
+  resourcesCount(where: ResourceWhereInput! = {}): Int
+  resourceCategories(where: ResourceCategoryWhereInput! = {}, orderBy: [ResourceCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceCategoryWhereUniqueInput): [ResourceCategory!]
+  resourceCategory(where: ResourceCategoryWhereUniqueInput!): ResourceCategory
+  resourceCategoriesCount(where: ResourceCategoryWhereInput! = {}): Int
+  resourceTypes(where: ResourceTypeWhereInput! = {}, orderBy: [ResourceTypeOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceTypeWhereUniqueInput): [ResourceType!]
+  resourceType(where: ResourceTypeWhereUniqueInput!): ResourceType
+  resourceTypesCount(where: ResourceTypeWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

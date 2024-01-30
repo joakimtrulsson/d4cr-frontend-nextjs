@@ -1,10 +1,10 @@
 import { list } from '@keystone-6/core';
-import { text, json } from '@keystone-6/core/fields';
-import { document } from '@keystone-6/fields-document';
+import { text, json, relationship } from '@keystone-6/core/fields';
+
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
 
-export const testSchema = list({
+export const resourceTypeSchema = list({
   access: {
     operation: {
       ...allOperations(isSignedIn),
@@ -19,14 +19,22 @@ export const testSchema = list({
     },
   },
   fields: {
-    title: text(),
-
-    sections: json({
+    title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+    icon: json({
+      label: 'Icon',
+      validation: { isRequired: true },
       ui: {
-        views: './customViews/AllSections.jsx',
+        views: './customViews/IconPickerSection.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
+      },
+    }),
+    resources: relationship({
+      ref: 'Resource.type',
+      many: true,
+      ui: {
+        description: 'Resources belonging to this type.',
       },
     }),
   },

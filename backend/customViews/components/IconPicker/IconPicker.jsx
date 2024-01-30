@@ -26,6 +26,12 @@ const IconPicker = ({ value, onChange }) => {
     return icon.iconName.includes(searchText.toLowerCase());
   });
 
+  const uniqueIcons = Array.from(new Set(iconsFiltered.map((icon) => icon.iconName))).map(
+    (iconName) => {
+      return iconsFiltered.find((icon) => icon.iconName === iconName);
+    }
+  );
+
   return (
     <>
       <TextField
@@ -93,7 +99,7 @@ const IconPicker = ({ value, onChange }) => {
           </div>
           <Divider />
           <div className='iconPicker__iconsContainer'>
-            {iconsFiltered.map((icon) => (
+            {uniqueIcons.map((icon) => (
               <div className='iconPicker__iconWrapper' key={icon.iconName}>
                 <button
                   className={`iconPicker__iconItem ${
