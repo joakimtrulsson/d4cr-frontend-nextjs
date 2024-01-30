@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@keystone-6/document-renderer": "^1.1.2",
+    "@keystone-6/fields-document": "^8.0.2",
     "next": "^14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "sass": "^1.69.7"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-native-webview": "^13.6.4"
   },
   "devDependencies": {
     "@types/node": "20.10.7",
