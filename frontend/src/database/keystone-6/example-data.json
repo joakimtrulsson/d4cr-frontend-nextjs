@@ -25,7 +25,7 @@
                   "text": " demo ",
                   "bold": true,
                   "underline": true,
-                  "font_size": "large"
+                  "font_size": "small"
                 },
                 {
                   "text": "and see it in",
@@ -34,7 +34,7 @@
                 {
                   "text": " action",
                   "italic": true,
-                  "font_size": "medium"
+                  "font_size": "small"
                 },
                 {
                   "text": "?",
