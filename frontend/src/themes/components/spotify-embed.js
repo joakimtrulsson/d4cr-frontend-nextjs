@@ -6,7 +6,7 @@ const SpotifyEmbed = ({ embedId }) => (
   <div className="spotify-container">
 
       <Iframe style="border-radius:12px" 
-      src={`https://open.spotify.com/embed/show/${embedId}?utm_source=generator&theme=0`}
+      src={`https://open.spotify.com/embed/episode/${embedId}?utm_source=generator&theme=0`}
       width="60%" 
       height="152" 
       frameBorder="0" 

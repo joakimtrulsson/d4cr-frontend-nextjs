@@ -9,8 +9,6 @@ import BulletList from '../themes/components/large-bullet-list.js'
 import NewsTeaser from '../themes/components/news-teaser.js'
 import TextMedia from '../themes/components/text-media.js'
 import data from '../database/sections-data/text-and-media-data.js'
-// import Wysiswig from './wysiwig.js'
-
 
 
 export default function AllSectionsPage() {

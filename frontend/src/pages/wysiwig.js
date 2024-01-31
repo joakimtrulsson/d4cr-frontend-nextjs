@@ -1,26 +1,49 @@
-import '../themes/sources/scss/components/wysiwig.scss';
-import '../themes/sources/scss/base/utils.scss';
-import React from 'react';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
-import YoutubeEmbed from '../themes/components/youtube-embed';
-import SpotifyEmbed from '../themes/components/spotify-embed';
+import React, { useEffect, useState } from 'react';
+import RichTextViewer from '../themes/components/document-renderer.js';
+import succe from '../database/keystone-6/wysiwig-data.json';
 
+export const WysiwigPage = () => {  
 
-const WysiwigPage = () => {
+  const [jsonData, setJsonData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const json = require('../database/keystone-6/example-data.json')
-  const document = json['data']['slides'][0]['content']['document']
+  useEffect(() => {
 
+    const fetchData = async () => {
+
+      try {
+
+        const convertedJson = succe.data.sections.map(section => ({
+          type: section.type,
+          children: section.children
+        }));
+
+        setJsonData(convertedJson);
+
+      } catch (error) {
+        console.error('Error fetching JSON data:', error);
+        
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  
   return (
-    <div>
-      <h1>Document Viewer Example</h1>
-      <DocumentRenderer document={document} />
-
-      <SpotifyEmbed embedId='3KnaaLIoWllg3QylQCpijZ' />
-      <YoutubeEmbed embedId="rokGy0huYEA" />
-
+    <div className='wysiwig-container'>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : jsonData != null ? (
+        <RichTextViewer initialValue={jsonData} />
+      ) : (
+        <h1>404 error</h1>
+      )}
     </div>
   );
 };
 
 export default WysiwigPage;
+

@@ -651,6 +651,10 @@ h4,
     background-color: $-yellow-200;
 }
 
+.bg-yellow-300 {
+    background-color: $-yellow-300;
+}
+
 .bg-yellow-700 {
     background-color: $-yellow-700;
 }
@@ -711,3 +715,9 @@ h4,
     top: 0;
     left: 0;
 }
+
+.dropdown-container {
+    display: none;
+    position: absolute;
+    z-index: $-z-index-navbar-dropdown;
+  }

@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/themes/components/renderers.js"  ],
+, "src/themes/components/renderers.js", "src/themes/components/document-renderer.js"  ],
   "exclude": [
     "node_modules"
   ]
