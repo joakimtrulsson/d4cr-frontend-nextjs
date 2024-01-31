@@ -32,9 +32,9 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core10 = require("@keystone-6/core");
+var import_core11 = require("@keystone-6/core");
 var import_express = __toESM(require("express"));
-var import_dotenv5 = __toESM(require("dotenv"));
+var import_dotenv6 = __toESM(require("dotenv"));
 
 // schemas/userSchema.js
 var import_core = require("@keystone-6/core");
@@ -515,8 +515,16 @@ var chapterSchema = (0, import_core3.list)({
         softBreaks: true
       }
     }),
-    heroImage: (0, import_fields3.image)({
-      storage: "heroImages"
+    // heroImage: image({
+    //   storage: 'heroImages',
+    // }),
+    heroImage: (0, import_fields3.json)({
+      ui: {
+        views: "./customViews/MediaLibrary.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
     }),
     chapterLanguage: (0, import_fields3.select)({
       type: "string",
@@ -773,8 +781,16 @@ var resourceSchema = (0, import_core6.list)({
   fields: {
     title: (0, import_fields6.text)({ isIndexed: "unique", validation: { isRequired: true } }),
     url: (0, import_fields6.text)({ validation: { isRequired: true } }),
-    image: (0, import_fields6.image)({
-      storage: "resourceImages"
+    // image: image({
+    //   storage: 'resourceImages',
+    // }),
+    image: (0, import_fields6.json)({
+      ui: {
+        views: "./customViews/MediaLibrary.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
     }),
     file: (0, import_fields6.file)({
       storage: "resourceFiles"
@@ -879,7 +895,6 @@ var resourceTypeSchema = (0, import_core8.list)({
 // schemas/testSchema.js
 var import_core9 = require("@keystone-6/core");
 var import_fields9 = require("@keystone-6/core/fields");
-var import_fields_document4 = require("@keystone-6/fields-document");
 var import_access17 = require("@keystone-6/core/access");
 var testSchema = (0, import_core9.list)({
   access: {
@@ -897,12 +912,58 @@ var testSchema = (0, import_core9.list)({
   },
   fields: {
     title: (0, import_fields9.text)(),
-    sections: (0, import_fields9.json)({
+    image: (0, import_fields9.json)({
       ui: {
-        views: "./customViews/AllSections.jsx",
+        views: "./customViews/MediaLibrary.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
+      }
+    })
+  }
+});
+
+// schemas/imageSchema.js
+var import_core10 = require("@keystone-6/core");
+var import_fields10 = require("@keystone-6/core/fields");
+var import_access19 = require("@keystone-6/core/access");
+var imageSchema = (0, import_core10.list)({
+  access: {
+    operation: {
+      ...(0, import_access19.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields10.text)(),
+    alt: (0, import_fields10.text)(),
+    file: (0, import_fields10.image)({ storage: "imageStorage" }),
+    createdAt: (0, import_fields10.timestamp)({ isRequired: true, defaultValue: { kind: "now" } }),
+    size: (0, import_fields10.integer)({
+      hooks: {
+        resolveInput: ({ operation, resolvedData, inputData }) => {
+          if (operation === "create") {
+            return resolvedData.file.filesize;
+          }
+        }
+      }
+    }),
+    thumbnailUrl: (0, import_fields10.text)({
+      hooks: {
+        resolveInput: ({ operation, resolvedData, inputData }) => {
+          let url = "http://localhost:3000/public";
+          console.log(resolvedData);
+          if (operation === "create") {
+            return `${url}/${resolvedData.file.id}.${resolvedData.file.extension}`;
+          }
+        }
       }
     })
   }
@@ -917,7 +978,9 @@ var lists = {
   FrontPage: frontPageSchema,
   Resource: resourceSchema,
   ResourceCategory: resourceCategorySchema,
-  ResourceType: resourceTypeSchema
+  ResourceType: resourceTypeSchema,
+  Image: imageSchema
+  // Test,
 };
 
 // storage/heroImages.js
@@ -976,12 +1039,27 @@ var frontPageHeroStorage = {
   storagePath: "public/media/"
 };
 
+// storage/imageStorage.js
+var import_dotenv5 = __toESM(require("dotenv"));
+import_dotenv5.default.config();
+var { ASSET_BASE_URL: ASSET_BASE_URL5 } = process.env;
+var imageStorage = {
+  kind: "local",
+  type: "image",
+  generateUrl: (path) => `${ASSET_BASE_URL5}/public/${path}`,
+  serverRoute: {
+    path: "public/"
+  },
+  storagePath: "public/"
+};
+
 // storage.js
 var storage = {
   heroImages: heroImagesStorage,
   frontPageHero: frontPageHeroStorage,
   resourceFiles: resourceFilesStorage,
-  resourceImages: resourceImagesStorage
+  resourceImages: resourceImagesStorage,
+  imageStorage
 };
 
 // auth/auth.js
@@ -1109,19 +1187,19 @@ var deleteImages = async (req, res, commonContext) => {
 };
 
 // keystone.js
-import_dotenv5.default.config();
-var { ASSET_BASE_URL: ASSET_BASE_URL5, PORT, MAX_FILE_SIZE, FRONTEND_URL, DATABASE_URL } = process.env;
+import_dotenv6.default.config();
+var { ASSET_BASE_URL: ASSET_BASE_URL6, PORT, MAX_FILE_SIZE, FRONTEND_URL, DATABASE_URL } = process.env;
 function withContext(commonContext, f) {
   return async (req, res) => {
     return f(req, res, await commonContext.withRequest(req, res));
   };
 }
 var keystone_default = withAuth(
-  (0, import_core10.config)({
+  (0, import_core11.config)({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
-      cors: { origin: ["*"], credentials: true },
+      cors: { origin: ["http://localhost:3000"], credentials: true },
       extendExpressApp: (app, commonContext) => {
         app.use(import_express.default.json());
         app.use("/public", import_express.default.static("public"));

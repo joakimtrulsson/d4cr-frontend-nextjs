@@ -11,3 +11,4 @@ export { resourceTypeSchema as ResourceType } from './resourceTypeSchema';
 
 // Test schema for developing sections
 export { testSchema as Test } from './testSchema';
+export { imageSchema as Image } from './imageSchema';

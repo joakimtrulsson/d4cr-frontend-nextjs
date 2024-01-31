@@ -1,6 +1,6 @@
 import { list } from '@keystone-6/core';
 import { text, json } from '@keystone-6/core/fields';
-import { document } from '@keystone-6/fields-document';
+
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
 
@@ -21,9 +21,9 @@ export const testSchema = list({
   fields: {
     title: text(),
 
-    sections: json({
+    image: json({
       ui: {
-        views: './customViews/AllSections.jsx',
+        views: './customViews/MediaLibrary.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },

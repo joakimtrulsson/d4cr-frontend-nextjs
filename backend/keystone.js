@@ -24,7 +24,7 @@ export default withAuth(
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
-      cors: { origin: ['*'], credentials: true },
+      cors: { origin: ['http://localhost:3000'], credentials: true },
       extendExpressApp: (app, commonContext) => {
         app.use(express.json());
         app.use('/public', express.static('public'));

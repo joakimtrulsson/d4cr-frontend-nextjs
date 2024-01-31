@@ -75,8 +75,16 @@ export const chapterSchema = list({
         softBreaks: true,
       },
     }),
-    heroImage: image({
-      storage: 'heroImages',
+    // heroImage: image({
+    //   storage: 'heroImages',
+    // }),
+    heroImage: json({
+      ui: {
+        views: './customViews/MediaLibrary.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
+      },
     }),
 
     chapterLanguage: select({

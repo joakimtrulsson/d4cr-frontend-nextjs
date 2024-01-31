@@ -227,7 +227,7 @@ type Chapter {
   title: String
   slug: String
   preamble: Chapter_preamble_Document
-  heroImage: ImageFieldOutput
+  heroImage: JSON
   chapterLanguage: String
   translatedChapters(where: ChapterWhereInput! = {}, orderBy: [ChapterOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ChapterWhereUniqueInput): [Chapter!]
   translatedChaptersCount(where: ChapterWhereInput! = {}): Int
@@ -237,22 +237,6 @@ type Chapter {
 
 type Chapter_preamble_Document {
   document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-type ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  url: String!
-}
-
-enum ImageExtension {
-  jpg
-  png
-  webp
-  gif
 }
 
 input ChapterWhereUniqueInput {
@@ -298,19 +282,12 @@ input ChapterUpdateInput {
   title: String
   slug: String
   preamble: JSON
-  heroImage: ImageFieldInput
+  heroImage: JSON
   chapterLanguage: String
   translatedChapters: ChapterRelateToManyForUpdateInput
   status: String
   sections: JSON
 }
-
-input ImageFieldInput {
-  upload: Upload!
-}
-
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
 
 input ChapterUpdateArgs {
   where: ChapterWhereUniqueInput!
@@ -321,7 +298,7 @@ input ChapterCreateInput {
   title: String
   slug: String
   preamble: JSON
-  heroImage: ImageFieldInput
+  heroImage: JSON
   chapterLanguage: String
   translatedChapters: ChapterRelateToManyForCreateInput
   status: String
@@ -462,6 +439,9 @@ input FileFieldInput {
   upload: Upload!
 }
 
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
 input FrontPageUpdateArgs {
   where: FrontPageWhereUniqueInput! = {id: 1}
   data: FrontPageUpdateInput!
@@ -483,7 +463,7 @@ type Resource {
   id: ID!
   title: String
   url: String
-  image: ImageFieldOutput
+  image: JSON
   file: FileFieldOutput
   category: ResourceCategory
   type: ResourceType
@@ -530,7 +510,7 @@ input ResourceOrderByInput {
 input ResourceUpdateInput {
   title: String
   url: String
-  image: ImageFieldInput
+  image: JSON
   file: FileFieldInput
   category: ResourceCategoryRelateToOneForUpdateInput
   type: ResourceTypeRelateToOneForUpdateInput
@@ -557,7 +537,7 @@ input ResourceUpdateArgs {
 input ResourceCreateInput {
   title: String
   url: String
-  image: ImageFieldInput
+  image: JSON
   file: FileFieldInput
   category: ResourceCategoryRelateToOneForCreateInput
   type: ResourceTypeRelateToOneForCreateInput
@@ -682,6 +662,95 @@ input ResourceTypeCreateInput {
   resources: ResourceRelateToManyForCreateInput
 }
 
+type Image {
+  id: ID!
+  title: String
+  alt: String
+  file: ImageFieldOutput
+  createdAt: DateTime
+  size: Int
+  thumbnailUrl: String
+}
+
+type ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  url: String!
+}
+
+enum ImageExtension {
+  jpg
+  png
+  webp
+  gif
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
+
+input ImageWhereInput {
+  AND: [ImageWhereInput!]
+  OR: [ImageWhereInput!]
+  NOT: [ImageWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  alt: StringFilter
+  createdAt: DateTimeNullableFilter
+  size: IntNullableFilter
+  thumbnailUrl: StringFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input ImageOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  alt: OrderDirection
+  createdAt: OrderDirection
+  size: OrderDirection
+  thumbnailUrl: OrderDirection
+}
+
+input ImageUpdateInput {
+  title: String
+  alt: String
+  file: ImageFieldInput
+  createdAt: DateTime
+  size: Int
+  thumbnailUrl: String
+}
+
+input ImageFieldInput {
+  upload: Upload!
+}
+
+input ImageUpdateArgs {
+  where: ImageWhereUniqueInput!
+  data: ImageUpdateInput!
+}
+
+input ImageCreateInput {
+  title: String
+  alt: String
+  file: ImageFieldInput
+  createdAt: DateTime
+  size: Int
+  thumbnailUrl: String
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -736,6 +805,12 @@ type Mutation {
   updateResourceTypes(data: [ResourceTypeUpdateArgs!]!): [ResourceType]
   deleteResourceType(where: ResourceTypeWhereUniqueInput!): ResourceType
   deleteResourceTypes(where: [ResourceTypeWhereUniqueInput!]!): [ResourceType]
+  createImage(data: ImageCreateInput!): Image
+  createImages(data: [ImageCreateInput!]!): [Image]
+  updateImage(where: ImageWhereUniqueInput!, data: ImageUpdateInput!): Image
+  updateImages(data: [ImageUpdateArgs!]!): [Image]
+  deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteImages(where: [ImageWhereUniqueInput!]!): [Image]
   endSession: Boolean!
   authenticateUserWithPassword(username: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -782,6 +857,9 @@ type Query {
   resourceTypes(where: ResourceTypeWhereInput! = {}, orderBy: [ResourceTypeOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceTypeWhereUniqueInput): [ResourceType!]
   resourceType(where: ResourceTypeWhereUniqueInput!): ResourceType
   resourceTypesCount(where: ResourceTypeWhereInput! = {}): Int
+  images(where: ImageWhereInput! = {}, orderBy: [ImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ImageWhereUniqueInput): [Image!]
+  image(where: ImageWhereUniqueInput!): Image
+  imagesCount(where: ImageWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

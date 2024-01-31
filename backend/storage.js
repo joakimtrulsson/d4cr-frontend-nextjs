@@ -3,6 +3,7 @@ import {
   frontPageHero,
   resourceFiles,
   resourceImages,
+  imageStorage,
 } from './storage/index.js';
 
 export const storage = {
@@ -10,4 +11,5 @@ export const storage = {
   frontPageHero,
   resourceFiles,
   resourceImages,
+  imageStorage,
 };

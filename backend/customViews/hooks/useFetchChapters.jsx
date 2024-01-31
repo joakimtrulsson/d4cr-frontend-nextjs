@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BASE_URL_BACKEND } from '../utils/constants';
 
 const useFetchChapters = () => {
   const [chapters, setChapters] = useState([]);
@@ -8,7 +9,7 @@ const useFetchChapters = () => {
   useEffect(() => {
     const fetchChapters = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/graphql', {
+        const response = await fetch(`${BASE_URL_BACKEND}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

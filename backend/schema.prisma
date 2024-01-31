@@ -40,11 +40,7 @@ model Chapter {
   title                           String    @default("")
   slug                            String    @unique @default("")
   preamble                        Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  heroImage_filesize              Int?
-  heroImage_extension             String?
-  heroImage_width                 Int?
-  heroImage_height                Int?
-  heroImage_id                    String?
+  heroImage                       Json?
   chapterLanguage                 String?   @default("EN-GB")
   translatedChapters              Chapter[] @relation("Chapter_translatedChapters")
   status                          String    @default("draft")
@@ -81,21 +77,17 @@ model FrontPage {
 }
 
 model Resource {
-  id              String            @id @default(uuid())
-  title           String            @unique @default("")
-  url             String            @default("")
-  image_filesize  Int?
-  image_extension String?
-  image_width     Int?
-  image_height    Int?
-  image_id        String?
-  file_filesize   Int?
-  file_filename   String?
-  category        ResourceCategory? @relation("Resource_category", fields: [categoryId], references: [id])
-  categoryId      String?           @map("category")
-  type            ResourceType?     @relation("Resource_type", fields: [typeId], references: [id])
-  typeId          String?           @map("type")
-  createdAt       DateTime?         @default(now())
+  id            String            @id @default(uuid())
+  title         String            @unique @default("")
+  url           String            @default("")
+  image         Json?
+  file_filesize Int?
+  file_filename String?
+  category      ResourceCategory? @relation("Resource_category", fields: [categoryId], references: [id])
+  categoryId    String?           @map("category")
+  type          ResourceType?     @relation("Resource_type", fields: [typeId], references: [id])
+  typeId        String?           @map("type")
+  createdAt     DateTime?         @default(now())
 
   @@index([categoryId])
   @@index([typeId])
@@ -113,4 +105,18 @@ model ResourceType {
   title     String     @unique @default("")
   icon      Json?
   resources Resource[] @relation("Resource_type")
+}
+
+model Image {
+  id             String    @id @default(uuid())
+  title          String    @default("")
+  alt            String    @default("")
+  file_filesize  Int?
+  file_extension String?
+  file_width     Int?
+  file_height    Int?
+  file_id        String?
+  createdAt      DateTime? @default(now())
+  size           Int?
+  thumbnailUrl   String    @default("")
 }

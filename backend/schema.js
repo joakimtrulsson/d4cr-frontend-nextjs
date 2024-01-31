@@ -7,6 +7,8 @@ import {
   ResourceCategory,
   ResourceType,
   Resource,
+  Image,
+  Test,
 } from './schemas/index';
 
 export const lists = {
@@ -18,4 +20,6 @@ export const lists = {
   Resource,
   ResourceCategory,
   ResourceType,
+  Image,
+  // Test,
 };

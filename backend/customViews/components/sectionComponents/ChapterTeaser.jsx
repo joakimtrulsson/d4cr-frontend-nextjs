@@ -2,7 +2,6 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import useFetchChapters from '../../hooks/useFetchChapters.jsx';
-// import useHandleSave from '../../hooks/useHandleSave.jsx';
 
 import { Button } from '@keystone-ui/button';
 
