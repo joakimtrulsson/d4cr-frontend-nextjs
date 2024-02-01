@@ -18,8 +18,17 @@ export const resourceTypeSchema = list({
       delete: rules.canManageItems,
     },
   },
+  ui: {
+    labelField: 'type',
+    listView: {
+      initialColumns: ['type', 'icon'],
+      initialSort: { field: 'type', direction: 'ASC' },
+      pageSize: 50,
+    },
+  },
   fields: {
-    title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+    type: text({ validation: { isRequired: true } }),
+    // title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
     icon: json({
       label: 'Icon',
       validation: { isRequired: true },
@@ -31,7 +40,7 @@ export const resourceTypeSchema = list({
       },
     }),
     resources: relationship({
-      ref: 'Resource.type',
+      ref: 'Resource.resourceType',
       many: true,
       ui: {
         description: 'Resources belonging to this type.',

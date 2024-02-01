@@ -19,15 +19,10 @@ const SpotifyEmbed = ({ attributes, element, children }) => {
       }}
       {...element.attr}
     >
-      <div
-        contentEditable={false}
-        // style={{ width: `${size.width}px`, height: `${size.height}px` }}
-      >
+      <div contentEditable={false}>
         <iframe
           title='Spotify Embed'
           src={url}
-          // src='https://open.spotify.com/embed/track/0qCQg5TkfBfkTsQP3IhAmC?utm_source=generator'
-
           width='620px'
           height='152'
           frameBorder='0'

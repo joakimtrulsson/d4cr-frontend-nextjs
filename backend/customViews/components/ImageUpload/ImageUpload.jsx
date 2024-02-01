@@ -83,7 +83,8 @@ function ImageUpload({ setFile, editData }) {
         )} */}
 
         <Button
-          style={{ alignSelf: 'flex-end' }}
+          style={{ marginRight: '0.5rem' }}
+          size='small'
           onClick={() => fileInputRef.current.click()}
         >
           Choose Image

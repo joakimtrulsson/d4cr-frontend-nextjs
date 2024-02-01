@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
 
-// import SimpleWysiwyg from '../../sections/components/SimpleWysiwyg/SimpleWysiwyg.jsx';
 import Wysiwyg from '../Wysiwyg/Wysiwyg';
+import AddSectionButton from '../AddSectionButton/AddSectionButton';
+import RemoveEntryButton from '../RemoveEntryButton/RemoveEntryButton';
+import AddEntryButton from '../AddEntryButton/AddEntryButton';
+import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton';
+import CancelButton from '../CancelButton/CancelButton';
 
 function Accordion({
   onCloseSection,
@@ -16,11 +19,6 @@ function Accordion({
   autoFocus,
   editData,
 }) {
-  // const [value, setValue] = useState({
-  //   title: '',
-  //   fields: [{ heading: '', bodyText: '' }],
-  // });
-
   // Inte optimalt att göra så här.
   const [value, setValue] = useState(() => {
     if (editData) {
@@ -104,12 +102,9 @@ function Accordion({
       <div
         style={{
           marginBottom: '2rem',
-          marginTop: '1rem',
         }}
       >
-        <FieldLabel style={{ paddingTop: '0.5rem', borderTop: '1px solid #e1e5e9' }}>
-          Section title:
-        </FieldLabel>
+        <FieldLabel style={{ paddingTop: '0.5rem' }}>Section title</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('title', event.target.value)}
@@ -133,78 +128,31 @@ function Accordion({
             value={field.heading}
           />
           <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
-          {/* <SimpleWysiwyg
-            onSetPreamble={(preamble) => handleFieldChange(index, 'bodyText', preamble)}
-            editData={field.bodyText}
-          /> */}
+
           <Wysiwyg
             onSetPreamble={(preamble) => handleFieldChange(index, 'bodyText', preamble)}
             editData={field.bodyText}
             extended={false}
           />
-          <Button
-            onClick={() => handleRemoveField(index)}
-            style={{
-              marginTop: '1rem',
-              backgroundColor: '#fef3f2',
-              color: '#dc2627',
-            }}
-          >
-            Remove Entry
-          </Button>
+          <RemoveEntryButton handleRemove={handleRemoveField} indexToRemove={index}>
+            Remove entry
+          </RemoveEntryButton>
         </div>
       ))}
 
-      {/* {editData &&
-        editData.fields.map((field, index) => (
-          <div key={index}>
-
-            <FieldLabel>{`Heading ${index + 1}`}</FieldLabel>
-            <TextInput
-              autoFocus={autoFocus}
-              onChange={(event) =>
-                handleFieldChange(index, 'heading', event.target.value)
-              }
-              value={field.heading}
-            />
-            <FieldLabel>{`Body Text ${index + 1}`}</FieldLabel>
-            <SimpleWysiwyg
-              onSetPremble={(premble) => handleFieldChange(index, 'bodyText', premble)}
-              editData={field.bodyText}
-            />
-          </div>
-        ))} */}
-
       <div style={{ borderTop: '1px solid #e1e5e9' }}>
-        <Button
-          style={{ marginTop: '1rem', marginRight: '0.5rem' }}
-          onClick={handleAddField}
-        >
-          Add Field
-        </Button>
+        <AddEntryButton handleAdd={handleAddField}>Add field</AddEntryButton>
 
         {editData ? (
-          <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
+          <UpdateSectionButton handleUpdate={handleSaveUpdate}>
             Update
-          </Button>
+          </UpdateSectionButton>
         ) : (
-          <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
+          <AddSectionButton handleSaveSection={handleSave}>
             Add Accordion section
-          </Button>
+          </AddSectionButton>
         )}
-        {editData && (
-          <Button
-            style={{
-              marginTop: '1rem',
-              marginLeft: '0.5rem',
-              backgroundColor: '#fef3f2',
-              color: '#dc2627',
-            }}
-            onClick={onCloseSection}
-          >
-            Cancel
-          </Button>
-        )}
+        {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
       </div>
     </FieldContainer>
   );

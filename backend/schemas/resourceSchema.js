@@ -59,7 +59,7 @@ export const resourceSchema = list({
       },
     }),
 
-    type: relationship({
+    resourceType: relationship({
       validation: { isRequired: true },
       ref: 'ResourceType.resources',
       many: false,

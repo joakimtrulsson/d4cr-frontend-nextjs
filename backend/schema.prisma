@@ -77,20 +77,20 @@ model FrontPage {
 }
 
 model Resource {
-  id            String            @id @default(uuid())
-  title         String            @unique @default("")
-  url           String            @default("")
-  image         Json?
-  file_filesize Int?
-  file_filename String?
-  category      ResourceCategory? @relation("Resource_category", fields: [categoryId], references: [id])
-  categoryId    String?           @map("category")
-  type          ResourceType?     @relation("Resource_type", fields: [typeId], references: [id])
-  typeId        String?           @map("type")
-  createdAt     DateTime?         @default(now())
+  id             String            @id @default(uuid())
+  title          String            @unique @default("")
+  url            String            @default("")
+  image          Json?
+  file_filesize  Int?
+  file_filename  String?
+  category       ResourceCategory? @relation("Resource_category", fields: [categoryId], references: [id])
+  categoryId     String?           @map("category")
+  resourceType   ResourceType?     @relation("Resource_resourceType", fields: [resourceTypeId], references: [id])
+  resourceTypeId String?           @map("resourceType")
+  createdAt      DateTime?         @default(now())
 
   @@index([categoryId])
-  @@index([typeId])
+  @@index([resourceTypeId])
 }
 
 model ResourceCategory {
@@ -102,9 +102,9 @@ model ResourceCategory {
 
 model ResourceType {
   id        String     @id @default(uuid())
-  title     String     @unique @default("")
+  type      String     @default("")
   icon      Json?
-  resources Resource[] @relation("Resource_type")
+  resources Resource[] @relation("Resource_resourceType")
 }
 
 model Image {
@@ -119,4 +119,11 @@ model Image {
   createdAt      DateTime? @default(now())
   size           Int?
   thumbnailUrl   String    @default("")
+}
+
+model Test {
+  id       String @id @default(uuid())
+  title    String @default("")
+  image    Json?
+  sections Json?
 }

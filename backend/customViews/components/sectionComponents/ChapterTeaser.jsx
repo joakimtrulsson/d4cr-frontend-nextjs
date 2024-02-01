@@ -2,8 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import useFetchChapters from '../../hooks/useFetchChapters.jsx';
-
-import { Button } from '@keystone-ui/button';
+import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
 
 function ChapterTeaser({ onCloseSection, onChange, sectionsData, setSectionsData }) {
   const { chapters } = useFetchChapters();
@@ -22,9 +21,9 @@ function ChapterTeaser({ onCloseSection, onChange, sectionsData, setSectionsData
   }
 
   return (
-    <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-      Add a Chapter Teaser section
-    </Button>
+    <AddSectionButton handleSaveSection={handleSave}>
+      Add Chapter Teaser section
+    </AddSectionButton>
   );
 }
 

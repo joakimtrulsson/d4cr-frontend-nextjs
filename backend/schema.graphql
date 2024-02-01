@@ -466,7 +466,7 @@ type Resource {
   image: JSON
   file: FileFieldOutput
   category: ResourceCategory
-  type: ResourceType
+  resourceType: ResourceType
   createdAt: DateTime
 }
 
@@ -485,7 +485,7 @@ input ResourceWhereInput {
   title: StringFilter
   url: StringFilter
   category: ResourceCategoryWhereInput
-  type: ResourceTypeWhereInput
+  resourceType: ResourceTypeWhereInput
   createdAt: DateTimeNullableFilter
 }
 
@@ -513,7 +513,7 @@ input ResourceUpdateInput {
   image: JSON
   file: FileFieldInput
   category: ResourceCategoryRelateToOneForUpdateInput
-  type: ResourceTypeRelateToOneForUpdateInput
+  resourceType: ResourceTypeRelateToOneForUpdateInput
   createdAt: DateTime
 }
 
@@ -540,7 +540,7 @@ input ResourceCreateInput {
   image: JSON
   file: FileFieldInput
   category: ResourceCategoryRelateToOneForCreateInput
-  type: ResourceTypeRelateToOneForCreateInput
+  resourceType: ResourceTypeRelateToOneForCreateInput
   createdAt: DateTime
 }
 
@@ -620,7 +620,7 @@ input ResourceRelateToManyForCreateInput {
 
 type ResourceType {
   id: ID!
-  title: String
+  type: String
   icon: JSON
   resources(where: ResourceWhereInput! = {}, orderBy: [ResourceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceWhereUniqueInput): [Resource!]
   resourcesCount(where: ResourceWhereInput! = {}): Int
@@ -628,7 +628,6 @@ type ResourceType {
 
 input ResourceTypeWhereUniqueInput {
   id: ID
-  title: String
 }
 
 input ResourceTypeWhereInput {
@@ -636,17 +635,17 @@ input ResourceTypeWhereInput {
   OR: [ResourceTypeWhereInput!]
   NOT: [ResourceTypeWhereInput!]
   id: IDFilter
-  title: StringFilter
+  type: StringFilter
   resources: ResourceManyRelationFilter
 }
 
 input ResourceTypeOrderByInput {
   id: OrderDirection
-  title: OrderDirection
+  type: OrderDirection
 }
 
 input ResourceTypeUpdateInput {
-  title: String
+  type: String
   icon: JSON
   resources: ResourceRelateToManyForUpdateInput
 }
@@ -657,7 +656,7 @@ input ResourceTypeUpdateArgs {
 }
 
 input ResourceTypeCreateInput {
-  title: String
+  type: String
   icon: JSON
   resources: ResourceRelateToManyForCreateInput
 }
@@ -751,6 +750,47 @@ input ImageCreateInput {
   thumbnailUrl: String
 }
 
+type Test {
+  id: ID!
+  title: String
+  image: JSON
+  sections: JSON
+}
+
+input TestWhereUniqueInput {
+  id: ID
+}
+
+input TestWhereInput {
+  AND: [TestWhereInput!]
+  OR: [TestWhereInput!]
+  NOT: [TestWhereInput!]
+  id: IDFilter
+  title: StringFilter
+}
+
+input TestOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+}
+
+input TestUpdateInput {
+  title: String
+  image: JSON
+  sections: JSON
+}
+
+input TestUpdateArgs {
+  where: TestWhereUniqueInput!
+  data: TestUpdateInput!
+}
+
+input TestCreateInput {
+  title: String
+  image: JSON
+  sections: JSON
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -811,6 +851,12 @@ type Mutation {
   updateImages(data: [ImageUpdateArgs!]!): [Image]
   deleteImage(where: ImageWhereUniqueInput!): Image
   deleteImages(where: [ImageWhereUniqueInput!]!): [Image]
+  createTest(data: TestCreateInput!): Test
+  createTests(data: [TestCreateInput!]!): [Test]
+  updateTest(where: TestWhereUniqueInput!, data: TestUpdateInput!): Test
+  updateTests(data: [TestUpdateArgs!]!): [Test]
+  deleteTest(where: TestWhereUniqueInput!): Test
+  deleteTests(where: [TestWhereUniqueInput!]!): [Test]
   endSession: Boolean!
   authenticateUserWithPassword(username: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -860,6 +906,9 @@ type Query {
   images(where: ImageWhereInput! = {}, orderBy: [ImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ImageWhereUniqueInput): [Image!]
   image(where: ImageWhereUniqueInput!): Image
   imagesCount(where: ImageWhereInput! = {}): Int
+  tests(where: TestWhereInput! = {}, orderBy: [TestOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestWhereUniqueInput): [Test!]
+  test(where: TestWhereUniqueInput!): Test
+  testsCount(where: TestWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

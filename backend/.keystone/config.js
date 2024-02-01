@@ -803,7 +803,7 @@ var resourceSchema = (0, import_core6.list)({
         description: "Reference to a category."
       }
     }),
-    type: (0, import_fields6.relationship)({
+    resourceType: (0, import_fields6.relationship)({
       validation: { isRequired: true },
       ref: "ResourceType.resources",
       many: false,
@@ -870,8 +870,17 @@ var resourceTypeSchema = (0, import_core8.list)({
       delete: rules.canManageItems
     }
   },
+  ui: {
+    labelField: "type",
+    listView: {
+      initialColumns: ["type", "icon"],
+      initialSort: { field: "type", direction: "ASC" },
+      pageSize: 50
+    }
+  },
   fields: {
-    title: (0, import_fields8.text)({ isIndexed: "unique", validation: { isRequired: true } }),
+    type: (0, import_fields8.text)({ validation: { isRequired: true } }),
+    // title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
     icon: (0, import_fields8.json)({
       label: "Icon",
       validation: { isRequired: true },
@@ -883,7 +892,7 @@ var resourceTypeSchema = (0, import_core8.list)({
       }
     }),
     resources: (0, import_fields8.relationship)({
-      ref: "Resource.type",
+      ref: "Resource.resourceType",
       many: true,
       ui: {
         description: "Resources belonging to this type."
@@ -915,6 +924,14 @@ var testSchema = (0, import_core9.list)({
     image: (0, import_fields9.json)({
       ui: {
         views: "./customViews/MediaLibrary.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    sections: (0, import_fields9.json)({
+      ui: {
+        views: "./customViews/AllSections.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -979,8 +996,8 @@ var lists = {
   Resource: resourceSchema,
   ResourceCategory: resourceCategorySchema,
   ResourceType: resourceTypeSchema,
-  Image: imageSchema
-  // Test,
+  Image: imageSchema,
+  Test: testSchema
 };
 
 // storage/heroImages.js

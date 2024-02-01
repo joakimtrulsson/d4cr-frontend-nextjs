@@ -9,10 +9,12 @@ import {
   Select,
   FieldDescription,
 } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
 
 import { mockNewsData } from '../../../data/mockNewsData.js';
 import Wysiwyg from '../Wysiwyg/Wysiwyg.jsx';
+import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../CancelButton/CancelButton.jsx';
 
 function NewsTeaser({
   onCloseSection,
@@ -23,15 +25,6 @@ function NewsTeaser({
   sectionIndex,
   setSectionsData,
 }) {
-  // const [value, setValue] = useState({
-  //   title: '',
-  //   subHeading: '',
-  //   selectedNews: {
-  //     chapter: 'ALLCHAPTERS',
-  //     category: 'ALL',
-  //   },
-  // });
-
   // Inte optimalt att göra så här.
   const [value, setValue] = useState(() => {
     if (editData) {
@@ -141,16 +134,17 @@ function NewsTeaser({
 
   return (
     <FieldContainer>
-      <div>
-        <FieldLabel>Title:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Title</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('title', event.target.value)}
           value={value.title}
         />
       </div>
-      <div>
-        <FieldLabel>Subheading:</FieldLabel>
+
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Subheading</FieldLabel>
         {/* <SimpleWysiwyg onSetPreamble={setPreamble} editData={editData?.subHeading} /> */}
         <Wysiwyg
           onSetPreamble={setPreamble}
@@ -159,10 +153,10 @@ function NewsTeaser({
         />
       </div>
 
-      <div>
-        <FieldLabel>News:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>News</FieldLabel>
         <FieldDescription>Select news to display</FieldDescription>
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '1rem' }}>
           <FieldLegend>Chapters</FieldLegend>
           <Select
             value={mockChaptersSelection.find(
@@ -172,7 +166,7 @@ function NewsTeaser({
             onChange={handleChapterChange}
           />
         </div>
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '1rem' }}>
           <FieldLegend>Categories</FieldLegend>
           <Select
             value={mockCategoriesSelection.find(
@@ -184,28 +178,18 @@ function NewsTeaser({
         </div>
       </div>
 
-      {editData ? (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
-          Update
-        </Button>
-      ) : (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-          Add News Teaser section
-        </Button>
-      )}
-      {editData && (
-        <Button
-          style={{
-            marginTop: '1rem',
-            marginLeft: '0.5rem',
-            backgroundColor: '#fef3f2',
-            color: '#dc2627',
-          }}
-          onClick={onCloseSection}
-        >
-          Cancel
-        </Button>
-      )}
+      <div style={{ borderTop: '1px solid #e1e5e9' }}>
+        {editData ? (
+          <UpdateSectionButton handleUpdate={handleSaveUpdate}>
+            Update
+          </UpdateSectionButton>
+        ) : (
+          <AddSectionButton handleSaveSection={handleSave}>
+            Add News Teaser section
+          </AddSectionButton>
+        )}
+        {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
+      </div>
     </FieldContainer>
   );
 }

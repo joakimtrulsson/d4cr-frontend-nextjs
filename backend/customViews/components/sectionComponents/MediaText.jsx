@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput, Select } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
 
 import Wysiwyg from '../Wysiwyg/Wysiwyg';
 import ImageUpload from '../ImageUpload/ImageUpload';
 import CallToActionForm from '../CallToActionForm/CallToActionForm.jsx';
+import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../CancelButton/CancelButton.jsx';
 
-import { styles } from '../../styles.js';
 import { deleteImages } from '../../utils/deleteImages.js';
 import { uploadImage } from '../../utils/uploadImage.js';
 import useFetchLinkOptions from '../../hooks/useFetchLinkOptions.jsx';
@@ -164,16 +165,16 @@ function MediaText({
 
   return (
     <FieldContainer>
-      <div className={styles.form.field}>
-        <FieldLabel>Title:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Title</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('title', event.target.value)}
           value={value.title}
         />
       </div>
-      <div className={styles.form.field}>
-        <FieldLabel>Subheading:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Subheading</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('subHeading', event.target.value)}
@@ -181,8 +182,8 @@ function MediaText({
         />
       </div>
 
-      <div className={styles.form.field}>
-        <FieldLabel>Background color:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Background color</FieldLabel>
         <Select
           value={colorOptions.find((option) => option.value === value.backgroundColor)}
           options={colorOptions}
@@ -192,8 +193,8 @@ function MediaText({
         />
       </div>
 
-      <div className={styles.form.field}>
-        <FieldLabel>Border:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Border</FieldLabel>
         <Select
           value={borderOptions.find((option) => option.value === value.border)}
           options={borderOptions}
@@ -201,8 +202,8 @@ function MediaText({
         />
       </div>
 
-      <div className={styles.form.field}>
-        <FieldLabel>Image position:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Image position</FieldLabel>
 
         <Select
           value={imageOptions.find((option) => option.value === value.imagePosition)}
@@ -214,10 +215,13 @@ function MediaText({
       </div>
 
       <div
-        className={styles.form.field}
-        style={{ flexDirection: 'column', alignItems: 'flex-start' }}
+        style={{
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          marginBottom: '1rem',
+        }}
       >
-        <FieldLabel>Image:</FieldLabel>
+        <FieldLabel>Image</FieldLabel>
 
         <ImageUpload
           file={file}
@@ -226,16 +230,21 @@ function MediaText({
         />
       </div>
 
-      <div style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-        <FieldLabel>Preamble:</FieldLabel>
-        {/* <SimpleWysiwyg onSetPreamble={setPreamble} editData={editData?.preamble} /> */}
+      <div
+        style={{
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          marginBottom: '1rem',
+        }}
+      >
+        <FieldLabel>Preamble</FieldLabel>
         <Wysiwyg
           onSetPreamble={setPreamble}
           editData={editData?.preamble}
           extended={false}
         />
       </div>
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ marginBottom: '1rem' }}>
         <FieldLabel>Call to action 1</FieldLabel>
         <CallToActionForm
           autoFocus={autoFocus}
@@ -247,7 +256,7 @@ function MediaText({
           ctaIdentifier={1}
         />
       </div>
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ marginBottom: '1rem' }}>
         <FieldLabel>Call to action 2</FieldLabel>
         <CallToActionForm
           autoFocus={autoFocus}
@@ -260,50 +269,18 @@ function MediaText({
         />
       </div>
 
-      {/* {value.cta.map((ctaItem, index) => (
-          <div key={index}>
-            <FieldDescription>Anchor text:</FieldDescription>
-            <TextInput
-              autoFocus={autoFocus}
-              onChange={(event) =>
-                handleCTAChange(index, 'anchorText', event.target.value)
-              }
-              value={ctaItem.anchorText}
-              style={{ marginBottom: '0.5rem' }}
-            />
-
-            <FieldDescription>Url/Page:</FieldDescription>
-            <TextInput
-              style={{ marginBottom: '1rem' }}
-              autoFocus={autoFocus}
-              onChange={(event) => handleCTAChange(index, 'url', event.target.value)}
-              value={ctaItem.url}
-            />
-          </div>
-        ))} */}
-
-      {editData ? (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
-          Update
-        </Button>
-      ) : (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-          Add Media + Text Section
-        </Button>
-      )}
-      {editData && (
-        <Button
-          style={{
-            marginTop: '1rem',
-            marginLeft: '0.5rem',
-            backgroundColor: '#fef3f2',
-            color: '#dc2627',
-          }}
-          onClick={onCloseSection}
-        >
-          Cancel
-        </Button>
-      )}
+      <div style={{ borderTop: '1px solid #e1e5e9' }}>
+        {editData ? (
+          <UpdateSectionButton handleUpdate={handleSaveUpdate}>
+            Update
+          </UpdateSectionButton>
+        ) : (
+          <AddSectionButton handleSaveSection={handleSave}>
+            Add Media + Text Section
+          </AddSectionButton>
+        )}
+        {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
+      </div>
     </FieldContainer>
   );
 }

@@ -5,14 +5,19 @@ import { FieldContainer, FieldLabel, FieldDescription } from '@keystone-ui/field
 import { options } from './utils/constants';
 import { deleteImages } from './utils/deleteImages';
 
-import ChapterTeaser from './components/sectionComponents/ChapterTeaser';
-import LargeBulletList from './components/sectionComponents/LargeBulletList';
-import MediaText from './components/sectionComponents/MediaText';
-import Accordion from './components/sectionComponents/Accordion';
-import Image from './components/sectionComponents/Image';
-import Banner from './components/sectionComponents/Banner';
-import NewsTeaser from './components/sectionComponents/NewsTeaser';
-import WysiwygSection from './components/sectionComponents/WysiwygSection';
+import * as SectionComponents from './components/sectionComponents';
+
+const {
+  ChapterTeaser,
+  LargeBulletList,
+  MediaText,
+  Accordion,
+  Image,
+  Banner,
+  NewsTeaser,
+  WysiwygSection,
+  Resources,
+} = SectionComponents;
 
 import SelectSections from './components/SelectSections/SelectSections';
 import StoredSections from './components/StoredSections/StoredSections';
@@ -149,6 +154,16 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
 
+      {!editFormData && activeSection === 'RESOURCES' && (
+        <Resources
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
       {/* Renderar Edit */}
 
       {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (
@@ -219,6 +234,17 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
 
       {editFormData && editFormData.sectionData.sectionType === 'WYSIWYG' && (
         <WysiwygSection
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'RESOURCES' && (
+        <Resources
           sectionsData={sectionsData}
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}

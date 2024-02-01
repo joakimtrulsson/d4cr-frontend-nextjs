@@ -21,5 +21,5 @@ export const lists = {
   ResourceCategory,
   ResourceType,
   Image,
-  // Test,
+  Test,
 };

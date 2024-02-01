@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
 
 import Wysiwyg from '../Wysiwyg/Wysiwyg.jsx';
 
-import { styles } from '../../styles.js';
+import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../CancelButton/CancelButton.jsx';
 
 function WysiwygSection({
   onCloseSection,
@@ -88,8 +89,8 @@ function WysiwygSection({
 
   return (
     <FieldContainer>
-      <div className={styles.form.field}>
-        <FieldLabel>Title:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Title</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('title', event.target.value)}
@@ -98,7 +99,7 @@ function WysiwygSection({
       </div>
 
       <div>
-        <FieldLabel>Text:</FieldLabel>
+        <FieldLabel>Text</FieldLabel>
         <Wysiwyg
           onSetPreamble={setPreamble}
           editData={editData?.preamble}
@@ -107,27 +108,16 @@ function WysiwygSection({
       </div>
 
       {editData ? (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
-          Update
-        </Button>
+        <UpdateSectionButton handleUpdate={handleSaveUpdate}>Update</UpdateSectionButton>
       ) : (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-          Add WYSISWYG section
-        </Button>
+        <AddSectionButton handleSaveSection={handleSave}>
+          Add WYSIWYG section
+        </AddSectionButton>
       )}
-      {editData && (
-        <Button
-          style={{
-            marginTop: '1rem',
-            marginLeft: '0.5rem',
-            backgroundColor: '#fef3f2',
-            color: '#dc2627',
-          }}
-          onClick={onCloseSection}
-        >
-          Cancel
-        </Button>
-      )}
+
+      <div style={{ borderTop: '1px solid #e1e5e9' }}>
+        {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
+      </div>
     </FieldContainer>
   );
 }

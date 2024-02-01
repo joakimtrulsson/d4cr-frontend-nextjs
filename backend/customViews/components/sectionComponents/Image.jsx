@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
 
-// import ImageUpload from './ImageUpload/ImageUpload.jsx';
 import ImageUpload from '../ImageUpload/ImageUpload';
+import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
+import RemoveEntryButton from '../RemoveEntryButton/RemoveEntryButton.jsx';
+import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../CancelButton/CancelButton.jsx';
 
 import { deleteImages } from '../../utils/deleteImages.js';
 import { uploadImages } from '../../utils/uploadImages.js';
-
-import { styles } from '../../styles.js';
 
 function Image({
   onCloseSection,
@@ -130,8 +130,8 @@ function Image({
 
   return (
     <FieldContainer>
-      <div className={styles.form.field}>
-        <FieldLabel>Title:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Title</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('title', event.target.value)}
@@ -139,102 +139,59 @@ function Image({
         />
       </div>
 
-      <div
-        className={styles.form.field}
-        style={{ flexDirection: 'column', alignItems: 'flex-start' }}
-      >
-        <div
-          className={styles.form.field}
-          style={{ flexDirection: 'column', alignItems: 'flex-start' }}
-        >
-          <FieldLabel>Image 1:</FieldLabel>
+      <div>
+        <div>
+          <FieldLabel>Image 1</FieldLabel>
           <div style={{ display: 'flex', marginBottom: '1rem' }}>
             <ImageUpload
               file={newFile1}
               setFile={setNewFile1}
               editData={prevFiles?.[0]?.imageUrls?.large}
             />
-            <Button
-              onClick={() => handleDeleteImage(0)}
-              style={{
-                marginTop: '1rem',
-                marginLeft: '0.5rem',
-                backgroundColor: '#fef3f2',
-                color: '#dc2627',
-                alignSelf: 'flex-end',
-              }}
-            >
+            <RemoveEntryButton handleRemove={handleDeleteImage} indexToRemove={0}>
               Delete Image
-            </Button>
+            </RemoveEntryButton>
           </div>
 
-          <FieldLabel>Image 2:</FieldLabel>
+          <FieldLabel>Image 2</FieldLabel>
           <div style={{ display: 'flex', marginBottom: '1rem' }}>
             <ImageUpload
               file={newFile2}
               setFile={setNewFile2}
               editData={prevFiles?.[1]?.imageUrls?.large}
             />
-            <Button
-              onClick={() => handleDeleteImage(1)}
-              style={{
-                marginTop: '1rem',
-                marginLeft: '0.5rem',
-                backgroundColor: '#fef3f2',
-                color: '#dc2627',
-                alignSelf: 'flex-end',
-              }}
-            >
+            <RemoveEntryButton handleRemove={handleDeleteImage} indexToRemove={1}>
               Delete Image
-            </Button>
+            </RemoveEntryButton>
           </div>
 
-          <FieldLabel>Image 3:</FieldLabel>
+          <FieldLabel>Image 3</FieldLabel>
           <div style={{ display: 'flex', marginBottom: '1rem' }}>
             <ImageUpload
               file={newFile3}
               setFile={setNewFile3}
               editData={prevFiles?.[2]?.imageUrls?.large}
             />
-            <Button
-              onClick={() => handleDeleteImage(2)}
-              style={{
-                marginTop: '1rem',
-                marginLeft: '0.5rem',
-                backgroundColor: '#fef3f2',
-                color: '#dc2627',
-                alignSelf: 'flex-end',
-              }}
-            >
+            <RemoveEntryButton handleRemove={handleDeleteImage} indexToRemove={2}>
               Delete Image
-            </Button>
+            </RemoveEntryButton>
           </div>
         </div>
       </div>
 
-      {editData ? (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
-          Update
-        </Button>
-      ) : (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-          Add Images section
-        </Button>
-      )}
+      <div style={{ paddingTop: '1rem', borderTop: '1px solid #e1e5e9' }}>
+        {editData ? (
+          <UpdateSectionButton handleUpdate={handleSaveUpdate}>
+            Update
+          </UpdateSectionButton>
+        ) : (
+          <AddSectionButton handleSaveSection={handleSave}>
+            Add Image section
+          </AddSectionButton>
+        )}
 
-      {editData && (
-        <Button
-          style={{
-            marginTop: '1rem',
-            marginLeft: '0.5rem',
-            backgroundColor: '#fef3f2',
-            color: '#dc2627',
-          }}
-          onClick={onCloseSection}
-        >
-          Cancel
-        </Button>
-      )}
+        {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
+      </div>
     </FieldContainer>
   );
 }

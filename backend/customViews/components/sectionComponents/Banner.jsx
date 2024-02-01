@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
-
-import { styles } from '../../styles.js';
 
 import IconPicker from '../IconPicker/IconPicker.jsx';
 import Wysiwyg from '../Wysiwyg/Wysiwyg.jsx';
 import CallToActionForm from '../CallToActionForm/CallToActionForm.jsx';
 import useFetchLinkOptions from '../../hooks/useFetchLinkOptions';
+import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../CancelButton/CancelButton.jsx';
 
 function Banner({
   onCloseSection,
@@ -115,8 +115,8 @@ function Banner({
 
   return (
     <FieldContainer>
-      <div className={styles.form.field}>
-        <FieldLabel>Title:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Title</FieldLabel>
         <TextInput
           autoFocus={autoFocus}
           onChange={(event) => handleChange('title', event.target.value)}
@@ -124,15 +124,15 @@ function Banner({
         />
       </div>
 
-      <div style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-        <FieldLabel>Preamble:</FieldLabel>
+      <div style={{ marginBottom: '1rem' }}>
+        <FieldLabel>Preamble</FieldLabel>
         <Wysiwyg
           onSetPreamble={setPreamble}
           editData={editData?.preamble}
           extended={false}
         />
       </div>
-      <div style={{ marginTop: '1rem' }}>
+      <div>
         <FieldLabel>Call to action</FieldLabel>
 
         <CallToActionForm
@@ -149,28 +149,18 @@ function Banner({
       <FieldLabel>Select an icon:</FieldLabel>
       <IconPicker value={iconName} onChange={setIconName} />
 
-      {editData ? (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSaveUpdate}>
-          Update
-        </Button>
-      ) : (
-        <Button style={{ marginTop: '1rem' }} onClick={handleSave}>
-          Add Banner section
-        </Button>
-      )}
-      {editData && (
-        <Button
-          style={{
-            marginTop: '1rem',
-            marginLeft: '0.5rem',
-            backgroundColor: '#fef3f2',
-            color: '#dc2627',
-          }}
-          onClick={onCloseSection}
-        >
-          Cancel
-        </Button>
-      )}
+      <div style={{ paddingTop: '1rem', borderTop: '1px solid #e1e5e9' }}>
+        {editData ? (
+          <UpdateSectionButton handleUpdate={handleSaveUpdate}>
+            Update
+          </UpdateSectionButton>
+        ) : (
+          <AddSectionButton handleSaveSection={handleSave}>
+            Add Banner section
+          </AddSectionButton>
+        )}
+        {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
+      </div>
     </FieldContainer>
   );
 }
