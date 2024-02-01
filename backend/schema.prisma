@@ -121,6 +121,47 @@ model Image {
   thumbnailUrl   String    @default("")
 }
 
+model Video {
+  id            String    @id @default(uuid())
+  title         String    @default("")
+  alt           String    @default("")
+  file_filesize Int?
+  file_filename String?
+  createdAt     DateTime? @default(now())
+  size          Int?
+  thumbnailUrl  String    @default("")
+}
+
+model Principle {
+  id                String              @id @default(uuid())
+  title             String              @default("")
+  slug              String              @unique @default("")
+  subHeader         String              @default("")
+  quote             String              @default("")
+  quoteAuthor       String              @default("")
+  image             Json?
+  subPrinciples     Json?
+  principleCategory PrincipleCategory[] @relation("Principle_principleCategory")
+  principleNumber   PrincipleNumber?    @relation("Principle_principleNumber", fields: [principleNumberId], references: [id])
+  principleNumberId String?             @map("principleNumber")
+  status            String              @default("draft")
+
+  @@index([principleNumberId])
+}
+
+model PrincipleNumber {
+  id                             String      @id @default(uuid())
+  number                         Int         @unique
+  from_Principle_principleNumber Principle[] @relation("Principle_principleNumber")
+}
+
+model PrincipleCategory {
+  id                               String      @id @default(uuid())
+  title                            String      @unique @default("")
+  createdAt                        DateTime?   @default(now())
+  from_Principle_principleCategory Principle[] @relation("Principle_principleCategory")
+}
+
 model Test {
   id       String @id @default(uuid())
   title    String @default("")

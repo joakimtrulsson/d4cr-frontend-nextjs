@@ -10,9 +10,14 @@ import { FieldLabel, FieldDescription } from '@keystone-ui/fields';
 
 export function CustomNavigation({ authenticatedItem, lists }) {
   // Glöm inte att lägga till nya innehållstyper i listan nedan
-  const aboveTaxonomyLists = ['User', 'Role', 'Chapter', 'Page', 'Resource', 'Test'];
-  const underTaxonomyLists = ['ResourceType', 'ResourceCategory'];
-  const underMediaLibraryLists = ['Image'];
+  const aboveTaxonomyLists = ['User', 'Role', 'Chapter', 'Page', 'Resource', 'Principle'];
+  const underTaxonomyLists = [
+    'ResourceType',
+    'ResourceCategory',
+    'PrincipleCategory',
+    'PrincipleNumber',
+  ];
+  const underMediaLibraryLists = ['Image', 'Video'];
 
   const aboveTaxonomy = lists.filter((list) => aboveTaxonomyLists.includes(list.key));
   const underTaxonomy = lists.filter((list) => underTaxonomyLists.includes(list.key));
@@ -49,8 +54,6 @@ export function CustomNavigation({ authenticatedItem, lists }) {
         Media Library
       </FieldLabel>
       <ListNavItems lists={underMediaLibrary} />
-      <FieldDescription style={{ marginLeft: '1.5rem' }}>Files</FieldDescription>
-      <FieldDescription style={{ marginLeft: '1.5rem' }}>Videos</FieldDescription>
     </NavigationContainer>
   );
 }

@@ -5,7 +5,7 @@ import { FieldContainer, FieldLabel, FieldDescription } from '@keystone-ui/field
 import { options } from './utils/constants';
 import { deleteImages } from './utils/deleteImages';
 
-import * as SectionComponents from './components/sectionComponents';
+import * as SectionComponents from './sections';
 
 const {
   ChapterTeaser,

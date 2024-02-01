@@ -1,8 +1,8 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import useFetchChapters from '../../hooks/useFetchChapters.jsx';
-import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
+import useFetchChapters from '../hooks/useFetchChapters.jsx';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
 
 function ChapterTeaser({ onCloseSection, onChange, sectionsData, setSectionsData }) {
   const { chapters } = useFetchChapters();

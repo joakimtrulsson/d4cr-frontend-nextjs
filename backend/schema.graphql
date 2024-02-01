@@ -750,6 +750,257 @@ input ImageCreateInput {
   thumbnailUrl: String
 }
 
+type Video {
+  id: ID!
+  title: String
+  alt: String
+  file: FileFieldOutput
+  createdAt: DateTime
+  size: Int
+  thumbnailUrl: String
+}
+
+input VideoWhereUniqueInput {
+  id: ID
+}
+
+input VideoWhereInput {
+  AND: [VideoWhereInput!]
+  OR: [VideoWhereInput!]
+  NOT: [VideoWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  alt: StringFilter
+  createdAt: DateTimeNullableFilter
+  size: IntNullableFilter
+  thumbnailUrl: StringFilter
+}
+
+input VideoOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  alt: OrderDirection
+  createdAt: OrderDirection
+  size: OrderDirection
+  thumbnailUrl: OrderDirection
+}
+
+input VideoUpdateInput {
+  title: String
+  alt: String
+  file: FileFieldInput
+  createdAt: DateTime
+  size: Int
+  thumbnailUrl: String
+}
+
+input VideoUpdateArgs {
+  where: VideoWhereUniqueInput!
+  data: VideoUpdateInput!
+}
+
+input VideoCreateInput {
+  title: String
+  alt: String
+  file: FileFieldInput
+  createdAt: DateTime
+  size: Int
+  thumbnailUrl: String
+}
+
+type Principle {
+  id: ID!
+  title: String
+  slug: String
+  subHeader: String
+  quote: String
+  quoteAuthor: String
+  image: JSON
+  subPrinciples: JSON
+  principleCategory(where: PrincipleCategoryWhereInput! = {}, orderBy: [PrincipleCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleCategoryWhereUniqueInput): [PrincipleCategory!]
+  principleCategoryCount(where: PrincipleCategoryWhereInput! = {}): Int
+  principleNumber: PrincipleNumber
+  status: String
+}
+
+input PrincipleWhereUniqueInput {
+  id: ID
+  slug: String
+}
+
+input PrincipleWhereInput {
+  AND: [PrincipleWhereInput!]
+  OR: [PrincipleWhereInput!]
+  NOT: [PrincipleWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  slug: StringFilter
+  subHeader: StringFilter
+  quote: StringFilter
+  quoteAuthor: StringFilter
+  principleCategory: PrincipleCategoryManyRelationFilter
+  principleNumber: PrincipleNumberWhereInput
+  status: StringFilter
+}
+
+input PrincipleCategoryManyRelationFilter {
+  every: PrincipleCategoryWhereInput
+  some: PrincipleCategoryWhereInput
+  none: PrincipleCategoryWhereInput
+}
+
+input PrincipleOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  slug: OrderDirection
+  subHeader: OrderDirection
+  quote: OrderDirection
+  quoteAuthor: OrderDirection
+  status: OrderDirection
+}
+
+input PrincipleUpdateInput {
+  title: String
+  slug: String
+  subHeader: String
+  quote: String
+  quoteAuthor: String
+  image: JSON
+  subPrinciples: JSON
+  principleCategory: PrincipleCategoryRelateToManyForUpdateInput
+  principleNumber: PrincipleNumberRelateToOneForUpdateInput
+  status: String
+}
+
+input PrincipleCategoryRelateToManyForUpdateInput {
+  disconnect: [PrincipleCategoryWhereUniqueInput!]
+  set: [PrincipleCategoryWhereUniqueInput!]
+  create: [PrincipleCategoryCreateInput!]
+  connect: [PrincipleCategoryWhereUniqueInput!]
+}
+
+input PrincipleNumberRelateToOneForUpdateInput {
+  create: PrincipleNumberCreateInput
+  connect: PrincipleNumberWhereUniqueInput
+  disconnect: Boolean
+}
+
+input PrincipleUpdateArgs {
+  where: PrincipleWhereUniqueInput!
+  data: PrincipleUpdateInput!
+}
+
+input PrincipleCreateInput {
+  title: String
+  slug: String
+  subHeader: String
+  quote: String
+  quoteAuthor: String
+  image: JSON
+  subPrinciples: JSON
+  principleCategory: PrincipleCategoryRelateToManyForCreateInput
+  principleNumber: PrincipleNumberRelateToOneForCreateInput
+  status: String
+}
+
+input PrincipleCategoryRelateToManyForCreateInput {
+  create: [PrincipleCategoryCreateInput!]
+  connect: [PrincipleCategoryWhereUniqueInput!]
+}
+
+input PrincipleNumberRelateToOneForCreateInput {
+  create: PrincipleNumberCreateInput
+  connect: PrincipleNumberWhereUniqueInput
+}
+
+type PrincipleNumber {
+  id: ID!
+  number: Int
+}
+
+input PrincipleNumberWhereUniqueInput {
+  id: ID
+  number: Int
+}
+
+input PrincipleNumberWhereInput {
+  AND: [PrincipleNumberWhereInput!]
+  OR: [PrincipleNumberWhereInput!]
+  NOT: [PrincipleNumberWhereInput!]
+  id: IDFilter
+  number: IntFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntFilter
+}
+
+input PrincipleNumberOrderByInput {
+  id: OrderDirection
+  number: OrderDirection
+}
+
+input PrincipleNumberUpdateInput {
+  number: Int
+}
+
+input PrincipleNumberUpdateArgs {
+  where: PrincipleNumberWhereUniqueInput!
+  data: PrincipleNumberUpdateInput!
+}
+
+input PrincipleNumberCreateInput {
+  number: Int
+}
+
+type PrincipleCategory {
+  id: ID!
+  title: String
+  createdAt: DateTime
+}
+
+input PrincipleCategoryWhereUniqueInput {
+  id: ID
+  title: String
+}
+
+input PrincipleCategoryWhereInput {
+  AND: [PrincipleCategoryWhereInput!]
+  OR: [PrincipleCategoryWhereInput!]
+  NOT: [PrincipleCategoryWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input PrincipleCategoryOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  createdAt: OrderDirection
+}
+
+input PrincipleCategoryUpdateInput {
+  title: String
+  createdAt: DateTime
+}
+
+input PrincipleCategoryUpdateArgs {
+  where: PrincipleCategoryWhereUniqueInput!
+  data: PrincipleCategoryUpdateInput!
+}
+
+input PrincipleCategoryCreateInput {
+  title: String
+  createdAt: DateTime
+}
+
 type Test {
   id: ID!
   title: String
@@ -851,6 +1102,30 @@ type Mutation {
   updateImages(data: [ImageUpdateArgs!]!): [Image]
   deleteImage(where: ImageWhereUniqueInput!): Image
   deleteImages(where: [ImageWhereUniqueInput!]!): [Image]
+  createVideo(data: VideoCreateInput!): Video
+  createVideos(data: [VideoCreateInput!]!): [Video]
+  updateVideo(where: VideoWhereUniqueInput!, data: VideoUpdateInput!): Video
+  updateVideos(data: [VideoUpdateArgs!]!): [Video]
+  deleteVideo(where: VideoWhereUniqueInput!): Video
+  deleteVideos(where: [VideoWhereUniqueInput!]!): [Video]
+  createPrinciple(data: PrincipleCreateInput!): Principle
+  createPrinciples(data: [PrincipleCreateInput!]!): [Principle]
+  updatePrinciple(where: PrincipleWhereUniqueInput!, data: PrincipleUpdateInput!): Principle
+  updatePrinciples(data: [PrincipleUpdateArgs!]!): [Principle]
+  deletePrinciple(where: PrincipleWhereUniqueInput!): Principle
+  deletePrinciples(where: [PrincipleWhereUniqueInput!]!): [Principle]
+  createPrincipleNumber(data: PrincipleNumberCreateInput!): PrincipleNumber
+  createPrincipleNumbers(data: [PrincipleNumberCreateInput!]!): [PrincipleNumber]
+  updatePrincipleNumber(where: PrincipleNumberWhereUniqueInput!, data: PrincipleNumberUpdateInput!): PrincipleNumber
+  updatePrincipleNumbers(data: [PrincipleNumberUpdateArgs!]!): [PrincipleNumber]
+  deletePrincipleNumber(where: PrincipleNumberWhereUniqueInput!): PrincipleNumber
+  deletePrincipleNumbers(where: [PrincipleNumberWhereUniqueInput!]!): [PrincipleNumber]
+  createPrincipleCategory(data: PrincipleCategoryCreateInput!): PrincipleCategory
+  createPrincipleCategories(data: [PrincipleCategoryCreateInput!]!): [PrincipleCategory]
+  updatePrincipleCategory(where: PrincipleCategoryWhereUniqueInput!, data: PrincipleCategoryUpdateInput!): PrincipleCategory
+  updatePrincipleCategories(data: [PrincipleCategoryUpdateArgs!]!): [PrincipleCategory]
+  deletePrincipleCategory(where: PrincipleCategoryWhereUniqueInput!): PrincipleCategory
+  deletePrincipleCategories(where: [PrincipleCategoryWhereUniqueInput!]!): [PrincipleCategory]
   createTest(data: TestCreateInput!): Test
   createTests(data: [TestCreateInput!]!): [Test]
   updateTest(where: TestWhereUniqueInput!, data: TestUpdateInput!): Test
@@ -906,6 +1181,18 @@ type Query {
   images(where: ImageWhereInput! = {}, orderBy: [ImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ImageWhereUniqueInput): [Image!]
   image(where: ImageWhereUniqueInput!): Image
   imagesCount(where: ImageWhereInput! = {}): Int
+  videos(where: VideoWhereInput! = {}, orderBy: [VideoOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: VideoWhereUniqueInput): [Video!]
+  video(where: VideoWhereUniqueInput!): Video
+  videosCount(where: VideoWhereInput! = {}): Int
+  principles(where: PrincipleWhereInput! = {}, orderBy: [PrincipleOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleWhereUniqueInput): [Principle!]
+  principle(where: PrincipleWhereUniqueInput!): Principle
+  principlesCount(where: PrincipleWhereInput! = {}): Int
+  principleNumbers(where: PrincipleNumberWhereInput! = {}, orderBy: [PrincipleNumberOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleNumberWhereUniqueInput): [PrincipleNumber!]
+  principleNumber(where: PrincipleNumberWhereUniqueInput!): PrincipleNumber
+  principleNumbersCount(where: PrincipleNumberWhereInput! = {}): Int
+  principleCategories(where: PrincipleCategoryWhereInput! = {}, orderBy: [PrincipleCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleCategoryWhereUniqueInput): [PrincipleCategory!]
+  principleCategory(where: PrincipleCategoryWhereUniqueInput!): PrincipleCategory
+  principleCategoriesCount(where: PrincipleCategoryWhereInput! = {}): Int
   tests(where: TestWhereInput! = {}, orderBy: [TestOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestWhereUniqueInput): [Test!]
   test(where: TestWhereUniqueInput!): Test
   testsCount(where: TestWhereInput! = {}): Int

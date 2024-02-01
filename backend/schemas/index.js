@@ -9,6 +9,14 @@ export { resourceSchema as Resource } from './resourceSchema';
 export { resourceCategorySchema as ResourceCategory } from './resourceCategorySchema';
 export { resourceTypeSchema as ResourceType } from './resourceTypeSchema';
 
+// Principles
+export { principleSchema as Principle } from './principleSchema';
+export { principleNumberSchema as PrincipleNumber } from './principleNumberSchema';
+export { principleCategorySchema as PrincipleCategory } from './principleCategorySchema';
+
+// Files
+export { imageSchema as Image } from './imageSchema';
+export { videoSchema as Video } from './videoSchema';
+
 // Test schema for developing sections
 export { testSchema as Test } from './testSchema';
-export { imageSchema as Image } from './imageSchema';

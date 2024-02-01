@@ -3,12 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
 
-import Wysiwyg from '../Wysiwyg/Wysiwyg';
-import AddSectionButton from '../AddSectionButton/AddSectionButton';
-import RemoveEntryButton from '../RemoveEntryButton/RemoveEntryButton';
-import AddEntryButton from '../AddEntryButton/AddEntryButton';
-import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton';
-import CancelButton from '../CancelButton/CancelButton';
+import Wysiwyg from '../components/Wysiwyg/Wysiwyg';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton';
+import RemoveEntryButton from '../components/RemoveEntryButton/RemoveEntryButton';
+import AddEntryButton from '../components/AddEntryButton/AddEntryButton';
+import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton';
+import CancelButton from '../components/CancelButton/CancelButton';
 
 function Accordion({
   onCloseSection,

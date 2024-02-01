@@ -10,11 +10,12 @@ import {
   FieldDescription,
 } from '@keystone-ui/fields';
 
-import { mockNewsData } from '../../../data/mockNewsData.js';
-import Wysiwyg from '../Wysiwyg/Wysiwyg.jsx';
-import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
-import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
-import CancelButton from '../CancelButton/CancelButton.jsx';
+import { mockNewsData } from '../../data/mockNewsData.js';
+
+import Wysiwyg from '../components/Wysiwyg/Wysiwyg.jsx';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../components/CancelButton/CancelButton.jsx';
 
 function NewsTeaser({
   onCloseSection,

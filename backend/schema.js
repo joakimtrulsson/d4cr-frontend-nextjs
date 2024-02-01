@@ -8,6 +8,10 @@ import {
   ResourceType,
   Resource,
   Image,
+  Video,
+  Principle,
+  PrincipleNumber,
+  PrincipleCategory,
   Test,
 } from './schemas/index';
 
@@ -21,5 +25,9 @@ export const lists = {
   ResourceCategory,
   ResourceType,
   Image,
+  Video,
+  Principle,
+  PrincipleNumber,
+  PrincipleCategory,
   Test,
 };

@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
 
-import Wysiwyg from '../Wysiwyg/Wysiwyg.jsx';
-import ResourcesForm from '../ResourcesForm/ResourcesForm.jsx';
-import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
-import RemoveEntryButton from '../RemoveEntryButton/RemoveEntryButton.jsx';
-import AddEntryButton from '../AddEntryButton/AddEntryButton.jsx';
-import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
-import CancelButton from '../CancelButton/CancelButton.jsx';
+import Wysiwyg from '../components/Wysiwyg/Wysiwyg.jsx';
+import ResourcesForm from '../components/ResourcesForm/ResourcesForm.jsx';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
+import RemoveEntryButton from '../components/RemoveEntryButton/RemoveEntryButton.jsx';
+import AddEntryButton from '../components/AddEntryButton/AddEntryButton.jsx';
+import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../components/CancelButton/CancelButton.jsx';
 
 function Resources({
   onCloseSection,
