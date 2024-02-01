@@ -6,6 +6,10 @@
     font-family: $-montserrat-normal;
 }
 
+.dev-border { // use this border when you're developing new stuffs
+    border: 2px black solid;
+}
+
 /*
     1. width and height
     2. margin
@@ -17,6 +21,7 @@
     8. text layout & style 
     9. colors
     10. z-index
+    11. re-using
 */
 
 /* width and height */
@@ -94,7 +99,7 @@
     }
 }
 
-.full-width-height { // skulle egentligen ändras till full-width-auto-height
+.full-width-height { // skulle egentligen heta full-width-auto-height
     width: 100%;
     height: auto;
     display: block;
@@ -366,10 +371,6 @@
     }
 }
 
-.dev-border { // use this border when you're developing
-    border: 2px black solid;
-}
-
 .borderradius { // ändrade till bo(r)derradius 
 
     &--xxs {
@@ -577,7 +578,11 @@ h4,
     letter-spacing: 0.02rem;
 }
 
-// text layout & style
+/* text layout & style */
+
+ul { // All unordered lists should be inside by default
+    list-style-position: inside;
+}
 
 .text-align-center {
     text-align: center;
@@ -596,7 +601,7 @@ h4,
 }
 
 .uppercase {
-    text-transform: uppercase; // not in use
+    text-transform: uppercase;
 }
 
 .whitespace-nowrap {
@@ -648,6 +653,10 @@ h4,
 
 .bg-yellow-200 {
     background-color: $-yellow-200;
+}
+
+.bg-yellow-300 {
+    background-color: $-yellow-300;
 }
 
 .bg-yellow-700 {
@@ -709,4 +718,10 @@ h4,
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.dropdown-container {
+    display: none;
+    position: absolute;
+    z-index: $-z-index-navbar-dropdown;
 }
