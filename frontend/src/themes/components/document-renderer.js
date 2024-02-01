@@ -3,7 +3,7 @@ import { createEditor } from "slate";
 import { Slate, withReact, Editable } from "slate-react"
 import YoutubeEmbed from '../components/youtube-embed.js'
 import SpotifyEmbed from '../components/spotify-embed.js'
-
+import '../sources/scss/base/utils.scss'
 
 export default function DocumentRenderer({ initialValue }) {
 
@@ -13,55 +13,65 @@ export default function DocumentRenderer({ initialValue }) {
 
   const Element = ({ attributes, children, element }) => {
 
-    const style = { textAlign: element.align }
+    const style = { textAlign: element.align };
 
     switch (element.type) {
+      case 'alignStart':
+        return <div className={element.className} style={{ textAlign: 'start' }} {...attributes}>{children}</div>;
+
+      case 'alignCenter':
+        return <div className={element.className} style={{ textAlign: 'center' }} {...attributes}>{children}</div>;
+
+      case 'alignEnd':
+        return <div className={element.className} style={{ textAlign: 'end' }} {...attributes}>{children}</div>;
 
       case 'block-quote':
-        return (<blockquote style={style} {...attributes}>{children}</blockquote>)
+        return <blockquote className={element.className} style={style} {...attributes}>{children}</blockquote>;
 
       case 'heading-one':
-        return (<h1 style={style} {...attributes}>{children}</h1>)
+        return <h1 className={element.className} style={style} {...attributes}>{children}</h1>;
 
       case 'heading-two':
-        return (<h2 style={style} {...attributes}>{children}</h2>)
+        return <h2 className={element.className} style={style} {...attributes}>{children}</h2>;
 
       case 'heading-three':
-        return (<h3 style={style} {...attributes}>{children}</h3>)
+        return <h3 className={element.className} style={style} {...attributes}>{children}</h3>;
 
       case 'heading-four':
-        return (<h4 style={style} {...attributes}>{children}</h4>)
+        return <h4 className={element.className} style={style} {...attributes}>{children}</h4>;
 
       case 'heading-five':
-        return (<h5 style={style} {...attributes}>{children}</h5>)
+        return <h5 className={element.className} style={style} {...attributes}>{children}</h5>;
 
       case 'heading-six':
-        return (<h6 style={style} {...attributes}>{children}</h6>)
+        return <h6 className={element.className} style={style} {...attributes}>{children}</h6>;
 
       case 'list-item':
-        return (<li style={style} {...attributes}>{children}</li>)
+        return <li className={element.className} style={style} {...attributes}>{children}</li>;
 
       case 'numbered-list':
-        return (<ol style={style} {...attributes}>{children}</ol>)
+        return <ol className={element.className} style={style} {...attributes}>{children}</ol>;
 
       case 'bulleted-list':
-        return (<ul style={style} {...attributes}>{children}</ul>)
+        return <ul className={element.className} style={style} {...attributes}>{children}</ul>;
 
       case 'spotify-embed':
-        return (<SpotifyEmbed embedId={children} />)
+        return <SpotifyEmbed className={element.className} url={element.url} />;
 
       case 'youtube-embed':
-        return (<YoutubeEmbed embedId={children} />)
+        return <YoutubeEmbed className={element.className} url={element.url} />;
 
       case 'img':
-        return (<img style={style} alt={element.alt} src={element.src} {...attributes} />);
+        return <img className={element.className} style={style} alt={element.alt} src={element.src} {...attributes} />;
 
       default:
-        return (<p style={style} {...attributes}>{children}</p>)
+        return <p className={element.className} style={style} {...attributes}>{children}</p>;
     }
-  }
+  };
 
   const Leaf = ({ attributes, children, leaf }) => {
+
+    console.log('Leaf Component - leaf:', leaf);
 
     if (leaf.bold) {
       children = <strong>{children}</strong>
@@ -84,8 +94,8 @@ export default function DocumentRenderer({ initialValue }) {
 
   return (
     <div className="App">
-      <Slate editor={editor} initialValue={initialValue} renderLeaf={renderLeaf}>
-        <Editable readOnly renderElement={renderElement} />
+      <Slate editor={editor} initialValue={initialValue}>
+        <Editable readOnly renderElement={renderElement} renderLeaf={renderLeaf} />
       </Slate>
     </div>
   );

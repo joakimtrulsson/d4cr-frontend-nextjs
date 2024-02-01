@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import RichTextViewer from '../themes/components/document-renderer.js';
-import succe from '../database/keystone-6/wysiwig-data.json';
+import LocalJsonFile from '../database/keystone-6/wysiwig-data.json';
+import '../themes/sources/scss/components/wysiwig.scss'
+
 
 export const WysiwigPage = () => {  
 
@@ -13,7 +15,7 @@ export const WysiwigPage = () => {
 
       try {
 
-        const convertedJson = succe.data.sections.map(section => ({
+        const convertedJson = LocalJsonFile.data.sections.map(section => ({
           type: section.type,
           children: section.children
         }));
