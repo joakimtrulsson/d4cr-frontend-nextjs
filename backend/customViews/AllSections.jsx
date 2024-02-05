@@ -17,6 +17,7 @@ const {
   NewsTeaser,
   WysiwygSection,
   Resources,
+  Principles,
 } = SectionComponents;
 
 import SelectSections from './components/SelectSections/SelectSections';
@@ -164,6 +165,16 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
 
+      {!editFormData && activeSection === 'PRINCIPLES' && (
+        <Principles
+          sectionsData={sectionsData}
+          setSectionsData={setSectionsData}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
       {/* Renderar Edit */}
 
       {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (
@@ -245,6 +256,17 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
 
       {editFormData && editFormData.sectionData.sectionType === 'RESOURCES' && (
         <Resources
+          sectionsData={sectionsData}
+          editData={editFormData.sectionData}
+          sectionIndex={editFormData.sectionIndex}
+          onCloseSection={handleCloseSection}
+          onChange={onChange}
+          autoFocus={autoFocus}
+        />
+      )}
+
+      {editFormData && editFormData.sectionData.sectionType === 'PRINCIPLES' && (
+        <Principles
           sectionsData={sectionsData}
           editData={editFormData.sectionData}
           sectionIndex={editFormData.sectionIndex}

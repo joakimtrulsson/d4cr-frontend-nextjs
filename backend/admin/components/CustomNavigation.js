@@ -10,7 +10,15 @@ import { FieldLabel, FieldDescription } from '@keystone-ui/fields';
 
 export function CustomNavigation({ authenticatedItem, lists }) {
   // Glöm inte att lägga till nya innehållstyper i listan nedan
-  const aboveTaxonomyLists = ['User', 'Role', 'Chapter', 'Page', 'Resource', 'Principle'];
+  const aboveTaxonomyLists = [
+    'User',
+    'Role',
+    'Chapter',
+    'Page',
+    'Resource',
+    'Principle',
+    'Test',
+  ];
   const underTaxonomyLists = [
     'ResourceType',
     'ResourceCategory',

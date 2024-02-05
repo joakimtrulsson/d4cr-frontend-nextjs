@@ -68,6 +68,7 @@ model FrontPage {
   heroPreamble        Json    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   heroMedia_filesize  Int?
   heroMedia_filename  String?
+  heroVideo           Json?
   ctaOneAnchorText    String  @default("")
   ctaOneUrl           Json?
   ctaTwoUrlAnchorText String  @default("")
@@ -118,7 +119,7 @@ model Image {
   file_id        String?
   createdAt      DateTime? @default(now())
   size           Int?
-  thumbnailUrl   String    @default("")
+  url            String    @default("")
 }
 
 model Video {
@@ -130,6 +131,7 @@ model Video {
   createdAt     DateTime? @default(now())
   size          Int?
   thumbnailUrl  String    @default("")
+  url           String    @default("")
 }
 
 model Principle {
@@ -141,6 +143,7 @@ model Principle {
   quoteAuthor       String              @default("")
   image             Json?
   subPrinciples     Json?
+  resources         Json?
   principleCategory PrincipleCategory[] @relation("Principle_principleCategory")
   principleNumber   PrincipleNumber?    @relation("Principle_principleNumber", fields: [principleNumberId], references: [id])
   principleNumberId String?             @map("principleNumber")
@@ -163,8 +166,7 @@ model PrincipleCategory {
 }
 
 model Test {
-  id       String @id @default(uuid())
-  title    String @default("")
-  image    Json?
-  sections Json?
+  id        String @id @default(uuid())
+  title     String @default("")
+  resources Json?
 }

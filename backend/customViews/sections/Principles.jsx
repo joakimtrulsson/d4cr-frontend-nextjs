@@ -4,14 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
 
 import Wysiwyg from '../components/Wysiwyg/Wysiwyg.jsx';
-import ResourcesForm from '../components/ResourcesForm/ResourcesForm.jsx';
+import PrinciplesForm from '../components/PrinciplesForm/PrinciplesForm.jsx';
 import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
 import RemoveEntryButton from '../components/RemoveEntryButton/RemoveEntryButton.jsx';
 import AddEntryButton from '../components/AddEntryButton/AddEntryButton.jsx';
 import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
 import CancelButton from '../components/CancelButton/CancelButton.jsx';
 
-function Resources({
+function Principles({
   onCloseSection,
   sectionsData,
   onChange,
@@ -27,36 +27,34 @@ function Resources({
       return {
         title: '',
         preamble: '',
-        resources: [],
+        groups: [],
       };
     }
   });
   const [groups, setGroups] = useState(() => {
     if (editData) {
-      return editData.resources || [];
+      return editData.groups || [];
     } else {
       return [
         {
           id: uuidv4(),
           title: '',
-          resources: [],
+          groups: [],
         },
       ];
     }
   });
   const [newItems, setNewItems] = useState([]);
 
-  console.log('editData', editData);
-
   async function handleSave() {
     if (onChange) {
       const newId = uuidv4();
 
       const newItem = {
-        sectionType: 'RESOURCES',
+        sectionType: 'PRINCIPLES',
         id: newId,
         ...value,
-        resources: newItems,
+        groups: newItems,
       };
 
       setSectionsData((prevSectionsData) => [...prevSectionsData, newItem]);
@@ -69,13 +67,13 @@ function Resources({
     event.preventDefault();
     if (onChange) {
       const updatedSection = {
-        sectionType: 'RESOURCES',
+        sectionType: 'PRINCIPLES',
         id: editData.id,
-        ...value,
-        resources:
-          newItems.length > 0 ? [...value.resources, ...newItems] : [...value.resources],
+        title: value.title,
+        preamble: value.preamble,
+        groups: newItems.length > 0 ? [...value.groups, ...newItems] : [...value.groups],
       };
-
+      console.log(newItems);
       sectionsData[sectionIndex] = updatedSection;
 
       onChange(JSON.stringify(sectionsData));
@@ -101,15 +99,14 @@ function Resources({
     const groupIndex = newItems.findIndex(
       (item) => item.groupTitle === newItem.groupTitle
     );
-
     if (groupIndex !== -1) {
       const updatedGroup = newItems[groupIndex];
-      newItem.resources.forEach((resource) => {
-        const existingResource = updatedGroup.resources.find(
-          (existingResource) => existingResource.id === resource.id
+      newItem.principles.forEach((group) => {
+        const existingGroups = updatedGroup.principles.find(
+          (existingGroup) => existingGroup.id === group.id
         );
-        if (!existingResource) {
-          updatedGroup.resources.push(resource);
+        if (!existingGroups) {
+          updatedGroup.principles.push(group);
         }
       });
     } else {
@@ -119,20 +116,21 @@ function Resources({
 
   const handleUpdateItem = (updatedGroup) => {
     setValue((prev) => {
-      const updatedResources = prev.resources.map((resource) => {
-        if (resource.id === updatedGroup.id) {
+      const updatedGroups = prev.groups.map((group) => {
+        console.log(group.id, updatedGroup.id);
+        if (group.id === updatedGroup.id) {
           return updatedGroup;
         }
-        return resource;
+        return group;
       });
 
-      if (!updatedResources.some((resource) => resource.id === updatedGroup.id)) {
+      if (!updatedGroups.some((resource) => resource.id === updatedGroup.id)) {
         setNewItems((prevNewItems) => [...prevNewItems, updatedGroup]);
       }
 
       return {
         ...prev,
-        resources: updatedResources,
+        groups: updatedGroups,
       };
     });
   };
@@ -143,7 +141,7 @@ function Resources({
       {
         id: uuidv4(),
         title: '',
-        resources: [],
+        groups: [],
       },
     ]);
   };
@@ -164,7 +162,7 @@ function Resources({
 
     setValue((prev) => ({
       ...prev,
-      resources: prev.resources.filter((resource) => resource.id !== groupToRemove.id),
+      resources: prev.groups.filter((resource) => resource.id !== groupToRemove.id),
     }));
   };
 
@@ -192,12 +190,12 @@ function Resources({
       <div>
         {groups.map((group, index) => (
           <div key={group.id}>
-            <ResourcesForm
+            <PrinciplesForm
               autoFocus={autoFocus}
               onAddNewItem={handleAddGroupDataToNewItems}
               onUpdateItem={handleUpdateItem}
               value={group}
-              editData={editData?.resources[index]}
+              editData={editData?.groups[index]}
             />
 
             {groups.length > 1 && (
@@ -215,7 +213,7 @@ function Resources({
       ) : (
         // <Button onClick={handleSaveUpdate}>Update</Button>
         <AddSectionButton handleSaveSection={handleSave}>
-          Add resources section
+          Add principles section
         </AddSectionButton>
       )}
       {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
@@ -223,4 +221,4 @@ function Resources({
   );
 }
 
-export default Resources;
+export default Principles;

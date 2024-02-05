@@ -41,7 +41,7 @@ export const resourceSchema = list({
     // }),
     image: json({
       ui: {
-        views: './customViews/MediaLibrary.jsx',
+        views: './customViews/ImageLibrary.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },

@@ -520,7 +520,7 @@ var chapterSchema = (0, import_core3.list)({
     // }),
     heroImage: (0, import_fields3.json)({
       ui: {
-        views: "./customViews/MediaLibrary.jsx",
+        views: "./customViews/ImageLibrary.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -704,6 +704,14 @@ var frontPageSchema = (0, import_core5.list)({
       storage: "frontPageHero",
       validation: { isRequired: true }
     }),
+    heroVideo: (0, import_fields5.json)({
+      ui: {
+        views: "./customViews/VideoLibrary.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
     ctaOneAnchorText: (0, import_fields5.text)({
       label: "Call to action 1",
       ui: {
@@ -786,7 +794,7 @@ var resourceSchema = (0, import_core6.list)({
     // }),
     image: (0, import_fields6.json)({
       ui: {
-        views: "./customViews/MediaLibrary.jsx",
+        views: "./customViews/ImageLibrary.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -983,7 +991,7 @@ var principleSchema = (0, import_core9.list)({
     quoteAuthor: (0, import_fields9.text)({}),
     image: (0, import_fields9.json)({
       ui: {
-        views: "./customViews/MediaLibrary.jsx",
+        views: "./customViews/ImageLibrary.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -992,6 +1000,14 @@ var principleSchema = (0, import_core9.list)({
     subPrinciples: (0, import_fields9.json)({
       ui: {
         views: "./customViews/SubPrinciples.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    resources: (0, import_fields9.json)({
+      ui: {
+        views: "./customViews/Resources.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
@@ -1130,7 +1146,7 @@ var imageSchema = (0, import_core12.list)({
         }
       }
     }),
-    thumbnailUrl: (0, import_fields12.text)({
+    url: (0, import_fields12.text)({
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
           let url = "http://localhost:3000/public";
@@ -1165,7 +1181,9 @@ var videoSchema = (0, import_core13.list)({
   fields: {
     title: (0, import_fields13.text)(),
     alt: (0, import_fields13.text)(),
-    file: (0, import_fields13.file)({ storage: "videoStorage" }),
+    file: (0, import_fields13.file)({
+      storage: "videoStorage"
+    }),
     createdAt: (0, import_fields13.timestamp)({ isRequired: true, defaultValue: { kind: "now" } }),
     size: (0, import_fields13.integer)({
       hooks: {
@@ -1176,13 +1194,13 @@ var videoSchema = (0, import_core13.list)({
         }
       }
     }),
-    thumbnailUrl: (0, import_fields13.text)({
+    thumbnailUrl: (0, import_fields13.text)({}),
+    url: (0, import_fields13.text)({
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
-          let url = "http://localhost:3000/public";
-          console.log(resolvedData);
+          let url = "http://localhost:3000/public/media/";
           if (operation === "create") {
-            return `${url}/${resolvedData.file.id}.${resolvedData.file.extension}`;
+            return `${url}/${resolvedData.file.filename}`;
           }
         }
       }
@@ -1210,17 +1228,25 @@ var testSchema = (0, import_core14.list)({
   },
   fields: {
     title: (0, import_fields14.text)(),
-    image: (0, import_fields14.json)({
+    // image: json({
+    //   ui: {
+    //     views: './customViews/MediaLibrary.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
+    // sections: json({
+    //   ui: {
+    //     views: './customViews/AllSections.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
+    resources: (0, import_fields14.json)({
       ui: {
-        views: "./customViews/MediaLibrary.jsx",
-        createView: { fieldMode: "edit" },
-        listView: { fieldMode: "hidden" },
-        itemView: { fieldMode: "edit" }
-      }
-    }),
-    sections: (0, import_fields14.json)({
-      ui: {
-        views: "./customViews/AllSections.jsx",
+        views: "./customViews/Resources.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }

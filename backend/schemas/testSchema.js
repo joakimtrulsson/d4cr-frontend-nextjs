@@ -21,17 +21,25 @@ export const testSchema = list({
   fields: {
     title: text(),
 
-    image: json({
+    // image: json({
+    //   ui: {
+    //     views: './customViews/MediaLibrary.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
+    // sections: json({
+    //   ui: {
+    //     views: './customViews/AllSections.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
+    resources: json({
       ui: {
-        views: './customViews/MediaLibrary.jsx',
-        createView: { fieldMode: 'edit' },
-        listView: { fieldMode: 'hidden' },
-        itemView: { fieldMode: 'edit' },
-      },
-    }),
-    sections: json({
-      ui: {
-        views: './customViews/AllSections.jsx',
+        views: './customViews/Resources.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },

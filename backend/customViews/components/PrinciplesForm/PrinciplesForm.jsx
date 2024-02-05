@@ -7,11 +7,12 @@ import {
 } from '@keystone-ui/fields';
 import { v4 as uuidv4 } from 'uuid';
 
-import useFetchResources from '../../hooks/useFetchResources';
+import useFetchPrinciples from '../../hooks/useFetchPrinciples';
+import AddEntryButton from '../AddEntryButton/AddEntryButton';
 
-function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
+function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
   const [options, setOptions] = useState([]);
-  const { allResources, loading, error } = useFetchResources();
+  const { allPrinciples, loading, error } = useFetchPrinciples();
   const [resourcesData, setResourcesData] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [groupTitle, setGroupTitle] = useState('');
@@ -21,11 +22,10 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
   // När editData finns så sätts groupTitle och resourcesData
   useEffect(() => {
     if (editData) {
-      console.log('edit', editData.groupTitle);
       setGroupTitle(editData.groupTitle);
-      setResourcesData(editData.resources);
+      setResourcesData(editData.principles);
 
-      const newSelectedOptions = editData.resources.map((resource) => ({
+      const newSelectedOptions = editData.principles.map((resource) => ({
         value: resource.id,
         label: resource.title,
       }));
@@ -33,41 +33,44 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
     }
   }, [editData]);
 
-  // När allResources finns så skapas options till MultiSelect
   useEffect(() => {
-    if (allResources.resourceCategories) {
-      const newOptions = allResources.resourceCategories.reduce(
-        (acc, resourceCategory) => {
-          const resources = resourceCategory.resources.map((resource) => ({
-            value: resource.id,
-            label: resource.title,
-          }));
+    if (
+      allPrinciples &&
+      allPrinciples.principles &&
+      allPrinciples.principles.length > 0
+    ) {
+      console.log(allPrinciples);
 
-          return [...acc, ...resources];
-        },
-        []
-      );
+      const newOptions = allPrinciples.principles.reduce((acc, principle) => {
+        const resource = {
+          value: principle.id,
+          label: principle.title,
+        };
+
+        return [...acc, resource];
+      }, []);
 
       setOptions(newOptions);
     }
-  }, [allResources]);
+  }, [allPrinciples]);
 
-  // När grouptitle och resources finns så skickas det tillbaka.
+  // När grouptitle och resources finns så skickas det tillbaka till Resources.jsx
   useEffect(() => {
     // Här måste vi kontrollera om editData finns, då ska inte id uppdateras, dvs den ska bli samma som editData.id
     if (editData && groupTitle && resourcesData.length > 0) {
       const updatedItem = {
         id: editData.id,
         groupTitle: groupTitle,
-        resources: resourcesData,
+        principles: resourcesData,
       };
       onUpdateItem(updatedItem);
     } else if (!editData && groupTitle && resourcesData.length > 0) {
       const newItem = {
         id: newId,
         groupTitle: groupTitle,
-        resources: resourcesData,
+        principles: resourcesData,
       };
+      console.log(newItem); // Här skickas det tillbaka till Resources.jsx
       onAddNewItem(newItem);
     }
   }, [groupTitle, resourcesData]);
@@ -76,19 +79,31 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
     if (key === 'selectedOptions') {
       // Value innehåller resources id och titel
 
-      const allResouceData = value.map((selectedOption) => {
-        const resource = allResources.resourceCategories
-          .map((resourceCategory) => resourceCategory.resources)
+      const allPrinciplesData = value.map((selectedOption) => {
+        const principle = allPrinciples.principles
+          .map((principle) => principle)
           .flat()
-          .find((resource) => resource.id === selectedOption.value);
+          .find((principle) => principle.id === selectedOption.value);
+        // console.log(principle);
 
-        return resource;
+        return principle;
       });
 
-      setResourcesData(allResouceData);
+      setResourcesData(allPrinciplesData);
     } else if (key === 'groupTitle') {
       setGroupTitle(value);
     }
+  };
+
+  const addAllPriciples = () => {
+    const allPrinciplesData = allPrinciples.principles.map((principle) => principle);
+    setResourcesData(allPrinciplesData);
+    setSelectedOptions(
+      allPrinciplesData.map((resource) => ({
+        value: resource.id,
+        label: resource.title,
+      }))
+    );
   };
 
   return (
@@ -96,7 +111,7 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
       <div style={{ marginBottom: '1rem' }}>
         <FieldLabel>Group title</FieldLabel>
         <FieldDescription>
-          Assign a title to categorize this group of resources
+          Assign a title to categorize this group of principles
         </FieldDescription>
         <div style={{ marginBottom: '1rem' }}>
           <TextInput
@@ -107,9 +122,9 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
         </div>
       </div>
       <div style={{ marginBottom: '1rem' }}>
-        <FieldLabel>Resources</FieldLabel>
+        <FieldLabel>Principles</FieldLabel>
         <FieldDescription>
-          Select resources associated with the group title
+          Select principles associated with the group title
         </FieldDescription>
         <div style={{ marginBottom: '1rem' }}>
           <MultiSelect
@@ -121,10 +136,13 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
             }}
             value={selectedOptions || []}
           />
+          <AddEntryButton handleAdd={addAllPriciples}>
+            Select all principles
+          </AddEntryButton>
         </div>
       </div>
     </>
   );
 }
 
-export default ResourcesForm;
+export default PrinciplesForm;

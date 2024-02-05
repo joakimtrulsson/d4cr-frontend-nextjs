@@ -382,6 +382,7 @@ type FrontPage {
   heroTitle: String
   heroPreamble: FrontPage_heroPreamble_Document
   heroMedia: FileFieldOutput
+  heroVideo: JSON
   ctaOneAnchorText: String
   ctaOneUrl: JSON
   ctaTwoUrlAnchorText: String
@@ -427,6 +428,7 @@ input FrontPageUpdateInput {
   heroTitle: String
   heroPreamble: JSON
   heroMedia: FileFieldInput
+  heroVideo: JSON
   ctaOneAnchorText: String
   ctaOneUrl: JSON
   ctaTwoUrlAnchorText: String
@@ -451,6 +453,7 @@ input FrontPageCreateInput {
   heroTitle: String
   heroPreamble: JSON
   heroMedia: FileFieldInput
+  heroVideo: JSON
   ctaOneAnchorText: String
   ctaOneUrl: JSON
   ctaTwoUrlAnchorText: String
@@ -668,7 +671,7 @@ type Image {
   file: ImageFieldOutput
   createdAt: DateTime
   size: Int
-  thumbnailUrl: String
+  url: String
 }
 
 type ImageFieldOutput {
@@ -700,7 +703,7 @@ input ImageWhereInput {
   alt: StringFilter
   createdAt: DateTimeNullableFilter
   size: IntNullableFilter
-  thumbnailUrl: StringFilter
+  url: StringFilter
 }
 
 input IntNullableFilter {
@@ -720,7 +723,7 @@ input ImageOrderByInput {
   alt: OrderDirection
   createdAt: OrderDirection
   size: OrderDirection
-  thumbnailUrl: OrderDirection
+  url: OrderDirection
 }
 
 input ImageUpdateInput {
@@ -729,7 +732,7 @@ input ImageUpdateInput {
   file: ImageFieldInput
   createdAt: DateTime
   size: Int
-  thumbnailUrl: String
+  url: String
 }
 
 input ImageFieldInput {
@@ -747,7 +750,7 @@ input ImageCreateInput {
   file: ImageFieldInput
   createdAt: DateTime
   size: Int
-  thumbnailUrl: String
+  url: String
 }
 
 type Video {
@@ -758,6 +761,7 @@ type Video {
   createdAt: DateTime
   size: Int
   thumbnailUrl: String
+  url: String
 }
 
 input VideoWhereUniqueInput {
@@ -774,6 +778,7 @@ input VideoWhereInput {
   createdAt: DateTimeNullableFilter
   size: IntNullableFilter
   thumbnailUrl: StringFilter
+  url: StringFilter
 }
 
 input VideoOrderByInput {
@@ -783,6 +788,7 @@ input VideoOrderByInput {
   createdAt: OrderDirection
   size: OrderDirection
   thumbnailUrl: OrderDirection
+  url: OrderDirection
 }
 
 input VideoUpdateInput {
@@ -792,6 +798,7 @@ input VideoUpdateInput {
   createdAt: DateTime
   size: Int
   thumbnailUrl: String
+  url: String
 }
 
 input VideoUpdateArgs {
@@ -806,6 +813,7 @@ input VideoCreateInput {
   createdAt: DateTime
   size: Int
   thumbnailUrl: String
+  url: String
 }
 
 type Principle {
@@ -817,6 +825,7 @@ type Principle {
   quoteAuthor: String
   image: JSON
   subPrinciples: JSON
+  resources: JSON
   principleCategory(where: PrincipleCategoryWhereInput! = {}, orderBy: [PrincipleCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleCategoryWhereUniqueInput): [PrincipleCategory!]
   principleCategoryCount(where: PrincipleCategoryWhereInput! = {}): Int
   principleNumber: PrincipleNumber
@@ -867,6 +876,7 @@ input PrincipleUpdateInput {
   quoteAuthor: String
   image: JSON
   subPrinciples: JSON
+  resources: JSON
   principleCategory: PrincipleCategoryRelateToManyForUpdateInput
   principleNumber: PrincipleNumberRelateToOneForUpdateInput
   status: String
@@ -898,6 +908,7 @@ input PrincipleCreateInput {
   quoteAuthor: String
   image: JSON
   subPrinciples: JSON
+  resources: JSON
   principleCategory: PrincipleCategoryRelateToManyForCreateInput
   principleNumber: PrincipleNumberRelateToOneForCreateInput
   status: String
@@ -1004,8 +1015,7 @@ input PrincipleCategoryCreateInput {
 type Test {
   id: ID!
   title: String
-  image: JSON
-  sections: JSON
+  resources: JSON
 }
 
 input TestWhereUniqueInput {
@@ -1027,8 +1037,7 @@ input TestOrderByInput {
 
 input TestUpdateInput {
   title: String
-  image: JSON
-  sections: JSON
+  resources: JSON
 }
 
 input TestUpdateArgs {
@@ -1038,8 +1047,7 @@ input TestUpdateArgs {
 
 input TestCreateInput {
   title: String
-  image: JSON
-  sections: JSON
+  resources: JSON
 }
 
 """

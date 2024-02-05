@@ -92,7 +92,7 @@ export const principleSchema = list({
 
     image: json({
       ui: {
-        views: './customViews/MediaLibrary.jsx',
+        views: './customViews/ImageLibrary.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
@@ -102,6 +102,15 @@ export const principleSchema = list({
     subPrinciples: json({
       ui: {
         views: './customViews/SubPrinciples.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
+      },
+    }),
+
+    resources: json({
+      ui: {
+        views: './customViews/Resources.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },

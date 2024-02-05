@@ -32,7 +32,7 @@ export const imageSchema = list({
         },
       },
     }),
-    thumbnailUrl: text({
+    url: text({
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
           let url = 'http://localhost:3000/public';
