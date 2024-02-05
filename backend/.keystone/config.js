@@ -1070,13 +1070,6 @@ var principleNumberSchema = (0, import_core10.list)({
   },
   fields: {
     number: (0, import_fields10.integer)({ isIndexed: "unique", validation: { isRequired: true } })
-    // resources: relationship({
-    //   ref: 'Resource.category',
-    //   many: true,
-    //   ui: {
-    //     description: 'Resources belonging to this category.',
-    //   },
-    // }),
   }
 });
 

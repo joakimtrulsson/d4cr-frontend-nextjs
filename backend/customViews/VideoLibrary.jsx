@@ -62,6 +62,9 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
             ...file,
             _id: file.id,
             id: undefined,
+            // Detta ska ändras när thumbnailUrl(bild) finns
+            thumbnailUrl: file.url,
+            url: undefined,
           };
         });
 

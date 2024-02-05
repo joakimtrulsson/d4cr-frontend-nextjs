@@ -23,13 +23,5 @@ export const principleNumberSchema = list({
   },
   fields: {
     number: integer({ isIndexed: 'unique', validation: { isRequired: true } }),
-
-    // resources: relationship({
-    //   ref: 'Resource.category',
-    //   many: true,
-    //   ui: {
-    //     description: 'Resources belonging to this category.',
-    //   },
-    // }),
   },
 });
