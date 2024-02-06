@@ -3,13 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
 
-import IconPicker from '../IconPicker/IconPicker.jsx';
-import Wysiwyg from '../Wysiwyg/Wysiwyg.jsx';
-import CallToActionForm from '../CallToActionForm/CallToActionForm.jsx';
-import useFetchLinkOptions from '../../hooks/useFetchLinkOptions';
-import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
-import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
-import CancelButton from '../CancelButton/CancelButton.jsx';
+import IconPicker from '../components/IconPicker/IconPicker.jsx';
+import Wysiwyg from '../components/Wysiwyg/Wysiwyg.jsx';
+import CallToActionForm from '../components/CallToActionForm/CallToActionForm.jsx';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../components/CancelButton/CancelButton.jsx';
+import useFetchLinkOptions from '../hooks/useFetchLinkOptions.jsx';
 
 function Banner({
   onCloseSection,

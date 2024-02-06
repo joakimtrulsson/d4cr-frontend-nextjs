@@ -6,13 +6,14 @@ import {
   FieldDescription,
   TextInput,
 } from '@keystone-ui/fields';
-import { Button } from '@keystone-ui/button';
+
 import FormData from 'form-data';
 
 import { formatFileSize } from '../utils/formatFileSize';
 import { BASE_URL_BACKEND } from './utils/constants';
+import AddEntryButton from './components/AddEntryButton/AddEntryButton';
 
-export const Field = ({ field, value, onChange, autoFocus }) => {
+export const ImageLibrary = ({ field, value, onChange, autoFocus }) => {
   const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -178,13 +179,9 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
     <FieldContainer>
       <FieldLabel>{field.label}</FieldLabel>
 
-      <Button
-        style={{ marginBottom: '1rem' }}
-        type='small'
-        onClick={handleOpenMediaLibrary}
-      >
-        Open Media Library
-      </Button>
+      <AddEntryButton style={{ marginBottom: '1rem' }} handleAdd={handleOpenMediaLibrary}>
+        Open Image Library
+      </AddEntryButton>
       <div>
         <FieldDescription>Selected image:</FieldDescription>
         <div

@@ -4,6 +4,7 @@ import {
   resourceFiles,
   resourceImages,
   imageStorage,
+  videoStorage,
 } from './storage/index.js';
 
 export const storage = {
@@ -12,4 +13,5 @@ export const storage = {
   resourceFiles,
   resourceImages,
   imageStorage,
+  videoStorage,
 };

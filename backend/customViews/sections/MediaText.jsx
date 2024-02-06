@@ -3,16 +3,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput, Select } from '@keystone-ui/fields';
 
-import Wysiwyg from '../Wysiwyg/Wysiwyg';
-import ImageUpload from '../ImageUpload/ImageUpload';
-import CallToActionForm from '../CallToActionForm/CallToActionForm.jsx';
-import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
-import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
-import CancelButton from '../CancelButton/CancelButton.jsx';
+import Wysiwyg from '../components/Wysiwyg/Wysiwyg';
+import ImageUpload from '../components/ImageUpload/ImageUpload';
+import CallToActionForm from '../components/CallToActionForm/CallToActionForm.jsx';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
+import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../components/CancelButton/CancelButton.jsx';
 
-import { deleteImages } from '../../utils/deleteImages.js';
-import { uploadImage } from '../../utils/uploadImage.js';
-import useFetchLinkOptions from '../../hooks/useFetchLinkOptions.jsx';
+import { deleteImages } from '../utils/deleteImages.js';
+import { uploadImage } from '../utils/uploadImage.js';
+import useFetchLinkOptions from '../hooks/useFetchLinkOptions.jsx';
 
 function MediaText({
   onCloseSection,

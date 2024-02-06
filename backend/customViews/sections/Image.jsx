@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
 
-import ImageUpload from '../ImageUpload/ImageUpload';
-import AddSectionButton from '../AddSectionButton/AddSectionButton.jsx';
-import RemoveEntryButton from '../RemoveEntryButton/RemoveEntryButton.jsx';
-import UpdateSectionButton from '../UpdateSectionButton/UpdateSectionButton.jsx';
-import CancelButton from '../CancelButton/CancelButton.jsx';
+import ImageUpload from '../components/ImageUpload/ImageUpload';
+import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
+import RemoveEntryButton from '../components/RemoveEntryButton/RemoveEntryButton.jsx';
+import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
+import CancelButton from '../components/CancelButton/CancelButton.jsx';
 
-import { deleteImages } from '../../utils/deleteImages.js';
-import { uploadImages } from '../../utils/uploadImages.js';
+import { deleteImages } from '../utils/deleteImages.js';
+import { uploadImages } from '../utils/uploadImages.js';
 
 function Image({
   onCloseSection,

@@ -38,6 +38,14 @@ export const frontPageSchema = list({
       storage: 'frontPageHero',
       validation: { isRequired: true },
     }),
+    heroVideo: json({
+      ui: {
+        views: './customViews/VideoLibrary.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
+      },
+    }),
     ctaOneAnchorText: text({
       label: 'Call to action 1',
       ui: {

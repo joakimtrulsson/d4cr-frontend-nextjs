@@ -21,18 +21,20 @@ const useFetchLinkOptions = () => {
               pages(where: { status: { equals: "published" } }) {
                 slug
               }
+              principles(where: { status: { equals: "published" } }) {
+                slug
+              }
+              resources {
+                url
+              }
+
             }
             `,
           }),
         });
 
         const { data } = await response.json();
-        // const options = data.chapters.map((chapter) => ({
-        //   label: `${chapter.slug}`,
-        //   value: `${chapter.slug}`,
-        // }));
 
-        // Map chapters and pages separately, then concatenate the arrays
         const chaptersOptions = data.chapters.map((chapter) => ({
           label: `${chapter.slug}`,
           value: `${chapter.slug}`,
@@ -43,7 +45,21 @@ const useFetchLinkOptions = () => {
           value: `${page.slug}`,
         }));
 
-        const options = chaptersOptions.concat(pagesOptions);
+        const principlesOptions = data.principles.map((principle) => ({
+          label: `${principle.slug}`,
+          value: `${principle.slug}`,
+        }));
+
+        const resourcesOptions = data.resources.map((resource) => ({
+          label: `${resource.url}`,
+          value: `${resource.url}`,
+        }));
+
+        const options = chaptersOptions.concat(
+          pagesOptions,
+          principlesOptions,
+          resourcesOptions
+        );
 
         options.unshift({ label: 'Select', value: '' });
 
