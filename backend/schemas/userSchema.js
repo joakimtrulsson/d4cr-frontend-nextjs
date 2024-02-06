@@ -48,9 +48,11 @@ export const userSchema = list({
         isRequired: true,
       },
     }),
+
     email: text({
       isIndexed: 'unique',
     }),
+
     password: password({
       access: {
         read: denyAll,
@@ -59,6 +61,7 @@ export const userSchema = list({
       },
       validation: { isRequired: true },
     }),
+
     chapters: relationship({
       ref: 'Chapter',
       many: true,

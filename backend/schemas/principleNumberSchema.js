@@ -23,6 +23,7 @@ export const principleNumberSchema = list({
   },
   fields: {
     number: integer({ isIndexed: 'unique', validation: { isRequired: true } }),
+
     principles: relationship({
       ref: 'Principle.principleNumber',
       many: false,

@@ -28,7 +28,7 @@ export const resourceTypeSchema = list({
   },
   fields: {
     type: text({ validation: { isRequired: true } }),
-    // title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+
     icon: json({
       label: 'Icon',
       validation: { isRequired: true },
@@ -39,6 +39,7 @@ export const resourceTypeSchema = list({
         itemView: { fieldMode: 'edit' },
       },
     }),
+
     resources: relationship({
       ref: 'Resource.resourceType',
       many: true,

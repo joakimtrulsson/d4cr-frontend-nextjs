@@ -4,15 +4,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { FieldContainer, FieldLabel, TextInput, Select } from '@keystone-ui/fields';
 
 import Wysiwyg from '../components/Wysiwyg/Wysiwyg';
-import ImageUpload from '../components/ImageUpload/ImageUpload';
+// import ImageUpload from '../components/ImageUpload-delete/ImageUpload.jsx';
 import CallToActionForm from '../components/CallToActionForm/CallToActionForm.jsx';
 import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
 import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
 import CancelButton from '../components/CancelButton/CancelButton.jsx';
 
-import { deleteImages } from '../utils/deleteImages.js';
-import { uploadImage } from '../utils/uploadImage.js';
+import ImageLibrary from '../components/ImageLibrary/ImageLibrary.jsx';
+
+// import { deleteImages } from '../utils/deleteImages.js';
+// import { uploadImage } from '../utils/uploadImage.js';
 import useFetchLinkOptions from '../hooks/useFetchLinkOptions.jsx';
+// import { select } from 'slate';
 
 function MediaText({
   onCloseSection,
@@ -24,7 +27,8 @@ function MediaText({
   setSectionsData,
 }) {
   const [value, setValue] = useState({});
-  const [file, setFile] = useState({});
+  // const [file, setFile] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
   const pagesOptions = useFetchLinkOptions();
   const [pageOneValue, setPageOneValue] = useState('');
   const [pageTwoValue, setPageTwoValue] = useState('');
@@ -50,6 +54,7 @@ function MediaText({
       return;
     }
     setValue(editData);
+    setSelectedFile(editData.image);
 
     if (editData.cta1.url && editData.cta1.url.startsWith('/')) {
       setPageOneValue(editData.cta1.url);
@@ -72,12 +77,10 @@ function MediaText({
     if (onChange) {
       const newId = uuidv4();
 
-      const imageUrl = await uploadImage(file, newId);
-
       const newItem = {
         sectionType: 'MEDIATEXT',
         id: newId,
-        image: imageUrl,
+        image: selectedFile,
         ...value,
       };
 
@@ -98,24 +101,12 @@ function MediaText({
   async function handleSaveUpdate(event) {
     event.preventDefault();
 
-    // Om bilden har blivit uppdaterad så ska den gamla bilden raderas.
-    // Och den nya ska laddas upp.
-    let imageUrl = '';
-
-    if (Object.keys(file).length > 0) {
-      const imageUrlsToDelete = editData.image[0].imageUrls;
-      const responses = await deleteImages(imageUrlsToDelete);
-      imageUrl = await uploadImage(file, editData.id);
-    } else {
-      imageUrl = editData.image[0];
-    }
-
     if (onChange) {
       const updatedSection = {
         sectionType: 'MEDIATEXT',
         id: editData.id,
         ...value,
-        image: imageUrl,
+        image: selectedFile,
       };
 
       if (pageOneValue) {
@@ -223,10 +214,10 @@ function MediaText({
       >
         <FieldLabel>Image</FieldLabel>
 
-        <ImageUpload
-          file={file}
-          setFile={setFile}
-          editData={editData?.image[0]?.imageUrls?.large}
+        <ImageLibrary
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
+          isMultiSelect={false}
         />
       </div>
 

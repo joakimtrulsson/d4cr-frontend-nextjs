@@ -14,6 +14,9 @@ export { principleSchema as Principle } from './principleSchema';
 export { principleNumberSchema as PrincipleNumber } from './principleNumberSchema';
 export { principleCategorySchema as PrincipleCategory } from './principleCategorySchema';
 
+// Cases
+export { caseSchema as Case } from './caseSchema';
+
 // Files
 export { imageSchema as Image } from './imageSchema';
 export { videoSchema as Video } from './videoSchema';

@@ -20,10 +20,12 @@ export const resourceCategorySchema = list({
   },
   fields: {
     title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+
     createdAt: timestamp({
       isRequired: true,
       defaultValue: { kind: 'now' },
     }),
+
     resources: relationship({
       ref: 'Resource.category',
       many: true,

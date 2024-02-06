@@ -29,21 +29,29 @@ export const testSchema = list({
     //     itemView: { fieldMode: 'edit' },
     //   },
     // }),
-    // sections: json({
-    //   ui: {
-    //     views: './customViews/AllSections.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
-    resources: json({
+    sections: json({
       ui: {
-        views: './customViews/Resources.jsx',
+        views: './customViews/AllSections.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
       },
     }),
+    // principles: json({
+    //   ui: {
+    //     views: './customViews/Principles.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
+    // resources: json({
+    //   ui: {
+    //     views: './customViews/Resources.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
   },
 });

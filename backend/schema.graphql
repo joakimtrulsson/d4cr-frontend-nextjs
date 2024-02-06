@@ -381,7 +381,6 @@ type FrontPage {
   id: ID!
   heroTitle: String
   heroPreamble: FrontPage_heroPreamble_Document
-  heroMedia: FileFieldOutput
   heroVideo: JSON
   ctaOneAnchorText: String
   ctaOneUrl: JSON
@@ -393,12 +392,6 @@ type FrontPage {
 
 type FrontPage_heroPreamble_Document {
   document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-type FileFieldOutput {
-  filename: String!
-  filesize: Int!
-  url: String!
 }
 
 input FrontPageWhereUniqueInput {
@@ -427,7 +420,6 @@ input FrontPageOrderByInput {
 input FrontPageUpdateInput {
   heroTitle: String
   heroPreamble: JSON
-  heroMedia: FileFieldInput
   heroVideo: JSON
   ctaOneAnchorText: String
   ctaOneUrl: JSON
@@ -437,13 +429,6 @@ input FrontPageUpdateInput {
   sections: JSON
 }
 
-input FileFieldInput {
-  upload: Upload!
-}
-
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
-
 input FrontPageUpdateArgs {
   where: FrontPageWhereUniqueInput! = {id: 1}
   data: FrontPageUpdateInput!
@@ -452,7 +437,6 @@ input FrontPageUpdateArgs {
 input FrontPageCreateInput {
   heroTitle: String
   heroPreamble: JSON
-  heroMedia: FileFieldInput
   heroVideo: JSON
   ctaOneAnchorText: String
   ctaOneUrl: JSON
@@ -467,7 +451,6 @@ type Resource {
   title: String
   url: String
   image: JSON
-  file: FileFieldOutput
   category: ResourceCategory
   resourceType: ResourceType
   createdAt: DateTime
@@ -514,7 +497,6 @@ input ResourceUpdateInput {
   title: String
   url: String
   image: JSON
-  file: FileFieldInput
   category: ResourceCategoryRelateToOneForUpdateInput
   resourceType: ResourceTypeRelateToOneForUpdateInput
   createdAt: DateTime
@@ -541,7 +523,6 @@ input ResourceCreateInput {
   title: String
   url: String
   image: JSON
-  file: FileFieldInput
   category: ResourceCategoryRelateToOneForCreateInput
   resourceType: ResourceTypeRelateToOneForCreateInput
   createdAt: DateTime
@@ -739,6 +720,9 @@ input ImageFieldInput {
   upload: Upload!
 }
 
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
 input ImageUpdateArgs {
   where: ImageWhereUniqueInput!
   data: ImageUpdateInput!
@@ -762,6 +746,12 @@ type Video {
   size: Int
   thumbnailUrl: String
   url: String
+}
+
+type FileFieldOutput {
+  filename: String!
+  filesize: Int!
+  url: String!
 }
 
 input VideoWhereUniqueInput {
@@ -799,6 +789,10 @@ input VideoUpdateInput {
   size: Int
   thumbnailUrl: String
   url: String
+}
+
+input FileFieldInput {
+  upload: Upload!
 }
 
 input VideoUpdateArgs {
@@ -1050,10 +1044,88 @@ input PrincipleRelateToManyForCreateInput {
   connect: [PrincipleWhereUniqueInput!]
 }
 
+type Case {
+  id: ID!
+  title: String
+  slug: String
+  preamble: Case_preamble_Document
+  sections: JSON
+  caseImage: JSON
+  quote: String
+  caseLink: JSON
+  principles: JSON
+  resources: JSON
+  status: String
+  createdAt: DateTime
+}
+
+type Case_preamble_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input CaseWhereUniqueInput {
+  id: ID
+  slug: String
+}
+
+input CaseWhereInput {
+  AND: [CaseWhereInput!]
+  OR: [CaseWhereInput!]
+  NOT: [CaseWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  slug: StringFilter
+  quote: StringFilter
+  status: StringFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input CaseOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  slug: OrderDirection
+  quote: OrderDirection
+  status: OrderDirection
+  createdAt: OrderDirection
+}
+
+input CaseUpdateInput {
+  title: String
+  slug: String
+  preamble: JSON
+  sections: JSON
+  caseImage: JSON
+  quote: String
+  caseLink: JSON
+  principles: JSON
+  resources: JSON
+  status: String
+  createdAt: DateTime
+}
+
+input CaseUpdateArgs {
+  where: CaseWhereUniqueInput!
+  data: CaseUpdateInput!
+}
+
+input CaseCreateInput {
+  title: String
+  slug: String
+  preamble: JSON
+  sections: JSON
+  caseImage: JSON
+  quote: String
+  caseLink: JSON
+  principles: JSON
+  resources: JSON
+  status: String
+  createdAt: DateTime
+}
+
 type Test {
   id: ID!
   title: String
-  resources: JSON
+  sections: JSON
 }
 
 input TestWhereUniqueInput {
@@ -1075,7 +1147,7 @@ input TestOrderByInput {
 
 input TestUpdateInput {
   title: String
-  resources: JSON
+  sections: JSON
 }
 
 input TestUpdateArgs {
@@ -1085,7 +1157,7 @@ input TestUpdateArgs {
 
 input TestCreateInput {
   title: String
-  resources: JSON
+  sections: JSON
 }
 
 """
@@ -1172,6 +1244,12 @@ type Mutation {
   updatePrincipleCategories(data: [PrincipleCategoryUpdateArgs!]!): [PrincipleCategory]
   deletePrincipleCategory(where: PrincipleCategoryWhereUniqueInput!): PrincipleCategory
   deletePrincipleCategories(where: [PrincipleCategoryWhereUniqueInput!]!): [PrincipleCategory]
+  createCase(data: CaseCreateInput!): Case
+  createCases(data: [CaseCreateInput!]!): [Case]
+  updateCase(where: CaseWhereUniqueInput!, data: CaseUpdateInput!): Case
+  updateCases(data: [CaseUpdateArgs!]!): [Case]
+  deleteCase(where: CaseWhereUniqueInput!): Case
+  deleteCases(where: [CaseWhereUniqueInput!]!): [Case]
   createTest(data: TestCreateInput!): Test
   createTests(data: [TestCreateInput!]!): [Test]
   updateTest(where: TestWhereUniqueInput!, data: TestUpdateInput!): Test
@@ -1239,6 +1317,9 @@ type Query {
   principleCategories(where: PrincipleCategoryWhereInput! = {}, orderBy: [PrincipleCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleCategoryWhereUniqueInput): [PrincipleCategory!]
   principleCategory(where: PrincipleCategoryWhereUniqueInput!): PrincipleCategory
   principleCategoriesCount(where: PrincipleCategoryWhereInput! = {}): Int
+  cases(where: CaseWhereInput! = {}, orderBy: [CaseOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: CaseWhereUniqueInput): [Case!]
+  case(where: CaseWhereUniqueInput!): Case
+  casesCount(where: CaseWhereInput! = {}): Int
   tests(where: TestWhereInput! = {}, orderBy: [TestOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestWhereUniqueInput): [Test!]
   test(where: TestWhereUniqueInput!): Test
   testsCount(where: TestWhereInput! = {}): Int

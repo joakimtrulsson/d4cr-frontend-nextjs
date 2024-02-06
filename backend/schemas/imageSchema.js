@@ -20,10 +20,22 @@ export const imageSchema = list({
   },
   fields: {
     title: text(),
+
     alt: text(),
+
     file: image({ storage: 'imageStorage' }),
+
     createdAt: timestamp({ isRequired: true, defaultValue: { kind: 'now' } }),
+
     size: integer({
+      ui: {
+        createView: {
+          fieldMode: 'hidden',
+        },
+        itemView: {
+          fieldMode: 'read',
+        },
+      },
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
           if (operation === 'create') {
@@ -32,11 +44,19 @@ export const imageSchema = list({
         },
       },
     }),
+
     url: text({
+      ui: {
+        createView: {
+          fieldMode: 'hidden',
+        },
+        itemView: {
+          fieldMode: 'read',
+        },
+      },
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
-          let url = 'http://localhost:3000/public';
-          console.log(resolvedData);
+          let url = process.env.IMAGE_URL;
 
           if (operation === 'create') {
             return `${url}/${resolvedData.file.id}.${resolvedData.file.extension}`;

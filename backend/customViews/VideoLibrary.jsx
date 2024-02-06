@@ -46,7 +46,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
                 alt
                 id
                 size
-                thumbnailUrl
+                url
                 title
               }
             }
@@ -55,7 +55,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         });
 
         const result = await response.json();
-        // console.log(result.data.images);
+        // console.log(result);
 
         const modifiedFiles = result.data.videos.map((file) => {
           return {
@@ -64,7 +64,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
             id: undefined,
             // Detta ska ändras när thumbnailUrl(bild) finns
             thumbnailUrl: file.url,
-            url: undefined,
+            // url: undefined,
           };
         });
 
@@ -84,6 +84,8 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const handleSelectFile = (file) => {
     setSelectedFile(file[0]);
     handleOpenMediaLibrary();
+
+    file[0].thumbnailUrl = undefined;
 
     onChange(JSON.stringify(file[0]));
   };
@@ -196,14 +198,10 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           }}
         >
           {selectedFile && (
-            <img
-              alt={selectedFile.title}
-              src={selectedFile.thumbnailUrl}
-              style={{
-                height: 'auto',
-                width: '100%',
-              }}
-            />
+            <video controls style={{ height: '150px' }}>
+              <source src={selectedFile.url} type='video/mp4' />
+              Your browser does not support the video tag.
+            </video>
           )}
         </div>
         <p>
@@ -214,10 +212,11 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
       </div>
       {files && (
         <ReactMediaLibrary
-          acceptedTypes={['image/*']}
+          acceptedTypes={['video/*']}
           // defaultSelectedItemIds={[files[0]._id]}
           fileLibraryList={files}
           // fileLibraryList={filteredFiles}
+          modalTitle='Video Library'
           fileUploadCallback={handleFileUpload}
           filesDeleteCallback={handleDeleteFile}
           filesSelectCallback={handleSelectFile}

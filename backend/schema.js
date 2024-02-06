@@ -12,6 +12,7 @@ import {
   Principle,
   PrincipleNumber,
   PrincipleCategory,
+  Case,
   Test,
 } from './schemas/index';
 
@@ -29,5 +30,6 @@ export const lists = {
   Principle,
   PrincipleNumber,
   PrincipleCategory,
+  Case,
   Test,
 };
