@@ -9,15 +9,48 @@ import BulletList from '../themes/components/large-bullet-list.js'
 import NewsTeaser from '../themes/components/news-teaser.js'
 import TextMedia from '../themes/components/text-media.js'
 import data from '../database/sections-data/text-and-media-data.js'
-
+import React, { useEffect, useState } from 'react';
+import RichTextViewer from '../themes/sources/js/document-renderer.js';
+import LocalJsonFile from '../database/keystone-6/wysiwig-data.json';
+import '../themes/sources/scss/components/wysiwig.scss'
 
 export default function AllSectionsPage() {
 
+  // IMAGESOMPONENT's data
   const Images1 = [Image1];
   const Images2 = [Image1, Image2];
   const Images3 = [Image1, Image2, Image3];
 
-  
+  // WYSIWIG's data
+  const [jsonData, setJsonData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      try {
+
+        const convertedJson = LocalJsonFile.data.sections.map(section => ({
+          type: section.type,
+          children: section.children
+        }));
+
+        setJsonData(convertedJson);
+
+      } catch (error) {
+        console.error('Error fetching JSON data:', error);
+
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
   return (
     <main>
 
@@ -31,11 +64,20 @@ export default function AllSectionsPage() {
       <NewsTeaser />
 
       {data.map((item, key) => {
-        return(
+        return (
           <TextMedia key={key} data={item} />
-      )})}
+        )
+      })}
 
-      
+      <div className='wysiwig-container'>
+        {loading ? (
+          <h1>Loading...</h1>
+        ) : jsonData != null ? (
+          <RichTextViewer initialValue={jsonData} />
+        ) : (
+          <h1>404 error</h1>
+        )}
+      </div>
 
     </main>
   )

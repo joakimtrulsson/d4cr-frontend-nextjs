@@ -6,6 +6,10 @@
     font-family: $-montserrat-normal;
 }
 
+body {
+    margin: 0;
+}
+
 .dev-border { // use this border when you're developing new stuffs
     border: 2px black solid;
 }

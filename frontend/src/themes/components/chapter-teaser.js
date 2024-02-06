@@ -1,11 +1,13 @@
 import '../sources/scss/components/chapter-teaser.scss'
 import Image from 'next/image'
 import Mapbase from  '../sources/assets/graphics/mapbase.png'
-import Title from '../../database/sections-data/chapter-teaser-title'
 import LocalsCityAndUrl from '../../database/sections-data/locals-city-url-data'
 import CountryCard from './country-card'
 
 const ChapterTeaser = () => {
+
+const Title = "Our local chapters"
+
     return (
         <div className="chapter-teaser">
             <div className='image-container'>

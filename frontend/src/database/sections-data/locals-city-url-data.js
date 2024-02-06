@@ -12,8 +12,8 @@ export const Data = [
         subItemUrl:'/los-angeles',
     },
     {
-        subItemTitle: 'Malmö',
-        subItemUrl:'/malmo',
+        subItemTitle: 'Copenhagen',
+        subItemUrl:'/chapters/copenhagen',
     },
     {
         subItemTitle: 'Paris',
