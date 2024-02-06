@@ -4,7 +4,7 @@ import SectionRender from '../../themes/sources/js/section-render.js'
 
 export default function MyApp({ chapters }) {
 
-  console.log(chapters);  
+  console.log("slug: ",chapters.sections[0].sectionType);  
 
   return (
     <div>
@@ -14,9 +14,12 @@ export default function MyApp({ chapters }) {
       <h1>{chapters.title}</h1>
       <img src={chapters.heroImage.thumbnailUrl} alt={chapters.heroImage.title} />
 
+      <SectionRender section={chapters.sections[0]} />
+
+
       {
-        chapters.sections.map(element => {
-          <RenderSection section={element} />
+        chapters.sections.map(section => {
+          <SectionRender section={section} />
         })
       }
     </div>

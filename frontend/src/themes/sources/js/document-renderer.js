@@ -5,7 +5,9 @@ import YoutubeEmbed from '../../components/youtube-embed.js'
 import SpotifyEmbed from '../../components/spotify-embed.js'
 import '../scss/base/utils.scss'
 
-export default function DocumentRenderer({ initialValue }) {
+export default function DocumentRenderer({ content }) {
+
+  console.log(content)
 
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(props => <Element {...props} />, [])
@@ -92,7 +94,7 @@ export default function DocumentRenderer({ initialValue }) {
 
   return (
     <div className="document-render">
-      <Slate editor={editor} initialValue={initialValue}>
+      <Slate editor={editor} initialValue={content}>
         <Editable readOnly renderElement={renderElement} renderLeaf={renderLeaf} />
       </Slate>
     </div>

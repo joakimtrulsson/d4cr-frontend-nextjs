@@ -5,29 +5,29 @@ import ImagesSection from '../../components/images-component.js'
 import LargeBulletListSection from '../../components/large-bullet-list.js'
 import MediaAndTextSection from '../../components/text-media.js'
 import NewsTeaserSection from '../../components/news-teaser.js'
-import WysiwigSection from './document-renderer.js'
+import DocumentRenderer from './document-renderer.js'
 
-export default function sectionRender(section) {
+export default function sectionRender({section}) {
     
     switch (section.sectionType) {
       case 'accordion':
-        return <AccordionSection section={section} />;
+        return <AccordionSection section={section} />; // doesnt work!
       case 'banner':
-        return <BannerSection section={section} />;
+        return <BannerSection section={section} />; // doesnt work!
       case 'chapterTown':
-        return <ChapterSection section={section} />;
+        return <ChapterSection section={section} />; // doesnt work!
       case 'images':
-        return <ImagesSection section={section} />;
+        return <ImagesSection section={section} />; // doesnt work!
       case 'largebulletlist':
-        return <LargeBulletListSection section={section} />;
+        return <LargeBulletListSection section={section} />; // doesnt work!
       case 'media and text':
-        return <MediaAndTextSection section={section} />;
+        return <MediaAndTextSection section={section} />; // doesnt work!
       case 'news teaser':
-        return <NewsTeaserSection section={section} />;
+        return <NewsTeaserSection section={section} />; // doesnt work!
       case 'resources':
-        return <ResourcesSection section={section} />; // not yet! 
-      case 'wysiwig':
-        return <WysiwigSection section={section} />;
+        return <ResourcesSection section={section} />; // doesnt work!
+      case 'WYSIWYG':
+        return <DocumentRenderer content={section.preamble} />;
       default:
         return null;
     }

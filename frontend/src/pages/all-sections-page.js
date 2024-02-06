@@ -12,7 +12,7 @@ import data from '../database/sections-data/text-and-media-data.js'
 import React, { useEffect, useState } from 'react';
 import RichTextViewer from '../themes/sources/js/document-renderer.js';
 import LocalJsonFile from '../database/keystone-6/wysiwig-data.json';
-import '../themes/sources/scss/components/wysiwig.scss'
+import '../themes/sources/scss/components/wysiwyg.scss'
 
 export default function AllSectionsPage() {
 
@@ -73,7 +73,7 @@ export default function AllSectionsPage() {
         {loading ? (
           <h1>Loading...</h1>
         ) : jsonData != null ? (
-          <RichTextViewer initialValue={jsonData} />
+          <RichTextViewer content={jsonData} />
         ) : (
           <h1>404 error</h1>
         )}
