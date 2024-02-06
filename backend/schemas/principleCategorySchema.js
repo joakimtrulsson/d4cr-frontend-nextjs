@@ -24,12 +24,12 @@ export const principleCategorySchema = list({
       isRequired: true,
       defaultValue: { kind: 'now' },
     }),
-    // resources: relationship({
-    //   ref: 'Resource.category',
-    //   many: true,
-    //   ui: {
-    //     description: 'Resources belonging to this category.',
-    //   },
-    // }),
+    principles: relationship({
+      ref: 'Principle.principleCategory',
+      many: true,
+      ui: {
+        description: 'Principles belonging to this category.',
+      },
+    }),
   },
 });

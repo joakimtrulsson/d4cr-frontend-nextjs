@@ -146,23 +146,21 @@ model Principle {
   resources         Json?
   principleCategory PrincipleCategory[] @relation("Principle_principleCategory")
   principleNumber   PrincipleNumber?    @relation("Principle_principleNumber", fields: [principleNumberId], references: [id])
-  principleNumberId String?             @map("principleNumber")
+  principleNumberId String?             @unique @map("principleNumber")
   status            String              @default("draft")
-
-  @@index([principleNumberId])
 }
 
 model PrincipleNumber {
-  id                             String      @id @default(uuid())
-  number                         Int         @unique
-  from_Principle_principleNumber Principle[] @relation("Principle_principleNumber")
+  id         String     @id @default(uuid())
+  number     Int        @unique
+  principles Principle? @relation("Principle_principleNumber")
 }
 
 model PrincipleCategory {
-  id                               String      @id @default(uuid())
-  title                            String      @unique @default("")
-  createdAt                        DateTime?   @default(now())
-  from_Principle_principleCategory Principle[] @relation("Principle_principleCategory")
+  id         String      @id @default(uuid())
+  title      String      @unique @default("")
+  createdAt  DateTime?   @default(now())
+  principles Principle[] @relation("Principle_principleCategory")
 }
 
 model Test {

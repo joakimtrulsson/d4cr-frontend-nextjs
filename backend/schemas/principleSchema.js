@@ -118,7 +118,7 @@ export const principleSchema = list({
     }),
 
     principleCategory: relationship({
-      ref: 'PrincipleCategory',
+      ref: 'PrincipleCategory.principles',
       many: true,
       ui: {
         description: 'Reference to principle category.',
@@ -126,7 +126,8 @@ export const principleSchema = list({
     }),
 
     principleNumber: relationship({
-      ref: 'PrincipleNumber',
+      validation: { isRequired: true },
+      ref: 'PrincipleNumber.principles',
       many: false,
       ui: {
         description: 'Reference to principle number.',
@@ -142,14 +143,5 @@ export const principleSchema = list({
       defaultValue: 'draft',
       ui: { displayMode: 'segmented-control' },
     }),
-
-    // sections: json({
-    //   ui: {
-    //     views: './customViews/AllSections.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
   },
 });

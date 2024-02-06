@@ -927,6 +927,7 @@ input PrincipleNumberRelateToOneForCreateInput {
 type PrincipleNumber {
   id: ID!
   number: Int
+  principles: Principle
 }
 
 input PrincipleNumberWhereUniqueInput {
@@ -940,6 +941,7 @@ input PrincipleNumberWhereInput {
   NOT: [PrincipleNumberWhereInput!]
   id: IDFilter
   number: IntFilter
+  principles: PrincipleWhereInput
 }
 
 input IntFilter {
@@ -960,6 +962,13 @@ input PrincipleNumberOrderByInput {
 
 input PrincipleNumberUpdateInput {
   number: Int
+  principles: PrincipleRelateToOneForUpdateInput
+}
+
+input PrincipleRelateToOneForUpdateInput {
+  create: PrincipleCreateInput
+  connect: PrincipleWhereUniqueInput
+  disconnect: Boolean
 }
 
 input PrincipleNumberUpdateArgs {
@@ -969,12 +978,20 @@ input PrincipleNumberUpdateArgs {
 
 input PrincipleNumberCreateInput {
   number: Int
+  principles: PrincipleRelateToOneForCreateInput
+}
+
+input PrincipleRelateToOneForCreateInput {
+  create: PrincipleCreateInput
+  connect: PrincipleWhereUniqueInput
 }
 
 type PrincipleCategory {
   id: ID!
   title: String
   createdAt: DateTime
+  principles(where: PrincipleWhereInput! = {}, orderBy: [PrincipleOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PrincipleWhereUniqueInput): [Principle!]
+  principlesCount(where: PrincipleWhereInput! = {}): Int
 }
 
 input PrincipleCategoryWhereUniqueInput {
@@ -989,6 +1006,13 @@ input PrincipleCategoryWhereInput {
   id: IDFilter
   title: StringFilter
   createdAt: DateTimeNullableFilter
+  principles: PrincipleManyRelationFilter
+}
+
+input PrincipleManyRelationFilter {
+  every: PrincipleWhereInput
+  some: PrincipleWhereInput
+  none: PrincipleWhereInput
 }
 
 input PrincipleCategoryOrderByInput {
@@ -1000,6 +1024,14 @@ input PrincipleCategoryOrderByInput {
 input PrincipleCategoryUpdateInput {
   title: String
   createdAt: DateTime
+  principles: PrincipleRelateToManyForUpdateInput
+}
+
+input PrincipleRelateToManyForUpdateInput {
+  disconnect: [PrincipleWhereUniqueInput!]
+  set: [PrincipleWhereUniqueInput!]
+  create: [PrincipleCreateInput!]
+  connect: [PrincipleWhereUniqueInput!]
 }
 
 input PrincipleCategoryUpdateArgs {
@@ -1010,6 +1042,12 @@ input PrincipleCategoryUpdateArgs {
 input PrincipleCategoryCreateInput {
   title: String
   createdAt: DateTime
+  principles: PrincipleRelateToManyForCreateInput
+}
+
+input PrincipleRelateToManyForCreateInput {
+  create: [PrincipleCreateInput!]
+  connect: [PrincipleWhereUniqueInput!]
 }
 
 type Test {

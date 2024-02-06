@@ -1014,14 +1014,15 @@ var principleSchema = (0, import_core9.list)({
       }
     }),
     principleCategory: (0, import_fields9.relationship)({
-      ref: "PrincipleCategory",
+      ref: "PrincipleCategory.principles",
       many: true,
       ui: {
         description: "Reference to principle category."
       }
     }),
     principleNumber: (0, import_fields9.relationship)({
-      ref: "PrincipleNumber",
+      validation: { isRequired: true },
+      ref: "PrincipleNumber.principles",
       many: false,
       ui: {
         description: "Reference to principle number."
@@ -1036,14 +1037,6 @@ var principleSchema = (0, import_core9.list)({
       defaultValue: "draft",
       ui: { displayMode: "segmented-control" }
     })
-    // sections: json({
-    //   ui: {
-    //     views: './customViews/AllSections.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
   }
 });
 
@@ -1069,7 +1062,14 @@ var principleNumberSchema = (0, import_core10.list)({
     labelField: "number"
   },
   fields: {
-    number: (0, import_fields10.integer)({ isIndexed: "unique", validation: { isRequired: true } })
+    number: (0, import_fields10.integer)({ isIndexed: "unique", validation: { isRequired: true } }),
+    principles: (0, import_fields10.relationship)({
+      ref: "Principle.principleNumber",
+      many: false,
+      ui: {
+        description: "Principle belonging to this number."
+      }
+    })
   }
 });
 
@@ -1096,14 +1096,14 @@ var principleCategorySchema = (0, import_core11.list)({
     createdAt: (0, import_fields11.timestamp)({
       isRequired: true,
       defaultValue: { kind: "now" }
+    }),
+    principles: (0, import_fields11.relationship)({
+      ref: "Principle.principleCategory",
+      many: true,
+      ui: {
+        description: "Principles belonging to this category."
+      }
     })
-    // resources: relationship({
-    //   ref: 'Resource.category',
-    //   many: true,
-    //   ui: {
-    //     description: 'Resources belonging to this category.',
-    //   },
-    // }),
   }
 });
 
