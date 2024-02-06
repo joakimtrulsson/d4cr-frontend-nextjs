@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { createEditor } from "slate";
 import { Slate, withReact, Editable } from "slate-react"
-import YoutubeEmbed from '../components/youtube-embed.js'
-import SpotifyEmbed from '../components/spotify-embed.js'
-import '../sources/scss/base/utils.scss'
+import YoutubeEmbed from '../../components/youtube-embed.js'
+import SpotifyEmbed from '../../components/spotify-embed.js'
+import '../scss/base/utils.scss'
 
-export default function DocumentRenderer({ initialValue }) {
+export default function DocumentRenderer({ content }) {
+
+  console.log(content)
 
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(props => <Element {...props} />, [])
@@ -71,8 +73,6 @@ export default function DocumentRenderer({ initialValue }) {
 
   const Leaf = ({ attributes, children, leaf }) => {
 
-    console.log('Leaf Component - leaf:', leaf);
-
     if (leaf.bold) {
       children = <strong>{children}</strong>
     }
@@ -93,8 +93,8 @@ export default function DocumentRenderer({ initialValue }) {
   }
 
   return (
-    <div className="App">
-      <Slate editor={editor} initialValue={initialValue}>
+    <div className="document-render">
+      <Slate editor={editor} initialValue={content}>
         <Editable readOnly renderElement={renderElement} renderLeaf={renderLeaf} />
       </Slate>
     </div>
