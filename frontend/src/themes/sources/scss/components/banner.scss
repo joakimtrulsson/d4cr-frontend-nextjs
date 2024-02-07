@@ -5,7 +5,9 @@
 
     transition: transform 0.2s ease-in-out;
 
-    .earth-icon-wrapper {
+    
+
+    .icon-wrapper {
         transition: background-color 0.2s ease-in-out;
     }
 
@@ -18,7 +20,7 @@
         transform: scale(1.04);
         transition: transform 0.2s ease-in-out;
 
-        .earth-icon-wrapper {
+        .icon-wrapper {
             background-color: $-orange-200;
             transition: background-color 0.2s ease-in-out;
         }

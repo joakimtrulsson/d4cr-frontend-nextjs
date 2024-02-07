@@ -8,7 +8,7 @@ export default function MyApp({ chapters }) {
 
   return (
     <div>
-      <SectionRender section={chapters.sections[0]} />
+      <SectionRender section={chapters.sections[1]} />
     </div>
   );
 }
