@@ -8,10 +8,12 @@ import NewsTeaserSection from '../../components/news-teaser.js'
 import DocumentRenderer from './document-renderer.js'
 
 export default function sectionRender({section}) {
-    
+
+  console.log("sec content:", section)
+
     switch (section.sectionType) {
-      case 'accordion':
-        return <AccordionSection section={section} />; // doesnt work!
+      case 'ACCORDION':
+        return <AccordionSection content={section} />;
       case 'banner':
         return <BannerSection section={section} />; // doesnt work!
       case 'chapterTown':
