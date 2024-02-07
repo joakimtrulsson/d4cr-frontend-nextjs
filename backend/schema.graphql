@@ -1126,6 +1126,7 @@ type Test {
   id: ID!
   title: String
   sections: JSON
+  principles: JSON
 }
 
 input TestWhereUniqueInput {
@@ -1148,6 +1149,7 @@ input TestOrderByInput {
 input TestUpdateInput {
   title: String
   sections: JSON
+  principles: JSON
 }
 
 input TestUpdateArgs {
@@ -1158,6 +1160,7 @@ input TestUpdateArgs {
 input TestCreateInput {
   title: String
   sections: JSON
+  principles: JSON
 }
 
 """

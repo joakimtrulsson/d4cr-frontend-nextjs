@@ -16,8 +16,20 @@ import AddEntryButton from './components/AddEntryButton/AddEntryButton.jsx';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [data, setData] = useState(value ? JSON.parse(value) : []);
-  const [groups, setGroups] = useState(value ? JSON.parse(value).groups : []);
+  const [groups, setGroups] = useState(
+    value
+      ? JSON.parse(value).groups
+      : [
+          {
+            id: uuidv4(),
+            title: '',
+            groups: [],
+          },
+        ]
+  );
   const [newItems, setNewItems] = useState(value ? JSON.parse(value).groups : []);
+  // Nytillagd
+  const [isAddAndResetVisible, setIsAddAndResetVisible] = useState(true);
 
   useEffect(() => {
     const updatedData = {
@@ -43,7 +55,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   }
 
   const handleAddGroupDataToNewItems = (newItem) => {
-    console.log('newItem', newItem);
     const groupIndex = newItems.findIndex(
       (item) => item.groupTitle === newItem.groupTitle
     );
@@ -146,25 +157,24 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
               onUpdateItem={handleUpdateItem}
               value={group}
               editData={newItems[index]}
+              isAddAndResetVisible={isAddAndResetVisible}
+              setIsAddAndResetVisible={setIsAddAndResetVisible}
+              groups={groups}
             />
 
-            {/* {groups.length > 1 && (
+            {groups.length > 1 && (
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <RemoveEntryButton handleRemove={handleRemoveGroup} indexToRemove={index}>
                   Remove group
                 </RemoveEntryButton>
               </div>
-            )} */}
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <RemoveEntryButton handleRemove={handleRemoveGroup} indexToRemove={index}>
-                Remove group
-              </RemoveEntryButton>
-            </div>
+            )}
           </div>
         ))}
       </div>
-      <AddEntryButton handleAdd={handleAddGroup}>Add new group</AddEntryButton>
+      {isAddAndResetVisible && (
+        <AddEntryButton handleAdd={handleAddGroup}>Add new group</AddEntryButton>
+      )}
     </FieldContainer>
   );
 };

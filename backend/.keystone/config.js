@@ -1359,15 +1359,15 @@ var testSchema = (0, import_core15.list)({
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
       }
+    }),
+    principles: (0, import_fields15.json)({
+      ui: {
+        views: "./customViews/Principles.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
     })
-    // principles: json({
-    //   ui: {
-    //     views: './customViews/Principles.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
     // resources: json({
     //   ui: {
     //     views: './customViews/Resources.jsx',

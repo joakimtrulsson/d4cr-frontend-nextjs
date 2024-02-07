@@ -24,10 +24,6 @@ const useFetchLinkOptions = () => {
               principles(where: { status: { equals: "published" } }) {
                 slug
               }
-              resources {
-                url
-              }
-
             }
             `,
           }),
@@ -50,15 +46,15 @@ const useFetchLinkOptions = () => {
           value: `${principle.slug}`,
         }));
 
-        const resourcesOptions = data.resources.map((resource) => ({
-          label: `${resource.url}`,
-          value: `${resource.url}`,
-        }));
+        // const resourcesOptions = data.resources.map((resource) => ({
+        //   label: `${resource.url}`,
+        //   value: `${resource.url}`,
+        // }));
 
         const options = chaptersOptions.concat(
           pagesOptions,
-          principlesOptions,
-          resourcesOptions
+          principlesOptions
+          // resourcesOptions
         );
 
         options.unshift({ label: 'Select', value: '' });

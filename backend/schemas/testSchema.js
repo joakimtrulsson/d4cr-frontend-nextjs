@@ -37,14 +37,14 @@ export const testSchema = list({
         itemView: { fieldMode: 'edit' },
       },
     }),
-    // principles: json({
-    //   ui: {
-    //     views: './customViews/Principles.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
+    principles: json({
+      ui: {
+        views: './customViews/Principles.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
+      },
+    }),
     // resources: json({
     //   ui: {
     //     views: './customViews/Resources.jsx',
