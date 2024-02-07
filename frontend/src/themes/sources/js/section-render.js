@@ -16,18 +16,18 @@ export default function sectionRender({ section }) {
         return <AccordionSection content={section} />;
       case 'BANNER':
         return <BannerSection content={section} />;
-      case 'chapterTown':
-        return <ChapterSection section={section} />; // doesnt work!
+      case 'CHAPTERTEASER':
+        return <ChapterSection content={section} />;
       case 'images':
-        return <ImagesSection section={section} />; // doesnt work!
+        return <ImagesSection content={section} />; // doesnt work!
       case 'largebulletlist':
-        return <LargeBulletListSection section={section} />; // doesnt work!
+        return <LargeBulletListSection content={section} />; // doesnt work!
       case 'media and text':
-        return <MediaAndTextSection section={section} />; // doesnt work!
+        return <MediaAndTextSection content={section} />; // doesnt work!
       case 'news teaser':
-        return <NewsTeaserSection section={section} />; // doesnt work!
+        return <NewsTeaserSection content={section} />; // doesnt work!
       case 'resources':
-        return <ResourcesSection section={section} />; // doesnt work!
+        return <ResourcesSection content={section} />; // doesnt work!
       case 'WYSIWYG':
         return <DocumentRenderer content={section.preamble} />;
       default:
