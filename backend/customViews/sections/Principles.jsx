@@ -45,6 +45,7 @@ function Principles({
     }
   });
   const [newItems, setNewItems] = useState([]);
+  const [isAddAndResetVisible, setIsAddAndResetVisible] = useState(true);
 
   async function handleSave() {
     if (onChange) {
@@ -73,7 +74,7 @@ function Principles({
         preamble: value.preamble,
         groups: newItems.length > 0 ? [...value.groups, ...newItems] : [...value.groups],
       };
-      console.log(newItems);
+
       sectionsData[sectionIndex] = updatedSection;
 
       onChange(JSON.stringify(sectionsData));
@@ -117,7 +118,6 @@ function Principles({
   const handleUpdateItem = (updatedGroup) => {
     setValue((prev) => {
       const updatedGroups = prev.groups.map((group) => {
-        console.log(group.id, updatedGroup.id);
         if (group.id === updatedGroup.id) {
           return updatedGroup;
         }
@@ -196,6 +196,9 @@ function Principles({
               onUpdateItem={handleUpdateItem}
               value={group}
               editData={editData?.groups[index]}
+              isAddAndResetVisible={isAddAndResetVisible}
+              setIsAddAndResetVisible={setIsAddAndResetVisible}
+              groups={groups}
             />
 
             {groups.length > 1 && (
@@ -206,12 +209,13 @@ function Principles({
           </div>
         ))}
       </div>
-      <AddEntryButton handleAdd={handleAddGroup}>Add new group</AddEntryButton>
+      {isAddAndResetVisible && (
+        <AddEntryButton handleAdd={handleAddGroup}>Add new group</AddEntryButton>
+      )}
 
       {editData ? (
         <UpdateSectionButton handleUpdate={handleSaveUpdate}>Update</UpdateSectionButton>
       ) : (
-        // <Button onClick={handleSaveUpdate}>Update</Button>
         <AddSectionButton handleSaveSection={handleSave}>
           Add principles section
         </AddSectionButton>

@@ -20,10 +20,12 @@ export const principleCategorySchema = list({
   },
   fields: {
     title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+
     createdAt: timestamp({
       isRequired: true,
       defaultValue: { kind: 'now' },
     }),
+
     principles: relationship({
       ref: 'Principle.principleCategory',
       many: true,

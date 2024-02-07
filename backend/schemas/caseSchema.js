@@ -1,13 +1,12 @@
 import { list } from '@keystone-6/core';
-import { text, json, select } from '@keystone-6/core/fields';
+import { text, json, select, timestamp } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
-
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
 
 import { buildSlug } from '../utils/buildSlug';
 
-export const pageSchema = list({
+export const caseSchema = list({
   access: {
     operation: {
       ...allOperations(isSignedIn),
@@ -24,7 +23,7 @@ export const pageSchema = list({
   ui: {
     labelField: 'title',
     listView: {
-      initialColumns: ['title', 'slug', 'status'],
+      initialColumns: ['title', 'principleNumber', 'principleCategory', 'slug', 'status'],
       initialSort: { field: 'title', direction: 'ASC' },
       pageSize: 50,
     },
@@ -36,20 +35,20 @@ export const pageSchema = list({
       isIndexed: 'unique',
       ui: {
         description:
-          'The path name for the page. Must be unique. If not supplied, it will be generated from the title.',
+          'The path name for the case. Must be unique. If not supplied, it will be generated from the title.',
       },
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
           if (operation === 'create' && !inputData.slug) {
-            return buildSlug(inputData.title);
+            return buildSlug(inputData.title, 'cases');
           }
 
           if (operation === 'create' && inputData.slug) {
-            return buildSlug(inputData.slug);
+            return buildSlug(inputData.slug, 'cases');
           }
 
           if (operation === 'update' && inputData.slug) {
-            return buildSlug(inputData.slug);
+            return buildSlug(inputData.slug, 'cases');
           }
 
           // if (operation === 'update' && !inputData.slug && inputData.title) {
@@ -59,7 +58,7 @@ export const pageSchema = list({
       },
     }),
 
-    heroPreamble: document({
+    preamble: document({
       links: true,
       formatting: {
         inlineMarks: {
@@ -72,14 +71,27 @@ export const pageSchema = list({
       },
     }),
 
-    ctaOneAnchorText: text({
-      label: 'Call to action 1',
+    sections: json({
       ui: {
-        description: 'Anchor text for the call to action button.',
+        views: './customViews/AllSections.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
       },
     }),
 
-    ctaOneUrl: json({
+    caseImage: json({
+      ui: {
+        views: './customViews/ImageLibrary.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
+      },
+    }),
+
+    quote: text({}),
+
+    caseLink: json({
       ui: {
         views: './customViews/DynamicLinkSection.jsx',
         createView: { fieldMode: 'edit' },
@@ -88,16 +100,18 @@ export const pageSchema = list({
       },
     }),
 
-    ctaTwoUrlAnchorText: text({
-      label: 'Call to action 2',
+    principles: json({
       ui: {
-        description: 'Anchor text for the call to action button.',
+        views: './customViews/Principles.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
       },
     }),
 
-    ctaTwoUrl: json({
+    resources: json({
       ui: {
-        views: './customViews/DynamicLinkSection.jsx',
+        views: './customViews/Resources.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
@@ -114,13 +128,9 @@ export const pageSchema = list({
       ui: { displayMode: 'segmented-control' },
     }),
 
-    sections: json({
-      ui: {
-        views: './customViews/AllSections.jsx',
-        createView: { fieldMode: 'edit' },
-        listView: { fieldMode: 'hidden' },
-        itemView: { fieldMode: 'edit' },
-      },
+    createdAt: timestamp({
+      isRequired: true,
+      defaultValue: { kind: 'now' },
     }),
   },
 });

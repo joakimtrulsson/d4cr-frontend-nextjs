@@ -7,9 +7,9 @@ const { ASSET_BASE_URL } = process.env;
 export const imageStorage = {
   kind: 'local',
   type: 'image',
-  generateUrl: (path) => `${ASSET_BASE_URL}/public/${path}`,
+  generateUrl: (path) => `${ASSET_BASE_URL}/public/images${path}`,
   serverRoute: {
-    path: 'public/',
+    path: 'public/images',
   },
-  storagePath: 'public/',
+  storagePath: 'public/images',
 };

@@ -22,11 +22,13 @@ const useFetchPrinciples = () => {
                 title
                 slug                           
                 image
+                principleCategory {
+                  title
+              }
                 principleNumber{
-                    number
+                  number
                 }
                 status
-                
               }
             }
             
@@ -35,7 +37,7 @@ const useFetchPrinciples = () => {
         });
 
         const { data } = await response.json();
-        console.log(data);
+
         setAllPrinciples(data);
         setLoading(false);
       } catch (error) {

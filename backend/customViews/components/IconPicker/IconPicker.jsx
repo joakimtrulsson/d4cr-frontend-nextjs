@@ -31,7 +31,6 @@ const IconPicker = ({ value, onChange }) => {
       return iconsFiltered.find((icon) => icon.iconName === iconName);
     }
   );
-
   return (
     <>
       <TextField
@@ -50,7 +49,14 @@ const IconPicker = ({ value, onChange }) => {
             <InputAdornment position='end'>
               <IconButton size='small' onClick={(e) => setAnchorEl(e.currentTarget)}>
                 {value ? (
-                  <FontAwesomeIcon icon={['fas', value]} color='#556ee6' />
+                  // Dynamiskt prefix baserat på ikonens namn (value)
+                  <FontAwesomeIcon
+                    icon={[
+                      iconPack.find((icon) => icon.iconName === value)?.prefix,
+                      value,
+                    ]}
+                    color='#556ee6'
+                  />
                 ) : (
                   <Edit fontSize='small' />
                 )}

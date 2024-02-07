@@ -4,6 +4,9 @@ import {
   Chapter,
   Page,
   FrontPage,
+  FooterBanner,
+  FormEmail,
+  FooterJoinUs,
   ResourceCategory,
   ResourceType,
   Resource,
@@ -12,6 +15,7 @@ import {
   Principle,
   PrincipleNumber,
   PrincipleCategory,
+  Case,
   Test,
 } from './schemas/index';
 
@@ -21,6 +25,9 @@ export const lists = {
   Chapter,
   Page,
   FrontPage,
+  FooterBanner,
+  FormEmail,
+  FooterJoinUs,
   Resource,
   ResourceCategory,
   ResourceType,
@@ -29,5 +36,6 @@ export const lists = {
   Principle,
   PrincipleNumber,
   PrincipleCategory,
+  Case,
   Test,
 };

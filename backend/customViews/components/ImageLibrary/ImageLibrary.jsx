@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { ReactMediaLibrary } from 'react-media-library';
-import {
-  FieldContainer,
-  FieldLabel,
-  FieldDescription,
-  TextInput,
-} from '@keystone-ui/fields';
+import { FieldContainer, FieldDescription, TextInput } from '@keystone-ui/fields';
 
 import FormData from 'form-data';
 
-import { formatFileSize } from '../utils/formatFileSize';
-import { BASE_URL_BACKEND } from './utils/constants';
-import AddEntryButton from './components/AddEntryButton/AddEntryButton';
+import { formatFileSize } from '../../../utils/formatFileSize';
+import { BASE_URL_BACKEND } from '../../utils/constants';
+import AddEntryButton from '../AddEntryButton/AddEntryButton';
 
-export const ImageLibrary = ({ field, value, onChange, autoFocus }) => {
+import { useFetchImages } from '../../hooks/useFetchImages';
+import { useFileUpload } from '../../hooks/useFileUpload';
+
+function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);
-  const [files, setFiles] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [files, setFiles] = useState([]);
+  const [files, setFiles] = useFetchImages();
+  // const handleFileUpload = useFileUpload();
   const [search, setSearch] = useState('');
 
-  const [filteredFiles, setFilteredFiles] = useState([]);
+  // const [filteredFiles, setFilteredFiles] = useState([]);
 
   // useEffect(() => {
   //   setFilteredFiles(
@@ -27,63 +26,64 @@ export const ImageLibrary = ({ field, value, onChange, autoFocus }) => {
   //   );
   // }, [files, search]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (value) {
-        setSelectedFile(JSON.parse(value));
-      }
-      try {
-        const response = await fetch(`${BASE_URL_BACKEND}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Apollo-Require-Preflight': 'true',
-          },
-          body: JSON.stringify({
-            query: `
-            query {
-              images {
-                createdAt
-                alt
-                id
-                size
-                thumbnailUrl
-                title
-              }
-            }
-          `,
-          }),
-        });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`${BASE_URL_BACKEND}`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Apollo-Require-Preflight': 'true',
+  //         },
+  //         body: JSON.stringify({
+  //           query: `
+  //           query {
+  //             images {
+  //               createdAt
+  //               alt
+  //               id
+  //               size
+  //               url
+  //               title
+  //             }
+  //           }
+  //         `,
+  //         }),
+  //       });
 
-        const result = await response.json();
-        // console.log(result.data.images);
+  //       const result = await response.json();
 
-        const modifiedFiles = result.data.images.map((file) => {
-          return {
-            ...file,
-            _id: file.id,
-            id: undefined,
-          };
-        });
+  //       const modifiedFiles = result.data.images.map((file) => {
+  //         return {
+  //           ...file,
+  //           _id: file.id,
+  //           id: undefined,
+  //           thumbnailUrl: file.url,
+  //         };
+  //       });
 
-        setFiles(modifiedFiles);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  //       setFiles(modifiedFiles);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [files]);
+  //   fetchData();
+  // }, [files]);
 
   const handleOpenMediaLibrary = () => {
     setIsMediaLibraryOpen((prev) => !prev);
   };
 
   const handleSelectFile = (file) => {
-    setSelectedFile(file[0]);
-    handleOpenMediaLibrary();
-
-    onChange(JSON.stringify(file[0]));
+    if (!isMultiSelect) {
+      setSelectedFile(file[0]);
+      handleOpenMediaLibrary();
+    } else if (isMultiSelect) {
+      console.log(file);
+      setSelectedFile(file);
+      handleOpenMediaLibrary();
+    }
   };
 
   // Export till hooks
@@ -177,39 +177,47 @@ export const ImageLibrary = ({ field, value, onChange, autoFocus }) => {
 
   return (
     <FieldContainer>
-      <FieldLabel>{field.label}</FieldLabel>
-
       <AddEntryButton style={{ marginBottom: '1rem' }} handleAdd={handleOpenMediaLibrary}>
         Open Image Library
       </AddEntryButton>
       <div>
-        <FieldDescription>Selected image:</FieldDescription>
         <div
           style={{
             width: '20rem',
           }}
         >
-          {selectedFile && (
-            <img
-              alt={selectedFile.title}
-              src={selectedFile.thumbnailUrl}
-              style={{
-                height: 'auto',
-                width: '100%',
-              }}
-            />
+          {selectedFile ? (
+            <>
+              <FieldDescription>Selected image:</FieldDescription>
+              {selectedFile.map((file) => (
+                <>
+                  <img
+                    key={file.id}
+                    alt={file.title}
+                    src={file.thumbnailUrl}
+                    style={{
+                      height: 'auto',
+                      width: '100%',
+                    }}
+                  />
+                  <p>
+                    Title: {file.title}
+                    <br />
+                    Filesize: {formatFileSize(file?.size)}
+                  </p>
+                </>
+              ))}
+            </>
+          ) : (
+            <p>No selected Images</p>
           )}
         </div>
-        <p>
-          Title: {selectedFile?.title}
-          <br />
-          Filesize: {formatFileSize(selectedFile?.size)}
-        </p>
       </div>
       {files && (
         <ReactMediaLibrary
+          modalTitle='Image Library'
           acceptedTypes={['image/*']}
-          // defaultSelectedItemIds={[files[0]._id]}
+          // defaultSelectedItemIds={[selectedFile._id]}
           fileLibraryList={files}
           // fileLibraryList={filteredFiles}
           fileUploadCallback={handleFileUpload}
@@ -218,9 +226,12 @@ export const ImageLibrary = ({ field, value, onChange, autoFocus }) => {
           finishUploadCallback={function noRefCheck() {}}
           onClose={handleOpenMediaLibrary}
           isOpen={isMediaLibraryOpen}
+          multiSelect={isMultiSelect}
           topBarComponent={searchBar}
         />
       )}
     </FieldContainer>
   );
-};
+}
+
+export default ImageLibrary;

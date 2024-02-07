@@ -1,12 +1,5 @@
 import { list } from '@keystone-6/core';
-import {
-  text,
-  timestamp,
-  image,
-  relationship,
-  file,
-  json,
-} from '@keystone-6/core/fields';
+import { text, timestamp, relationship, file, json } from '@keystone-6/core/fields';
 
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
@@ -35,10 +28,9 @@ export const resourceSchema = list({
   },
   fields: {
     title: text({ isIndexed: 'unique', validation: { isRequired: true } }),
+
     url: text({ validation: { isRequired: true } }),
-    // image: image({
-    //   storage: 'resourceImages',
-    // }),
+
     image: json({
       ui: {
         views: './customViews/ImageLibrary.jsx',
@@ -47,9 +39,7 @@ export const resourceSchema = list({
         itemView: { fieldMode: 'edit' },
       },
     }),
-    file: file({
-      storage: 'resourceFiles',
-    }),
+
     category: relationship({
       validation: { isRequired: true },
       ref: 'ResourceCategory.resources',
@@ -67,6 +57,7 @@ export const resourceSchema = list({
         description: 'Reference to a type.',
       },
     }),
+
     createdAt: timestamp({
       isRequired: true,
       defaultValue: { kind: 'now' },

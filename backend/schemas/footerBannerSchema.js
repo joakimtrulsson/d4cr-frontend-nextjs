@@ -1,10 +1,11 @@
 import { list } from '@keystone-6/core';
 import { text, json } from '@keystone-6/core/fields';
+import { document } from '@keystone-6/fields-document';
 
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
 
-export const testSchema = list({
+export const footerBannerSchema = list({
   access: {
     operation: {
       ...allOperations(isSignedIn),
@@ -18,40 +19,45 @@ export const testSchema = list({
       delete: rules.canManageItems,
     },
   },
+  isSingleton: true,
   fields: {
-    title: text(),
+    title: text({ validation: { isRequired: true } }),
 
-    // image: json({
-    //   ui: {
-    //     views: './customViews/MediaLibrary.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
-    sections: json({
+    preamble: document({
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true,
+        },
+        softBreaks: true,
+      },
+    }),
+
+    anchorText: text({
+      label: 'Call to action',
       ui: {
-        views: './customViews/AllSections.jsx',
+        description: 'Anchor text for the call to action button.',
+      },
+    }),
+
+    url: json({
+      ui: {
+        views: './customViews/DynamicLinkSection.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
       },
     }),
-    principles: json({
+
+    icon: json({
       ui: {
-        views: './customViews/Principles.jsx',
+        views: './customViews/IconPickerSection.jsx',
         createView: { fieldMode: 'edit' },
         listView: { fieldMode: 'hidden' },
         itemView: { fieldMode: 'edit' },
       },
     }),
-    // resources: json({
-    //   ui: {
-    //     views: './customViews/Resources.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
   },
 });

@@ -9,8 +9,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 import useFetchPrinciples from '../../hooks/useFetchPrinciples';
 import AddEntryButton from '../AddEntryButton/AddEntryButton';
+import RemoveEntryButton from '../RemoveEntryButton/RemoveEntryButton';
 
-function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
+function PrinciplesForm({
+  autoFocus,
+  onAddNewItem,
+  onUpdateItem,
+  editData,
+  isAddAndResetVisible,
+  setIsAddAndResetVisible,
+  groups,
+}) {
   const [options, setOptions] = useState([]);
   const { allPrinciples, loading, error } = useFetchPrinciples();
   const [resourcesData, setResourcesData] = useState([]);
@@ -21,7 +30,19 @@ function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
 
   // När editData finns så sätts groupTitle och resourcesData
   useEffect(() => {
-    if (editData) {
+    if (editData && editData.groupTitle === 'AllPrinciples') {
+      setIsAddAndResetVisible(false);
+      setGroupTitle(editData.groupTitle);
+
+      setSelectedOptions(
+        editData.principles.flatMap((principle) =>
+          principle.principles.map((subPrinciple) => ({
+            value: subPrinciple.id,
+            label: subPrinciple.title,
+          }))
+        )
+      );
+    } else if (editData) {
       setGroupTitle(editData.groupTitle);
       setResourcesData(editData.principles);
 
@@ -39,8 +60,6 @@ function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
       allPrinciples.principles &&
       allPrinciples.principles.length > 0
     ) {
-      console.log(allPrinciples);
-
       const newOptions = allPrinciples.principles.reduce((acc, principle) => {
         const resource = {
           value: principle.id,
@@ -70,7 +89,6 @@ function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
         groupTitle: groupTitle,
         principles: resourcesData,
       };
-      console.log(newItem); // Här skickas det tillbaka till Resources.jsx
       onAddNewItem(newItem);
     }
   }, [groupTitle, resourcesData]);
@@ -84,7 +102,6 @@ function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
           .map((principle) => principle)
           .flat()
           .find((principle) => principle.id === selectedOption.value);
-        // console.log(principle);
 
         return principle;
       });
@@ -96,14 +113,39 @@ function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
   };
 
   const addAllPriciples = () => {
-    const allPrinciplesData = allPrinciples.principles.map((principle) => principle);
-    setResourcesData(allPrinciplesData);
+    const allPrinciplesData = allPrinciples.principles;
+
+    const categories = allPrinciplesData.reduce((acc, principle) => {
+      if (!acc[principle.principleCategory[0].title]) {
+        acc[principle.principleCategory[0].title] = [];
+      }
+      acc[principle.principleCategory[0].title].push(principle);
+      return acc;
+    }, {});
+
+    const newPrinciplesData = Object.keys(categories).map((category) => ({
+      cateogoryTitle: category,
+      principles: categories[category],
+    }));
+
+    setResourcesData(newPrinciplesData);
     setSelectedOptions(
       allPrinciplesData.map((resource) => ({
         value: resource.id,
         label: resource.title,
       }))
     );
+
+    setGroupTitle('AllPrinciples');
+
+    setIsAddAndResetVisible(false);
+  };
+
+  const resetForm = () => {
+    setResourcesData([]);
+    setSelectedOptions([]);
+    setGroupTitle('');
+    setIsAddAndResetVisible(true);
   };
 
   return (
@@ -136,9 +178,19 @@ function PrinciplesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
             }}
             value={selectedOptions || []}
           />
-          <AddEntryButton handleAdd={addAllPriciples}>
-            Select all principles
-          </AddEntryButton>
+          {isAddAndResetVisible && groups.length === 1 ? (
+            <AddEntryButton handleAdd={addAllPriciples}>
+              Add all principles sorted by category
+            </AddEntryButton>
+          ) : (
+            groups.length === 1 && (
+              <div
+                style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}
+              >
+                <RemoveEntryButton handleRemove={resetForm}>Reset form</RemoveEntryButton>
+              </div>
+            )
+          )}
         </div>
       </div>
     </>

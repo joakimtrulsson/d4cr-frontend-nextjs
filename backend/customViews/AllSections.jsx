@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { FieldContainer, FieldLabel, FieldDescription } from '@keystone-ui/fields';
 
 import { options } from './utils/constants';
-import { deleteImages } from './utils/deleteImages';
 
 import * as SectionComponents from './sections';
 
@@ -19,6 +18,19 @@ const {
   Resources,
   Principles,
 } = SectionComponents;
+
+const SECTIONS = {
+  CHAPTERTEASER: ChapterTeaser,
+  MEDIATEXT: MediaText,
+  ACCORDION: Accordion,
+  BULLETLIST: LargeBulletList,
+  IMAGE: Image,
+  BANNER: Banner,
+  NEWSTEASER: NewsTeaser,
+  WYSIWYG: WysiwygSection,
+  RESOURCES: Resources,
+  PRINCIPLES: Principles,
+};
 
 import SelectSections from './components/SelectSections/SelectSections';
 import StoredSections from './components/StoredSections/StoredSections';
@@ -42,23 +54,11 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   };
 
   const handleDeleteSection = async (sectionId) => {
-    const sectionToDelete = sectionsData.find((section) => section.id === sectionId);
-
     if (onChange) {
       const updatedSectionsData = sectionsData.filter((item) => item.id !== sectionId);
 
       setSectionsData(() => [...updatedSectionsData]);
       onChange(JSON.stringify(updatedSectionsData));
-
-      if (sectionToDelete.sectionType === 'IMAGE') {
-        const imageUrlsToDelete = sectionToDelete.images.map((image) => image.imageUrls);
-
-        const responses = await Promise.all(imageUrlsToDelete.map(deleteImages));
-      }
-      if (sectionToDelete.sectionType === 'MEDIATEXT') {
-        const imageUrlsToDelete = sectionToDelete.image[0].imageUrls;
-        const responses = await deleteImages(imageUrlsToDelete);
-      }
     }
   };
 
@@ -69,7 +69,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
 
   return (
     <FieldContainer>
-      {/* Renderar Dropdown menyn */}
       <FieldLabel>{field.label}</FieldLabel>
       <SelectSections
         activeSection={activeSection}
@@ -77,206 +76,33 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         options={options}
       />
 
-      {/* Renderar sektioner */}
-      {!editFormData && activeSection === 'CHAPTERTEASER' && (
-        <ChapterTeaser
-          onChange={onChange}
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-        />
-      )}
-      {!editFormData && activeSection === 'MEDIATEXT' && (
-        <MediaText
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-      {!editFormData && activeSection === 'ACCORDION' && (
-        <Accordion
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
+      {Object.entries(SECTIONS).map(([key, SectionComponent], index) => {
+        const commonProps = {
+          sectionsData,
+          setSectionsData,
+          onCloseSection: handleCloseSection,
+          onChange,
+          autoFocus,
+        };
 
-      {!editFormData && activeSection === 'BULLETLIST' && (
-        <LargeBulletList
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
+        if (!editFormData && activeSection === key) {
+          return <SectionComponent key={index} {...commonProps} />;
+        }
 
-      {!editFormData && activeSection === 'IMAGE' && (
-        <Image
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
+        if (editFormData && editFormData.sectionData.sectionType === key) {
+          return (
+            <SectionComponent
+              key={index}
+              {...commonProps}
+              editData={editFormData.sectionData}
+              sectionIndex={editFormData.sectionIndex}
+            />
+          );
+        }
 
-      {!editFormData && activeSection === 'BANNER' && (
-        <Banner
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
+        return null;
+      })}
 
-      {!editFormData && activeSection === 'NEWSTEASER' && (
-        <NewsTeaser
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {!editFormData && activeSection === 'WYSIWYG' && (
-        <WysiwygSection
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {!editFormData && activeSection === 'RESOURCES' && (
-        <Resources
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {!editFormData && activeSection === 'PRINCIPLES' && (
-        <Principles
-          sectionsData={sectionsData}
-          setSectionsData={setSectionsData}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {/* Renderar Edit */}
-
-      {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (
-        <MediaText
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'ACCORDION' && (
-        <Accordion
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'BULLETLIST' && (
-        <LargeBulletList
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'IMAGE' && (
-        <Image
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'BANNER' && (
-        <Banner
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'NEWSTEASER' && (
-        <NewsTeaser
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'WYSIWYG' && (
-        <WysiwygSection
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'RESOURCES' && (
-        <Resources
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {editFormData && editFormData.sectionData.sectionType === 'PRINCIPLES' && (
-        <Principles
-          sectionsData={sectionsData}
-          editData={editFormData.sectionData}
-          sectionIndex={editFormData.sectionIndex}
-          onCloseSection={handleCloseSection}
-          onChange={onChange}
-          autoFocus={autoFocus}
-        />
-      )}
-
-      {/* Renderar sparade sektioner */}
       <FieldLabel style={{ marginTop: '1rem', marginBottom: '-1rem' }}>
         Stored Sections
       </FieldLabel>
@@ -294,5 +120,231 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         />
       )}
     </FieldContainer>
+    // <FieldContainer>
+    //   {/* Renderar Dropdown menyn */}
+    //   <FieldLabel>{field.label}</FieldLabel>
+    //   <SelectSections
+    //     activeSection={activeSection}
+    //     onChangeActiveSections={handleActiveSection}
+    //     options={options}
+    //   />
+
+    //   {/* Renderar sektioner */}
+    //   {!editFormData && activeSection === 'CHAPTERTEASER' && (
+    //     <ChapterTeaser
+    //       onChange={onChange}
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //     />
+    //   )}
+    //   {!editFormData && activeSection === 'MEDIATEXT' && (
+    //     <MediaText
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+    //   {!editFormData && activeSection === 'ACCORDION' && (
+    //     <Accordion
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'BULLETLIST' && (
+    //     <LargeBulletList
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'IMAGE' && (
+    //     <Image
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'BANNER' && (
+    //     <Banner
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'NEWSTEASER' && (
+    //     <NewsTeaser
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'WYSIWYG' && (
+    //     <WysiwygSection
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'RESOURCES' && (
+    //     <Resources
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {!editFormData && activeSection === 'PRINCIPLES' && (
+    //     <Principles
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {/* Renderar Edit */}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'MEDIATEXT' && (
+    //     <MediaText
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'ACCORDION' && (
+    //     <Accordion
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'BULLETLIST' && (
+    //     <LargeBulletList
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'IMAGE' && (
+    //     <Image
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'BANNER' && (
+    //     <Banner
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'NEWSTEASER' && (
+    //     <NewsTeaser
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'WYSIWYG' && (
+    //     <WysiwygSection
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'RESOURCES' && (
+    //     <Resources
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {editFormData && editFormData.sectionData.sectionType === 'PRINCIPLES' && (
+    //     <Principles
+    //       sectionsData={sectionsData}
+    //       editData={editFormData.sectionData}
+    //       sectionIndex={editFormData.sectionIndex}
+    //       onCloseSection={handleCloseSection}
+    //       onChange={onChange}
+    //       autoFocus={autoFocus}
+    //     />
+    //   )}
+
+    //   {/* Renderar sparade sektioner */}
+    //   <FieldLabel style={{ marginTop: '1rem', marginBottom: '-1rem' }}>
+    //     Stored Sections
+    //   </FieldLabel>
+    //   {sectionsData.length === 0 ? (
+    //     <FieldDescription>
+    //       <p>No sections stored</p>
+    //     </FieldDescription>
+    //   ) : (
+    //     <StoredSections
+    //       sectionsData={sectionsData}
+    //       setSectionsData={setSectionsData}
+    //       onEditSection={handleEditSection}
+    //       onDelete={handleDeleteSection}
+    //       onChange={onChange}
+    //     />
+    //   )}
+    // </FieldContainer>
   );
 };

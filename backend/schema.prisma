@@ -63,18 +63,44 @@ model Page {
 }
 
 model FrontPage {
-  id                  Int     @id
-  heroTitle           String  @default("")
-  heroPreamble        Json    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  heroMedia_filesize  Int?
-  heroMedia_filename  String?
+  id                  Int    @id
+  heroTitle           String @default("")
+  heroPreamble        Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   heroVideo           Json?
-  ctaOneAnchorText    String  @default("")
+  ctaOneAnchorText    String @default("")
   ctaOneUrl           Json?
-  ctaTwoUrlAnchorText String  @default("")
+  ctaTwoUrlAnchorText String @default("")
   ctaTwoUrl           Json?
-  status              String  @default("draft")
+  status              String @default("draft")
   sections            Json?
+}
+
+model FooterBanner {
+  id         Int    @id
+  title      String @default("")
+  preamble   Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  anchorText String @default("")
+  url        Json?
+  icon       Json?
+}
+
+model FormEmail {
+  id              Int    @id
+  contactEmail    String @default("")
+  newChapterEmail String @default("")
+  joinSlackEmail  String @default("")
+}
+
+model FooterJoinUs {
+  id    Int    @id
+  url1  String @default("")
+  icon1 Json?
+  url2  String @default("")
+  icon2 Json?
+  url3  String @default("")
+  icon3 Json?
+  url4  String @default("")
+  icon4 Json?
 }
 
 model Resource {
@@ -82,8 +108,6 @@ model Resource {
   title          String            @unique @default("")
   url            String            @default("")
   image          Json?
-  file_filesize  Int?
-  file_filename  String?
   category       ResourceCategory? @relation("Resource_category", fields: [categoryId], references: [id])
   categoryId     String?           @map("category")
   resourceType   ResourceType?     @relation("Resource_resourceType", fields: [resourceTypeId], references: [id])
@@ -163,8 +187,24 @@ model PrincipleCategory {
   principles Principle[] @relation("Principle_principleCategory")
 }
 
+model Case {
+  id         String    @id @default(uuid())
+  title      String    @default("")
+  slug       String    @unique @default("")
+  preamble   Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  sections   Json?
+  caseImage  Json?
+  quote      String    @default("")
+  caseLink   Json?
+  principles Json?
+  resources  Json?
+  status     String    @default("draft")
+  createdAt  DateTime? @default(now())
+}
+
 model Test {
-  id        String @id @default(uuid())
-  title     String @default("")
-  resources Json?
+  id         String @id @default(uuid())
+  title      String @default("")
+  sections   Json?
+  principles Json?
 }

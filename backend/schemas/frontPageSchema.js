@@ -22,6 +22,7 @@ export const frontPageSchema = list({
   isSingleton: true,
   fields: {
     heroTitle: text({ validation: { isRequired: true } }),
+
     heroPreamble: document({
       links: true,
       formatting: {
@@ -34,10 +35,7 @@ export const frontPageSchema = list({
         softBreaks: true,
       },
     }),
-    heroMedia: file({
-      storage: 'frontPageHero',
-      validation: { isRequired: true },
-    }),
+
     heroVideo: json({
       ui: {
         views: './customViews/VideoLibrary.jsx',
@@ -46,12 +44,14 @@ export const frontPageSchema = list({
         itemView: { fieldMode: 'edit' },
       },
     }),
+
     ctaOneAnchorText: text({
       label: 'Call to action 1',
       ui: {
         description: 'Anchor text for the call to action button.',
       },
     }),
+
     ctaOneUrl: json({
       ui: {
         views: './customViews/DynamicLinkSection.jsx',
@@ -60,12 +60,14 @@ export const frontPageSchema = list({
         itemView: { fieldMode: 'edit' },
       },
     }),
+
     ctaTwoUrlAnchorText: text({
       label: 'Call to action 2',
       ui: {
         description: 'Anchor text for the call to action button.',
       },
     }),
+
     ctaTwoUrl: json({
       ui: {
         views: './customViews/DynamicLinkSection.jsx',
@@ -84,6 +86,7 @@ export const frontPageSchema = list({
       defaultValue: 'draft',
       ui: { displayMode: 'segmented-control' },
     }),
+
     sections: json({
       ui: {
         views: './customViews/AllSections.jsx',

@@ -29,6 +29,7 @@ export const principleSchema = list({
   },
   fields: {
     title: text({ validation: { isRequired: true } }),
+
     slug: text({
       isIndexed: 'unique',
       ui: {
@@ -87,7 +88,9 @@ export const principleSchema = list({
       },
     }),
     subHeader: text({}),
+
     quote: text({}),
+
     quoteAuthor: text({}),
 
     image: json({

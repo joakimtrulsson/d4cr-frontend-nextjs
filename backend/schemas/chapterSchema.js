@@ -37,6 +37,7 @@ export const chapterSchema = list({
   },
   fields: {
     title: text({ validation: { isRequired: true } }),
+
     slug: text({
       isIndexed: 'unique',
       ui: {
@@ -63,6 +64,7 @@ export const chapterSchema = list({
         },
       },
     }),
+
     preamble: document({
       links: true,
       formatting: {
@@ -75,9 +77,7 @@ export const chapterSchema = list({
         softBreaks: true,
       },
     }),
-    // heroImage: image({
-    //   storage: 'heroImages',
-    // }),
+
     heroImage: json({
       ui: {
         views: './customViews/ImageLibrary.jsx',
@@ -92,6 +92,7 @@ export const chapterSchema = list({
       defaultValue: 'EN-GB',
       options: languageCodesData,
     }),
+
     translatedChapters: relationship({
       ref: 'Chapter',
       many: true,
@@ -109,6 +110,7 @@ export const chapterSchema = list({
       defaultValue: 'draft',
       ui: { displayMode: 'segmented-control' },
     }),
+
     sections: json({
       ui: {
         views: './customViews/AllSections.jsx',
@@ -119,27 +121,3 @@ export const chapterSchema = list({
     }),
   },
 });
-
-// chapterInfoEnglish: document({
-//   links: true,
-//   formatting: {
-//     inlineMarks: {
-//       bold: true,
-//       italic: true,
-//       underline: true,
-//       strikethrough: true,
-//     },
-//   },
-// }),
-// chapterInfoLocalLanguage: document({
-//   links: true,
-//   formatting: {
-//     inlineMarks: {
-//       bold: true,
-//       italic: true,
-//       underline: true,
-//       strikethrough: true,
-//     },
-//     softBreaks: true,
-//   },
-// }),

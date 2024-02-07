@@ -2,7 +2,12 @@ export { userSchema as User } from './userSchema';
 export { roleSchema as Role } from './roleSchema';
 export { chapterSchema as Chapter } from './chapterSchema';
 export { pageSchema as Page } from './pageSchema';
+
+// Site Configuration
 export { frontPageSchema as FrontPage } from './frontPageSchema';
+export { footerBannerSchema as FooterBanner } from './footerBannerSchema';
+export { formEmailSchema as FormEmail } from './formEmailSchema';
+export { footerJoinUsSchema as FooterJoinUs } from './footerJoinUsSchema';
 
 // Resources
 export { resourceSchema as Resource } from './resourceSchema';
@@ -13,6 +18,9 @@ export { resourceTypeSchema as ResourceType } from './resourceTypeSchema';
 export { principleSchema as Principle } from './principleSchema';
 export { principleNumberSchema as PrincipleNumber } from './principleNumberSchema';
 export { principleCategorySchema as PrincipleCategory } from './principleCategorySchema';
+
+// Cases
+export { caseSchema as Case } from './caseSchema';
 
 // Files
 export { imageSchema as Image } from './imageSchema';
