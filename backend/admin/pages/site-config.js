@@ -56,7 +56,7 @@ export default function SiteConfig() {
           ':hover': { backgroundColor: '#eff6ff' },
         }}
       >
-        <Link css={{ ...linkStyle, ':hover': hoverStyle }} href='/front-page/1'>
+        <Link css={{ ...linkStyle, ':hover': hoverStyle }} href='/form-email/1'>
           Forms
         </Link>
       </p>
@@ -67,7 +67,7 @@ export default function SiteConfig() {
           ':hover': { backgroundColor: '#eff6ff' },
         }}
       >
-        <Link css={{ ...linkStyle, ':hover': hoverStyle }} href='/front-page/1'>
+        <Link css={{ ...linkStyle, ':hover': hoverStyle }} href='/footer-banner/1'>
           Footer - Banner
         </Link>
       </p>
@@ -77,7 +77,7 @@ export default function SiteConfig() {
           ':hover': { backgroundColor: '#eff6ff' },
         }}
       >
-        <Link css={{ ...linkStyle, ':hover': hoverStyle }} href='/front-page/1'>
+        <Link css={{ ...linkStyle, ':hover': hoverStyle }} href='/footer-join-us/1'>
           Footer - Join us
         </Link>
       </p>

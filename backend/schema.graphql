@@ -446,6 +446,166 @@ input FrontPageCreateInput {
   sections: JSON
 }
 
+type FooterBanner {
+  id: ID!
+  title: String
+  preamble: FooterBanner_preamble_Document
+  anchorText: String
+  url: JSON
+  icon: JSON
+}
+
+type FooterBanner_preamble_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input FooterBannerWhereUniqueInput {
+  id: ID
+}
+
+input FooterBannerWhereInput {
+  AND: [FooterBannerWhereInput!]
+  OR: [FooterBannerWhereInput!]
+  NOT: [FooterBannerWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  anchorText: StringFilter
+}
+
+input FooterBannerOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  anchorText: OrderDirection
+}
+
+input FooterBannerUpdateInput {
+  title: String
+  preamble: JSON
+  anchorText: String
+  url: JSON
+  icon: JSON
+}
+
+input FooterBannerUpdateArgs {
+  where: FooterBannerWhereUniqueInput! = {id: 1}
+  data: FooterBannerUpdateInput!
+}
+
+input FooterBannerCreateInput {
+  title: String
+  preamble: JSON
+  anchorText: String
+  url: JSON
+  icon: JSON
+}
+
+type FormEmail {
+  id: ID!
+  contactEmail: String
+  newChapterEmail: String
+  joinSlackEmail: String
+}
+
+input FormEmailWhereUniqueInput {
+  id: ID
+}
+
+input FormEmailWhereInput {
+  AND: [FormEmailWhereInput!]
+  OR: [FormEmailWhereInput!]
+  NOT: [FormEmailWhereInput!]
+  id: IDFilter
+  contactEmail: StringFilter
+  newChapterEmail: StringFilter
+  joinSlackEmail: StringFilter
+}
+
+input FormEmailOrderByInput {
+  id: OrderDirection
+  contactEmail: OrderDirection
+  newChapterEmail: OrderDirection
+  joinSlackEmail: OrderDirection
+}
+
+input FormEmailUpdateInput {
+  contactEmail: String
+  newChapterEmail: String
+  joinSlackEmail: String
+}
+
+input FormEmailUpdateArgs {
+  where: FormEmailWhereUniqueInput! = {id: 1}
+  data: FormEmailUpdateInput!
+}
+
+input FormEmailCreateInput {
+  contactEmail: String
+  newChapterEmail: String
+  joinSlackEmail: String
+}
+
+type FooterJoinUs {
+  id: ID!
+  url1: String
+  icon1: JSON
+  url2: String
+  icon2: JSON
+  url3: String
+  icon3: JSON
+  url4: String
+  icon4: JSON
+}
+
+input FooterJoinUsWhereUniqueInput {
+  id: ID
+}
+
+input FooterJoinUsWhereInput {
+  AND: [FooterJoinUsWhereInput!]
+  OR: [FooterJoinUsWhereInput!]
+  NOT: [FooterJoinUsWhereInput!]
+  id: IDFilter
+  url1: StringFilter
+  url2: StringFilter
+  url3: StringFilter
+  url4: StringFilter
+}
+
+input FooterJoinUsOrderByInput {
+  id: OrderDirection
+  url1: OrderDirection
+  url2: OrderDirection
+  url3: OrderDirection
+  url4: OrderDirection
+}
+
+input FooterJoinUsUpdateInput {
+  url1: String
+  icon1: JSON
+  url2: String
+  icon2: JSON
+  url3: String
+  icon3: JSON
+  url4: String
+  icon4: JSON
+}
+
+input FooterJoinUsUpdateArgs {
+  where: FooterJoinUsWhereUniqueInput! = {id: 1}
+  data: FooterJoinUsUpdateInput!
+}
+
+input FooterJoinUsCreateInput {
+  url1: String
+  icon1: JSON
+  url2: String
+  icon2: JSON
+  url3: String
+  icon3: JSON
+  url4: String
+  icon4: JSON
+}
+
 type Resource {
   id: ID!
   title: String
@@ -1199,6 +1359,24 @@ type Mutation {
   updateFrontPages(data: [FrontPageUpdateArgs!]!): [FrontPage]
   deleteFrontPage(where: FrontPageWhereUniqueInput! = {id: 1}): FrontPage
   deleteFrontPages(where: [FrontPageWhereUniqueInput!]!): [FrontPage]
+  createFooterBanner(data: FooterBannerCreateInput!): FooterBanner
+  createFooterBanners(data: [FooterBannerCreateInput!]!): [FooterBanner]
+  updateFooterBanner(where: FooterBannerWhereUniqueInput! = {id: 1}, data: FooterBannerUpdateInput!): FooterBanner
+  updateFooterBanners(data: [FooterBannerUpdateArgs!]!): [FooterBanner]
+  deleteFooterBanner(where: FooterBannerWhereUniqueInput! = {id: 1}): FooterBanner
+  deleteFooterBanners(where: [FooterBannerWhereUniqueInput!]!): [FooterBanner]
+  createFormEmail(data: FormEmailCreateInput!): FormEmail
+  createFormEmails(data: [FormEmailCreateInput!]!): [FormEmail]
+  updateFormEmail(where: FormEmailWhereUniqueInput! = {id: 1}, data: FormEmailUpdateInput!): FormEmail
+  updateFormEmails(data: [FormEmailUpdateArgs!]!): [FormEmail]
+  deleteFormEmail(where: FormEmailWhereUniqueInput! = {id: 1}): FormEmail
+  deleteFormEmails(where: [FormEmailWhereUniqueInput!]!): [FormEmail]
+  createFooterJoinUs(data: FooterJoinUsCreateInput!): FooterJoinUs
+  createFooterJoinuses(data: [FooterJoinUsCreateInput!]!): [FooterJoinUs]
+  updateFooterJoinUs(where: FooterJoinUsWhereUniqueInput! = {id: 1}, data: FooterJoinUsUpdateInput!): FooterJoinUs
+  updateFooterJoinuses(data: [FooterJoinUsUpdateArgs!]!): [FooterJoinUs]
+  deleteFooterJoinUs(where: FooterJoinUsWhereUniqueInput! = {id: 1}): FooterJoinUs
+  deleteFooterJoinuses(where: [FooterJoinUsWhereUniqueInput!]!): [FooterJoinUs]
   createResource(data: ResourceCreateInput!): Resource
   createResources(data: [ResourceCreateInput!]!): [Resource]
   updateResource(where: ResourceWhereUniqueInput!, data: ResourceUpdateInput!): Resource
@@ -1296,6 +1474,15 @@ type Query {
   frontPages(where: FrontPageWhereInput! = {id: {equals: 1}}, orderBy: [FrontPageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FrontPageWhereUniqueInput): [FrontPage!]
   frontPage(where: FrontPageWhereUniqueInput! = {id: 1}): FrontPage
   frontPagesCount(where: FrontPageWhereInput! = {id: {equals: 1}}): Int
+  footerBanners(where: FooterBannerWhereInput! = {id: {equals: 1}}, orderBy: [FooterBannerOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FooterBannerWhereUniqueInput): [FooterBanner!]
+  footerBanner(where: FooterBannerWhereUniqueInput! = {id: 1}): FooterBanner
+  footerBannersCount(where: FooterBannerWhereInput! = {id: {equals: 1}}): Int
+  formEmails(where: FormEmailWhereInput! = {id: {equals: 1}}, orderBy: [FormEmailOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FormEmailWhereUniqueInput): [FormEmail!]
+  formEmail(where: FormEmailWhereUniqueInput! = {id: 1}): FormEmail
+  formEmailsCount(where: FormEmailWhereInput! = {id: {equals: 1}}): Int
+  footerJoinuses(where: FooterJoinUsWhereInput! = {id: {equals: 1}}, orderBy: [FooterJoinUsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FooterJoinUsWhereUniqueInput): [FooterJoinUs!]
+  footerJoinUs(where: FooterJoinUsWhereUniqueInput! = {id: 1}): FooterJoinUs
+  footerJoinusesCount(where: FooterJoinUsWhereInput! = {id: {equals: 1}}): Int
   resources(where: ResourceWhereInput! = {}, orderBy: [ResourceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceWhereUniqueInput): [Resource!]
   resource(where: ResourceWhereUniqueInput!): Resource
   resourcesCount(where: ResourceWhereInput! = {}): Int

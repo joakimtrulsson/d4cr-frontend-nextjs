@@ -21,7 +21,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
 
   return (
     <FieldContainer>
-      <FieldLabel>Resource Icon</FieldLabel>
+      <FieldLabel>{field.label}</FieldLabel>
       <FieldDescription>Choose an icon</FieldDescription>
       <IconPicker value={iconName} onChange={handleSave} />
     </FieldContainer>

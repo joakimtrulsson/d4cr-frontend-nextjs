@@ -2,7 +2,12 @@ export { userSchema as User } from './userSchema';
 export { roleSchema as Role } from './roleSchema';
 export { chapterSchema as Chapter } from './chapterSchema';
 export { pageSchema as Page } from './pageSchema';
+
+// Site Configuration
 export { frontPageSchema as FrontPage } from './frontPageSchema';
+export { footerBannerSchema as FooterBanner } from './footerBannerSchema';
+export { formEmailSchema as FormEmail } from './formEmailSchema';
+export { footerJoinUsSchema as FooterJoinUs } from './footerJoinUsSchema';
 
 // Resources
 export { resourceSchema as Resource } from './resourceSchema';

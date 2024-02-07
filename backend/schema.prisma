@@ -75,6 +75,34 @@ model FrontPage {
   sections            Json?
 }
 
+model FooterBanner {
+  id         Int    @id
+  title      String @default("")
+  preamble   Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  anchorText String @default("")
+  url        Json?
+  icon       Json?
+}
+
+model FormEmail {
+  id              Int    @id
+  contactEmail    String @default("")
+  newChapterEmail String @default("")
+  joinSlackEmail  String @default("")
+}
+
+model FooterJoinUs {
+  id    Int    @id
+  url1  String @default("")
+  icon1 Json?
+  url2  String @default("")
+  icon2 Json?
+  url3  String @default("")
+  icon3 Json?
+  url4  String @default("")
+  icon4 Json?
+}
+
 model Resource {
   id             String            @id @default(uuid())
   title          String            @unique @default("")
