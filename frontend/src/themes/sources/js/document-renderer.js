@@ -7,7 +7,7 @@ import '../scss/base/utils.scss'
 
 export default function DocumentRenderer({ content }) {
 
-  console.log(content)
+  console.log("doc content: ",content)
 
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(props => <Element {...props} />, [])
@@ -27,34 +27,34 @@ export default function DocumentRenderer({ content }) {
       case 'alignEnd':
         return <div className={element.className} style={{ textAlign: 'end' }} {...attributes}>{children}</div>;
 
-      case 'block-quote':
+      case 'blockQuote':
         return <blockquote className={element.className} style={style} {...attributes}>{children}</blockquote>;
 
-      case 'heading-one':
+      case 'headingOne':
         return <h1 className={element.className} style={style} {...attributes}>{children}</h1>;
 
-      case 'heading-two':
+      case 'headingTwo':
         return <h2 className={element.className} style={style} {...attributes}>{children}</h2>;
 
-      case 'heading-three':
+      case 'headingThree':
         return <h3 className={element.className} style={style} {...attributes}>{children}</h3>;
 
-      case 'heading-four':
+      case 'headingFour':
         return <h4 className={element.className} style={style} {...attributes}>{children}</h4>;
 
-      case 'heading-five':
+      case 'headingFive':
         return <h5 className={element.className} style={style} {...attributes}>{children}</h5>;
 
-      case 'heading-six':
+      case 'headingSix':
         return <h6 className={element.className} style={style} {...attributes}>{children}</h6>;
 
-      case 'list-item':
+      case 'listItem':
         return <li className={element.className} style={style} {...attributes}>{children}</li>;
 
-      case 'numbered-list':
+      case 'numberedList':
         return <ol className={element.className} style={style} {...attributes}>{children}</ol>;
 
-      case 'bulleted-list':
+      case 'bulletedList':
         return <ul className={element.className} style={style} {...attributes}>{children}</ul>;
 
       case 'spotify-embed':

@@ -4,24 +4,11 @@ import SectionRender from '../../themes/sources/js/section-render.js'
 
 export default function MyApp({ chapters }) {
 
-  console.log("slug: ",chapters.sections[0].sectionType);  
+  console.log("slug: ", chapters);  
 
   return (
     <div>
-      <h1>{chapters.slug}</h1>
-      <h1>{chapters.chapterLanguage}</h1>
-      <h1>{chapters.status}</h1>
-      <h1>{chapters.title}</h1>
-      <img src={chapters.heroImage.thumbnailUrl} alt={chapters.heroImage.title} />
-
-      <SectionRender section={chapters.sections[0]} />
-
-
-      {
-        chapters.sections.map(section => {
-          <SectionRender section={section} />
-        })
-      }
+      <SectionRender section={chapters.sections[1]} />
     </div>
   );
 }
@@ -66,7 +53,7 @@ export async function getStaticProps({ params }) {
     variables: {
       where: {
         slug: {
-          contains: "/chapters/los-angeles"
+          contains: "/chapters/robertsfors"
         }
       }
     }

@@ -4,7 +4,7 @@ const PrimaryButton = ({title}) => {
 
     return (
         <div>
-            <button className='primary-button' >{title}</button>
+            <button className='primary-button uppercase' >{title}</button>
         </div>
     )
 }

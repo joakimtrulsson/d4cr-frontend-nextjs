@@ -10,6 +10,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.9.2",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@keystone-6/document-renderer": "^1.1.2",
     "@keystone-6/fields-document": "^8.0.2",
     "@payloadcms/richtext-slate": "^1.4.0",
