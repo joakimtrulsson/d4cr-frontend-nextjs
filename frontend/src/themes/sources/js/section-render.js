@@ -3,7 +3,7 @@ import BannerSection from '../../components/banner.js'
 import ChapterSection from '../../components/chapter-teaser.js'
 import ImagesSection from '../../components/images-component.js'
 import LargeBulletListSection from '../../components/large-bullet-list.js'
-import MediaAndTextSection from '../../components/text-media.js'
+import MediaTextSection from '../../components/text-media-component.js'
 import NewsTeaserSection from '../../components/news-teaser.js'
 import DocumentRenderer from './document-renderer.js'
 
@@ -23,13 +23,13 @@ export default function sectionRender({ section }) {
       case 'BULLETLIST':
         return <LargeBulletListSection content={section} />;
       case 'MEDIATEXT':
-        return <MediaAndTextSection content={section} />; // doesnt work!
+        return <MediaTextSection content={section} />;
       case 'NEWSTEASER':
-        return <NewsTeaserSection content={section} />; // doesnt work!
+        return <NewsTeaserSection content={section} />;
       case 'PRINCIPLES':
-        return <>null</>;
+        return <>null</>; // doesnt work!
       case 'RESOURCES':
-        return <ResourcesSection content={section} />; // doesnt work!
+        return <ResourcesSection content={section} />; 
       case 'WYSIWYG':
         return <DocumentRenderer classname={null} content={section.preamble} />;
       default:

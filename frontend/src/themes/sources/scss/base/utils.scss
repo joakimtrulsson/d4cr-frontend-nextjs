@@ -716,6 +716,11 @@ ul { // All unordered lists should be inside by default
     left: -14rem;
     top: 2rem;
     z-index: $-z-index-background;
+
+    &-container {
+        position: relative;
+        z-index: $-z-index-container; 
+    }
 }
 
 .center-image {
