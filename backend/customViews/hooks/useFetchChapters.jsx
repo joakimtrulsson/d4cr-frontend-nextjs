@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { BASE_URL_BACKEND } from '../utils/constants';
+// import { BASE_URL_BACKEND } from '../utils/constants';
+import { API_URL } from '../../utils/constants';
 
 const useFetchChapters = () => {
   const [chapters, setChapters] = useState([]);
@@ -9,7 +10,7 @@ const useFetchChapters = () => {
   useEffect(() => {
     const fetchChapters = async () => {
       try {
-        const response = await fetch(`${BASE_URL_BACKEND}`, {
+        const response = await fetch(`${API_URL}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,6 +29,7 @@ const useFetchChapters = () => {
         });
 
         const { data } = await response.json();
+        console.log(data);
         setChapters(data.chapters);
         setLoading(false);
       } catch (error) {

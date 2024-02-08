@@ -47,6 +47,7 @@ model Chapter {
   sections                        Json?
   from_User_chapters              User[]    @relation("User_chapters")
   from_Chapter_translatedChapters Chapter[] @relation("Chapter_translatedChapters")
+  from_News_relatedChapters       News[]    @relation("News_relatedChapters")
 }
 
 model Page {
@@ -101,6 +102,28 @@ model FooterJoinUs {
   icon3 Json?
   url4  String @default("")
   icon4 Json?
+}
+
+model News {
+  id              String        @id @default(uuid())
+  title           String        @unique @default("")
+  slug            String        @unique @default("")
+  newsCategory    NewsCategory? @relation("News_newsCategory", fields: [newsCategoryId], references: [id])
+  newsCategoryId  String?       @map("newsCategory")
+  relatedChapters Chapter[]     @relation("News_relatedChapters")
+  image           Json?
+  status          String        @default("draft")
+  sections        Json?
+  createdAt       DateTime?     @default(now())
+
+  @@index([newsCategoryId])
+}
+
+model NewsCategory {
+  id            String    @id @default(uuid())
+  categoryTitle String    @unique @default("")
+  createdAt     DateTime? @default(now())
+  relatedNews   News[]    @relation("News_newsCategory")
 }
 
 model Resource {

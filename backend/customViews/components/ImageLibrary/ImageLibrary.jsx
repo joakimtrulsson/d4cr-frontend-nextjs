@@ -5,7 +5,8 @@ import { FieldContainer, FieldDescription, TextInput } from '@keystone-ui/fields
 import FormData from 'form-data';
 
 import { formatFileSize } from '../../../utils/formatFileSize';
-import { BASE_URL_BACKEND } from '../../utils/constants';
+// import { BASE_URL_BACKEND } from '../../utils/constants';
+import { API_URL } from '../../../utils/constants';
 import AddEntryButton from '../AddEntryButton/AddEntryButton';
 
 import { useFetchImages } from '../../hooks/useFetchImages';
@@ -29,7 +30,7 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await fetch(`${BASE_URL_BACKEND}`, {
+  //       const response = await fetch(`${API_URL}`, {
   //         method: 'POST',
   //         headers: {
   //           'Content-Type': 'application/json',
@@ -113,7 +114,7 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
       formData.append('map', JSON.stringify({ 0: ['variables.data.file.upload'] }));
       formData.append('0', uploadedFile);
 
-      const response = await fetch(`${BASE_URL_BACKEND}`, {
+      const response = await fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
           'Apollo-Require-Preflight': 'true',
@@ -137,7 +138,7 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   // Export till hooks
   const handleDeleteFile = async (file) => {
     try {
-      const response = await fetch(`${BASE_URL_BACKEND}`, {
+      const response = await fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

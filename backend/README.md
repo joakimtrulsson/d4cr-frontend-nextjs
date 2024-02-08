@@ -2,25 +2,26 @@
 
 1. Konfigurera miljövariabler
    Skapa en .env-fil i /backend med nedanstående variabler och ange dina egna värden.
+   Om annan port än 3000 ska användas så ändra PORT till önskad port SAMT i utils/constants.js
 
 ```
 NODE_ENV=development
 PORT=3000
+
 MAX_FILE_SIZE = 10
-ASSET_BASE_URL = 'http://localhost:3000'
-BASE_URL = 'http://localhost:3000'
-API_URL = 'http://localhost:3000/api/graphql'
+BASE_URL = 'http://localhost:${PORT}/'
+API_URL = '${BASE_URL}api/graphql'
 
 # Session
 SESSION_SECRET="myultrasecretstringmyultrasecretstring"
 SESSION_MAX_AGE=2592000
 
 # Database
-DATABASE_URL="mysql://username:password@127.0.0.1:3306/db_name"
+DATABASE_URL="mysql://root@127.0.0.1:3306/d4cr_database"
 
 # Media
-MEDIA_URL="http://localhost:3000/public/media"
-IMAGE_URL="http://localhost:3000/public/images"
+MEDIA_URL="${BASE_URL}public/media"
+IMAGE_URL="${BASE_URL}public/images"
 ```
 
 2. Skapa en mysql databas lokalt

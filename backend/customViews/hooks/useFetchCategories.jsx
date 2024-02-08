@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 // import { BASE_URL_BACKEND } from '../utils/constants';
 import { API_URL } from '../../utils/constants';
 
-const useFetchResources = () => {
-  const [allResources, setAllResources] = useState([]);
+const useFetchCategories = () => {
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchResources = async () => {
+    const fetchCategories = async () => {
       try {
         const response = await fetch(`${API_URL}`, {
           method: 'POST',
@@ -17,29 +17,19 @@ const useFetchResources = () => {
           },
           body: JSON.stringify({
             query: `
-            query {
-              resourceCategories(orderBy: { createdAt: desc }) {
-                createdAt
-                title
-                resources(orderBy: { createdAt: desc }) {
-                  id
-                  createdAt
-                  title
-                  url
-                  resourceType {
-                    type
-                    icon
-                  }
-                }
+            query NewsCategories {
+              newsCategories {
+                categoryTitle
+                id
               }
             }
-            
             `,
           }),
         });
 
         const { data } = await response.json();
-        setAllResources(data);
+
+        setCategories(data.newsCategories);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -47,10 +37,10 @@ const useFetchResources = () => {
       }
     };
 
-    fetchResources();
+    fetchCategories();
   }, []);
 
-  return { allResources, loading, error };
+  return { categories, loading, error };
 };
 
-export default useFetchResources;
+export default useFetchCategories;

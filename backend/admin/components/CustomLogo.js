@@ -3,7 +3,9 @@
 
 import { jsx } from '@keystone-ui/core';
 
+import { IMAGE_URL } from '../../utils/constants';
+
 export const CustomLogo = () => {
-  const imagePath = 'http://localhost:3000/public/images/logo/D4CR_Logo.svg';
+  const imagePath = `${IMAGE_URL}/logo/D4CR_Logo.svg`;
   return <img src={imagePath} alt='logo' style={{ width: '175px', height: '50px' }} />;
 };

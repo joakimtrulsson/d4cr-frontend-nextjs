@@ -10,7 +10,7 @@ import {
 import FormData from 'form-data';
 
 import { formatFileSize } from '../utils/formatFileSize';
-import { BASE_URL_BACKEND } from './utils/constants';
+import { API_URL } from '../utils/constants';
 import AddEntryButton from './components/AddEntryButton/AddEntryButton';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
@@ -33,7 +33,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         setSelectedFile(JSON.parse(value));
       }
       try {
-        const response = await fetch(`${BASE_URL_BACKEND}`, {
+        const response = await fetch(`${API_URL}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
       formData.append('map', JSON.stringify({ 0: ['variables.data.file.upload'] }));
       formData.append('0', uploadedFile);
 
-      const response = await fetch(`${BASE_URL_BACKEND}`, {
+      const response = await fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
           'Apollo-Require-Preflight': 'true',
@@ -138,7 +138,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   // Export till hooks
   const handleDeleteFile = async (file) => {
     try {
-      const response = await fetch(`${BASE_URL_BACKEND}`, {
+      const response = await fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
