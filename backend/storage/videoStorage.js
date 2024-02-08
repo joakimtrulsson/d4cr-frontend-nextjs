@@ -7,7 +7,7 @@ const { MEDIA_URL } = process.env;
 export const videoStorage = {
   kind: 'local',
   type: 'file',
-  generateUrl: (path) => `${MEDIA_URL}${path}`,
+  generateUrl: (path) => `/public/images/${path}`,
   serverRoute: {
     path: 'public/media',
   },

@@ -65,14 +65,6 @@ export const newsSchema = list({
       },
     }),
 
-    // newsNumber: relationship({
-    //   ref: 'NewsNumber.relatedNews',
-    //   many: false,
-    //   ui: {
-    //     description: 'Reference to a news number.',
-    //   },
-    // }),
-
     newsCategory: relationship({
       validation: { isRequired: true },
       ref: 'NewsCategory.relatedNews',

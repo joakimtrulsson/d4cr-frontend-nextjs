@@ -20,8 +20,8 @@ SESSION_MAX_AGE=2592000
 DATABASE_URL="mysql://root@127.0.0.1:3306/d4cr_database"
 
 # Media
-MEDIA_URL="public/media"
-IMAGE_URL="public/images"
+MEDIA_URL="${BASE_URL}public/media"
+IMAGE_URL="${BASE_URL}public/images"
 ```
 
 2. Skapa en mysql databas lokalt
@@ -38,3 +38,9 @@ npm install
 npm run dev
 
 ```
+
+## Problem
+
+1. När News hämtas som tillhör ett visst Chapter inkluderas även nyheter som inte är kopplade till något Chapter. Det förväntade beteendet är att endast nyheter som är associerade med det specifika Chapter ska hämtas. För att komma runt problemet just nu, får ni kontrollera om relatedChapters är falsy(!relatedChapters).
+
+2. När News hämtas som tillhör ett visst Chapter och en viss News Category inkluderas även nyheter som inte är kopplade till något Chapter. Det förväntade beteendet är att endast nyheter som är associerade med det specifika Chapter och NewsCategory ska hämtas. För att komma runt problemet just nu, får ni kontrollera om relatedChapters är falsy(!relatedChapters).
