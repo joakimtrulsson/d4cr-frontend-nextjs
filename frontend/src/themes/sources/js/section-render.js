@@ -18,18 +18,20 @@ export default function sectionRender({ section }) {
         return <BannerSection content={section} />;
       case 'CHAPTERTEASER':
         return <ChapterSection content={section} />;
-      case 'images':
-        return <ImagesSection content={section} />; // doesnt work!
-      case 'largebulletlist':
-        return <LargeBulletListSection content={section} />; // doesnt work!
-      case 'media and text':
+      case 'IMAGE':
+        return <ImagesSection content={section} />;
+      case 'BULLETLIST':
+        return <LargeBulletListSection content={section} />;
+      case 'MEDIATEXT':
         return <MediaAndTextSection content={section} />; // doesnt work!
-      case 'news teaser':
+      case 'NEWSTEASER':
         return <NewsTeaserSection content={section} />; // doesnt work!
-      case 'resources':
+      case 'PRINCIPLES':
+        return <>null</>;
+      case 'RESOURCES':
         return <ResourcesSection content={section} />; // doesnt work!
       case 'WYSIWYG':
-        return <DocumentRenderer content={section.preamble} />;
+        return <DocumentRenderer classname={null} content={section.preamble} />;
       default:
         return null;
     }
