@@ -20,8 +20,8 @@ SESSION_MAX_AGE=2592000
 DATABASE_URL="mysql://root@127.0.0.1:3306/d4cr_database"
 
 # Media
-MEDIA_URL="${BASE_URL}public/media"
-IMAGE_URL="${BASE_URL}public/images"
+MEDIA_URL="public/media"
+IMAGE_URL="public/images"
 ```
 
 2. Skapa en mysql databas lokalt
