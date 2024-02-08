@@ -1,32 +1,34 @@
 import '../sources/scss/components/large-bullet-list.scss'
 import '../sources/scss/base/utils.scss'
-import Image from 'next/image'
-import ArrowRight from '../sources/assets/graphics/icons/arrow-right.svg'
-import data from '../../database/sections-data/large-bullet-list'
+import DocumentRenderer from '../sources/js/document-renderer.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
-const LargeBulletList = () => {
+export default function LargeBulletList({ content }) {
 
-    if (!data || !data.sections || data.sections.length === 0) {
-        return null;
-    }
+    const { library, config } = require('@fortawesome/fontawesome-svg-core');
+    library.add(fas)
 
-    const { title, subHeader, bullets } = data.sections[0];
+    const iconColor = '#FC7C37'
 
     return (
         <div className='large-bullet-list-container min-width-25 flex flex-column  flex-align-center'>
-            <h2>{title}</h2>
-            <p className='large-text'>{subHeader}</p>
+            <h2>{content.title}</h2>
+            <p className='large-text'>{content.subHeader}</p>
 
-            {bullets.map((bullet, index) => {
+            {content.bullets.map((bullet, index) => {
                 return (
-                    <div className='bullet-content full-width-height max-width-45 flex flex-row flex-align-center flex-justify-start' key={index} >
-                        <Image src={ArrowRight} />
-                        <p>{bullet.bodyText[0].children[0].text}</p>
+                    <div className='bullet-content full-width-height max-width-45 flex flex-row flex-align-center flex-justify-start 
+                    bg-grey-25 borderradius--xxs padding--xs' key={index} >
+                        
+                        { (content.listType === 'ORDERED') ? 
+                            <FontAwesomeIcon icon={['fas', 'arrow-right']} color={iconColor} />
+                            : <FontAwesomeIcon icon={['fas', `${index+1}`]} color={iconColor} />
+                        }
+                        <DocumentRenderer content={bullet.bodyText} />
                     </div>
                 )
             })}
         </div>
     )
 }
-
-export default LargeBulletList
