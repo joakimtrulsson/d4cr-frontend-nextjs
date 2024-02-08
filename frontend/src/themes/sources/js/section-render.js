@@ -9,8 +9,6 @@ import DocumentRenderer from './document-renderer.js'
 
 export default function sectionRender({ section }) {
 
-  console.log("sec content:", section)
-
     switch (section.sectionType) {
       case 'ACCORDION':
         return <AccordionSection content={section} />;
@@ -27,9 +25,9 @@ export default function sectionRender({ section }) {
       case 'NEWSTEASER':
         return <NewsTeaserSection content={section} />;
       case 'PRINCIPLES':
-        return <>null</>; // doesnt work!
+        return <PrinciplesSection content={section} />; // doesnt work!
       case 'RESOURCES':
-        return <ResourcesSection content={section} />; 
+        return <ResourcesSection content={section} />; // doesnt work!
       case 'WYSIWYG':
         return <DocumentRenderer classname={null} content={section.preamble} />;
       default:
