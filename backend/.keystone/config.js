@@ -1763,7 +1763,7 @@ var { MEDIA_URL } = process.env;
 var videoStorage = {
   kind: "local",
   type: "file",
-  generateUrl: (path) => `/public/images/${path}`,
+  generateUrl: (path) => `/public/media/${path}`,
   serverRoute: {
     path: "public/media"
   },
