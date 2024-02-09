@@ -104,6 +104,18 @@ model FooterJoinUs {
   icon4 Json?
 }
 
+model MainMenu {
+  id            Int    @id
+  navigation    Json?
+  ctaAnchorText String @default("")
+  ctaUrl        Json?
+}
+
+model FooterMenu {
+  id         Int   @id
+  navigation Json?
+}
+
 model News {
   id              String        @id @default(uuid())
   title           String        @unique @default("")

@@ -1,7 +1,3 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 export const imageStorage = {
   kind: 'local',
   type: 'image',
