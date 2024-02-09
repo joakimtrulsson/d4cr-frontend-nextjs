@@ -1760,30 +1760,30 @@ var testSchema = (0, import_core22.list)({
   },
   fields: {
     title: (0, import_fields22.text)(),
-    // image: json({
-    //   ui: {
-    //     views: './customViews/MediaLibrary.jsx',
-    //     createView: { fieldMode: 'edit' },
-    //     listView: { fieldMode: 'hidden' },
-    //     itemView: { fieldMode: 'edit' },
-    //   },
-    // }),
-    sections: (0, import_fields22.json)({
+    image: (0, import_fields22.json)({
       ui: {
-        views: "./customViews/AllSections.jsx",
-        createView: { fieldMode: "edit" },
-        listView: { fieldMode: "hidden" },
-        itemView: { fieldMode: "edit" }
-      }
-    }),
-    principles: (0, import_fields22.json)({
-      ui: {
-        views: "./customViews/Principles.jsx",
+        views: "./customViews/ImageLibrary.jsx",
         createView: { fieldMode: "edit" },
         listView: { fieldMode: "hidden" },
         itemView: { fieldMode: "edit" }
       }
     })
+    // sections: json({
+    //   ui: {
+    //     views: './customViews/AllSections.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
+    // principles: json({
+    //   ui: {
+    //     views: './customViews/Principles.jsx',
+    //     createView: { fieldMode: 'edit' },
+    //     listView: { fieldMode: 'hidden' },
+    //     itemView: { fieldMode: 'edit' },
+    //   },
+    // }),
     // resources: json({
     //   ui: {
     //     views: './customViews/Resources.jsx',
@@ -1900,7 +1900,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.js
 import_dotenv.default.config();
-var { PORT, MAX_FILE_SIZE, DATABASE_URL, BASE_URL, API_URL } = process.env;
+var { PORT, MAX_FILE_SIZE, DATABASE_URL } = process.env;
 var keystone_default = withAuth(
   (0, import_core23.config)({
     server: {

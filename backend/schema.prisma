@@ -238,8 +238,7 @@ model Case {
 }
 
 model Test {
-  id         String @id @default(uuid())
-  title      String @default("")
-  sections   Json?
-  principles Json?
+  id    String @id @default(uuid())
+  title String @default("")
+  image Json?
 }

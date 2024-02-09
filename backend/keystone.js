@@ -8,7 +8,7 @@ import { withAuth, session } from './auth/auth';
 
 dotenv.config();
 
-const { PORT, MAX_FILE_SIZE, DATABASE_URL, BASE_URL, API_URL } = process.env;
+const { PORT, MAX_FILE_SIZE, DATABASE_URL } = process.env;
 
 export default withAuth(
   config({
