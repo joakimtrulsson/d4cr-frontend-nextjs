@@ -1,7 +1,6 @@
 import '../sources/scss/components/chapter-teaser.scss'
 import Image from 'next/image'
 import Mapbase from  '../sources/assets/graphics/mapbase.png'
-import LocalsCityAndUrl from '../../database/sections-data/locals-city-url-data'
 import CountryCard from './country-card'
 
 export default function ChapterTeaser({ content }) {
