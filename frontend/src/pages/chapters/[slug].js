@@ -2,13 +2,13 @@ import { gql } from '@apollo/client';
 import client from '../../apollo-client.js';
 import SectionRender from '../../themes/sources/js/section-render.js'
 
-export default function MyApp({ chapters }) {
+export default function SlugPage({ chapters }) {
 
   console.log("slug: ", chapters);  
 
   return (
     <div>
-      <SectionRender section={chapters.sections[1]} />
+      <SectionRender section={chapters.sections[0]} />
     </div>
   );
 }
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-  console.log("params:", params.slug)
+  console.log("getStaticPaths params:", params.slug)
 
   const { data } = await client.query({
     query: gql`

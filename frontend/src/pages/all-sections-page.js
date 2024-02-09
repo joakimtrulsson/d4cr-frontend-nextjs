@@ -7,7 +7,7 @@ import Image2 from '../themes/sources/assets/graphics/placeholder/dummy-image3.w
 import Image3 from '../themes/sources/assets/graphics/placeholder/dummy-image4.png'
 import BulletList from '../themes/components/large-bullet-list.js'
 import NewsTeaser from '../themes/components/news-teaser.js'
-import TextMedia from '../themes/components/text-media.js'
+import TextMedia from '../themes/components/text-media-content.js'
 import data from '../database/sections-data/text-and-media-data.js'
 import React, { useEffect, useState } from 'react';
 import RichTextViewer from '../themes/sources/js/document-renderer.js';

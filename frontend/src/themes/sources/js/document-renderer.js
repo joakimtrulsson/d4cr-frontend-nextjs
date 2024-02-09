@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback } from 'react'
 import { createEditor } from "slate";
 import { Slate, withReact, Editable } from "slate-react"
 import YoutubeEmbed from '../../components/youtube-embed.js'
@@ -6,8 +6,6 @@ import SpotifyEmbed from '../../components/spotify-embed.js'
 import '../scss/base/utils.scss'
 
 export default function DocumentRenderer({ content }) {
-
-  console.log("doc content: ",content)
 
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(props => <Element {...props} />, [])
@@ -65,6 +63,9 @@ export default function DocumentRenderer({ content }) {
 
       case 'img':
         return <img className={element.className} style={style} alt={element.alt} src={element.src} {...attributes} />;
+
+      case 'link':
+        return <a className={element.className} href={element.href} {...attributes}>{children}</a>;
 
       default:
         return <p className={element.className} style={style} {...attributes}>{children}</p>;

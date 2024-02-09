@@ -4,9 +4,9 @@ import Mapbase from  '../sources/assets/graphics/mapbase.png'
 import LocalsCityAndUrl from '../../database/sections-data/locals-city-url-data'
 import CountryCard from './country-card'
 
-const ChapterTeaser = () => {
+export default function ChapterTeaser({ content }) {
 
-const Title = "Our local chapters"
+    const title = 'Our local chapters'
 
     return (
         <div className="chapter-teaser">
@@ -15,9 +15,9 @@ const Title = "Our local chapters"
             </div>
 
             <div className='text-container'>
-                <h1 className='heading-2' >{Title}</h1>
+                <h1 className='heading-2' >{title}</h1>
                 <div className='country-card-container'>
-                    { LocalsCityAndUrl.map((item, index) => {
+                    { content.chapters.map((item, index) => {
                         return(
                             <CountryCard key={index} item={item}/>
                     )})}
@@ -26,5 +26,3 @@ const Title = "Our local chapters"
         </div>
     )
 }
-
-export default ChapterTeaser
