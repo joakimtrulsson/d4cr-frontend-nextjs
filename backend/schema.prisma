@@ -88,7 +88,7 @@ model FooterBanner {
 model FormEmail {
   id              Int    @id
   contactEmail    String @default("")
-  newChapterEmail String @default("")
+  shareStoryEmail String @default("")
   joinSlackEmail  String @default("")
 }
 
@@ -170,7 +170,7 @@ model ResourceType {
 model Image {
   id             String    @id @default(uuid())
   title          String    @default("")
-  alt            String    @default("")
+  altText        String    @default("")
   file_filesize  Int?
   file_extension String?
   file_width     Int?
@@ -184,7 +184,7 @@ model Image {
 model Video {
   id            String    @id @default(uuid())
   title         String    @default("")
-  alt           String    @default("")
+  altText       String    @default("")
   file_filesize Int?
   file_filename String?
   createdAt     DateTime? @default(now())

@@ -502,7 +502,7 @@ input FooterBannerCreateInput {
 type FormEmail {
   id: ID!
   contactEmail: String
-  newChapterEmail: String
+  shareStoryEmail: String
   joinSlackEmail: String
 }
 
@@ -516,20 +516,20 @@ input FormEmailWhereInput {
   NOT: [FormEmailWhereInput!]
   id: IDFilter
   contactEmail: StringFilter
-  newChapterEmail: StringFilter
+  shareStoryEmail: StringFilter
   joinSlackEmail: StringFilter
 }
 
 input FormEmailOrderByInput {
   id: OrderDirection
   contactEmail: OrderDirection
-  newChapterEmail: OrderDirection
+  shareStoryEmail: OrderDirection
   joinSlackEmail: OrderDirection
 }
 
 input FormEmailUpdateInput {
   contactEmail: String
-  newChapterEmail: String
+  shareStoryEmail: String
   joinSlackEmail: String
 }
 
@@ -540,7 +540,7 @@ input FormEmailUpdateArgs {
 
 input FormEmailCreateInput {
   contactEmail: String
-  newChapterEmail: String
+  shareStoryEmail: String
   joinSlackEmail: String
 }
 
@@ -1024,7 +1024,7 @@ input ResourceTypeCreateInput {
 type Image {
   id: ID!
   title: String
-  alt: String
+  altText: String
   file: ImageFieldOutput
   createdAt: DateTime
   size: Int
@@ -1057,7 +1057,7 @@ input ImageWhereInput {
   NOT: [ImageWhereInput!]
   id: IDFilter
   title: StringFilter
-  alt: StringFilter
+  altText: StringFilter
   createdAt: DateTimeNullableFilter
   size: IntNullableFilter
   url: StringFilter
@@ -1077,7 +1077,7 @@ input IntNullableFilter {
 input ImageOrderByInput {
   id: OrderDirection
   title: OrderDirection
-  alt: OrderDirection
+  altText: OrderDirection
   createdAt: OrderDirection
   size: OrderDirection
   url: OrderDirection
@@ -1085,7 +1085,7 @@ input ImageOrderByInput {
 
 input ImageUpdateInput {
   title: String
-  alt: String
+  altText: String
   file: ImageFieldInput
   createdAt: DateTime
   size: Int
@@ -1106,7 +1106,7 @@ input ImageUpdateArgs {
 
 input ImageCreateInput {
   title: String
-  alt: String
+  altText: String
   file: ImageFieldInput
   createdAt: DateTime
   size: Int
@@ -1116,7 +1116,7 @@ input ImageCreateInput {
 type Video {
   id: ID!
   title: String
-  alt: String
+  altText: String
   file: FileFieldOutput
   createdAt: DateTime
   size: Int
@@ -1140,7 +1140,7 @@ input VideoWhereInput {
   NOT: [VideoWhereInput!]
   id: IDFilter
   title: StringFilter
-  alt: StringFilter
+  altText: StringFilter
   createdAt: DateTimeNullableFilter
   size: IntNullableFilter
   thumbnailUrl: StringFilter
@@ -1150,7 +1150,7 @@ input VideoWhereInput {
 input VideoOrderByInput {
   id: OrderDirection
   title: OrderDirection
-  alt: OrderDirection
+  altText: OrderDirection
   createdAt: OrderDirection
   size: OrderDirection
   thumbnailUrl: OrderDirection
@@ -1159,7 +1159,7 @@ input VideoOrderByInput {
 
 input VideoUpdateInput {
   title: String
-  alt: String
+  altText: String
   file: FileFieldInput
   createdAt: DateTime
   size: Int
@@ -1178,7 +1178,7 @@ input VideoUpdateArgs {
 
 input VideoCreateInput {
   title: String
-  alt: String
+  altText: String
   file: FileFieldInput
   createdAt: DateTime
   size: Int
