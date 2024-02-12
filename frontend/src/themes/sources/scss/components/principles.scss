@@ -1,0 +1,19 @@
+@import '../variables/color-variables.scss';
+
+.principles {
+    .card-wrapper {
+        transition: transform 0.2s ease-in-out;
+
+    }
+
+    .card-wrapper:hover,
+    .card-wrapper:focus {
+        transform: scale(1.05);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .hide-cards {
+        display: none;
+        /* This will hide the container and all its children */
+    }
+}
