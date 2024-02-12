@@ -2,7 +2,7 @@ import Image from 'next/image'
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/image-component.scss'
 
-const ImagesComponent = ({ content }) => {
+export default function ImagesComponent({ content }) {
 
     var containerClass;
 
@@ -18,7 +18,7 @@ const ImagesComponent = ({ content }) => {
         <div className={`${containerClass} flex flex-row flex-justify-center flex-align-center
         padding-tb--m `}>
 
-            {content.images.map((image, index)=> (
+            { content.images.map((image, index)=> (
                 <div className='image-wrapper borderradius--xxs'> 
                     <Image className='center-image' key={index} src={image.url} alt={image.alt} />
                 </div>
@@ -28,4 +28,3 @@ const ImagesComponent = ({ content }) => {
     )
 }
 
-export default ImagesComponent

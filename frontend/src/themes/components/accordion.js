@@ -10,8 +10,6 @@ export default function Accordion({ content }) {
     const [clickedValue, setClickedValue] = useState(0);
     const [selectedField, setSelectedField] = useState(content.fields[0]);
     const [documentKey, setDocumentKey] = useState(0); // Key to force re-rendering of DocumentRenderer
-
-    console.log(selectedField)
     
     useEffect(() => {
         setSelectedField(content.fields[clickedValue]);
