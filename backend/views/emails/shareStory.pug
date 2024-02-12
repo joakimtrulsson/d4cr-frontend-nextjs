@@ -1,0 +1,13 @@
+extends baseEmail
+block content
+
+  p Someone wants to share a story with D4CR.
+  p From #{name}
+  p Email: #{contactEmail}
+  p LinkedIn: #{linkedIn}
+  p Message: #{message}
+  p Is using D4CR Principles and Guides: #{usingD4CRGuideAndPrinciples ? 'Yes' : 'No'}
+  p Wants logo to be featured on the website: #{logoFeaturedOnWebpage ? 'Yes' : 'No'}
+  
+  p Om du behöver hjälp, tveka inte att höra av er!
+  p - Admin

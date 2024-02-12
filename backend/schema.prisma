@@ -47,6 +47,7 @@ model Chapter {
   sections                        Json?
   from_User_chapters              User[]    @relation("User_chapters")
   from_Chapter_translatedChapters Chapter[] @relation("Chapter_translatedChapters")
+  from_News_relatedChapters       News[]    @relation("News_relatedChapters")
 }
 
 model Page {
@@ -87,7 +88,7 @@ model FooterBanner {
 model FormEmail {
   id              Int    @id
   contactEmail    String @default("")
-  newChapterEmail String @default("")
+  shareStoryEmail String @default("")
   joinSlackEmail  String @default("")
 }
 
@@ -101,6 +102,40 @@ model FooterJoinUs {
   icon3 Json?
   url4  String @default("")
   icon4 Json?
+}
+
+model MainMenu {
+  id            Int    @id
+  navigation    Json?
+  ctaAnchorText String @default("")
+  ctaUrl        Json?
+}
+
+model FooterMenu {
+  id         Int   @id
+  navigation Json?
+}
+
+model News {
+  id              String        @id @default(uuid())
+  title           String        @unique @default("")
+  slug            String        @unique @default("")
+  newsCategory    NewsCategory? @relation("News_newsCategory", fields: [newsCategoryId], references: [id])
+  newsCategoryId  String?       @map("newsCategory")
+  relatedChapters Chapter[]     @relation("News_relatedChapters")
+  image           Json?
+  status          String        @default("draft")
+  sections        Json?
+  createdAt       DateTime?     @default(now())
+
+  @@index([newsCategoryId])
+}
+
+model NewsCategory {
+  id            String    @id @default(uuid())
+  categoryTitle String    @unique @default("")
+  createdAt     DateTime? @default(now())
+  relatedNews   News[]    @relation("News_newsCategory")
 }
 
 model Resource {
@@ -135,7 +170,7 @@ model ResourceType {
 model Image {
   id             String    @id @default(uuid())
   title          String    @default("")
-  alt            String    @default("")
+  altText        String    @default("")
   file_filesize  Int?
   file_extension String?
   file_width     Int?
@@ -149,7 +184,7 @@ model Image {
 model Video {
   id            String    @id @default(uuid())
   title         String    @default("")
-  alt           String    @default("")
+  altText       String    @default("")
   file_filesize Int?
   file_filename String?
   createdAt     DateTime? @default(now())
@@ -203,8 +238,7 @@ model Case {
 }
 
 model Test {
-  id         String @id @default(uuid())
-  title      String @default("")
-  sections   Json?
-  principles Json?
+  id    String @id @default(uuid())
+  title String @default("")
+  image Json?
 }

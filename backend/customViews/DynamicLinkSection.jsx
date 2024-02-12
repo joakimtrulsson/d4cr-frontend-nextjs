@@ -16,7 +16,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const pagesOptions = useFetchLinkOptions();
 
   useEffect(() => {
-    console.log(pagesOptions);
     if (pagesOptions.length > 0 && value && value !== '') {
       const result = pagesOptions.find(
         (option) => JSON.stringify(option.value) === value && option.value !== ''

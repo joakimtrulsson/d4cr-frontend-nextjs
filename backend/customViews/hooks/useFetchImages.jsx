@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { BASE_URL_BACKEND } from '../utils/constants';
+// import { BASE_URL_BACKEND } from '../utils/constants';
+import { API_URL } from '../utils/constants';
 
 export const useFetchImages = () => {
   const [files, setFiles] = useState([]);
@@ -8,7 +9,7 @@ export const useFetchImages = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL_BACKEND}`, {
+        const response = await fetch(`${API_URL}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

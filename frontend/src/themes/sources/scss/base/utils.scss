@@ -679,6 +679,10 @@ ul { // All unordered lists should be inside by default
     background-color: $-purple-50;
 }
 
+.bg-grey-25 {
+    background-color: $-grey-25;
+}
+
 .bg-grey-500 {
     background-color: $-grey-500;
 }
@@ -712,6 +716,11 @@ ul { // All unordered lists should be inside by default
     left: -14rem;
     top: 2rem;
     z-index: $-z-index-background;
+
+    &-container {
+        position: relative;
+        z-index: $-z-index-container; 
+    }
 }
 
 .center-image {
@@ -729,3 +738,10 @@ ul { // All unordered lists should be inside by default
     position: absolute;
     z-index: $-z-index-navbar-dropdown;
 }
+
+.button {
+    transition: all 300ms ease-in-out;
+    background-color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+  }

@@ -6,7 +6,7 @@ import {
   ListNavItems,
 } from '@keystone-6/core/admin-ui/components';
 
-import { FieldLabel, FieldDescription } from '@keystone-ui/fields';
+import { FieldLabel } from '@keystone-ui/fields';
 
 export function CustomNavigation({ authenticatedItem, lists }) {
   // Glöm inte att lägga till nya innehållstyper i listan nedan
@@ -18,6 +18,7 @@ export function CustomNavigation({ authenticatedItem, lists }) {
     'Resource',
     'Principle',
     'Case',
+    'News',
     'Test',
   ];
   const underTaxonomyLists = [
@@ -25,6 +26,8 @@ export function CustomNavigation({ authenticatedItem, lists }) {
     'ResourceCategory',
     'PrincipleCategory',
     'PrincipleNumber',
+    'NewsCategory',
+    // 'NewsNumber',
   ];
   const underMediaLibraryLists = ['Image', 'Video'];
 
@@ -40,6 +43,7 @@ export function CustomNavigation({ authenticatedItem, lists }) {
       {/* <ListNavItems lists={lists} /> */}
       <ListNavItems lists={aboveTaxonomy} />
       <NavItem href='/site-config'>Site Config</NavItem>
+      <NavItem href='/navigations'>Navigations</NavItem>
       <FieldLabel
         style={{
           marginLeft: '1.5rem',

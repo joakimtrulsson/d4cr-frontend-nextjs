@@ -9,6 +9,14 @@ export { footerBannerSchema as FooterBanner } from './footerBannerSchema';
 export { formEmailSchema as FormEmail } from './formEmailSchema';
 export { footerJoinUsSchema as FooterJoinUs } from './footerJoinUsSchema';
 
+// Navigations
+export { mainMenuSchema as MainMenu } from './mainMenuSchema';
+export { footerMenuSchema as FooterMenu } from './footerMenuSchema';
+
+// News
+export { newsSchema as News } from './newsSchema';
+export { newsCategorySchema as NewsCategory } from './newsCategorySchema';
+
 // Resources
 export { resourceSchema as Resource } from './resourceSchema';
 export { resourceCategorySchema as ResourceCategory } from './resourceCategorySchema';

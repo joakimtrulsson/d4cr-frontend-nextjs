@@ -2,13 +2,13 @@ import Image from 'next/image'
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/image-component.scss'
 
-const ImagesComponent = ({images}) => {
+export default function ImagesComponent({ content }) {
 
     var containerClass;
 
-    if (images.length === 3) {
+    if (content.images.length === 3) {
         containerClass = 'image-container-3';
-    } else if (images.length === 2) {
+    } else if (content.images.length === 2) {
         containerClass = 'image-container-2';
     } else {
         containerClass = 'image-container-1';
@@ -18,9 +18,9 @@ const ImagesComponent = ({images}) => {
         <div className={`${containerClass} flex flex-row flex-justify-center flex-align-center
         padding-tb--m `}>
 
-            {images.map((image, index)=> (
+            { content.images.map((image, index)=> (
                 <div className='image-wrapper borderradius--xxs'> 
-                    <Image className='center-image' key={index} src={image} />
+                    <Image className='center-image' key={index} src={image.url} alt={image.alt} />
                 </div>
             ))}
 
@@ -28,4 +28,3 @@ const ImagesComponent = ({images}) => {
     )
 }
 
-export default ImagesComponent

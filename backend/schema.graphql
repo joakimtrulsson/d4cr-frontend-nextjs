@@ -502,7 +502,7 @@ input FooterBannerCreateInput {
 type FormEmail {
   id: ID!
   contactEmail: String
-  newChapterEmail: String
+  shareStoryEmail: String
   joinSlackEmail: String
 }
 
@@ -516,20 +516,20 @@ input FormEmailWhereInput {
   NOT: [FormEmailWhereInput!]
   id: IDFilter
   contactEmail: StringFilter
-  newChapterEmail: StringFilter
+  shareStoryEmail: StringFilter
   joinSlackEmail: StringFilter
 }
 
 input FormEmailOrderByInput {
   id: OrderDirection
   contactEmail: OrderDirection
-  newChapterEmail: OrderDirection
+  shareStoryEmail: OrderDirection
   joinSlackEmail: OrderDirection
 }
 
 input FormEmailUpdateInput {
   contactEmail: String
-  newChapterEmail: String
+  shareStoryEmail: String
   joinSlackEmail: String
 }
 
@@ -540,7 +540,7 @@ input FormEmailUpdateArgs {
 
 input FormEmailCreateInput {
   contactEmail: String
-  newChapterEmail: String
+  shareStoryEmail: String
   joinSlackEmail: String
 }
 
@@ -606,6 +606,235 @@ input FooterJoinUsCreateInput {
   icon4: JSON
 }
 
+type MainMenu {
+  id: ID!
+  navigation: JSON
+  ctaAnchorText: String
+  ctaUrl: JSON
+}
+
+input MainMenuWhereUniqueInput {
+  id: ID
+}
+
+input MainMenuWhereInput {
+  AND: [MainMenuWhereInput!]
+  OR: [MainMenuWhereInput!]
+  NOT: [MainMenuWhereInput!]
+  id: IDFilter
+  ctaAnchorText: StringFilter
+}
+
+input MainMenuOrderByInput {
+  id: OrderDirection
+  ctaAnchorText: OrderDirection
+}
+
+input MainMenuUpdateInput {
+  navigation: JSON
+  ctaAnchorText: String
+  ctaUrl: JSON
+}
+
+input MainMenuUpdateArgs {
+  where: MainMenuWhereUniqueInput! = {id: 1}
+  data: MainMenuUpdateInput!
+}
+
+input MainMenuCreateInput {
+  navigation: JSON
+  ctaAnchorText: String
+  ctaUrl: JSON
+}
+
+type FooterMenu {
+  id: ID!
+  navigation: JSON
+}
+
+input FooterMenuWhereUniqueInput {
+  id: ID
+}
+
+input FooterMenuWhereInput {
+  AND: [FooterMenuWhereInput!]
+  OR: [FooterMenuWhereInput!]
+  NOT: [FooterMenuWhereInput!]
+  id: IDFilter
+}
+
+input FooterMenuOrderByInput {
+  id: OrderDirection
+}
+
+input FooterMenuUpdateInput {
+  navigation: JSON
+}
+
+input FooterMenuUpdateArgs {
+  where: FooterMenuWhereUniqueInput! = {id: 1}
+  data: FooterMenuUpdateInput!
+}
+
+input FooterMenuCreateInput {
+  navigation: JSON
+}
+
+type News {
+  id: ID!
+  title: String
+  slug: String
+  newsCategory: NewsCategory
+  relatedChapters(where: ChapterWhereInput! = {}, orderBy: [ChapterOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ChapterWhereUniqueInput): [Chapter!]
+  relatedChaptersCount(where: ChapterWhereInput! = {}): Int
+  image: JSON
+  status: String
+  sections: JSON
+  createdAt: DateTime
+}
+
+scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+input NewsWhereUniqueInput {
+  id: ID
+  title: String
+  slug: String
+}
+
+input NewsWhereInput {
+  AND: [NewsWhereInput!]
+  OR: [NewsWhereInput!]
+  NOT: [NewsWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  slug: StringFilter
+  newsCategory: NewsCategoryWhereInput
+  relatedChapters: ChapterManyRelationFilter
+  status: StringFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: DateTimeNullableFilter
+}
+
+input NewsOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  slug: OrderDirection
+  status: OrderDirection
+  createdAt: OrderDirection
+}
+
+input NewsUpdateInput {
+  title: String
+  slug: String
+  newsCategory: NewsCategoryRelateToOneForUpdateInput
+  relatedChapters: ChapterRelateToManyForUpdateInput
+  image: JSON
+  status: String
+  sections: JSON
+  createdAt: DateTime
+}
+
+input NewsCategoryRelateToOneForUpdateInput {
+  create: NewsCategoryCreateInput
+  connect: NewsCategoryWhereUniqueInput
+  disconnect: Boolean
+}
+
+input NewsUpdateArgs {
+  where: NewsWhereUniqueInput!
+  data: NewsUpdateInput!
+}
+
+input NewsCreateInput {
+  title: String
+  slug: String
+  newsCategory: NewsCategoryRelateToOneForCreateInput
+  relatedChapters: ChapterRelateToManyForCreateInput
+  image: JSON
+  status: String
+  sections: JSON
+  createdAt: DateTime
+}
+
+input NewsCategoryRelateToOneForCreateInput {
+  create: NewsCategoryCreateInput
+  connect: NewsCategoryWhereUniqueInput
+}
+
+type NewsCategory {
+  id: ID!
+  categoryTitle: String
+  createdAt: DateTime
+  relatedNews(where: NewsWhereInput! = {}, orderBy: [NewsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: NewsWhereUniqueInput): [News!]
+  relatedNewsCount(where: NewsWhereInput! = {}): Int
+}
+
+input NewsCategoryWhereUniqueInput {
+  id: ID
+  categoryTitle: String
+}
+
+input NewsCategoryWhereInput {
+  AND: [NewsCategoryWhereInput!]
+  OR: [NewsCategoryWhereInput!]
+  NOT: [NewsCategoryWhereInput!]
+  id: IDFilter
+  categoryTitle: StringFilter
+  createdAt: DateTimeNullableFilter
+  relatedNews: NewsManyRelationFilter
+}
+
+input NewsManyRelationFilter {
+  every: NewsWhereInput
+  some: NewsWhereInput
+  none: NewsWhereInput
+}
+
+input NewsCategoryOrderByInput {
+  id: OrderDirection
+  categoryTitle: OrderDirection
+  createdAt: OrderDirection
+}
+
+input NewsCategoryUpdateInput {
+  categoryTitle: String
+  createdAt: DateTime
+  relatedNews: NewsRelateToManyForUpdateInput
+}
+
+input NewsRelateToManyForUpdateInput {
+  disconnect: [NewsWhereUniqueInput!]
+  set: [NewsWhereUniqueInput!]
+  create: [NewsCreateInput!]
+  connect: [NewsWhereUniqueInput!]
+}
+
+input NewsCategoryUpdateArgs {
+  where: NewsCategoryWhereUniqueInput!
+  data: NewsCategoryUpdateInput!
+}
+
+input NewsCategoryCreateInput {
+  categoryTitle: String
+  createdAt: DateTime
+  relatedNews: NewsRelateToManyForCreateInput
+}
+
+input NewsRelateToManyForCreateInput {
+  create: [NewsCreateInput!]
+  connect: [NewsWhereUniqueInput!]
+}
+
 type Resource {
   id: ID!
   title: String
@@ -615,8 +844,6 @@ type Resource {
   resourceType: ResourceType
   createdAt: DateTime
 }
-
-scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
 
 input ResourceWhereUniqueInput {
   id: ID
@@ -633,17 +860,6 @@ input ResourceWhereInput {
   category: ResourceCategoryWhereInput
   resourceType: ResourceTypeWhereInput
   createdAt: DateTimeNullableFilter
-}
-
-input DateTimeNullableFilter {
-  equals: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  gt: DateTime
-  gte: DateTime
-  not: DateTimeNullableFilter
 }
 
 input ResourceOrderByInput {
@@ -808,7 +1024,7 @@ input ResourceTypeCreateInput {
 type Image {
   id: ID!
   title: String
-  alt: String
+  altText: String
   file: ImageFieldOutput
   createdAt: DateTime
   size: Int
@@ -841,7 +1057,7 @@ input ImageWhereInput {
   NOT: [ImageWhereInput!]
   id: IDFilter
   title: StringFilter
-  alt: StringFilter
+  altText: StringFilter
   createdAt: DateTimeNullableFilter
   size: IntNullableFilter
   url: StringFilter
@@ -861,7 +1077,7 @@ input IntNullableFilter {
 input ImageOrderByInput {
   id: OrderDirection
   title: OrderDirection
-  alt: OrderDirection
+  altText: OrderDirection
   createdAt: OrderDirection
   size: OrderDirection
   url: OrderDirection
@@ -869,7 +1085,7 @@ input ImageOrderByInput {
 
 input ImageUpdateInput {
   title: String
-  alt: String
+  altText: String
   file: ImageFieldInput
   createdAt: DateTime
   size: Int
@@ -890,7 +1106,7 @@ input ImageUpdateArgs {
 
 input ImageCreateInput {
   title: String
-  alt: String
+  altText: String
   file: ImageFieldInput
   createdAt: DateTime
   size: Int
@@ -900,7 +1116,7 @@ input ImageCreateInput {
 type Video {
   id: ID!
   title: String
-  alt: String
+  altText: String
   file: FileFieldOutput
   createdAt: DateTime
   size: Int
@@ -924,7 +1140,7 @@ input VideoWhereInput {
   NOT: [VideoWhereInput!]
   id: IDFilter
   title: StringFilter
-  alt: StringFilter
+  altText: StringFilter
   createdAt: DateTimeNullableFilter
   size: IntNullableFilter
   thumbnailUrl: StringFilter
@@ -934,7 +1150,7 @@ input VideoWhereInput {
 input VideoOrderByInput {
   id: OrderDirection
   title: OrderDirection
-  alt: OrderDirection
+  altText: OrderDirection
   createdAt: OrderDirection
   size: OrderDirection
   thumbnailUrl: OrderDirection
@@ -943,7 +1159,7 @@ input VideoOrderByInput {
 
 input VideoUpdateInput {
   title: String
-  alt: String
+  altText: String
   file: FileFieldInput
   createdAt: DateTime
   size: Int
@@ -962,7 +1178,7 @@ input VideoUpdateArgs {
 
 input VideoCreateInput {
   title: String
-  alt: String
+  altText: String
   file: FileFieldInput
   createdAt: DateTime
   size: Int
@@ -1285,8 +1501,7 @@ input CaseCreateInput {
 type Test {
   id: ID!
   title: String
-  sections: JSON
-  principles: JSON
+  image: JSON
 }
 
 input TestWhereUniqueInput {
@@ -1308,8 +1523,7 @@ input TestOrderByInput {
 
 input TestUpdateInput {
   title: String
-  sections: JSON
-  principles: JSON
+  image: JSON
 }
 
 input TestUpdateArgs {
@@ -1319,8 +1533,7 @@ input TestUpdateArgs {
 
 input TestCreateInput {
   title: String
-  sections: JSON
-  principles: JSON
+  image: JSON
 }
 
 """
@@ -1377,6 +1590,30 @@ type Mutation {
   updateFooterJoinuses(data: [FooterJoinUsUpdateArgs!]!): [FooterJoinUs]
   deleteFooterJoinUs(where: FooterJoinUsWhereUniqueInput! = {id: 1}): FooterJoinUs
   deleteFooterJoinuses(where: [FooterJoinUsWhereUniqueInput!]!): [FooterJoinUs]
+  createMainMenu(data: MainMenuCreateInput!): MainMenu
+  createMainMenus(data: [MainMenuCreateInput!]!): [MainMenu]
+  updateMainMenu(where: MainMenuWhereUniqueInput! = {id: 1}, data: MainMenuUpdateInput!): MainMenu
+  updateMainMenus(data: [MainMenuUpdateArgs!]!): [MainMenu]
+  deleteMainMenu(where: MainMenuWhereUniqueInput! = {id: 1}): MainMenu
+  deleteMainMenus(where: [MainMenuWhereUniqueInput!]!): [MainMenu]
+  createFooterMenu(data: FooterMenuCreateInput!): FooterMenu
+  createFooterMenus(data: [FooterMenuCreateInput!]!): [FooterMenu]
+  updateFooterMenu(where: FooterMenuWhereUniqueInput! = {id: 1}, data: FooterMenuUpdateInput!): FooterMenu
+  updateFooterMenus(data: [FooterMenuUpdateArgs!]!): [FooterMenu]
+  deleteFooterMenu(where: FooterMenuWhereUniqueInput! = {id: 1}): FooterMenu
+  deleteFooterMenus(where: [FooterMenuWhereUniqueInput!]!): [FooterMenu]
+  createNews(data: NewsCreateInput!): News
+  createNewsItems(data: [NewsCreateInput!]!): [News]
+  updateNews(where: NewsWhereUniqueInput!, data: NewsUpdateInput!): News
+  updateNewsItems(data: [NewsUpdateArgs!]!): [News]
+  deleteNews(where: NewsWhereUniqueInput!): News
+  deleteNewsItems(where: [NewsWhereUniqueInput!]!): [News]
+  createNewsCategory(data: NewsCategoryCreateInput!): NewsCategory
+  createNewsCategories(data: [NewsCategoryCreateInput!]!): [NewsCategory]
+  updateNewsCategory(where: NewsCategoryWhereUniqueInput!, data: NewsCategoryUpdateInput!): NewsCategory
+  updateNewsCategories(data: [NewsCategoryUpdateArgs!]!): [NewsCategory]
+  deleteNewsCategory(where: NewsCategoryWhereUniqueInput!): NewsCategory
+  deleteNewsCategories(where: [NewsCategoryWhereUniqueInput!]!): [NewsCategory]
   createResource(data: ResourceCreateInput!): Resource
   createResources(data: [ResourceCreateInput!]!): [Resource]
   updateResource(where: ResourceWhereUniqueInput!, data: ResourceUpdateInput!): Resource
@@ -1483,6 +1720,18 @@ type Query {
   footerJoinuses(where: FooterJoinUsWhereInput! = {id: {equals: 1}}, orderBy: [FooterJoinUsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FooterJoinUsWhereUniqueInput): [FooterJoinUs!]
   footerJoinUs(where: FooterJoinUsWhereUniqueInput! = {id: 1}): FooterJoinUs
   footerJoinusesCount(where: FooterJoinUsWhereInput! = {id: {equals: 1}}): Int
+  mainMenus(where: MainMenuWhereInput! = {id: {equals: 1}}, orderBy: [MainMenuOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: MainMenuWhereUniqueInput): [MainMenu!]
+  mainMenu(where: MainMenuWhereUniqueInput! = {id: 1}): MainMenu
+  mainMenusCount(where: MainMenuWhereInput! = {id: {equals: 1}}): Int
+  footerMenus(where: FooterMenuWhereInput! = {id: {equals: 1}}, orderBy: [FooterMenuOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: FooterMenuWhereUniqueInput): [FooterMenu!]
+  footerMenu(where: FooterMenuWhereUniqueInput! = {id: 1}): FooterMenu
+  footerMenusCount(where: FooterMenuWhereInput! = {id: {equals: 1}}): Int
+  newsItems(where: NewsWhereInput! = {}, orderBy: [NewsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: NewsWhereUniqueInput): [News!]
+  news(where: NewsWhereUniqueInput!): News
+  newsItemsCount(where: NewsWhereInput! = {}): Int
+  newsCategories(where: NewsCategoryWhereInput! = {}, orderBy: [NewsCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: NewsCategoryWhereUniqueInput): [NewsCategory!]
+  newsCategory(where: NewsCategoryWhereUniqueInput!): NewsCategory
+  newsCategoriesCount(where: NewsCategoryWhereInput! = {}): Int
   resources(where: ResourceWhereInput! = {}, orderBy: [ResourceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ResourceWhereUniqueInput): [Resource!]
   resource(where: ResourceWhereUniqueInput!): Resource
   resourcesCount(where: ResourceWhereInput! = {}): Int

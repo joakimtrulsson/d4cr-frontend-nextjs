@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { IconLookup, IconName, library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
 
 export const useFontAwesomeIconPack = () => {
   const [iconPack, setIconPack] = useState();
@@ -9,7 +8,6 @@ export const useFontAwesomeIconPack = () => {
     if (!iconPack) {
       import('@fortawesome/free-solid-svg-icons').then((module) => {
         // Delete problematic icons
-        console.log(module);
         const fas = { ...module.fas };
         delete fas.faCookie;
         delete fas.faFontAwesomeLogoFull;
@@ -29,13 +27,10 @@ export const useFontAwesomeIconPack = () => {
             iconName: icon.iconName,
           }));
 
-          // Concatenate solidIcons and brandIcons
           const allIcons = [...icons, ...brandIcons];
 
-          // Add all icons to the library
           library.add(...allIcons);
 
-          // Set the icon pack state
           setIconPack(allIcons);
         });
       });
@@ -44,18 +39,3 @@ export const useFontAwesomeIconPack = () => {
 
   return iconPack;
 };
-
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { fas } from '@fortawesome/free-solid-svg-icons';
-
-// import { fab } from '@fortawesome/free-brands-svg-icons';
-
-// export function useIconPickerPack() {
-//   library.add(fas, fab);
-//   const iconPack = [
-//     ...Object.keys(fas).map((key) => ['fas', key]),
-
-//     ...Object.keys(fab).map((key) => ['fab', key]),
-//   ];
-//   return iconPack;
-// }

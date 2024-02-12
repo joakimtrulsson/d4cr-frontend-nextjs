@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
-import { BASE_URL_BACKEND } from '../utils/constants';
+// import { BASE_URL_BACKEND } from '../utils/constants';
+import { API_URL } from '../../utils/constants';
 
 export const useFileUpload = () => {
   const handleFileUpload = useCallback(async (uploadedFile) => {
@@ -28,7 +29,7 @@ export const useFileUpload = () => {
       formData.append('map', JSON.stringify({ 0: ['variables.data.file.upload'] }));
       formData.append('0', uploadedFile);
 
-      const response = await fetch(`${BASE_URL_BACKEND}`, {
+      const response = await fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
           'Apollo-Require-Preflight': 'true',
