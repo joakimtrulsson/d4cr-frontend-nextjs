@@ -26,6 +26,7 @@ export default function SlugPage({ chapters }) {
       <div className='slug-container flex flex-column flex-align-center'>
 
         {hasPublishedTranslatedChapter && (
+
           <div className='language-tabs'>
 
             <button className='button' onClick={handleOriginalLanguage}>
@@ -43,7 +44,6 @@ export default function SlugPage({ chapters }) {
         )}
 
         <SlugPageComponent content={content} />
-
 
       </div>
     )
