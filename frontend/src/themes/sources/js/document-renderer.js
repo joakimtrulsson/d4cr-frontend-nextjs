@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { createEditor } from "slate";
 import { Slate, withReact, Editable } from "slate-react"
 import YoutubeEmbed from '../../components/youtube-embed.js'
@@ -7,6 +7,7 @@ import '../scss/base/utils.scss'
 
 export default function DocumentRenderer({ content }) {
 
+  const [value, setValue] = useState(content);
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
@@ -95,7 +96,7 @@ export default function DocumentRenderer({ content }) {
 
   return (
     <div className="document-render">
-      <Slate editor={editor} initialValue={content}>
+      <Slate editor={editor} initialValue={value} onChange={setValue}>
         <Editable readOnly renderElement={renderElement} renderLeaf={renderLeaf} />
       </Slate>
     </div>

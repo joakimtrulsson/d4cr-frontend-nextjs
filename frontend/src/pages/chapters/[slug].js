@@ -8,17 +8,16 @@ export default function SlugPage({ chapters }) {
 
   const [content, setContent] = useState(chapters);
 
-  console.log("SlugPage: ", content)
-
-
   const hasPublishedTranslatedChapter = chapters.translatedChapters.some(chapter => chapter.status === 'published')
 
   function handleTranslation(e, index) {
     setContent(chapters.translatedChapters[index]);
+    console.log("lang swapped... -> ", chapters)
   }
 
   function handleOriginalLanguage() {
     setContent(chapters);
+    console.log("lang swapped... -> ", chapters)
   }
 
   return !chapters ? <h1>Not found</h1> :
