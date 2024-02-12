@@ -3,7 +3,7 @@ import PrinciplesCard from "../themes/components/principles-card.js";
 import "../themes/sources/scss/base/utils.scss";
 import "../themes/sources/scss/components/principles.scss";
 import SecondaryButton from "../themes/components/buttons/secondary-button.js";
-import TextAndMedia from "../themes/components/text-media.js";
+
 
 export default function Principles() {
   const [showAllCards, setShowAllCards] = useState(true)
