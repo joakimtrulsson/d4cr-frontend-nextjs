@@ -2,9 +2,15 @@ import '../sources/scss/components/news-card.scss';
 import '../sources/scss/base/utils.scss'
 import Image from 'next/image'
 import PlaceHolder from '../sources/assets/graphics/placeholder/dummy-image1.svg'
-import ArrowRight from '../sources/assets/graphics/icons/arrow-right.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 const Newscard = ({type, title, url}) => {
+
+    const { library, config } = require('@fortawesome/fontawesome-svg-core');
+    library.add(fas)
+
+    const iconColor = '#FC7C37'
 
     return (
             <div className={`news-card full-width-height flex flex-column flex-justify-start 
@@ -23,7 +29,7 @@ const Newscard = ({type, title, url}) => {
 
             <div className='arrow-right-wrapper margin-b--s width-full flex flex-justify-end bottom-0'>
                 <a href={url}>
-                    <Image className='arrow-right' src={ArrowRight} />
+                    <FontAwesomeIcon icon={['fas', 'arrow-right']} color={iconColor} />
                 </a>
             </div>
         </div>

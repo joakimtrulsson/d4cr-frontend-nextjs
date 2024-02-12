@@ -21,7 +21,7 @@ export const videoSchema = list({
   fields: {
     title: text(),
 
-    alt: text(),
+    altText: text(),
 
     file: file({
       storage: 'videoStorage',
@@ -49,7 +49,6 @@ export const videoSchema = list({
       },
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
-          // let url = 'http://localhost:3000/public/media/';
           let url = process.env.MEDIA_URL;
 
           if (operation === 'create') {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { BASE_URL_BACKEND } from '../utils/constants';
+// import { BASE_URL_BACKEND } from '../utils/constants';
+import { API_URL } from '../../utils/constants';
 
 const useFetchResources = () => {
   const [allResources, setAllResources] = useState([]);
@@ -9,7 +10,7 @@ const useFetchResources = () => {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const response = await fetch(`${BASE_URL_BACKEND}`, {
+        const response = await fetch(`${API_URL}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

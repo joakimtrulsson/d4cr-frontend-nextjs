@@ -1,24 +1,31 @@
 import { config } from '@keystone-6/core';
 import express from 'express';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 
 import { lists } from './schema';
 import { storage } from './storage';
 import { withAuth, session } from './auth/auth';
 
+import sendEmail from './routes/emailRoutes';
+
 dotenv.config();
 
-const { ASSET_BASE_URL, PORT, MAX_FILE_SIZE, FRONTEND_URL, DATABASE_URL } = process.env;
+const { PORT, MAX_FILE_SIZE, DATABASE_URL } = process.env;
 
 export default withAuth(
   config({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,
-      cors: { origin: ['http://localhost:3000'], credentials: true },
+      cors: { origin: ['*'], credentials: true },
       extendExpressApp: (app, commonContext) => {
+        if (process.env.NODE_ENV === 'development') {
+          app.use(morgan('dev'));
+        }
         app.use(express.json());
         app.use('/public', express.static('public'));
+        app.post('/api/email', sendEmail);
       },
     },
     db: {

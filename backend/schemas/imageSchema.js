@@ -21,7 +21,7 @@ export const imageSchema = list({
   fields: {
     title: text(),
 
-    alt: text(),
+    altText: text(),
 
     file: image({ storage: 'imageStorage' }),
 

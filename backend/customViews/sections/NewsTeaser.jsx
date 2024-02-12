@@ -10,12 +10,12 @@ import {
   FieldDescription,
 } from '@keystone-ui/fields';
 
-import { mockNewsData } from '../../data/mockNewsData.js';
-
 import Wysiwyg from '../components/Wysiwyg/Wysiwyg.jsx';
 import AddSectionButton from '../components/AddSectionButton/AddSectionButton.jsx';
 import UpdateSectionButton from '../components/UpdateSectionButton/UpdateSectionButton.jsx';
 import CancelButton from '../components/CancelButton/CancelButton.jsx';
+import useFetchChapters from '../hooks/useFetchChapters.jsx';
+import useFetchCategories from '../hooks/useFetchCategories.jsx';
 
 function NewsTeaser({
   onCloseSection,
@@ -26,7 +26,6 @@ function NewsTeaser({
   sectionIndex,
   setSectionsData,
 }) {
-  // Inte optimalt att göra så här.
   const [value, setValue] = useState(() => {
     if (editData) {
       return editData;
@@ -42,19 +41,34 @@ function NewsTeaser({
     }
   });
 
-  const [mockChaptersSelection] = useState([
-    { value: 'ALLCHAPTERS', label: 'All Chapters' },
-    { value: 'CHAPTER1', label: 'Chapter 1' },
-    { value: 'CHAPTER2', label: 'Chapter 2' },
-    { value: 'CHAPTER3', label: 'Chapter 3' },
-  ]);
+  const { chapters } = useFetchChapters();
+  const { categories } = useFetchCategories();
+  const [chaptersOptions, setChaptersOptions] = useState([]);
+  const [categoriesOptions, setCategoriesOptions] = useState([]);
 
-  const [mockCategoriesSelection] = useState([
-    { value: 'ALL', label: 'All categories' },
-    { value: 'PODCAST', label: 'Podcasts' },
-    { value: 'EVENT', label: 'Events' },
-    { value: 'INFORMATIVE', label: 'Informative' },
-  ]);
+  useEffect(() => {
+    if (chapters) {
+      const chaptersOptions = chapters.map((chapter) => ({
+        label: `${chapter.title}`,
+        value: `${chapter.title}`,
+      }));
+
+      chaptersOptions.unshift({ value: 'ALLCHAPTERS', label: 'All Chapters' });
+
+      setChaptersOptions(chaptersOptions);
+    }
+
+    if (categories) {
+      const categoriesOptions = categories.map((category) => ({
+        label: `${category.categoryTitle}`,
+        value: `${category.categoryTitle}`,
+      }));
+
+      categoriesOptions.unshift({ value: 'ALL', label: 'All categories' });
+
+      setCategoriesOptions(categoriesOptions);
+    }
+  }, [chapters, categories]);
 
   useEffect(() => {
     if (!editData) {
@@ -73,7 +87,6 @@ function NewsTeaser({
         sectionType: 'NEWSTEASER',
         id: newId,
         ...value,
-        news: mockNewsData,
       };
 
       setSectionsData((prevSectionsData) => [...prevSectionsData, newItem]);
@@ -160,20 +173,20 @@ function NewsTeaser({
         <div style={{ marginBottom: '1rem' }}>
           <FieldLegend>Chapters</FieldLegend>
           <Select
-            value={mockChaptersSelection.find(
+            value={chaptersOptions.find(
               (chapter) => chapter.value === value.selectedNews.chapter
             )}
-            options={mockChaptersSelection}
+            options={chaptersOptions}
             onChange={handleChapterChange}
           />
         </div>
         <div style={{ marginBottom: '1rem' }}>
           <FieldLegend>Categories</FieldLegend>
           <Select
-            value={mockCategoriesSelection.find(
+            value={categoriesOptions.find(
               (category) => category.value === value.selectedNews.category
             )}
-            options={mockCategoriesSelection}
+            options={categoriesOptions}
             onChange={handleCategoryChange}
           />
         </div>

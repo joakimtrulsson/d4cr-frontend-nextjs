@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://localhost:3000/public/';
-export const BASE_URL_BACKEND = 'http://localhost:3000/api/graphql';
+// export const BASE_URL = 'http://localhost:3000/public/';
+// export const BASE_URL_BACKEND = 'http://localhost:3000/api/graphql';
 export const options = [
   { value: 'Select', label: 'Select' },
   { value: 'ACCORDION', label: 'Accordion' },

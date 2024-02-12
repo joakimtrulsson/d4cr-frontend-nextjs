@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@keystone-ui/button';
 
-function AddEntryButton({ handleAdd, children }) {
+function AddEntryButton({ style, handleAdd, children }) {
   return (
     <Button
-      style={{ marginTop: '1rem', marginRight: '0.5rem' }}
+      style={{ ...style, marginRight: '0.5rem' }}
       onClick={handleAdd}
       tone='positive'
       weight='bold'

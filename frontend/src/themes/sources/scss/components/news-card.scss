@@ -28,7 +28,7 @@
         } 
 
         .arrow-right-wrapper {
-            .arrow-right {
+            svg {
                 margin-right: 1rem;
                 transition: margin-right 0.2s ease-in-out;
             }
@@ -41,7 +41,9 @@
         bottom: 0;
         right: 0; 
 
-        .arrow-right {
+        svg {
+            height: 1.8rem;
+            width: 1.8rem;
             margin-right: 2rem;
             transition: margin-right 0.2s ease-in-out;
         }

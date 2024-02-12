@@ -38,7 +38,7 @@ export const formEmailSchema = list({
       },
     }),
 
-    newChapterEmail: text({
+    shareStoryEmail: text({
       validation: { isRequired: true },
       hooks: {
         validateInput: ({ addValidationError, resolvedData, fieldKey }) => {
