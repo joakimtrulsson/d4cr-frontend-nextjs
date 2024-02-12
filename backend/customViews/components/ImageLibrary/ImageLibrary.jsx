@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { ReactMediaLibrary } from 'react-media-library';
-import { FieldContainer, FieldDescription, TextInput } from '@keystone-ui/fields';
+import {
+  FieldLabel,
+  FieldContainer,
+  FieldDescription,
+  TextInput,
+} from '@keystone-ui/fields';
 
 import FormData from 'form-data';
 
 import { formatFileSize } from '../../../utils/formatFileSize';
-// import { BASE_URL_BACKEND } from '../../utils/constants';
 import { API_URL } from '../../../utils/constants';
 import AddEntryButton from '../AddEntryButton/AddEntryButton';
 
-import { useFetchImages } from '../../hooks/useFetchImages';
-import { useFileUpload } from '../../hooks/useFileUpload';
-
 function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);
-  // const [files, setFiles] = useState([]);
-  const [files, setFiles] = useFetchImages();
+  const [files, setFiles] = useState([]);
+  // const [files, setFiles] = useFetchImages();
   // const handleFileUpload = useFileUpload();
   const [search, setSearch] = useState('');
+  const [filteredFiles, setFilteredFiles] = useState();
 
   // const [filteredFiles, setFilteredFiles] = useState([]);
 
@@ -27,50 +29,50 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   //   );
   // }, [files, search]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`${API_URL}`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Apollo-Require-Preflight': 'true',
-  //         },
-  //         body: JSON.stringify({
-  //           query: `
-  //           query {
-  //             images {
-  //               createdAt
-  //               alt
-  //               id
-  //               size
-  //               url
-  //               title
-  //             }
-  //           }
-  //         `,
-  //         }),
-  //       });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${API_URL}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Apollo-Require-Preflight': 'true',
+          },
+          body: JSON.stringify({
+            query: `
+            query {
+              images {
+                createdAt
+                alt
+                id
+                size
+                url
+                title
+              }
+            }
+          `,
+          }),
+        });
 
-  //       const result = await response.json();
+        const result = await response.json();
 
-  //       const modifiedFiles = result.data.images.map((file) => {
-  //         return {
-  //           ...file,
-  //           _id: file.id,
-  //           id: undefined,
-  //           thumbnailUrl: file.url,
-  //         };
-  //       });
+        const modifiedFiles = result.data.images.map((file) => {
+          return {
+            ...file,
+            _id: file.id,
+            id: undefined,
+            thumbnailUrl: file.url,
+          };
+        });
 
-  //       setFiles(modifiedFiles);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
+        setFiles(modifiedFiles);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  //   fetchData();
-  // }, [files]);
+    fetchData();
+  }, [files]);
 
   const handleOpenMediaLibrary = () => {
     setIsMediaLibraryOpen((prev) => !prev);
@@ -167,17 +169,32 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
     }
   };
 
+  const handleSearch = (input) => {
+    setSearch(input);
+    const filtered = files.filter((file) => {
+      return file.title.toLowerCase().includes(input.toLowerCase());
+    });
+    setFilteredFiles(filtered);
+  };
+
   const searchBar = () => (
-    <TextInput
-      placeholder='Search...'
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      style={{ maxWidth: '1250px', marginLeft: '1rem', marginBottom: '1rem' }}
-    />
+    <div style={{ padding: '0rem 1rem' }}>
+      <TextInput
+        placeholder='Search by titel'
+        value={search}
+        onChange={(event) => {
+          handleSearch(event.target.value);
+        }}
+        style={{ marginBottom: '1rem' }}
+      />
+    </div>
   );
 
   return (
     <FieldContainer>
+      {isMultiSelect && <FieldLabel>Images</FieldLabel>}
+      {isMultiSelect && <FieldDescription>Select up to 3 images.</FieldDescription>}
+
       <AddEntryButton style={{ marginBottom: '1rem' }} handleAdd={handleOpenMediaLibrary}>
         Open Image Library
       </AddEntryButton>
@@ -187,10 +204,60 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
             width: '20rem',
           }}
         >
-          {selectedFile ? (
+          {selectedFile && (
+            <>
+              {isMultiSelect ? (
+                <>
+                  {selectedFile.map((file) => (
+                    <div key={file.id}>
+                      <FieldDescription>Selected images:</FieldDescription>
+                      <img
+                        alt={file.title}
+                        src={file.thumbnailUrl}
+                        style={{
+                          height: 'auto',
+                          width: '100%',
+                          borderRadius: '7px',
+                          border: '1px solid #e0e5e9',
+                        }}
+                      />
+                      <FieldDescription>
+                        Title: {file.title}
+                        <br />
+                        Filesize: {formatFileSize(file.size)}
+                      </FieldDescription>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <div>
+                  <FieldDescription>Selected image:</FieldDescription>
+                  <img
+                    alt={selectedFile.title}
+                    src={selectedFile.thumbnailUrl}
+                    style={{
+                      height: 'auto',
+                      width: '100%',
+                      borderRadius: '7px',
+                      border: '1px solid #e0e5e9',
+                    }}
+                  />
+                  <FieldDescription>
+                    Title: {selectedFile.title}
+                    <br />
+                    Filesize: {formatFileSize(selectedFile.size)}
+                  </FieldDescription>
+                </div>
+              )}
+            </>
+          )}
+
+          {!selectedFile && <FieldDescription>No selected Image</FieldDescription>}
+
+          {/* {selectedFile && isMultiSelect ? (
             <>
               <FieldDescription>Selected image:</FieldDescription>
-              {selectedFile.map((file) => (
+              {selectedFile?.map((file) => (
                 <>
                   <img
                     key={file.id}
@@ -201,17 +268,39 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
                       width: '100%',
                     }}
                   />
-                  <p>
-                    Title: {file.title}
+                  <FieldDescription>
+                    Title: {selectedFile?.title}
                     <br />
-                    Filesize: {formatFileSize(file?.size)}
-                  </p>
+                    Filesize: {formatFileSize(selectedFile?.size)}
+                  </FieldDescription>
                 </>
               ))}
             </>
           ) : (
-            <p>No selected Images</p>
+            <FieldDescription>No selected Images</FieldDescription>
           )}
+
+          {selectedFile && !isMultiSelect ? (
+            <>
+              <img
+                alt={selectedFile.title}
+                src={selectedFile.thumbnailUrl}
+                style={{
+                  height: 'auto',
+                  width: '100%',
+                  borderRadius: '7px',
+                  border: '1px solid #e0e5e9',
+                }}
+              />
+              <FieldDescription>
+                Title: {selectedFile?.title}
+                <br />
+                Filesize: {formatFileSize(selectedFile?.size)}
+              </FieldDescription>
+            </>
+          ) : (
+            <FieldDescription>No selected Image</FieldDescription>
+          )} */}
         </div>
       </div>
       {files && (
@@ -219,8 +308,8 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
           modalTitle='Image Library'
           acceptedTypes={['image/*']}
           // defaultSelectedItemIds={[selectedFile._id]}
-          fileLibraryList={files}
-          // fileLibraryList={filteredFiles}
+          // fileLibraryList={files}
+          fileLibraryList={filteredFiles ? filteredFiles : files}
           fileUploadCallback={handleFileUpload}
           filesDeleteCallback={handleDeleteFile}
           filesSelectCallback={handleSelectFile}

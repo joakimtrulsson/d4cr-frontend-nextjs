@@ -43,6 +43,7 @@ export function CustomNavigation({ authenticatedItem, lists }) {
       {/* <ListNavItems lists={lists} /> */}
       <ListNavItems lists={aboveTaxonomy} />
       <NavItem href='/site-config'>Site Config</NavItem>
+      <NavItem href='/navigations'>Navigations</NavItem>
       <FieldLabel
         style={{
           marginLeft: '1.5rem',

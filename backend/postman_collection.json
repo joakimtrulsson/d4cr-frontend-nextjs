@@ -1,0 +1,621 @@
+{
+	"info": {
+		"_postman_id": "f30ed3ad-19f4-4b08-94af-93a20c5bb9bf",
+		"name": "D4CR Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24852725",
+		"_collection_link": "https://d4cr-api.postman.co/workspace/My-Workspace~6005b7be-4fca-422e-87fc-7f10c2b86c9b/collection/24852725-f30ed3ad-19f4-4b08-94af-93a20c5bb9bf?action=share&source=collection_link&creator=24852725"
+	},
+	"item": [
+		{
+			"name": "Navigations",
+			"item": [
+				{
+					"name": "Get Main Menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MainMenu{\n    mainMenu{\n    navigation\n    ctaAnchorText\n    ctaUrl\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Footer Menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query FooterMenu{\n    footerMenu{\n    navigation\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Site Configuration",
+			"item": [
+				{
+					"name": "Get Footer - Banner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query FooterBanner {\n  footerBanner {\n    id\n    title\n    preamble {\n      document\n    }\n    icon\n    anchorText\n    url\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Form emails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query FormEmail {\n  formEmail {\n    id\n    contactEmail\n    joinSlackEmail\n    newChapterEmail\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Footer - Join us",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query FooterJoinUs {\n  footerJoinUs {\n    id\n    url1\n    icon1\n    url2\n    icon2\n    url3\n    icon3\n    url4\n    icon4\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Frontpage",
+			"item": [
+				{
+					"name": "Get Frontpage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Frontpage {\n    frontPage{\n        heroTitle\n        heroPreamble{\n            document\n        }\nheroVideo\n        ctaOneAnchorText\n        ctaOneUrl\n        ctaTwoUrlAnchorText\n        ctaTwoUrl\n        status\n        sections\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get all Pages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n            pages {\n              title\n              slug\n              heroPreamble{\n                document\n              }\n              ctaOneAnchorText\n              ctaOneUrl\n              ctaTwoUrlAnchorText\n              ctaTwoUrl\n              status\n              sections\n            }\n          }",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page by Slug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Page($where: PageWhereUniqueInput!) {\n  page(where: $where) {\n              title\n              slug\n              heroPreamble{\n                document\n              }\n              ctaOneAnchorText\n              ctaOneUrl\n              ctaTwoUrlAnchorText\n              ctaTwoUrl\n              status\n              sections\n            }\n          }",
+								"variables": "{\n  \"where\": {\n    \"slug\": \"/about-local-chapters\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chapters",
+			"item": [
+				{
+					"name": "Get Chapter by Slug",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Chapter($where: ChapterWhereUniqueInput!) {\n  chapter(where: $where  ) {\n    title\n    chapterLanguage\n    heroImage\n    preamble {\n      document\n    }\n    translatedChapters{\n        title\n        chapterLanguage\n        heroImage\n        preamble{\n            document\n        }\n        slug\n        status\n    }\n    slug\n    status\n  }\n}\n  \n",
+								"variables": "{\n  \"where\": {\n    \"slug\": \"/chapters/malmo\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Chapters",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Chapters {\n  chapters(where: { status: { equals: \"published\" } }) {\n      id\n      status\n      title\n      slug\n      chapterLanguage\n  \n      preamble {\n        document\n      }\n      heroImage\n      sections\n      translatedChapters {\n        id\n        title\n        slug\n        status\n        chapterLanguage\n    preamble {\n      document\n    }\n      }\n      }\n  }\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Principles",
+			"item": [
+				{
+					"name": "Get Principle by Slug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Principle($where: PrincipleWhereUniqueInput!) {\n  principle(where: $where) {\n    title\n    slug\n    resources\n    subHeader\n    quote\n    quoteAuthor\n    image\n    principleCategory{\n        title\n    }\n    principleNumber{\n        number\n    }\n    subPrinciples\n    status\n  }\n}",
+								"variables": "{\n  \"where\": {\n    \"slug\": \"/principle-4\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Principles",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\nprinciples {\n    title\n    slug\n    subHeader\n    quote\n    quoteAuthor\n    image \n    principleCategory {\n        title\n    }\n    principleNumber {\n        number\n    }\n    status\n    subPrinciples\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Principles orderBy Number",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query PrincipleNumbers {\n  principleNumbers(orderBy: { number: asc } \n  where: { principles: { status: { equals: \"published\" } } } )  {\n    number\n    principles {\n      id\n      status\n      title\n      subHeader\n      slug\n      image\n      quote\n      quoteAuthor\n      subPrinciples \n      resources\n      principleCategory {\n        title\n      }\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resources",
+			"item": [
+				{
+					"name": "Get all Resources",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    resources {\n        id\n        title\n        url\n        image \ncategory {\n    title\n}\nresourceType{\n    type\n    icon\n}\ncreatedAt\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Resources sorted by Category and createdAt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n  resourceCategories(orderBy: { createdAt: desc }) {\n    title\n    createdAt\n    resources(orderBy: { createdAt: desc }) {\n      createdAt\n      title\n      image\n      url\n      resourceType {\n        type\n        icon\n      }\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cases",
+			"item": [
+				{
+					"name": "Get all cases orderBy createdAt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Cases {\n  cases(orderBy: { createdAt: desc }) {\n    id\n    slug\n    status\n    title\n    preamble {\n      document\n    }\n    sections\n\n    caseImage\n    quote\n    caseLink\n    principles\n    resources\n    createdAt\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Case by Slug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Case($where: CaseWhereUniqueInput!) {\n  case(where: $where  ) {\n    id\n    slug\n    status\n    title\n    preamble {\n      document\n    }\n    sections\n    caseImage\n    quote\n    caseLink\n    principles\n    resources\n    createdAt\n  }\n}",
+								"variables": "{\n  \"where\": {\n    \"slug\": \"/cases/case-1\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News",
+			"item": [
+				{
+					"name": "Get all News orderBy CreatedAt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query NewsItems($orderBy: [NewsOrderByInput!]!) {\n  newsItems(orderBy: $orderBy) {\n    id\n    title\n    slug\n    status\n    image\n    sections\n    newsCategory {\n      categoryTitle\n    }\n    relatedChapters {\n      title\n    }\n    createdAt\n  }\n}",
+								"variables": "{\n  \"orderBy\": [\n    {\n      \"createdAt\": \"desc\"\n    }\n  ]\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  a News by slug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query News($where: NewsWhereUniqueInput!) {\n  news(where: $where) {\n    id\n    createdAt\n    title\n    slug\n    newsCategory {\n      categoryTitle\n    }\n        newsNumber {\n        number\n    }\n    image\n    sections\n    status\n  }\n}",
+								"variables": "{\n  \"where\": {\n    \"slug\": \"/news/speculative-design-the-future-of-childrens-rights-in-digital-products\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all News sorted by Category and CreatedAt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query NewsItems($orderBy: [NewsOrderByInput!]!, $where: NewsWhereInput!) {\n  newsItems(orderBy: $orderBy, where: $where) {\n    id\n    title\n    slug\n    status\n    image\n    sections\n    newsCategory {\n      categoryTitle\n    }\n    relatedChapters {\n      title\n    }\n    createdAt\n  }\n}",
+								"variables": "{\n  \"orderBy\": [\n    {\n      \"createdAt\": \"desc\"\n    }\n  ],\n  \"where\": {\n    \"newsCategory\": {\n      \"categoryTitle\": {\n        \"equals\": \"Event\"\n      }\n    }\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all News related to a Chapter and CreatedAt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query NewsItems($orderBy: [NewsOrderByInput!]!, $where: ChapterWhereInput!) {\n  newsItems(orderBy: $orderBy) {\n    id\n    title\n    slug\n    status\n    image\n    sections\n    newsCategory {\n      categoryTitle\n    }\n    relatedChapters(where: $where) {\n      title\n    }\n    createdAt\n  }\n}",
+								"variables": "{\n  \"orderBy\": [\n    {\n      \"createdAt\": \"desc\"\n    }\n  ],\n  \"where\": {\n    \"title\": {\n      \"equals\": \"Malmo\"\n    }\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all News by Category related to a Chapter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query NewsCategories($where: NewsCategoryWhereInput!, $relatedChaptersWhere2: ChapterWhereInput!, $orderBy: [NewsOrderByInput!]!) {\n  newsCategories(where: $where) {\n    categoryTitle\n    relatedNews(orderBy: $orderBy) {\n      title\n      createdAt\n      relatedChapters(where: $relatedChaptersWhere2) {\n        title\n      }\n    }\n  }\n}",
+								"variables": "{\n    \"where\": {\n    \"categoryTitle\": {\n      \"equals\": \"Event\"\n    }\n  },\n  \"relatedChaptersWhere2\": {\n    \"title\": {\n      \"equals\": \"Copenhagen\"\n    }\n  },\n  \"orderBy\": [\n    {\n      \"createdAt\": \"desc\"\n    }\n  ]\n}"
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "Test Requests",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n    tests{\n        image\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "Send email Contact Us",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/email",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send email Join our Slack",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/email",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send email Share story",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"John Doe\",\n\"contactEmail\": \"guest@test.com\",\n\"linkedIn\": \"http://www.linkedin.com/userprofile\",\n\"message\": \"This is a test message...\",\n\"usingD4CRGuideAndPrinciples\": true,\n\"logoFeaturedOnWebpage\": \"false\", \n\"target\": \"shareyourstory\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}/api/email",
+							"host": [
+								"{{URL}}{{PORT}}"
+							],
+							"path": [
+								"api",
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

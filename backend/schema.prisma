@@ -88,7 +88,7 @@ model FooterBanner {
 model FormEmail {
   id              Int    @id
   contactEmail    String @default("")
-  newChapterEmail String @default("")
+  shareStoryEmail String @default("")
   joinSlackEmail  String @default("")
 }
 
@@ -102,6 +102,18 @@ model FooterJoinUs {
   icon3 Json?
   url4  String @default("")
   icon4 Json?
+}
+
+model MainMenu {
+  id            Int    @id
+  navigation    Json?
+  ctaAnchorText String @default("")
+  ctaUrl        Json?
+}
+
+model FooterMenu {
+  id         Int   @id
+  navigation Json?
 }
 
 model News {
@@ -158,7 +170,7 @@ model ResourceType {
 model Image {
   id             String    @id @default(uuid())
   title          String    @default("")
-  alt            String    @default("")
+  altText        String    @default("")
   file_filesize  Int?
   file_extension String?
   file_width     Int?
@@ -172,7 +184,7 @@ model Image {
 model Video {
   id            String    @id @default(uuid())
   title         String    @default("")
-  alt           String    @default("")
+  altText       String    @default("")
   file_filesize Int?
   file_filename String?
   createdAt     DateTime? @default(now())
@@ -226,8 +238,7 @@ model Case {
 }
 
 model Test {
-  id         String @id @default(uuid())
-  title      String @default("")
-  sections   Json?
-  principles Json?
+  id    String @id @default(uuid())
+  title String @default("")
+  image Json?
 }

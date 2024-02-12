@@ -21,7 +21,7 @@ export const videoSchema = list({
   fields: {
     title: text(),
 
-    alt: text(),
+    altText: text(),
 
     file: file({
       storage: 'videoStorage',
