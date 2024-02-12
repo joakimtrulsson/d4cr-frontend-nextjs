@@ -151,14 +151,22 @@ function BulletList({
               editData={field.bodyText}
               extended={false}
             />
-            <RemoveEntryButton handleRemove={handleRemoveField} indexToRemove={index}>
-              Remove entry
-            </RemoveEntryButton>
+            {value.bullets.length > 1 && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <RemoveEntryButton
+                  style={{ marginTop: '1rem' }}
+                  handleRemove={handleRemoveField}
+                  indexToRemove={index}
+                >
+                  Remove entry
+                </RemoveEntryButton>
+              </div>
+            )}
           </div>
         );
       })}
 
-      <div style={{ borderTop: '1px solid #e1e5e9' }}>
+      <div>
         <AddEntryButton handleAdd={handleAddField}>Add field</AddEntryButton>
 
         {editData ? (

@@ -222,6 +222,20 @@ model PrincipleCategory {
   principles Principle[] @relation("Principle_principleCategory")
 }
 
+model SteeringGroupMember {
+  id               String    @id @default(uuid())
+  fullName         String    @default("")
+  role             String    @default("")
+  city             String    @default("")
+  country          String    @default("")
+  image            Json?
+  socialMediaUrl1  String    @default("")
+  socialMediaIcon1 Json?
+  socialMediaUrl2  String    @default("")
+  socialMediaIcon2 Json?
+  createdAt        DateTime? @default(now())
+}
+
 model Case {
   id         String    @id @default(uuid())
   title      String    @default("")
@@ -238,7 +252,7 @@ model Case {
 }
 
 model Test {
-  id    String @id @default(uuid())
-  title String @default("")
-  image Json?
+  id       String @id @default(uuid())
+  title    String @default("")
+  sections Json?
 }

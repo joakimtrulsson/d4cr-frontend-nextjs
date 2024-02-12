@@ -119,7 +119,7 @@ async function fetchFormEmails() {
               id
               contactEmail
               joinSlackEmail
-              newChapterEmail
+              shareStoryEmail
             }
           }
         `
@@ -151,6 +151,12 @@ var require_emailRoutes = __commonJS({
         const targetEmails = await fetchFormEmails();
         const fromEmail = `${process.env.EMAIL_FROM}}`;
         const url = "https://d4cr.com";
+        if (!req.body.target) {
+          res.status(400).send({
+            success: false,
+            message: "Missing or invalid required fields"
+          });
+        }
         if (req.body.target === "contactus") {
           if (!req.body.name || !req.body.contactEmail || !req.body.message) {
             res.status(400).send({
@@ -203,7 +209,7 @@ var require_emailRoutes = __commonJS({
         res.status(200).send({ success: true, message: "Email sent" });
       } catch (err) {
         console.log(err);
-        res.status("Error sending email", err);
+        res.status(500).json({ success: false, message: err.message });
       }
     };
     module2.exports = sendEmail2;
@@ -216,7 +222,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core23 = require("@keystone-6/core");
+var import_core24 = require("@keystone-6/core");
 var import_express = __toESM(require("express"));
 var import_dotenv = __toESM(require("dotenv"));
 var import_morgan = __toESM(require("morgan"));
@@ -1811,11 +1817,11 @@ var caseSchema = (0, import_core19.list)({
   }
 });
 
-// schemas/imageSchema.js
+// schemas/steeringGroupMemberSchema.js
 var import_core20 = require("@keystone-6/core");
 var import_fields20 = require("@keystone-6/core/fields");
 var import_access39 = require("@keystone-6/core/access");
-var imageSchema = (0, import_core20.list)({
+var steeringGroupMemberSchema = (0, import_core20.list)({
   access: {
     operation: {
       ...(0, import_access39.allOperations)(isSignedIn),
@@ -1829,12 +1835,91 @@ var imageSchema = (0, import_core20.list)({
       delete: rules.canManageItems
     }
   },
+  labelField: "fullName",
+  ui: {
+    listView: {
+      initialColumns: ["fullName", "role", "city", "country"],
+      initialSort: { field: "fullName", direction: "ASC" },
+      pageSize: 50
+    }
+  },
   fields: {
-    title: (0, import_fields20.text)(),
-    altText: (0, import_fields20.text)(),
-    file: (0, import_fields20.image)({ storage: "imageStorage" }),
-    createdAt: (0, import_fields20.timestamp)({ isRequired: true, defaultValue: { kind: "now" } }),
-    size: (0, import_fields20.integer)({
+    fullName: (0, import_fields20.text)({ validation: { isRequired: true } }),
+    role: (0, import_fields20.text)({ validation: { isRequired: true } }),
+    city: (0, import_fields20.text)({ validation: { isRequired: true } }),
+    country: (0, import_fields20.text)({ validation: { isRequired: true } }),
+    image: (0, import_fields20.json)({
+      ui: {
+        views: "./customViews/ImageLibrary.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    socialMediaUrl1: (0, import_fields20.text)({
+      label: "Socialmedia Link 1",
+      ui: {
+        description: "Url"
+      }
+    }),
+    socialMediaIcon1: (0, import_fields20.json)({
+      label: "Socialmedia icon 1",
+      ui: {
+        views: "./customViews/IconPickerSection.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    socialMediaUrl2: (0, import_fields20.text)({
+      label: "Socialmedia Link 2",
+      ui: {
+        description: "Url"
+      }
+    }),
+    socialMediaIcon2: (0, import_fields20.json)({
+      label: "Socialmedia icon 2",
+      ui: {
+        views: "./customViews/IconPickerSection.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    }),
+    createdAt: (0, import_fields20.timestamp)({
+      ui: {
+        itemView: { fieldMode: "hidden" }
+      },
+      isRequired: true,
+      defaultValue: { kind: "now" }
+    })
+  }
+});
+
+// schemas/imageSchema.js
+var import_core21 = require("@keystone-6/core");
+var import_fields21 = require("@keystone-6/core/fields");
+var import_access41 = require("@keystone-6/core/access");
+var imageSchema = (0, import_core21.list)({
+  access: {
+    operation: {
+      ...(0, import_access41.allOperations)(isSignedIn),
+      create: permissions.canCreateItems,
+      query: () => true
+    },
+    filter: {
+      query: () => true,
+      // query: rules.canReadItems,
+      update: rules.canManageItems,
+      delete: rules.canManageItems
+    }
+  },
+  fields: {
+    title: (0, import_fields21.text)(),
+    altText: (0, import_fields21.text)(),
+    file: (0, import_fields21.image)({ storage: "imageStorage" }),
+    createdAt: (0, import_fields21.timestamp)({ isRequired: true, defaultValue: { kind: "now" } }),
+    size: (0, import_fields21.integer)({
       ui: {
         createView: {
           fieldMode: "hidden"
@@ -1851,7 +1936,7 @@ var imageSchema = (0, import_core20.list)({
         }
       }
     }),
-    url: (0, import_fields20.text)({
+    url: (0, import_fields21.text)({
       ui: {
         createView: {
           fieldMode: "hidden"
@@ -1873,13 +1958,13 @@ var imageSchema = (0, import_core20.list)({
 });
 
 // schemas/videoSchema.js
-var import_core21 = require("@keystone-6/core");
-var import_fields21 = require("@keystone-6/core/fields");
-var import_access41 = require("@keystone-6/core/access");
-var videoSchema = (0, import_core21.list)({
+var import_core22 = require("@keystone-6/core");
+var import_fields22 = require("@keystone-6/core/fields");
+var import_access43 = require("@keystone-6/core/access");
+var videoSchema = (0, import_core22.list)({
   access: {
     operation: {
-      ...(0, import_access41.allOperations)(isSignedIn),
+      ...(0, import_access43.allOperations)(isSignedIn),
       create: permissions.canCreateItems,
       query: () => true
     },
@@ -1891,13 +1976,13 @@ var videoSchema = (0, import_core21.list)({
     }
   },
   fields: {
-    title: (0, import_fields21.text)(),
-    altText: (0, import_fields21.text)(),
-    file: (0, import_fields21.file)({
+    title: (0, import_fields22.text)(),
+    altText: (0, import_fields22.text)(),
+    file: (0, import_fields22.file)({
       storage: "videoStorage"
     }),
-    createdAt: (0, import_fields21.timestamp)({ isRequired: true, defaultValue: { kind: "now" } }),
-    size: (0, import_fields21.integer)({
+    createdAt: (0, import_fields22.timestamp)({ isRequired: true, defaultValue: { kind: "now" } }),
+    size: (0, import_fields22.integer)({
       hooks: {
         resolveInput: ({ operation, resolvedData, inputData }) => {
           if (operation === "create") {
@@ -1906,8 +1991,8 @@ var videoSchema = (0, import_core21.list)({
         }
       }
     }),
-    thumbnailUrl: (0, import_fields21.text)({}),
-    url: (0, import_fields21.text)({
+    thumbnailUrl: (0, import_fields22.text)({}),
+    url: (0, import_fields22.text)({
       ui: {
         itemView: {
           fieldMode: "read"
@@ -1926,13 +2011,13 @@ var videoSchema = (0, import_core21.list)({
 });
 
 // schemas/testSchema.js
-var import_core22 = require("@keystone-6/core");
-var import_fields22 = require("@keystone-6/core/fields");
-var import_access43 = require("@keystone-6/core/access");
-var testSchema = (0, import_core22.list)({
+var import_core23 = require("@keystone-6/core");
+var import_fields23 = require("@keystone-6/core/fields");
+var import_access45 = require("@keystone-6/core/access");
+var testSchema = (0, import_core23.list)({
   access: {
     operation: {
-      ...(0, import_access43.allOperations)(isSignedIn),
+      ...(0, import_access45.allOperations)(isSignedIn),
       create: permissions.canCreateItems,
       query: () => true
     },
@@ -1944,23 +2029,23 @@ var testSchema = (0, import_core22.list)({
     }
   },
   fields: {
-    title: (0, import_fields22.text)(),
-    image: (0, import_fields22.json)({
-      ui: {
-        views: "./customViews/ImageLibrary.jsx",
-        createView: { fieldMode: "edit" },
-        listView: { fieldMode: "hidden" },
-        itemView: { fieldMode: "edit" }
-      }
-    })
-    // sections: json({
+    title: (0, import_fields23.text)(),
+    // image: json({
     //   ui: {
-    //     views: './customViews/AllSections.jsx',
+    //     views: './customViews/ImageLibrary.jsx',
     //     createView: { fieldMode: 'edit' },
     //     listView: { fieldMode: 'hidden' },
     //     itemView: { fieldMode: 'edit' },
     //   },
     // }),
+    sections: (0, import_fields23.json)({
+      ui: {
+        views: "./customViews/AllSections.jsx",
+        createView: { fieldMode: "edit" },
+        listView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "edit" }
+      }
+    })
     // principles: json({
     //   ui: {
     //     views: './customViews/Principles.jsx',
@@ -2002,6 +2087,7 @@ var lists = {
   Principle: principleSchema,
   PrincipleNumber: principleNumberSchema,
   PrincipleCategory: principleCategorySchema,
+  SteeringGroupMember: steeringGroupMemberSchema,
   Case: caseSchema,
   Test: testSchema
 };
@@ -2088,7 +2174,7 @@ var import_emailRoutes = __toESM(require_emailRoutes());
 import_dotenv.default.config();
 var { PORT, MAX_FILE_SIZE, DATABASE_URL } = process.env;
 var keystone_default = withAuth(
-  (0, import_core23.config)({
+  (0, import_core24.config)({
     server: {
       port: PORT,
       maxFileSize: MAX_FILE_SIZE,

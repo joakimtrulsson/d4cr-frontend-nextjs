@@ -19,6 +19,7 @@ import {
   Principle,
   PrincipleNumber,
   PrincipleCategory,
+  SteeringGroupMember,
   Case,
   Test,
 } from './schemas/index';
@@ -44,6 +45,7 @@ export const lists = {
   Principle,
   PrincipleNumber,
   PrincipleCategory,
+  SteeringGroupMember,
   Case,
   Test,
 };

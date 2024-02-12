@@ -51,6 +51,8 @@ function StoredSections({
                       <div>
                         {section.sectionType === 'CHAPTERTEASER'
                           ? 'Chapter Teaser'
+                          : section.sectionType === 'STEERINGGROUP'
+                          ? 'Steering Group'
                           : ` ${section.sectionType} - ${section.title}${
                               section.sectionType === 'MEDIATEXT'
                                 ? ` Border: ${section.border}`

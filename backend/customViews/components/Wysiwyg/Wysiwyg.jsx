@@ -8,6 +8,7 @@ import { getMarked, getBlock } from './utils/SlateUtilityFunctions.js';
 import withLinks from './plugins/withLinks.js';
 import withEmbeds from './plugins/withEmbeds.js';
 import withEquation from './plugins/withEquation.js';
+import withTables from './plugins/withTable.js';
 import './editor.css';
 
 const Element = (props) => {
@@ -19,7 +20,10 @@ const Leaf = ({ attributes, children, leaf }) => {
 };
 const Wysiwyg = ({ onSetPreamble, editData, extended, height }) => {
   const editor = useMemo(
-    () => withEquation(withHistory(withEmbeds(withLinks(withReact(createEditor()))))),
+    () =>
+      withEquation(
+        withHistory(withEmbeds(withTables(withLinks(withReact(createEditor())))))
+      ),
     []
   );
 
@@ -50,7 +54,6 @@ const Wysiwyg = ({ onSetPreamble, editData, extended, height }) => {
         style={{
           minHeight: height ? `${height.toString()}px` : extended ? '600px' : '300px',
 
-          // overflow: 'auto',
           border: '1px solid #e1e5e9',
           borderRadius: '7px',
           padding: '0px',
@@ -59,16 +62,12 @@ const Wysiwyg = ({ onSetPreamble, editData, extended, height }) => {
         <Toolbar extended={extended} />
         <Editable
           className='editor'
-          placeholder='Write something...'
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           style={{
             minHeight: height ? `${height.toString()}px` : extended ? '600px' : '300px',
-            // minHeight: '300px',
-
             borderTop: '1px solid #e1e5e9',
             paddingLeft: '10px',
-            margin: '0px',
           }}
         />
       </div>

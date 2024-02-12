@@ -18,57 +18,65 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [search, setSearch] = useState('');
-
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [filteredFiles, setFilteredFiles] = useState();
 
+  // Hämta bilderna vid första renderingen
   useEffect(() => {
-    const fetchData = async () => {
-      if (value) {
-        setSelectedFile(JSON.parse(value));
-      }
-
-      try {
-        const response = await fetch(`${API_URL}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Apollo-Require-Preflight': 'true',
-          },
-          body: JSON.stringify({
-            query: `
-            query {
-              images {
-                createdAt
-                alt
-                id
-                size
-                url
-                title
-              }
-            }
-          `,
-          }),
-        });
-
-        const result = await response.json();
-
-        const modifiedFiles = result.data.images.map((file) => {
-          return {
-            ...file,
-            _id: file.id,
-            id: undefined,
-            thumbnailUrl: file.url,
-          };
-        });
-
-        setFiles(modifiedFiles);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
-  }, [files]);
+  }, []);
+
+  useEffect(() => {
+    if (isFileUploaded) {
+      fetchData();
+      setIsFileUploaded(false);
+    }
+  }, [isFileUploaded]);
+
+  const fetchData = async () => {
+    if (value) {
+      setSelectedFile(JSON.parse(value));
+    }
+
+    try {
+      const response = await fetch(`${API_URL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Apollo-Require-Preflight': 'true',
+        },
+        body: JSON.stringify({
+          query: `
+          query {
+            images {
+              createdAt
+              altText
+              id
+              size
+              url
+              title
+            }
+          }
+        `,
+        }),
+      });
+
+      const result = await response.json();
+
+      const modifiedFiles = result.data.images.map((file) => {
+        return {
+          ...file,
+          _id: file.id,
+          id: undefined,
+          thumbnailUrl: file.url,
+        };
+      });
+
+      setFiles((prevFiles) => [...prevFiles, ...modifiedFiles]);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   const handleOpenMediaLibrary = () => {
     setIsMediaLibraryOpen((prev) => !prev);
@@ -120,8 +128,8 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
       // result.data.createImage.id finns bara.
 
       if (!result.errors) {
-        // handleFinishUpload(uploadedFile);
-        // setFiles((prev) => [...prev, uploadedFile]);
+        setIsFileUploaded(true);
+
         return true;
       }
       return false;

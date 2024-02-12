@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
+import { FieldContainer, FieldLabel, FieldLegend, TextInput } from '@keystone-ui/fields';
 
 import IconPicker from '../components/IconPicker/IconPicker.jsx';
 import Wysiwyg from '../components/Wysiwyg/Wysiwyg.jsx';
@@ -20,7 +20,7 @@ function Banner({
   sectionIndex,
   setSectionsData,
 }) {
-  const [iconName, setIconName] = React.useState('');
+  const [iconName, setIconName] = useState('');
   const [value, setValue] = useState({ title: '' });
 
   const pagesOptions = useFetchLinkOptions();
@@ -64,7 +64,7 @@ function Banner({
   }
 
   async function handleSaveUpdate(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     if (onChange) {
       const updatedSection = {
@@ -159,6 +159,7 @@ function Banner({
             Add Banner section
           </AddSectionButton>
         )}
+
         {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}
       </div>
     </FieldContainer>

@@ -30,6 +30,9 @@ export { principleCategorySchema as PrincipleCategory } from './principleCategor
 // Cases
 export { caseSchema as Case } from './caseSchema';
 
+// Steering Group Members
+export { steeringGroupMemberSchema as SteeringGroupMember } from './steeringGroupMemberSchema';
+
 // Files
 export { imageSchema as Image } from './imageSchema';
 export { videoSchema as Video } from './videoSchema';

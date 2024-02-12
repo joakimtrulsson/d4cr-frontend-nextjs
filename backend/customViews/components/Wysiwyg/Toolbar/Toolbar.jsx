@@ -16,6 +16,9 @@ import extendedToolbarGroups from './extendedToolbarGroups.js';
 import simpleToolbarGroups from './simpleToolbarGroups.js';
 import './toolbar.css';
 
+import TableSelector from '../Elements/Table/TableSelector';
+import TableContextMenu from '../Elements/TableContextMenu/TableContextMenu';
+
 import LinkButton from '../Elements/Link/LinkButton.jsx';
 import Embed from '../Elements/Embed/Embed.jsx';
 
@@ -128,8 +131,8 @@ const Toolbar = ({ extended }) => {
               //       editor={editor}
               //     />
               //   );
-              // case 'table':
-              //   return <TableSelector key={element.id} editor={editor} />;
+              case 'table':
+                return <TableSelector key={element.id} editor={editor} />;
               case 'id':
                 return <Id editor={editor} />;
               // case 'equation':
@@ -142,8 +145,8 @@ const Toolbar = ({ extended }) => {
           })}
         </span>
       ))}
-      {/* <TableContextMenu editor={editor} />
-      <HtmlContextMenu editor={editor} handleCodeToText={handleCodeToText} /> */}
+      <TableContextMenu editor={editor} />
+      {/* <HtmlContextMenu editor={editor} handleCodeToText={handleCodeToText} /> */}
     </div>
   );
 };

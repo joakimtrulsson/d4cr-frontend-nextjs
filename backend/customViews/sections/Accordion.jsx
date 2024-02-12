@@ -134,9 +134,17 @@ function Accordion({
             editData={field.bodyText}
             extended={false}
           />
-          <RemoveEntryButton handleRemove={handleRemoveField} indexToRemove={index}>
-            Remove entry
-          </RemoveEntryButton>
+          {value.fields.length > 1 && (
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <RemoveEntryButton
+                style={{ marginTop: '1rem' }}
+                handleRemove={handleRemoveField}
+                indexToRemove={index}
+              >
+                Remove entry
+              </RemoveEntryButton>
+            </div>
+          )}
         </div>
       ))}
 

@@ -65,17 +65,21 @@ const toolbarGroups = [
     },
     {
       id: 13,
+      type: 'table',
+    },
+    {
+      id: 14,
       format: 'link',
       type: 'link',
     },
     {
-      id: 14,
+      id: 15,
       format: 'spotify',
       type: 'embed',
     },
 
     {
-      id: 15,
+      id: 16,
       format: 'video',
       type: 'embed',
     },

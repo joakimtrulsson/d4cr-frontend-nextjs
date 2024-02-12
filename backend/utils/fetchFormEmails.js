@@ -13,7 +13,7 @@ export async function fetchFormEmails() {
               id
               contactEmail
               joinSlackEmail
-              newChapterEmail
+              shareStoryEmail
             }
           }
         `,

@@ -534,7 +534,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query {\n    tests{\n        image\n    }\n}",
+								"query": "query {\n    tests{\n        sections\n    }\n}",
 								"variables": ""
 							}
 						},
@@ -557,6 +557,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"John Doe\",\n\"contactEmail\": \"guest@test.com\",\n\"message\": \"This is a test message...\",\n\"target\": \"contactus\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{URL}}{{PORT}}/api/email",
 							"host": [
@@ -575,6 +584,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"John Doe\",\n\"contactEmail\": \"guest@test.com\",\n\"linkedIn\": \"http://www.linkedin.com/userprofile\",\n\"message\": \"This is a test message...\",\n\"target\": \"joinslack\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{URL}}{{PORT}}/api/email",
 							"host": [
@@ -595,7 +613,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\": \"John Doe\",\n\"contactEmail\": \"guest@test.com\",\n\"linkedIn\": \"http://www.linkedin.com/userprofile\",\n\"message\": \"This is a test message...\",\n\"usingD4CRGuideAndPrinciples\": true,\n\"logoFeaturedOnWebpage\": \"false\", \n\"target\": \"shareyourstory\"\n}",
+							"raw": "{\"name\": \"John Doe\",\n\"contactEmail\": \"guest@test.com\",\n\"linkedIn\": \"http://www.linkedin.com/userprofile\",\n\"message\": \"This is a test message...\",\n\"usingD4CRGuideAndPrinciples\": true,\n\"logoFeaturedOnWebpage\": false, \n\"target\": \"shareyourstory\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -610,6 +628,58 @@
 							"path": [
 								"api",
 								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Reset password link",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation sendUserPasswordResetLink",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Steering group",
+			"item": [
+				{
+					"name": "Get all Steering group members",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query SteeringGroupMembers {\n    steeringGroupMembers{\n        id\n        createdAt\n        fullName\n        role\n        city\n        country\n        socialMediaUrl1\n        socialMediaIcon1\n        socialMediaUrl2\n        socialMediaIcon2\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{PORT}}{{ROUTE}}",
+							"host": [
+								"{{URL}}{{PORT}}{{ROUTE}}"
 							]
 						}
 					},

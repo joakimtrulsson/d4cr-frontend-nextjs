@@ -1,24 +1,8 @@
-# D4CR Keystone Server Installation Guide
+# D4CR Keystone Server Installations Guide
 
 1. Konfigurera miljövariabler
    Skapa en .env-fil i /backend med nedanstående variabler och ange dina egna värden.
    Om annan port än 3000 ska användas så ändra PORT till önskad port SAMT i utils/constants.js
-
-2. Mailtrap
-   Gå till Mailtrap och skapa ett konto om du inte redan har ett.
-   Efter att du har loggat in, skapa en ny inkorg genom att klicka på "Add Inbox" (Lägg till inkorg) och följ instruktionerna för att konfigurera den.
-   När inkorgen är skapad, klicka på den för att få tillgång till dess inställningar.
-   I inställningarna kommer du att hitta SMTP-serverinformation som du behöver för att fylla i din .env-fil. Notera användarnamn, lösenord, host och port.
-   Återgå till din .env-fil och fyll i följande fält under "Mail - Development (Mailtrap)":
-   EMAIL_USERNAME_DEV: Ditt Mailtrap-användarnamn
-   EMAIL_PASSWORD_DEV: Ditt Mailtrap-lösenord
-   EMAIL_HOST_DEV: SMTP-host som tillhandahålls av Mailtrap
-   EMAIL_PORT_DEV: SMTP-port som tillhandahålls av Mailtrap
-
-3. Postman
-   Importera "postman_collection.json" till din Postman app.
-   Denna fil innehåller en samling av fördefinierade API-förfrågningar som du kan använda för att interagera med.
-   .nosync
 
 ```
 NODE_ENV=development
@@ -55,6 +39,22 @@ EMAIL_HOST=
 EMAIL_PORT=
 
 ```
+
+2. Mailtrap
+   Gå till Mailtrap och skapa ett konto om du inte redan har ett.
+   Efter att du har loggat in, skapa en ny inkorg genom att klicka på "Add Inbox" (Lägg till inkorg) och följ instruktionerna för att konfigurera den.
+   När inkorgen är skapad, klicka på den för att få tillgång till dess inställningar.
+   I inställningarna kommer du att hitta SMTP-serverinformation som du behöver för att fylla i din .env-fil. Notera användarnamn, lösenord, host och port.
+   Återgå till din .env-fil och fyll i följande fält under "Mail - Development (Mailtrap)":
+   EMAIL_USERNAME_DEV: Ditt Mailtrap-användarnamn
+   EMAIL_PASSWORD_DEV: Ditt Mailtrap-lösenord
+   EMAIL_HOST_DEV: SMTP-host som tillhandahålls av Mailtrap
+   EMAIL_PORT_DEV: SMTP-port som tillhandahålls av Mailtrap
+
+3. Postman
+   Importera "postman_collection.json" till din Postman app.
+   Denna fil innehåller en samling av fördefinierade API-förfrågningar som du kan använda för att interagera med.
+   .nosync
 
 4. Skapa en mysql databas lokalt
    Följ dessa steg för att skapa en MySQL-databas lokalt:

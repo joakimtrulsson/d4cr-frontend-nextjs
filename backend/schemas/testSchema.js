@@ -21,22 +21,22 @@ export const testSchema = list({
   fields: {
     title: text(),
 
-    image: json({
-      ui: {
-        views: './customViews/ImageLibrary.jsx',
-        createView: { fieldMode: 'edit' },
-        listView: { fieldMode: 'hidden' },
-        itemView: { fieldMode: 'edit' },
-      },
-    }),
-    // sections: json({
+    // image: json({
     //   ui: {
-    //     views: './customViews/AllSections.jsx',
+    //     views: './customViews/ImageLibrary.jsx',
     //     createView: { fieldMode: 'edit' },
     //     listView: { fieldMode: 'hidden' },
     //     itemView: { fieldMode: 'edit' },
     //   },
     // }),
+    sections: json({
+      ui: {
+        views: './customViews/AllSections.jsx',
+        createView: { fieldMode: 'edit' },
+        listView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'edit' },
+      },
+    }),
     // principles: json({
     //   ui: {
     //     views: './customViews/Principles.jsx',

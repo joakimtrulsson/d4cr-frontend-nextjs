@@ -9,6 +9,13 @@ const sendEmail = async (req, res) => {
     const fromEmail = `${process.env.EMAIL_FROM}}`;
     const url = 'https://d4cr.com';
 
+    if (!req.body.target) {
+      res.status(400).send({
+        success: false,
+        message: 'Missing or invalid required fields',
+      });
+    }
+
     // Contact us form
     if (req.body.target === 'contactus') {
       if (!req.body.name || !req.body.contactEmail || !req.body.message) {
@@ -86,7 +93,7 @@ const sendEmail = async (req, res) => {
     res.status(200).send({ success: true, message: 'Email sent' });
   } catch (err) {
     console.log(err);
-    res.status('Error sending email', err);
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 

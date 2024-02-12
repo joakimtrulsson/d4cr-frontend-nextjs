@@ -98,3 +98,20 @@ select:focus,
 div[contenteditable='true']:focus {
   outline: none;
 }
+
+table {
+  width: 100%;
+}
+td {
+  height: 50px;
+  padding: 0 5px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+table {
+  border-collapse: collapse;
+}

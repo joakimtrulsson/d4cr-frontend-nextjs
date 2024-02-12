@@ -9,7 +9,7 @@ function AddSectionButton({ handleSaveSection, children }) {
       tone='active'
       weight='bold'
       size='small'
-      isBlock='true'
+      // isBlock='true'
     >
       {children}
     </Button>

@@ -201,9 +201,11 @@ function Resources({
             />
 
             {groups.length > 1 && (
-              <RemoveEntryButton handleRemove={handleRemoveGroup} indexToRemove={index}>
-                Remove group
-              </RemoveEntryButton>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <RemoveEntryButton handleRemove={handleRemoveGroup} indexToRemove={index}>
+                  Remove group
+                </RemoveEntryButton>
+              </div>
             )}
           </div>
         ))}

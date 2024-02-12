@@ -104,13 +104,17 @@ function WysiwygSection({
         />
       </div>
 
-      {editData ? (
-        <UpdateSectionButton handleUpdate={handleSaveUpdate}>Update</UpdateSectionButton>
-      ) : (
-        <AddSectionButton handleSaveSection={handleSave}>
-          Add WYSIWYG section
-        </AddSectionButton>
-      )}
+      <div style={{ margin: '1rem 0' }}>
+        {editData ? (
+          <UpdateSectionButton handleUpdate={handleSaveUpdate}>
+            Update
+          </UpdateSectionButton>
+        ) : (
+          <AddSectionButton handleSaveSection={handleSave}>
+            Add WYSIWYG section
+          </AddSectionButton>
+        )}
+      </div>
 
       <div style={{ borderTop: '1px solid #e1e5e9' }}>
         {editData && <CancelButton handleClose={onCloseSection}>Cancel</CancelButton>}

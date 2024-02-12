@@ -17,6 +17,7 @@ const {
   WysiwygSection,
   Resources,
   Principles,
+  SteeringGroup,
 } = SectionComponents;
 
 const SECTIONS = {
@@ -30,6 +31,7 @@ const SECTIONS = {
   WYSIWYG: WysiwygSection,
   RESOURCES: Resources,
   PRINCIPLES: Principles,
+  STEERINGGROUP: SteeringGroup,
 };
 
 import SelectSections from './components/SelectSections/SelectSections';
@@ -48,6 +50,14 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const handleEditSection = (sectionId) => {
     const sectionToEditData = sectionsData.find((section) => section.id === sectionId);
     const sectionIndex = sectionsData.findIndex((section) => section.id === sectionId);
+
+    // Om sectionType är "CHAPTERTEASER" eller "STEERINGGROUP", gör ingenting
+    if (
+      sectionToEditData.sectionType === 'CHAPTERTEASER' ||
+      sectionToEditData.sectionType === 'STEERINGGROUP'
+    ) {
+      return;
+    }
 
     setEditFormData({ sectionData: sectionToEditData, sectionIndex });
     setActiveSection(sectionToEditData.sectionType);
@@ -70,11 +80,13 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   return (
     <FieldContainer>
       <FieldLabel>{field.label}</FieldLabel>
-      <SelectSections
-        activeSection={activeSection}
-        onChangeActiveSections={handleActiveSection}
-        options={options}
-      />
+      {!editFormData && (
+        <SelectSections
+          activeSection={activeSection}
+          onChangeActiveSections={handleActiveSection}
+          options={options}
+        />
+      )}
 
       {Object.entries(SECTIONS).map(([key, SectionComponent], index) => {
         const commonProps = {

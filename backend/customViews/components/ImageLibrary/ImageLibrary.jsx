@@ -16,63 +16,21 @@ import AddEntryButton from '../AddEntryButton/AddEntryButton';
 function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);
   const [files, setFiles] = useState([]);
-  // const [files, setFiles] = useFetchImages();
-  // const handleFileUpload = useFileUpload();
   const [search, setSearch] = useState('');
   const [filteredFiles, setFilteredFiles] = useState();
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
 
-  // const [filteredFiles, setFilteredFiles] = useState([]);
-
-  // useEffect(() => {
-  //   setFilteredFiles(
-  //     files.filter((file) => file.title.toLowerCase().includes(search.toLowerCase()))
-  //   );
-  // }, [files, search]);
+  // Hämta bilderna vid första renderingen
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${API_URL}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Apollo-Require-Preflight': 'true',
-          },
-          body: JSON.stringify({
-            query: `
-            query {
-              images {
-                createdAt
-                alt
-                id
-                size
-                url
-                title
-              }
-            }
-          `,
-          }),
-        });
-
-        const result = await response.json();
-
-        const modifiedFiles = result.data.images.map((file) => {
-          return {
-            ...file,
-            _id: file.id,
-            id: undefined,
-            thumbnailUrl: file.url,
-          };
-        });
-
-        setFiles(modifiedFiles);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [files]);
+    if (isFileUploaded) {
+      fetchData();
+      setIsFileUploaded(false);
+    }
+  }, [isFileUploaded]);
 
   const handleOpenMediaLibrary = () => {
     setIsMediaLibraryOpen((prev) => !prev);
@@ -86,6 +44,47 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
       console.log(file);
       setSelectedFile(file);
       handleOpenMediaLibrary();
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${API_URL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Apollo-Require-Preflight': 'true',
+        },
+        body: JSON.stringify({
+          query: `
+          query {
+            images {
+              createdAt
+              altText
+              id
+              size
+              url
+              title
+            }
+          }
+        `,
+        }),
+      });
+
+      const result = await response.json();
+
+      const modifiedFiles = result.data.images.map((file) => {
+        return {
+          ...file,
+          _id: file.id,
+          id: undefined,
+          thumbnailUrl: file.url,
+        };
+      });
+
+      setFiles(modifiedFiles);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -129,7 +128,11 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
       const result = await response.json();
       // result.data.createImage.id finns bara.
 
-      if (!result.errors) return true;
+      if (!result.errors) {
+        setIsFileUploaded(true);
+
+        return true;
+      }
       return false;
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -253,54 +256,6 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
           )}
 
           {!selectedFile && <FieldDescription>No selected Image</FieldDescription>}
-
-          {/* {selectedFile && isMultiSelect ? (
-            <>
-              <FieldDescription>Selected image:</FieldDescription>
-              {selectedFile?.map((file) => (
-                <>
-                  <img
-                    key={file.id}
-                    alt={file.title}
-                    src={file.thumbnailUrl}
-                    style={{
-                      height: 'auto',
-                      width: '100%',
-                    }}
-                  />
-                  <FieldDescription>
-                    Title: {selectedFile?.title}
-                    <br />
-                    Filesize: {formatFileSize(selectedFile?.size)}
-                  </FieldDescription>
-                </>
-              ))}
-            </>
-          ) : (
-            <FieldDescription>No selected Images</FieldDescription>
-          )}
-
-          {selectedFile && !isMultiSelect ? (
-            <>
-              <img
-                alt={selectedFile.title}
-                src={selectedFile.thumbnailUrl}
-                style={{
-                  height: 'auto',
-                  width: '100%',
-                  borderRadius: '7px',
-                  border: '1px solid #e0e5e9',
-                }}
-              />
-              <FieldDescription>
-                Title: {selectedFile?.title}
-                <br />
-                Filesize: {formatFileSize(selectedFile?.size)}
-              </FieldDescription>
-            </>
-          ) : (
-            <FieldDescription>No selected Image</FieldDescription>
-          )} */}
         </div>
       </div>
       {files && (

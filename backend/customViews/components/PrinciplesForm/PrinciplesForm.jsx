@@ -179,7 +179,7 @@ function PrinciplesForm({
             value={selectedOptions || []}
           />
           {isAddAndResetVisible && groups.length === 1 ? (
-            <AddEntryButton handleAdd={addAllPriciples}>
+            <AddEntryButton style={{ marginTop: '1rem' }} handleAdd={addAllPriciples}>
               Add all principles sorted by category
             </AddEntryButton>
           ) : (

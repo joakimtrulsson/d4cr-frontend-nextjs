@@ -20,7 +20,7 @@ export const useFetchImages = () => {
             query {
               images {
                 createdAt
-                alt
+                altText
                 id
                 size
                 url
