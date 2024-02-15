@@ -31,7 +31,6 @@
     "react-media-library": "^2.0.1",
     "react-select": "^5.8.0",
     "sass": "^1.70.0",
-    "sharp": "^0.31.3",
     "slate": "^0.101.5",
     "slate-react": "^0.101.5",
     "typescript": "^4.9.5",

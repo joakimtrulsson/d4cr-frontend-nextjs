@@ -65,7 +65,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query FooterBanner {\n  footerBanner {\n    id\n    title\n    preamble {\n      document\n    }\n    icon\n    anchorText\n    url\n  }\n}\n",
+								"query": "query FooterBanner {\n  footerBanner {\n    id\n    title\n    preamble {\n      document\n    }\n  }\n}\n",
 								"variables": ""
 							}
 						},
@@ -86,7 +86,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query FormEmail {\n  formEmail {\n    id\n    contactEmail\n    joinSlackEmail\n    newChapterEmail\n  }\n}",
+								"query": "query FormEmail {\n  formEmail {\n    id\n    contactEmail\n    joinSlackEmail\n    shareStoryEmail\n  }\n}",
 								"variables": ""
 							}
 						},
@@ -445,7 +445,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query News($where: NewsWhereUniqueInput!) {\n  news(where: $where) {\n    id\n    createdAt\n    title\n    slug\n    newsCategory {\n      categoryTitle\n    }\n        newsNumber {\n        number\n    }\n    image\n    sections\n    status\n  }\n}",
+								"query": "query News($where: NewsWhereUniqueInput!) {\n  news(where: $where) {\n    id\n    createdAt\n    title\n    slug\n    newsCategory {\n      categoryTitle\n    }\n    image\n    sections\n    status\n  }\n}",
 								"variables": "{\n  \"where\": {\n    \"slug\": \"/news/speculative-design-the-future-of-childrens-rights-in-digital-products\"\n  }\n}"
 							}
 						},

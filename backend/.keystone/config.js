@@ -967,6 +967,7 @@ var footerBannerSchema = (0, import_core6.list)({
   fields: {
     title: (0, import_fields6.text)({ validation: { isRequired: true } }),
     preamble: (0, import_fields_document4.document)({
+      validation: { isRequired: true },
       formatting: {
         inlineMarks: {
           bold: true,
@@ -975,28 +976,6 @@ var footerBannerSchema = (0, import_core6.list)({
           strikethrough: true
         },
         softBreaks: true
-      }
-    }),
-    anchorText: (0, import_fields6.text)({
-      label: "Call to action",
-      ui: {
-        description: "Anchor text for the call to action button."
-      }
-    }),
-    url: (0, import_fields6.json)({
-      ui: {
-        views: "./customViews/DynamicLinkSection.jsx",
-        createView: { fieldMode: "edit" },
-        listView: { fieldMode: "hidden" },
-        itemView: { fieldMode: "edit" }
-      }
-    }),
-    icon: (0, import_fields6.json)({
-      ui: {
-        views: "./customViews/IconPickerSection.jsx",
-        createView: { fieldMode: "edit" },
-        listView: { fieldMode: "hidden" },
-        itemView: { fieldMode: "edit" }
       }
     })
   }

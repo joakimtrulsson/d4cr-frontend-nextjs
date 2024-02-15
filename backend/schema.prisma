@@ -77,12 +77,9 @@ model FrontPage {
 }
 
 model FooterBanner {
-  id         Int    @id
-  title      String @default("")
-  preamble   Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  anchorText String @default("")
-  url        Json?
-  icon       Json?
+  id       Int    @id
+  title    String @default("")
+  preamble Json   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 }
 
 model FormEmail {

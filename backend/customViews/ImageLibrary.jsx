@@ -240,7 +240,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           modalTitle='Image Library'
           // defaultSelectedItemIds={[files[0]._id]}
           fileLibraryList={filteredFiles ? filteredFiles : files}
-          // fileLibraryList={files}
           fileUploadCallback={handleFileUpload}
           filesDeleteCallback={handleDeleteFile}
           filesSelectCallback={handleSelectFile}
