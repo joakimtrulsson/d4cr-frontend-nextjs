@@ -11,9 +11,14 @@ export default function Principles({ chapterContent }) {
   const chapterContentProp = chapterContent.sections
     ? chapterContent.sections[0]
     : null;
-  const [showAllCards, setShowAllCards] = useState(true);
+  const [showAllCards, setShowAllCards] = useState(false);
+  // const [isOpaque, setIsOpaque] = useState(false);
+  // const [minText, setMinText] = useState(false);
+
   const handleToggleCardsVisibility = () => {
     setShowAllCards(!showAllCards);
+    // setIsOpaque(!isOpaque);
+    // setMinText(!minText);
   };
 
   return (
@@ -31,9 +36,9 @@ export default function Principles({ chapterContent }) {
             </p>
           </div>
 
-          {chapterContentProp.groups[0].groupTitle}
+          <h4 className={"color-grey-400"}>{chapterContentProp.groups[0].groupTitle}</h4>
           <div className="flex flex-row flex-wrap">
-            {chapterContentProp.groups[0].principles.map((principle, index) => (
+            {chapterContentProp.groups[0].principles.map((principle) => (
               <div className="card-wrapper">
                 <PrinciplesCard
                   title={
@@ -47,10 +52,14 @@ export default function Principles({ chapterContent }) {
           </div>
           {chapterContentProp.groups.length > 1 ? (
             <>
-              {chapterContentProp.groups[1].groupTitle}
-              <div className="flex flex-row flex-wrap ">
+              <h4 className={"color-grey-400"}>{chapterContentProp.groups[1].groupTitle}</h4>
+              <div
+                className={`flex flex-row flex-wrap ${
+                  showAllCards ? "" : "opacity-second-group"
+                }`}
+              >
                 {chapterContentProp.groups[1].principles.map(
-                  (principle, index) => (
+                  (principle) => (
                     <div className="card-wrapper">
                       <PrinciplesCard
                         title={
@@ -74,7 +83,7 @@ export default function Principles({ chapterContent }) {
                   >
                     {chapterContentProp.groups.slice(2).map((group, index) => (
                       <div key={index}>
-                        {group.groupTitle}
+                        <h4 className={"color-grey-400 text-align-center"}>{group.groupTitle}</h4>
                         <div className="flex flex-row flex-wrap flex-justify-center">
                           {group.principles.map((principle) => (
                             <div className="card-wrapper" key={principle.id}>
@@ -96,7 +105,7 @@ export default function Principles({ chapterContent }) {
               ) : null}
               <div className="button-wrapper margin-tb--s">
                 <SecondaryButton
-                  title={"SEE ALL"}
+                  title={`${showAllCards ? "Minimize" : "SEE ALL"}`}
                   onClick={handleToggleCardsVisibility}
                 />
               </div>
@@ -140,7 +149,7 @@ export async function getServerSideProps() {
     `;
     const chapterResult = await client.query({
       query: chapterQuery,
-      variables: { where: { slug: "/chapters/kina" } },
+      variables: { where: { slug: "/chapters/mecklenburg" } },
     });
 
     const chapterData = chapterResult.data.chapter;
