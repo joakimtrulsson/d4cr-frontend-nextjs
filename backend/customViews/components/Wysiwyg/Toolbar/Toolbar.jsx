@@ -122,31 +122,18 @@ const Toolbar = ({ extended }) => {
                 );
               case 'embed':
                 return <Embed key={element.id} format={element.format} editor={editor} />;
-              // case 'color-picker':
-              //   return (
-              //     <ColorPicker
-              //       key={element.id}
-              //       activeMark={activeMark}
-              //       format={element.format}
-              //       editor={editor}
-              //     />
-              //   );
+
               case 'table':
                 return <TableSelector key={element.id} editor={editor} />;
               case 'id':
                 return <Id editor={editor} />;
-              // case 'equation':
-              //   return <EquationButton editor={editor} />;
-              // case 'codeToText':
-              //   return <CodeToTextButton handleButtonClick={handleCodeToText} />;
               default:
                 return null;
             }
           })}
         </span>
       ))}
-      <TableContextMenu editor={editor} />
-      {/* <HtmlContextMenu editor={editor} handleCodeToText={handleCodeToText} /> */}
+      {/* <TableContextMenu editor={editor} /> */}
     </div>
   );
 };
