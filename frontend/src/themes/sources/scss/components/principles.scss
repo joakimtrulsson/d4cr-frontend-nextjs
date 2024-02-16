@@ -34,4 +34,14 @@
         z-index: 2;
     }
 
+    .button-wrapper {
+        padding-left: 2.5rem;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .button-wrapper:hover {
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
+    }
+
 }

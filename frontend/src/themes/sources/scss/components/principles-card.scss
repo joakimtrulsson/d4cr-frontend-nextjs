@@ -20,10 +20,17 @@
         border-bottom: 2px $-orange-500 solid;
     }
 
-    .img-size {
+    .img-container {
         height: 100%;
         width: 40%;
         background-color: #FEF2D6;
+
+        .img-size {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center center
+        }
     }
 
     .text-container {
@@ -56,9 +63,9 @@
     &:focus {
         background-color: $-yellow-100;
         transition: background-color 0.2s ease-in-out;
-       
-        .arrow-text{
-            
+
+        .arrow-text {
+
             padding-top: 3%;
             transition: margin-left, padding-top 0.2s ease-in-out;
         }
@@ -72,6 +79,7 @@
             overflow: visible;
             transition: overflow 0.2s ease-in-out;
         }
+
         .title-text {
             height: auto;
             max-height: 55%;
@@ -82,5 +90,3 @@
     }
 
 }
-
-
