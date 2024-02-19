@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldLabel, FieldDescription, Select } from '@keystone-ui/fields';
+import { FieldDescription, Select } from '@keystone-ui/fields';
 
 function SelectSections({ activeSection, onChangeActiveSections, options }) {
   return (

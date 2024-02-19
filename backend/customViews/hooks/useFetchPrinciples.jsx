@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-// import { BASE_URL_BACKEND } from '../utils/constants';
-import { API_URL } from '../../utils/constants';
 
 const useFetchPrinciples = () => {
   const [allPrinciples, setAllPrinciples] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const loc = window.location;
+  const API_URL = `${loc.protocol}//${loc.host}/api/graphql`;
 
   useEffect(() => {
     const fetchPrinciples = async () => {

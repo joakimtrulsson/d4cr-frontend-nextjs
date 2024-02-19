@@ -110,7 +110,6 @@ async function fetchFormEmails() {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
-        // Add any additional headers if required, such as authentication tokens
       },
       body: JSON.stringify({
         query: `
@@ -208,7 +207,7 @@ var require_emailRoutes = __commonJS({
         }
         res.status(200).send({ success: true, message: "Email sent" });
       } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ success: false, message: err.message });
       }
     };

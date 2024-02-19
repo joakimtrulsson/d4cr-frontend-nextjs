@@ -92,7 +92,7 @@ const sendEmail = async (req, res) => {
 
     res.status(200).send({ success: true, message: 'Email sent' });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ success: false, message: err.message });
   }
 };

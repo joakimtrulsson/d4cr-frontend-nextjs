@@ -22,7 +22,6 @@ const CallToActionForm = ({
 
       <FieldDescription>Page:</FieldDescription>
       <Select
-        // value={pageValue}
         value={pagesOptions.find((option) => option.value === pageValue)}
         onChange={(selectedOption) =>
           onChange('page', selectedOption.value, ctaIdentifier)

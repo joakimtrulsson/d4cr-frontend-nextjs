@@ -7,7 +7,6 @@ export const useFontAwesomeIconPack = () => {
   useEffect(() => {
     if (!iconPack) {
       import('@fortawesome/free-solid-svg-icons').then((module) => {
-        // Delete problematic icons
         const fas = { ...module.fas };
         delete fas.faCookie;
         delete fas.faFontAwesomeLogoFull;

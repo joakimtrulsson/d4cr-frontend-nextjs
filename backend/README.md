@@ -2,7 +2,6 @@
 
 1. Konfigurera miljövariabler
    Skapa en .env-fil i /backend med nedanstående variabler och ange dina egna värden.
-   Om annan port än 3000 ska användas så ändra PORT till önskad port SAMT i utils/constants.js
 
 ```
 NODE_ENV=development
@@ -46,6 +45,7 @@ EMAIL_PORT=
    När inkorgen är skapad, klicka på den för att få tillgång till dess inställningar.
    I inställningarna kommer du att hitta SMTP-serverinformation som du behöver för att fylla i din .env-fil. Notera användarnamn, lösenord, host och port.
    Återgå till din .env-fil och fyll i följande fält under "Mail - Development (Mailtrap)":
+
    EMAIL_USERNAME_DEV: Ditt Mailtrap-användarnamn
    EMAIL_PASSWORD_DEV: Ditt Mailtrap-lösenord
    EMAIL_HOST_DEV: SMTP-host som tillhandahålls av Mailtrap

@@ -24,7 +24,6 @@ function BulletList({
   autoFocus,
   editData,
 }) {
-  // Inte optimalt att göra så här.
   const [value, setValue] = useState(() => {
     if (editData) {
       return editData;
