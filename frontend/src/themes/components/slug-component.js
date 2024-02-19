@@ -4,8 +4,6 @@ import Image from 'next/image'
 
 export default function SlugPageComponent({ content }) {
 
-  console.log("SlugPageComponent: ", content)
-
   return (
     <div className='slug-content flex flex-column flex-align-center'>
 
