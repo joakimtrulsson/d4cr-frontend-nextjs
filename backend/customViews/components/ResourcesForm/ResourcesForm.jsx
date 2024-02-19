@@ -21,7 +21,6 @@ function ResourcesForm({ autoFocus, onAddNewItem, onUpdateItem, editData }) {
   // När editData finns så sätts groupTitle och resourcesData
   useEffect(() => {
     if (editData) {
-      console.log('edit', editData.groupTitle);
       setGroupTitle(editData.groupTitle);
       setResourcesData(editData.resources);
 

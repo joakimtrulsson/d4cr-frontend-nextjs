@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-// import { BASE_URL_BACKEND } from '../utils/constants';
-import { API_URL } from '../../utils/constants';
 
 const useFetchChapters = () => {
   const [chapters, setChapters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const loc = window.location;
+  const API_URL = `${loc.protocol}//${loc.host}/api/graphql`;
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -29,7 +30,6 @@ const useFetchChapters = () => {
         });
 
         const { data } = await response.json();
-        console.log(data);
         setChapters(data.chapters);
         setLoading(false);
       } catch (error) {

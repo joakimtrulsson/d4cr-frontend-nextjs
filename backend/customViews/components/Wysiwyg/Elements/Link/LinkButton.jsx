@@ -9,8 +9,9 @@ import { Transforms } from 'slate';
 import useFetchLinkOptions from '../../../../hooks/useFetchLinkOptions.jsx';
 
 import { TextInput, FieldLegend, FieldDescription } from '@keystone-ui/fields';
-
 import { Button } from '@keystone-ui/button';
+
+import AddEntryButton from '../../../AddEntryButton/AddEntryButton.jsx';
 
 const LinkButton = (props) => {
   const { editor } = props;
@@ -62,23 +63,19 @@ const LinkButton = (props) => {
         <Icon icon='link' />
       </Button>
       {showInput && (
-        <div className='popup' style={{ position: 'absolute', left: '75px' }}>
+        <div className='popup' style={{ borderRadius: '7px' }}>
           <div
             style={{
               display: 'flex',
               gap: '4px',
               flexDirection: 'column',
+              alignItems: 'flex-start',
               margin: '5px 2px',
             }}
           >
             <FieldLegend>Add Link</FieldLegend>
             <FieldDescription>Page:</FieldDescription>
-            {/* <Select
-              value={pageValue}
-              onChange={(selectedOption) => handleInputPage(selectedOption.value)}
-              // onChange={handleInputChange}
-              options={pagesOptions}
-            /> */}
+
             <select
               value={pageValue}
               onChange={(event) => handleInputPage(event.target.value)}
@@ -107,14 +104,9 @@ const LinkButton = (props) => {
               size='small'
               style={{ marginBottom: '0.5rem', marginTop: '-0.5rem', width: '350px' }}
             />
-            <Button
-              onClick={handleInsertLink}
-              size='small'
-              style={{ width: '75px', borderRadius: '5px', color: '#6b7280' }}
-              type='submit'
-            >
+            <AddEntryButton onClick={handleInsertLink} size='small' type='submit'>
               Save
-            </Button>
+            </AddEntryButton>
           </div>
           <label>
             <input type='checkbox' checked={showInNewTab} onChange={handleInputChange} />

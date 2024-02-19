@@ -10,7 +10,7 @@ import { Button } from '@keystone-ui/button';
 import FormData from 'form-data';
 
 import { formatFileSize } from '../utils/formatFileSize';
-import { API_URL } from '../utils/constants';
+// import { API_URL } from '../utils/constants';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);
@@ -19,6 +19,9 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const [search, setSearch] = useState('');
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [filteredFiles, setFilteredFiles] = useState();
+
+  const loc = window.location;
+  const API_URL = `${loc.protocol}//${loc.host}/api/graphql`;
 
   // Hämta bilderna vid första renderingen
   useEffect(() => {
@@ -33,9 +36,9 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   }, [isFileUploaded]);
 
   const fetchData = async () => {
-    // if (value) {
-    //   setSelectedFile(JSON.parse(value));
-    // }
+    if (value) {
+      setSelectedFile(JSON.parse(value));
+    }
     try {
       const response = await fetch(`${API_URL}`, {
         method: 'POST',
@@ -60,7 +63,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
       });
 
       const result = await response.json();
-      // console.log(result);
 
       const modifiedFiles = result.data.videos.map((file) => {
         return {
@@ -72,7 +74,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           // url: undefined,
         };
       });
-      console.log(modifiedFiles);
       setFiles(modifiedFiles);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -238,7 +239,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
           // fileLibraryList={filteredFiles}
           modalTitle='Video Library'
           fileUploadCallback={handleFileUpload}
-          filesDeleteCallback={handleDeleteFile}
+          // filesDeleteCallback={handleDeleteFile}
           filesSelectCallback={handleSelectFile}
           finishUploadCallback={function noRefCheck() {}}
           onClose={handleOpenMediaLibrary}

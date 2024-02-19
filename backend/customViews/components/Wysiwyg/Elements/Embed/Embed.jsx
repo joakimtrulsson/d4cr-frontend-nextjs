@@ -8,6 +8,7 @@ import { Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
 import { FieldLegend, TextInput } from '@keystone-ui/fields';
+import AddEntryButton from '../../../AddEntryButton/AddEntryButton.jsx';
 
 import { Button } from '@keystone-ui/button';
 
@@ -75,9 +76,6 @@ const Embed = ({ editor, format }) => {
               placeholder='Enter url'
               value={formData.url}
               onChange={(e) => setFormData((prev) => ({ ...prev, url: e.target.value }))}
-              // autoFocus={autoFocus}
-              // onChange={(event) => handleChange('anchorText', event.target.value)}
-              // value={value.cta?.anchorText}
               size='small'
               style={{ marginBottom: '0.5rem', width: '350px' }}
             />
@@ -94,13 +92,13 @@ const Embed = ({ editor, format }) => {
               onChange={(e) => setFormData((prev) => ({ ...prev, alt: e.target.value }))}
             /> */}
 
-            <Button
+            <AddEntryButton
               size='small'
-              style={{ width: '75px', borderRadius: '5px', color: '#6b7280' }}
+              // style={{ width: '75px', borderRadius: '5px' }}
               type='submit'
             >
               Save
-            </Button>
+            </AddEntryButton>
           </form>
         </div>
       )}

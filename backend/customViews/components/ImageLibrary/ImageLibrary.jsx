@@ -10,7 +10,6 @@ import {
 import FormData from 'form-data';
 
 import { formatFileSize } from '../../../utils/formatFileSize';
-import { API_URL } from '../../../utils/constants';
 import AddEntryButton from '../AddEntryButton/AddEntryButton';
 
 function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
@@ -19,6 +18,10 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
   const [search, setSearch] = useState('');
   const [filteredFiles, setFilteredFiles] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [defaultSelectedItemIds, setDefaultSelectedItemIds] = useState();
+
+  const loc = window.location;
+  const API_URL = `${loc.protocol}//${loc.host}/api/graphql`;
 
   // Hämta bilderna vid första renderingen
   useEffect(() => {
@@ -32,6 +35,21 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
     }
   }, [isFileUploaded]);
 
+  useEffect(() => {
+    let newDefaultSelectedItemIds;
+    if (selectedFile === null) return;
+
+    if (Array.isArray(selectedFile)) {
+      newDefaultSelectedItemIds = selectedFile.map((file) => file._id);
+    } else {
+      newDefaultSelectedItemIds = selectedFile._id;
+    }
+
+    setDefaultSelectedItemIds(
+      isMultiSelect ? newDefaultSelectedItemIds : newDefaultSelectedItemIds.toString()
+    );
+  }, [selectedFile, isMultiSelect]);
+
   const handleOpenMediaLibrary = () => {
     setIsMediaLibraryOpen((prev) => !prev);
   };
@@ -41,7 +59,6 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
       setSelectedFile(file[0]);
       handleOpenMediaLibrary();
     } else if (isMultiSelect) {
-      console.log(file);
       setSelectedFile(file);
       handleOpenMediaLibrary();
     }
@@ -262,7 +279,8 @@ function ImageLibrary({ selectedFile, setSelectedFile, isMultiSelect }) {
         <ReactMediaLibrary
           modalTitle='Image Library'
           acceptedTypes={['image/*']}
-          // defaultSelectedItemIds={[selectedFile._id]}
+          defaultSelectedItemIds={selectedFile ? defaultSelectedItemIds : null}
+          // defaultSelectedItemIds={selectedFile ? [selectedFile._id] : null}
           // fileLibraryList={files}
           fileLibraryList={filteredFiles ? filteredFiles : files}
           fileUploadCallback={handleFileUpload}

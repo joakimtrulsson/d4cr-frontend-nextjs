@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-// import { BASE_URL_BACKEND } from '../utils/constants';
-import { API_URL } from '../../utils/constants';
 
 const useFetchLinkOptions = () => {
   const [pagesOptions, setPagesOptions] = useState([]);
+
+  const loc = window.location;
+  const API_URL = `${loc.protocol}//${loc.host}/api/graphql`;
 
   useEffect(() => {
     const fetchLinkOptions = async () => {

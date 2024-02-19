@@ -29,8 +29,6 @@ function WysiwygSection({
     if (onChange) {
       const newId = uuidv4();
 
-      // Kontrollera att fält i är ifyllda innan du lägger till i sectionsData
-
       const newItem = {
         sectionType: 'WYSIWYG',
         id: newId,

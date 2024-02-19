@@ -46,8 +46,6 @@ function Resources({
   });
   const [newItems, setNewItems] = useState([]);
 
-  console.log('editData', editData);
-
   async function handleSave() {
     if (onChange) {
       const newId = uuidv4();

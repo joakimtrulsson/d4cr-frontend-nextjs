@@ -10,7 +10,7 @@ import {
 import FormData from 'form-data';
 
 import { formatFileSize } from '../utils/formatFileSize';
-import { API_URL } from '../utils/constants';
+// import { API_URL } from '../utils/constants';
 import AddEntryButton from './components/AddEntryButton/AddEntryButton';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
@@ -20,6 +20,9 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   const [search, setSearch] = useState('');
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [filteredFiles, setFilteredFiles] = useState();
+
+  const loc = window.location;
+  const API_URL = `${loc.protocol}//${loc.host}/api/graphql`;
 
   // Hämta bilderna vid första renderingen
   useEffect(() => {
@@ -72,7 +75,8 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         };
       });
 
-      setFiles((prevFiles) => [...prevFiles, ...modifiedFiles]);
+      setFiles((prevFiles) => [...modifiedFiles]);
+      // setFiles((prevFiles) => [...prevFiles, ...modifiedFiles]);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -193,7 +197,6 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
   );
 
   const handleFinishUpload = (uploadedFile) => {
-    console.log('uploadedFile', uploadedFile);
     setFiles((prev) => [...prev, uploadedFile]);
   };
 
@@ -238,7 +241,7 @@ export const Field = ({ field, value, onChange, autoFocus }) => {
         <ReactMediaLibrary
           acceptedTypes={['image/*']}
           modalTitle='Image Library'
-          // defaultSelectedItemIds={[files[0]._id]}
+          defaultSelectedItemIds={selectedFile ? [selectedFile._id] : null}
           fileLibraryList={filteredFiles ? filteredFiles : files}
           fileUploadCallback={handleFileUpload}
           filesDeleteCallback={handleDeleteFile}

@@ -81,8 +81,6 @@ function NewsTeaser({
     if (onChange) {
       const newId = uuidv4();
 
-      // Kontrollera att fält i är ifyllda innan du lägger till i sectionsData
-
       const newItem = {
         sectionType: 'NEWSTEASER',
         id: newId,
@@ -159,7 +157,6 @@ function NewsTeaser({
 
       <div style={{ marginBottom: '1rem' }}>
         <FieldLabel>Subheading</FieldLabel>
-        {/* <SimpleWysiwyg onSetPreamble={setPreamble} editData={editData?.subHeading} /> */}
         <Wysiwyg
           onSetPreamble={setPreamble}
           editData={editData?.subHeading}

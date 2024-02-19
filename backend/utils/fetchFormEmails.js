@@ -4,7 +4,6 @@ export async function fetchFormEmails() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Add any additional headers if required, such as authentication tokens
       },
       body: JSON.stringify({
         query: `

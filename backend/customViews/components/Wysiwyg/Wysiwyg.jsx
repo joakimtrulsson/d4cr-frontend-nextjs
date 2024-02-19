@@ -9,7 +9,7 @@ import withLinks from './plugins/withLinks.js';
 import withEmbeds from './plugins/withEmbeds.js';
 import withEquation from './plugins/withEquation.js';
 import withTables from './plugins/withTable.js';
-import './editor.css';
+import './Editor.css';
 
 const Element = (props) => {
   return getBlock(props);
