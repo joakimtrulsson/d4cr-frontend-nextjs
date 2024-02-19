@@ -52,7 +52,7 @@ const Embed = ({ editor, format }) => {
           width: '32px',
           height: '32px',
           border: showInput ? '1px solid lightgray' : '',
-          borderBottom: 'none',
+          // borderBottom: 'none',
         }}
         format={format}
         onClick={handleButtonClick}
@@ -94,6 +94,7 @@ const Embed = ({ editor, format }) => {
 
             <AddEntryButton
               size='small'
+              handleAdd={handleFormSubmit}
               // style={{ width: '75px', borderRadius: '5px' }}
               type='submit'
             >

@@ -29,6 +29,8 @@ const Video = ({ attributes, element, children }) => {
 
   const youtubeUrl = getYouTubeEmbedUrl(url);
 
+  console.log('youtubeUrl', youtubeUrl);
+
   return (
     <div
       {...attributes}
