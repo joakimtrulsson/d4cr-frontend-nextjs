@@ -5,7 +5,7 @@ import ImagesSection from "../../components/images-component.js";
 import LargeBulletListSection from "../../components/large-bullet-list.js";
 import MediaTextSection from "../../components/text-media-component.js";
 import NewsTeaserSection from "../../components/news-teaser.js";
-import PrinciplesSection from "../../../pages/principles.js";
+import PrinciplesSection from "../../components/principles.js";
 import DocumentRenderer from "./document-renderer.js";
 
 export default function sectionRender({ section }) {

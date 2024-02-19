@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { gql } from "@apollo/client";
-import client from "../apollo-client.js";
-import PrinciplesCard from "../themes/components/principles-card.js";
-import "../themes/sources/scss/base/utils.scss";
-import "../themes/sources/scss/components/principles.scss";
-import SecondaryButton from "../themes/components/buttons/secondary-button.js";
+import PrinciplesCard from "./principles-card.js";
+import "../sources/scss/base/utils.scss";
+import "../sources/scss/components/principles.scss";
+import SecondaryButton from "./buttons/secondary-button.js";
 
 export default function Principles({ content: chapterContent }) {
-  /////varför visas inte texten på cardsen?
   const chapterContentProp = chapterContent ? chapterContent : null;
-  console.log("new content", chapterContentProp.groups[0].principles[0].principleNumber.number);
+ 
   const [showAllCards, setShowAllCards] = useState(false);
 
   const handleToggleCardsVisibility = () => {
@@ -38,6 +35,7 @@ export default function Principles({ content: chapterContent }) {
               <div className="flex flex-row flex-wrap flex-justify-center flex-align-center">
                 {chapterContentProp.groups[0].principles.map((principle) => (
                   <div className="card-wrapper">
+                   
                     <PrinciplesCard
                       title={
                         principle.principleNumber.number +
@@ -135,54 +133,3 @@ export default function Principles({ content: chapterContent }) {
     </main>
   );
 }
-
-// export async function getServerSideProps() {
-//   // remove this when you're done with this section
-//   try {
-//     const chapterQuery = gql`
-//       query Chapter($where: ChapterWhereUniqueInput!) {
-//         chapter(where: $where) {
-//           title
-//           chapterLanguage
-//           heroImage
-//           preamble {
-//             document
-//           }
-//           translatedChapters {
-//             title
-//             chapterLanguage
-//             heroImage
-//             preamble {
-//               document
-//             }
-//             slug
-//             status
-//           }
-//           slug
-//           sections
-//           status
-
-//         }
-//       }
-//     `;
-//     const chapterResult = await client.query({
-//       query: chapterQuery,
-//       variables: { where: { slug: "/chapters/paris" } },
-//     });
-
-//     const chapterData = chapterResult.data.chapter;
-
-//     return {
-//       props: {
-//         chapterContent: chapterData,
-//       },
-//     };
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return {
-//       props: {
-//         chapterContent: null,
-//       },
-//     };
-//   }
-// }
