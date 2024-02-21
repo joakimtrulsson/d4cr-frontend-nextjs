@@ -1,6 +1,6 @@
 import '../sources/scss/components/large-bullet-list.scss'
 import '../sources/scss/base/utils.scss'
-import WYSIWYG from '../components/wysiwyg'
+import WYSIWYG from './wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 

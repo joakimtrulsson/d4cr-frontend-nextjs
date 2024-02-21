@@ -1,7 +1,7 @@
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/banner.scss'
 import PrimaryButton from './buttons/primary-button'
-import WYSIWYG from '../components/wysiwyg'
+import WYSIWYG from './wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 

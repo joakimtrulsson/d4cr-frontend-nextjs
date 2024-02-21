@@ -27,6 +27,7 @@ body {
     9. colors
     10. z-index
     11. re-using
+    12. buttons
 */
 
 /* width and height */
@@ -776,6 +777,8 @@ ul, ol {
     z-index: $-z-index-navbar-dropdown;
 }
 
+/* buttons */
+
 .lang-btn {
     cursor: pointer;
     background-color: transparent;
@@ -801,5 +804,48 @@ ul, ol {
         background-color: $-orange-50;
         border: 3px solid $-orange-400;
         transition: all 200ms linear;
+    }
+}
+
+.primary-button {
+    padding: 0.63rem 1.4rem;
+    color: $-orange-700;
+    background-color: $-orange-300;
+    font-weight: bold;
+    font-size: 0.6rem;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+    clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
+}
+
+.secondary-button  {
+    height: 2.1rem;
+    width: 9rem;
+
+    img  {
+        height: 2.1rem;
+        display: block;
+        margin: 0;
+    }
+
+    button {
+        cursor: pointer;
+        padding: 0rem 1rem;
+        background-color: transparent;
+        border-top: 2.18px solid $-orange-200;
+        border-bottom: 2.18px solid $-orange-200;
+        border-left: none;
+        border-right: none;
+        margin-left: -0.35rem;
+        margin-right: -0.35rem;
+    
+        /* font style*/
+        white-space: nowrap;  
+        color: $-orange-500;
+        font-weight: 680;
+        font-size: 0.6rem;
+        letter-spacing: 0.045rem;
+        text-transform: uppercase;
     }
 }

@@ -3,7 +3,7 @@ import LocalChaptersDropdown from '../../database/navbar-data/local-chapter-drop
 import AboutUsDropdown from '../../database/navbar-data/about-us-dropdown'
 import Icon from '../sources/assets/graphics/icons/d4cr-icon.png'
 import Image from 'next/image'
-import SecondaryButton from '../components/buttons/secondary-button'
+import SecondaryButton from './buttons/secondary-button'
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/navbar.scss'
 

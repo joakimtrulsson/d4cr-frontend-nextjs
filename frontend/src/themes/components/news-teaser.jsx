@@ -4,9 +4,9 @@ import { gql } from '@apollo/client';
 import client from '../../apollo-client.js';
 import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
-import Newscard from './news-card.js'
-import SecondaryButton from '../components/buttons/secondary-button.js'
-import WYSIWYG from '../components/wysiwyg'
+import Newscard from './news-card.jsx'
+import SecondaryButton from './buttons/secondary-button.jsx'
+import WYSIWYG from './wysiwyg.js'
 
 export default function NewsTeaser({ content }) {
 
