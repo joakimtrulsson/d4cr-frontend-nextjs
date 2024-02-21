@@ -3,7 +3,7 @@ import '../sources/scss/base/utils.scss'
 import { useState, useEffect } from 'react';
 import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
-import WYSIWYG from '../components/wysiwyg'
+import WYSIWYG from './wysiwyg'
 
 export default function Accordion({ content }) {
 
