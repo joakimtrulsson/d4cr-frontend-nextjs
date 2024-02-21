@@ -10,7 +10,6 @@ import { Button } from '@keystone-ui/button';
 import FormData from 'form-data';
 
 import { formatFileSize } from '../utils/formatFileSize';
-// import { API_URL } from '../utils/constants';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {
   const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);

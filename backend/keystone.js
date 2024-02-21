@@ -36,6 +36,8 @@ export default withAuth(
     lists,
     session,
     storage,
-    ui: { publicPages: ['public'] },
+    ui: {
+      publicPages: ['public'],
+    },
   })
 );

@@ -10,7 +10,7 @@ import {
 import FormData from 'form-data';
 
 import { formatFileSize } from '../utils/formatFileSize';
-// import { API_URL } from '../utils/constants';
+
 import AddEntryButton from './components/AddEntryButton/AddEntryButton';
 
 export const Field = ({ field, value, onChange, autoFocus }) => {

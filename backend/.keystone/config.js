@@ -2174,7 +2174,9 @@ var keystone_default = withAuth(
     lists,
     session,
     storage,
-    ui: { publicPages: ["public"] }
+    ui: {
+      publicPages: ["public"]
+    }
   })
 );
 //# sourceMappingURL=config.js.map
