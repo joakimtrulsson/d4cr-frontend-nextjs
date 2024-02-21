@@ -7,7 +7,6 @@ import '../scss/base/utils.scss'
 
 export default function DocumentRenderer({ content }) {
 
-  const [value, setValue] = useState(content);
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
@@ -17,13 +16,13 @@ export default function DocumentRenderer({ content }) {
     const style = { textAlign: element.align };
 
     switch (element.type) {
-      case 'alignStart':
+      case 'alignLeft':
         return <div className={element.className} style={{ textAlign: 'start' }} {...attributes}>{children}</div>;
 
       case 'alignCenter':
         return <div className={element.className} style={{ textAlign: 'center' }} {...attributes}>{children}</div>;
 
-      case 'alignEnd':
+      case 'alignRight':
         return <div className={element.className} style={{ textAlign: 'end' }} {...attributes}>{children}</div>;
 
       case 'blockQuote':
@@ -47,20 +46,23 @@ export default function DocumentRenderer({ content }) {
       case 'headingSix':
         return <h6 className={element.className} style={style} {...attributes}>{children}</h6>;
 
-      case 'listItem':
+      case 'list-item':
         return <li className={element.className} style={style} {...attributes}>{children}</li>;
 
-      case 'numberedList':
+      case 'orderedList':
         return <ol className={element.className} style={style} {...attributes}>{children}</ol>;
 
-      case 'bulletedList':
+      case 'unorderedList':
         return <ul className={element.className} style={style} {...attributes}>{children}</ul>;
 
-      case 'spotify-embed':
-        return <SpotifyEmbed className={element.className} url={element.url} />;
+      case 'table':
+        return <div className={`${element.className}`} style={style} {...attributes}>{children}</div>
 
-      case 'youtube-embed':
-        return <YoutubeEmbed className={element.className} url={element.url} />;
+      case 'table-row':
+        return <div className={`flex flex-row flex-justify-between ${element.className}`} style={style} {...attributes}>{children}</div>
+
+      case 'table-cell':
+        return <div className={`${element.className}`} style={style} {...attributes}>{children}</div>
 
       case 'img':
         return <img className={element.className} style={style} alt={element.alt} src={element.src} {...attributes} />;
@@ -68,8 +70,17 @@ export default function DocumentRenderer({ content }) {
       case 'link':
         return <a className={element.className} href={element.href} {...attributes}>{children}</a>;
 
-      default:
+      case 'paragraph':
         return <p className={element.className} style={style} {...attributes}>{children}</p>;
+
+      case 'spotify':
+        return <SpotifyEmbed className={element.className} url={element.url} />;
+
+      case 'video':
+        return <YoutubeEmbed className={element.className} url={element.url} />;
+
+      default:
+        return <div className={element.className} style={style} {...attributes}>{children}</div>;
     }
   };
 
@@ -95,8 +106,8 @@ export default function DocumentRenderer({ content }) {
   }
 
   return (
-    <div className="document-render">
-      <Slate editor={editor} initialValue={value} onChange={setValue}>
+    <div className="document-render wysiwyg-container">
+      <Slate editor={editor} initialValue={content}>
         <Editable readOnly renderElement={renderElement} renderLeaf={renderLeaf} />
       </Slate>
     </div>
