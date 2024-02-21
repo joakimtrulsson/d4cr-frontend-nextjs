@@ -6,7 +6,7 @@ import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
 import Newscard from './news-card.js'
 import SecondaryButton from '../components/buttons/secondary-button.js'
-import DocumentRenderer from '../sources/js/document-renderer.js';
+import WYSIWYG from '../components/wysiwyg'
 
 export default function NewsTeaser({ content }) {
 
@@ -39,7 +39,7 @@ export default function NewsTeaser({ content }) {
 
             <div className='text-align-center'>
                 <h2 className='margin-t--xxs margin--zero'>{content.title}</h2>
-                <DocumentRenderer content={content.subHeading} />
+                <WYSIWYG content={content.subHeading} />
             </div>
 
             <div className='news-card-container full-width-height  margin-tb--s flex flex-row flex-wrap

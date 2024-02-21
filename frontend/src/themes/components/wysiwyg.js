@@ -1,14 +1,12 @@
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/wysiwyg.scss'
-import DocumentRenderer from '../sources/js/document-renderer.js'
+import { DocumentRenderer } from '@keystone-6/document-renderer';
 
-export default function ImagesComponent({value}) {
+export default function WYSIWYG({ value }) {
 
     return (
         <div className="wysiwyg-container">
-
-        <DocumentRenderer content={value} />
-
+            <DocumentRenderer document={value} />
         </div>
     )
 }

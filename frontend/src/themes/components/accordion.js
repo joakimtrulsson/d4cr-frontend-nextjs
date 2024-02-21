@@ -3,7 +3,7 @@ import '../sources/scss/base/utils.scss'
 import { useState, useEffect } from 'react';
 import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
-import DocumentRenderer from '../sources/js/document-renderer.js'
+import WYSIWYG from '../components/wysiwyg'
 
 export default function Accordion({ content }) {
 
@@ -47,7 +47,7 @@ export default function Accordion({ content }) {
                 <div className='content-text bg-yellow-200 width--xxl padding--xl '>
 
                     {selectedField.bodyText && (
-                        <DocumentRenderer key={documentKey} content={selectedField.bodyText} />
+                        <WYSIWYG key={documentKey} content={selectedField.bodyText} />
                     ) }
                 </div>
             </div>

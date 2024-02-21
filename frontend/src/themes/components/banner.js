@@ -1,7 +1,7 @@
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/banner.scss'
 import PrimaryButton from './buttons/primary-button'
-import DocumentRenderer from '../sources/js/document-renderer.js'
+import WYSIWYG from '../components/wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
@@ -25,7 +25,7 @@ export default function Banner({ content }) {
 
             <div className="margin-lr--xs">
                 <h4 className='margin--zero color-grey-700'>{content.title}</h4>
-                <DocumentRenderer className='margin--zero color-grey-500 large-text margin-t--xxxs' content={content.preamble} />
+                <WYSIWYG className='margin--zero color-grey-500 large-text margin-t--xxxs' content={content.preamble} />
             </div>
 
             <div className="margin-r--xxs">
