@@ -3,6 +3,7 @@ import { text, json } from '@keystone-6/core/fields';
 
 import { allOperations } from '@keystone-6/core/access';
 import { isSignedIn, permissions, rules } from '../auth/access';
+import { document } from '@keystone-6/fields-document';
 
 export const testSchema = list({
   access: {
@@ -19,7 +20,38 @@ export const testSchema = list({
     },
   },
   fields: {
-    title: text(),
+    content: document({
+      layouts: [
+        [1, 1],
+        [1, 1, 1],
+      ],
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true,
+          code: true,
+          superscript: true,
+          subscript: true,
+          keyboard: true,
+        },
+        listTypes: {
+          ordered: true,
+          unordered: true,
+        },
+        alignment: {
+          center: true,
+          end: true,
+        },
+        headingLevels: [1, 2, 3, 4, 5, 6],
+        blockTypes: {
+          blockquote: true,
+          code: true,
+        },
+        softBreaks: true,
+      },
+    }),
 
     // image: json({
     //   ui: {
