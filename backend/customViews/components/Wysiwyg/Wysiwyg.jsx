@@ -9,6 +9,8 @@ import withLinks from './plugins/withLinks.js';
 import withEmbeds from './plugins/withEmbeds.js';
 import withEquation from './plugins/withEquation.js';
 import withTables from './plugins/withTable.js';
+import { convertKeystoneToSlate } from './utils/convertKeystoneToSlate.js';
+
 import './Editor.css';
 
 const Element = (props) => {
@@ -30,52 +32,40 @@ const Wysiwyg = ({ onSetPreamble, editData, extended, height }) => {
   );
 
   const [value, setValue] = useState(
-    editData || [
-      {
-        type: 'paragraph',
-        children: [{ text: '' }],
-      },
-    ]
+    editData
+      ? convertKeystoneToSlate(editData)
+      : [
+          {
+            type: 'paragraph',
+            children: [{ text: '' }],
+          },
+        ]
   );
 
   const handleEditorChange = (newValue) => {
-    // Loopa igenom varje element i newValue
     const modifiedValue = newValue.map((element) => {
-      // Skapa en kopia av elementet för att undvika read-only fel
       const modifiedElement = Object.assign({}, element);
 
       switch (modifiedElement.type) {
         case 'headingTwo':
-          // Döp om till "heading" och lägg till level: 2
           modifiedElement.type = 'heading';
           modifiedElement.level = 2;
           break;
         case 'headingThree':
-          // Döp om till "heading" och lägg till level: 3
           modifiedElement.type = 'heading';
           modifiedElement.level = 3;
           break;
         case 'headingFour':
-          // Döp om till "heading" och lägg till level: 4
           modifiedElement.type = 'heading';
           modifiedElement.level = 4;
           break;
         case 'orderedList':
-          // Döp om till "ordered-list"
           modifiedElement.type = 'ordered-list';
           break;
         case 'unorderedList':
-          // Döp om till "unordered-list"
           modifiedElement.type = 'unordered-list';
           break;
-        // case 'alignLeft':
-        //   // Döp om key till textAlign och sätt value till "left"
-        //   modifiedElement.key = 'textAlign';
-        //   modifiedElement.value = 'left';
-        //   delete modifiedElement.type; // Ta bort "type" egenskapen
-        //   break;
         case 'alignCenter':
-          // Uppdatera textAlign till "center"
           modifiedElement.textAlign = 'center';
           modifiedElement.type = 'paragraph';
           modifiedElement.children = [
@@ -83,7 +73,6 @@ const Wysiwyg = ({ onSetPreamble, editData, extended, height }) => {
           ];
           break;
         case 'alignRight':
-          // Uppdatera textAlign till "right"
           modifiedElement.textAlign = 'end';
           modifiedElement.type = 'paragraph';
           modifiedElement.children = [
@@ -117,7 +106,6 @@ const Wysiwyg = ({ onSetPreamble, editData, extended, height }) => {
 
           break;
         default:
-          // Ingen åtgärd för övriga typer
           break;
       }
 
