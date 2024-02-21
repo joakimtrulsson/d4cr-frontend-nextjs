@@ -2,7 +2,8 @@ import { gql } from '@apollo/client';
 import Link from 'next/link'
 import client from '../../apollo-client.js';
 import getLanguageName from '../../themes/sources/js/language-code.js'
-import SlugPageComponent from '../../themes/components/slug-component.jsx'
+import WYSIWYG from '../../themes/components/wysiwyg.jsx'
+import SectionRender from '../../themes/sources/js/section-render.js';
 
 export default function SlugPage({ chapters }) {
 
@@ -31,15 +32,17 @@ export default function SlugPage({ chapters }) {
 
   return !chapters ? <h1>Not found</h1> :
     (
-      <div className='slug-container flex flex-column flex-align-center'>
-        {chapterLanguages.length > 1 && (
+      <div className='flex flex-column flex-align-center margin-lr--xxxl max-width-60'>
+
+        {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
           <div className='language-tabs margin-tb--s'>
+
             {chapterLanguages.map((chapter, index) => (
               <Link href={chapter.slug} key={index}>
                 <button
                   className={`lang-btn ${index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''}
                   ${index === 0 ? 'lang-btn-left' : ''}
-                  ${chapter === currentLanguage ? 'lang-btn-active' : ''}`}>
+                  ${chapter.slug === currentLanguage.slug ? 'lang-btn-active' : ''}`}>
                   {getLanguageName(chapter.chapterLanguage)}
                 </button>
               </Link>
@@ -48,7 +51,25 @@ export default function SlugPage({ chapters }) {
           </div>
         )}
 
-        <SlugPageComponent content={chapters} />
+        {chapters.heroImage.url && ( // show hero image if exists
+          <div className='image-container-1 margin-t--s'>
+            <div className='image-wrapper  borderradius--xxs'>
+              <img className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} />
+            </div>
+          </div>
+        )}
+
+        <p className='sub-heading-m color-yellow-600 margin-t--s'>D4CR PRESENTS</p>
+
+        {chapters.title && <h1 className='heading-background margin-t--zero'>{chapters.title}</h1>}
+
+        <WYSIWYG content={chapters.preamble.document} />
+
+        {chapters.sections && chapters.sections.map((section, index) => ( // Render all this chapter's sections
+          <div className='margin-tb--xs'>
+            <SectionRender key={index} section={section} />
+          </div>
+        ))}
 
       </div>
     )

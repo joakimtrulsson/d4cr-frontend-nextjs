@@ -582,7 +582,7 @@ h4,
 }
 
 .sub-heading-m {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08rem;
 }
@@ -744,12 +744,12 @@ ul, ol {
     }
 }
 
-.moved-background {
+.heading-background {
     padding: 0;
     position: relative;
 }
 
-.moved-background::before {
+.heading-background::before {
     content: '';
     position: absolute;
     top: 0;

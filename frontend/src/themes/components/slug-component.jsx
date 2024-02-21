@@ -3,23 +3,27 @@ import WYSIWYG from './wysiwyg.jsx'
 
 export default function SlugPageComponent({ content }) {
 
-  return (
-    <div className='slug-content flex flex-column flex-align-center'>
+  console.log(content)
 
-      {content.heroImage && (
-        <div className='image-container-1'>
+    return (
+    <div className='margin-lr--xxxl max-width-60 flex flex-column flex-align-center'>
+
+      {content.heroImage.url && (
+        <div className='image-container-1 margin-t--s'>
           <div className='image-wrapper  borderradius--xxs'>
             <img className='center-image' src={content.heroImage.url} alt={content.heroImage.alt} />
           </div>
         </div>
       )}
 
-      <h1>{content.title && content.title}</h1>
+      {content.title && <h1 className='moved-background'>{content.title}</h1>}
 
       <WYSIWYG content={content.preamble.document} />
 
       {content.sections && content.sections.map((section, index) => (
-        <SectionRender key={index} section={section} />
+        <div className='margin-tb--xs'>
+          <SectionRender key={index} section={section} />
+        </div>
       ))}
 
     </div>

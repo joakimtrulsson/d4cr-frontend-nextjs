@@ -5,6 +5,7 @@ import ImagesSection from '../../components/images-component.jsx'
 import LargeBulletListSection from '../../components/large-bullet-list.jsx'
 import MediaTextSection from '../../components/text-media-component.jsx'
 import NewsTeaserSection from '../../components/news-teaser.jsx'
+import PrinciplesSection from '../../components/principles.jsx'
 import WYSIWYG from '../../components/wysiwyg.jsx'
 
 export default function sectionRender({ section }) {
@@ -25,7 +26,7 @@ export default function sectionRender({ section }) {
       case 'NEWSTEASER':
         return <NewsTeaserSection content={section} />;
       case 'PRINCIPLES':
-        return <PrinciplesSection content={section} />; // doesnt work!
+        return <PrinciplesSection content={section} />;
       case 'RESOURCES':
         return <ResourcesSection content={section} />; // doesnt work!
       case 'WYSIWYG':
