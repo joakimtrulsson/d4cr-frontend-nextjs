@@ -1,5 +1,3 @@
-import '../../sources/scss/components/buttons/primary-button.scss'
-
 const PrimaryButton = ({title}) => {
 
     return (

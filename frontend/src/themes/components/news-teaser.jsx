@@ -6,7 +6,7 @@ import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
 import Newscard from './news-card.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
-import WYSIWYG from './wysiwyg.js'
+import WYSIWYG from './wysiwyg.jsx'
 
 export default function NewsTeaser({ content }) {
 

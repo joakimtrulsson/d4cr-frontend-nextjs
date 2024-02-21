@@ -1,11 +1,11 @@
-import AccordionSection from '../../components/accordion.js'
-import BannerSection from '../../components/banner.js'
-import ChapterSection from '../../components/chapter-teaser.js'
-import ImagesSection from '../../components/images-component.js'
-import LargeBulletListSection from '../../components/large-bullet-list.js'
-import MediaTextSection from '../../components/text-media-component.js'
-import NewsTeaserSection from '../../components/news-teaser.js'
-import WYSIWYG from '../../components/wysiwyg.js'
+import AccordionSection from '../../components/accordion.jsx'
+import BannerSection from '../../components/banner.jsx'
+import ChapterSection from '../../components/chapter-teaser.jsx'
+import ImagesSection from '../../components/images-component.jsx'
+import LargeBulletListSection from '../../components/large-bullet-list.jsx'
+import MediaTextSection from '../../components/text-media-component.jsx'
+import NewsTeaserSection from '../../components/news-teaser.jsx'
+import WYSIWYG from '../../components/wysiwyg.jsx'
 
 export default function sectionRender({ section }) {
 

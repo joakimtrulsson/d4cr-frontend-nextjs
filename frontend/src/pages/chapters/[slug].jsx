@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 import Link from 'next/link'
 import client from '../../apollo-client.js';
 import getLanguageName from '../../themes/sources/js/language-code.js'
-import SlugPageComponent from '../../themes/components/slug-component.js'
+import SlugPageComponent from '../../themes/components/slug-component.jsx'
 
 export default function SlugPage({ chapters }) {
 

@@ -1,5 +1,5 @@
 import SectionRender from '../sources/js/section-render.js'
-import WYSIWYG from './wysiwyg.js'
+import WYSIWYG from './wysiwyg.jsx'
 
 export default function SlugPageComponent({ content }) {
 

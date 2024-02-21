@@ -4,7 +4,7 @@ import Image from 'next/image'
 import DummyImage1 from '../sources/assets/graphics/placeholder/dummy-image1.svg'
 import PrimaryButton from './buttons/primary-button.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
-import WYSIWYG from './wysiwyg.js'
+import WYSIWYG from './wysiwyg.jsx'
 import '../sources/scss/components/text-and-media.scss'
 import '../sources/scss/base/utils.scss'
 

@@ -6,7 +6,9 @@ export default function WYSIWYG({ value }) {
 
     return (
         <div className="wysiwyg-container">
-            <DocumentRenderer document={value} />
+            <h1>DocumentRenderer</h1>
         </div>
     )
 }
+
+//             <DocumentRenderer document={value} />
