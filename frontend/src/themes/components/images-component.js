@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import '../sources/scss/base/utils.scss'
 import '../sources/scss/components/image-component.scss'
 
@@ -20,11 +19,14 @@ export default function ImagesComponent({ content }) {
 
             { content.images.map((image, index)=> (
                 <div className='image-wrapper borderradius--xxs'> 
-                    <Image className='center-image' key={index} src={image.url} alt={image.alt} />
+                    <img 
+                    className='center-image' 
+                    key={index} 
+                    src={image.url} 
+                    alt={image.alt} />
                 </div>
             ))}
 
         </div>
     )
 }
-
