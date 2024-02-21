@@ -1,6 +1,5 @@
-import SectionRender from '../../themes/sources/js/section-render.js'
-import DocumentRenderer from '../../themes/sources/js/document-renderer.js'
-import Image from 'next/image'
+import SectionRender from '../sources/js/section-render.js'
+import WYSIWYG from './wysiwyg.jsx'
 
 export default function SlugPageComponent({ content }) {
 
@@ -17,7 +16,7 @@ export default function SlugPageComponent({ content }) {
 
       <h1>{content.title && content.title}</h1>
 
-      <DocumentRenderer content={content.preamble.document} />
+      <WYSIWYG content={content.preamble.document} />
 
       {content.sections && content.sections.map((section, index) => (
         <SectionRender key={index} section={section} />

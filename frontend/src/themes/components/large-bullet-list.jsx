@@ -1,6 +1,6 @@
 import '../sources/scss/components/large-bullet-list.scss'
 import '../sources/scss/base/utils.scss'
-import DocumentRenderer from '../sources/js/document-renderer.js'
+import WYSIWYG from './wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
@@ -25,7 +25,7 @@ export default function LargeBulletList({ content }) {
                             <FontAwesomeIcon icon={['fas', 'arrow-right']} color={iconColor} />
                             : <FontAwesomeIcon icon={['fas', `${index+1}`]} color={iconColor} />
                         }
-                        <DocumentRenderer content={bullet.bodyText} />
+                        <WYSIWYG content={bullet.bodyText} />
                     </div>
                 )
             })}

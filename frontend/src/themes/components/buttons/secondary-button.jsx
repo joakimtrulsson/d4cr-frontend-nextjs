@@ -1,4 +1,3 @@
-import '../../sources/scss/components/buttons/secondary-button.scss'
 import ArrowLeft from '../../../themes/sources/assets/graphics/buttons/secondary-btn-arrow-left.svg'
 import ArrowRight from '../../../themes/sources/assets/graphics/buttons/secondary-btn-arrow-right.svg'
 import Image from 'next/image'

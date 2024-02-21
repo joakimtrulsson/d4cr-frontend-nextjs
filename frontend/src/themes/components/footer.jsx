@@ -1,7 +1,7 @@
 import DesignGuideList from '../../database/footer-data/design-guide-list'
 import LocalChaptersList from '../../database/footer-data/local-chapter-list'
 import AboutUsList from '../../database/footer-data/about-us-list'
-import Wave from '../components/waves/top-wave'
+import Wave from './waves/top-wave'
 import Icon from '../sources/assets/graphics/icons/d4cr-icon.png'
 import Image from 'next/image'
 import '../sources/scss/components/footer.scss'

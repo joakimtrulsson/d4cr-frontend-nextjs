@@ -10,6 +10,12 @@ $-spacing-7: 4rem; // 64px (xxl)
 $-spacing-8: 5rem; // 80px (xxxl)
 
 // Z-index
-$-z-index-background: -1;
+$-z-index-background: -2;
+$-z-index-header-background: -1;
 $-z-index-navbar-dropdown: 1;
-$-z-index-container: 1;
+$-z-index-container: -1;
+
+$display-xs: 375px;
+$display-s: 575px;
+$display-m: 875px;
+$display-l: 1025px;

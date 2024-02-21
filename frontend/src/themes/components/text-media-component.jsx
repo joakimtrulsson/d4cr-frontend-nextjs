@@ -1,10 +1,10 @@
-import TopWave from './waves/top-wave.js'
-import BottomWave from './waves/bottom-wave.js'
+import TopWave from './waves/top-wave.jsx'
+import BottomWave from './waves/bottom-wave.jsx'
 import Image from 'next/image'
 import DummyImage1 from '../sources/assets/graphics/placeholder/dummy-image1.svg'
-import PrimaryButton from './buttons/primary-button.js'
-import SecondaryButton from './buttons/secondary-button.js'
-import DocumentRenderer from '../sources/js/document-renderer.js'
+import PrimaryButton from './buttons/primary-button.jsx'
+import SecondaryButton from './buttons/secondary-button.jsx'
+import WYSIWYG from './wysiwyg.jsx'
 import '../sources/scss/components/text-and-media.scss'
 import '../sources/scss/base/utils.scss'
 
@@ -44,7 +44,7 @@ export default function TextMediaComponent({ content }) {
                     <h2 className='sub-heading-m margin-t--xxxs margin-b--zero'>{content.subHeading}</h2>
                     <h3 className='heading2-lineheight-l margin--zero'>{content.title}</h3>
 
-                    <DocumentRenderer content={content.preamble} />
+                    <WYSIWYG content={content.preamble} />
 
                     <p>{content.description}</p>
 

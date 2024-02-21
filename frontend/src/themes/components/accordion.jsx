@@ -3,21 +3,21 @@ import '../sources/scss/base/utils.scss'
 import { useState, useEffect } from 'react';
 import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
-import DocumentRenderer from '../sources/js/document-renderer.js'
+import WYSIWYG from './wysiwyg'
 
 export default function Accordion({ content }) {
 
     const [clickedValue, setClickedValue] = useState(0);
     const [selectedField, setSelectedField] = useState(content.fields[0]);
     const [documentKey, setDocumentKey] = useState(0); // Key to force re-rendering of DocumentRenderer
-    
+
     useEffect(() => {
         setSelectedField(content.fields[clickedValue]);
         setDocumentKey(clickedValue);
     }, [clickedValue, content.fields]);
 
     return (
-        <div className="accordion-container flex flex-column flex-justify-center flex-align-center 
+        <div className="accordion-container animation-background-container flex flex-column flex-justify-center flex-align-center 
         padding-tb--xxl">
 
             <div className='animation-background'>
@@ -44,14 +44,11 @@ export default function Accordion({ content }) {
                     </ul>
                 </div>
 
-                <div className='content-text bg-yellow-200 width--xxl padding--xl'>
+                <div className='content-text bg-yellow-200 width--xxl padding--xl '>
 
-                {selectedField.bodyText ? (
-                        <DocumentRenderer key={documentKey} content={selectedField.bodyText} />
-                    ) : (
-                        <p>No content available</p>
-                    )}
-
+                    {selectedField.bodyText && (
+                        <WYSIWYG key={documentKey} content={selectedField.bodyText} />
+                    ) }
                 </div>
             </div>
         </div>
