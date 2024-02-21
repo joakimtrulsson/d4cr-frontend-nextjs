@@ -104,7 +104,7 @@ const LinkButton = (props) => {
               size='small'
               style={{ marginBottom: '0.5rem', marginTop: '-0.5rem', width: '350px' }}
             />
-            <AddEntryButton onClick={handleInsertLink} size='small' type='submit'>
+            <AddEntryButton handleAdd={handleInsertLink} size='small' type='submit'>
               Save
             </AddEntryButton>
           </div>
