@@ -1,9 +1,12 @@
 import React from 'react';
+import Layout from '../app/layout'
 
 const Chapters = () => {
     return (
         <div>
-            Chapters
+            <Layout>
+                Chapters
+            </Layout>
         </div>
     );
 }
