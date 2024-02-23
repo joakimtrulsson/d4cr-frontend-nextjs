@@ -4,10 +4,11 @@ import client from '../../apollo-client.js';
 import getLanguageName from '../../themes/sources/js/language-code.js'
 import WYSIWYG from '../../themes/components/wysiwyg.jsx'
 import SectionRender from '../../themes/sources/js/section-render.js';
+import Image from 'next/image'
 
 export default function SlugPage({ chapters }) {
 
-  console.log(chapters)
+  console.log('chap', chapters)
 
   // Get current chapter
   const currentLanguage = {

@@ -5,8 +5,9 @@ import "../sources/scss/components/principles.scss";
 import SecondaryButton from "./buttons/secondary-button.jsx";
 
 export default function Principles({ content: chapterContent }) {
+  
   const chapterContentProp = chapterContent ? chapterContent : null;
- 
+  console.log('Prop', chapterContentProp)
   const [showAllCards, setShowAllCards] = useState(false);
 
   const handleToggleCardsVisibility = () => {
@@ -35,14 +36,14 @@ export default function Principles({ content: chapterContent }) {
               <div className="flex flex-row flex-wrap flex-justify-center flex-align-center">
                 {chapterContentProp.groups[0].principles.map((principle) => (
                   <div className="card-wrapper">
-                   
+                    {console.log('cardet', principle.image.url)}
                     <PrinciplesCard
                       title={
                         principle.principleNumber.number +
                         ". " +
                         principle.title
                       }
-                      url={principle.slug}
+                      url={"/principles" + principle.slug}
                       key={principle.id}
                       img={
                         principle.image && principle.image.url
@@ -73,7 +74,7 @@ export default function Principles({ content: chapterContent }) {
                         ". " +
                         principle.title
                       }
-                      url={principle.slug}
+                      url={"/principles" + principle.slug}
                       key={principle.id}
                       img={
                         principle.image && principle.image.url
@@ -105,7 +106,7 @@ export default function Principles({ content: chapterContent }) {
                                   ". " +
                                   principle.title
                                 }
-                                url={principle.slug}
+                                url={"/principles" + principle.slug}
                                 img={
                                   principle.image && principle.image.url
                                     ? principle.image.url
