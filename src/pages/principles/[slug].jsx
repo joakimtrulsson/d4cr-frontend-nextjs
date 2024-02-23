@@ -38,10 +38,10 @@ export default function PrinciplesPage({ principle }) {
                     </div>
                 </div>
                 <div>
-                   {principle.subPrinciples.map(subPrinciple => {
-                {console.log(subPrinciple.text[0].children[0].text)}
-                             return <div>{subPrinciple.text[0].children[0].text}</div>
-                   })}
+                    {principle.subPrinciples.map(subPrinciple => {
+                        { console.log(subPrinciple.text[0].children[0].text) }
+                        return <div>{subPrinciple.text[0].children[0].text}</div>
+                    })}
                 </div>
             </main>
         )
