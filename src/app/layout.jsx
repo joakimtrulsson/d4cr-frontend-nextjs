@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 
 export const metadata = {
   title: 'D4CR',
@@ -8,10 +9,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
  return (
     <html lang="en">
-      <head>
+      <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-      </head>
+        <link rel="stylesheet" href='../themes/sources/scss/app.scss' />
+      </Head>
       <body>
         {/* <NavBar /> */}
         {children}
