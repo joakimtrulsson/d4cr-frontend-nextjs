@@ -4,12 +4,13 @@ import client from '../../apollo-client.js';
 import Image from 'next/image';
 import '../../themes/sources/scss/app.scss';
 import LargeBulletList from '../../themes/components/large-bullet-list.jsx';
-export default function PrinciplesPage({ principle }) {
-    if (principle ) {
+export default function PrinciplesPage(props) {
+    const principle = props.principle
+    const principlesNumber = props.principleNumbers
+    console.log('principleinComp',principle, principlesNumber)
 
-      
-
-        ///add checks to see if arrayes exists
+    if (principle) {
+         
 
         // Assume principle.subPrinciples is the array from your GraphQL query
         const transformedSubPrinciples = Array.isArray(principle.subPrinciples) ? principle.subPrinciples.map(subPrinciple => {
@@ -28,7 +29,7 @@ export default function PrinciplesPage({ principle }) {
             return {
                 bodyText: bodyText,
             };
-        }): [];
+        }) : [];
 
         // This would now be the array to pass into your LargeBulletList component
         const contentForLargeBulletList = {
@@ -41,6 +42,10 @@ export default function PrinciplesPage({ principle }) {
 
         return (
             <main>
+                <div className="flex flex-row"> {principlesNumber.map(((numbers) => (
+                  <a href={`.${numbers.principles.slug}`}> <h2 key ={numbers.number}> {numbers.number} </h2></a>
+                )))} 
+                </div>
                 <div className="bg-color-turquoise-50">
                     <div>
                         <h4>{'Principle ' + principle.principleNumber.number}</h4>
@@ -87,7 +92,7 @@ export async function getServerSideProps({ resolvedUrl }) {
     console.log('info ', resolvedUrl, slug)
     try {
 
-        const { data } = await client.query({
+        const { data : principleData } = await client.query({
             query: gql`
         query Principle($where: PrincipleWhereUniqueInput!) {
             principle(where: $where) {
@@ -112,12 +117,44 @@ export async function getServerSideProps({ resolvedUrl }) {
             variables: { where: { slug } }
         });
 
-        console.log('data', data)
-        return { props: { principle: data.principle } }
+        // Numberstop PrincipleNumbers query
+        const { data: principleNumbersData } = await client.query({
+            query: gql`
+            query PrincipleNumbers {
+                principleNumbers(orderBy: { number: asc } 
+                where: { principles: { status: { equals: "published" } } } )  {
+                    number
+                    principles {
+                        id
+                        status
+                        title
+                        subHeader
+                        slug
+                        image
+                        quote
+                        quoteAuthor
+                        subPrinciples 
+                        resources
+                        principleCategory {
+                            title
+                        }
+                    }
+                }
+            }
+        `
+        });
+        console.log('Principle data', principleData)
+        console.log('PrincipleNumbers data', principleNumbersData)
+
+        return {
+            props: {
+                principle: principleData.principle,
+                principleNumbers: principleNumbersData.principleNumbers
+            }
+        }
 
     } catch (error) {
-
         console.error("Error fetching data:", error)
-        return { props: { principle: null } }
+        return { props: { principle: null, principleNumbers: null } }
     }
 }
