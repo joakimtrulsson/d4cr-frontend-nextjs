@@ -25,7 +25,7 @@ export default function NavBar({ data }) {
     }
 
     return (
-        <div className="navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-yellow-50">
+        <div className="navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-white">
             <div className="navbar-icon margin-l--m">
                 <Image
                     src={Icon}
