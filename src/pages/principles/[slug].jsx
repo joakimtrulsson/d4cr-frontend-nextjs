@@ -4,8 +4,9 @@ import client from '../../apollo-client.js';
 import Image from 'next/image';
 import '../../themes/sources/scss/app.scss';
 import LargeBulletList from '../../themes/components/large-bullet-list.jsx';
-import ButtonDown from '../../themes/sources/assets/graphics/buttons/secondary-btn-arrow-right.svg'
-
+import ButtonDown from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-default.svg'
+import ButtonDownHover from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-hover.svg'
+import BottomWave from '../../themes/components/waves/bottom-wave.jsx'
 
 export default function PrinciplesPage(props) {
     const principle = props.principle
@@ -14,7 +15,7 @@ export default function PrinciplesPage(props) {
 
     if (principle) {
 
-
+        ////////////////change props to work in large-bullet list///////////////////
         // Assume principle.subPrinciples is the array from your GraphQL query
         const transformedSubPrinciples = Array.isArray(principle.subPrinciples) ? principle.subPrinciples.map(subPrinciple => {
             // Check if subPrinciple.text is an array and not undefined or null
@@ -36,13 +37,11 @@ export default function PrinciplesPage(props) {
 
         // This would now be the array to pass into your LargeBulletList component
         const contentForLargeBulletList = {
-            //ta bort title subheader
-            title: 'Your Title Here',
-            subHeader: 'Your Subheader Here',
             bullets: transformedSubPrinciples,
-            listType: 'ORDERED', // Or 'ORDERED', depending on your data
+            listType: 'UNORDERED',
         };
 
+        //////////////////////////toplinks////////////////////////////////
         // Find the index of the current principle in the principlesNumber array
         const currentIndex = principlesNumber.findIndex(numbers => numbers.principles.slug === props.slug);
         // Calculate the index for the "Tidigare" (Previous) principle
@@ -52,54 +51,72 @@ export default function PrinciplesPage(props) {
         //nästa slug
         const nextIndex = currentIndex + 1;
         const nextSlug = nextIndex < principlesNumber.length ? principlesNumber[nextIndex].principles.slug : null;
+
+        //////////////////wave///////////////////////////
+        const fillColorClass = 'fill-turquoise-50';
+
+        //////////////Button-scroll/////////////////
+        const [logoSrc, setLogoSrc] = useState(ButtonDown);
+
         return (
             <main>
 
+                <div>
+                    <div className="flex flex-row bg-turquoise-100 flex-justify-center">{previousSlug && (
+                        <a href={`./${previousSlug}`} className="previous-link">
+                            <h2>Tidigare</h2>
+                        </a>
+                    )} {principlesNumber.map(((numbers) => {
+                        const isActive = props.slug === numbers.principles.slug;
+                        return (<div>
+                            <a key={numbers.principles.id} href={`.${numbers.principles.slug}`} className={isActive ? 'active-link' : ''}
+                                style={isActive ? { color: 'red' } : {}}> <h2> {numbers.number} </h2></a></div>
+                        )
+                    }))}
+                        {nextSlug && (<a href={`./${nextSlug}`} className="next-link">
+                            <h2>Nästa</h2>
+                        </a>)}
+                    </div>
 
-                <div className="flex flex-row">{previousSlug && (
-                    <a href={`./${previousSlug}`} className="previous-link">
-                        <h2>Tidigare</h2>
-                    </a>
-                )} {principlesNumber.map(((numbers) => {
-                    const isActive = props.slug === numbers.principles.slug;
-                    return (<div>
-                        <a key={numbers.principles.id} href={`.${numbers.principles.slug}`} className={isActive ? 'active-link' : ''}
-                            style={isActive ? { color: 'red' } : {}}> <h2> {numbers.number} </h2></a></div>
-                    )
-                }))}
-                    {nextSlug && (<a href={`./${nextSlug}`} className="next-link">
-                        <h2>Nästa</h2>
-                    </a>)}
+                    <div className="bg-turquoise-50 margin-tb--xxxs-negative">
+                        <div className="flex flex-row flex-nowrap title-div">
+                            <div className="flex flex-column width--m left-part">
+                                <h4 className="margin--zero">{'Principle ' + principle.principleNumber.number}</h4>
+                                <h1>{principle.title}</h1>
+                                <h3>{principle.subHeader}</h3>
+                            </div>
+                            <div className="flex flex-column width--m right-part">
+                                <div className="">
+                                    <h3>{principle.quote}</h3>
+                                    <h4>{principle.quoteAuthor}</h4>
+                                </div>
+                                <div className="">
+                                    {principle.image ? (
+                                        <Image
+                                            className="img-size"
+                                            width={400}
+                                            height={400}
+                                            src={principle.image.url}
+                                            alt="Image put in by user in principle-card"
+                                        />
+                                    ) : (
+                                        <div className="no-image-placeholder">No Image</div>
+                                        // Or simply do not render anything or render a placeholder div
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <a className="width-full flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} onMouseEnter={() => {
+                            setLogoSrc(ButtonDownHover);
+                        }}
+                            onMouseOut={() => {
+                                setLogoSrc(ButtonDown);
+                            }} className="scroll-button" /></a>
+
+                    </div>
+                    <BottomWave fillColorClass={fillColorClass} />
                 </div>
-
-                <div className="bg-color-turquoise-50">
-                    <div>
-                        <h4>{'Principle ' + principle.principleNumber.number}</h4>
-                        <h1>{principle.title}</h1>
-                        <h3>{principle.subHeader}</h3>
-                    </div>
-                    <div>
-                        <h3>{principle.quote}</h3>
-                        <h4>{principle.quoteAuthor}</h4>
-                    </div>
-                    <div className="">
-                        {principle.image ? (
-                            <Image
-                                className="img-size"
-                                width={200}
-                                height={100}
-                                src={principle.image.url}
-                                alt="Image put in by user in principle-card"
-                            />
-                        ) : (
-                            <div className="no-image-placeholder">No Image</div>
-                            // Or simply do not render anything or render a placeholder div
-                        )}
-                    </div>
-                </div>
-                <a href="#target-section"><Image src={ButtonDown}/></a>
-
-                <div id="target-section">
+                <div id="target-section" className="bullet-div">
                     <LargeBulletList content={contentForLargeBulletList} />
                 </div>
 

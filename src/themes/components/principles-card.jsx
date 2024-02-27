@@ -4,11 +4,11 @@ import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 
 const PrinciplesCard = ({ title, url, img }) => {
-console.log(img)
+
   return (
     <div
       className={`principles-card flex flex-row
-            bg-yellow-50 borderradius--xxs`}
+      bg-grey-25 borderradius--xxs`}
     >
       <div className="img-container">
         {img ? (

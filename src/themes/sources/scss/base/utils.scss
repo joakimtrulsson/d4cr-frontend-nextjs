@@ -719,6 +719,14 @@ ol {
     background-color: $-grey-500;
 }
 
+.bg-turquoise-50 {
+    background-color: $-turquoise-50;
+}
+
+.bg-turquoise-100 {
+    background-color: $-turquoise-100;
+}
+
 .bg-transparent {
     background-color: rgba(0, 0, 0, 0);
 }
@@ -733,6 +741,10 @@ ol {
 
 .fill-purple-50 {
     fill: $-purple-50;
+}
+
+.fill-turquoise-50 {
+    fill: $-turquoise-50
 }
 
 /* z-index */
@@ -893,3 +905,4 @@ ol {
         text-transform: uppercase;
     }
 }
+

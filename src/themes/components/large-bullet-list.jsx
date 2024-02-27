@@ -13,15 +13,15 @@ export default function LargeBulletList({ content }) {
 
     return (
         <div className='large-bullet-list-container min-width-25 flex flex-column  flex-align-center'>
-            <h2>{content.title}</h2>
-            <p className='large-text'>{content.subHeader}</p>
+            {content.title && (<h2>{content.title}</h2>)}
+            {content.subHeader && (<p className='large-text'>{content.subHeader}</p>)}
 
             {content.bullets.map((bullet, index) => {
                 return (
                     <div className='bullet-content full-width-height max-width-45 flex flex-row flex-align-center flex-justify-start 
                     bg-grey-25 borderradius--xxs padding--xs' key={index} >
                         
-                        { (content.listType === 'ORDERED') ? 
+                        { (content.listType === 'UNORDERED') ? 
                             <FontAwesomeIcon icon={['fas', 'arrow-right']} color={iconColor} />
                             : <FontAwesomeIcon icon={['fas', `${index+1}`]} color={iconColor} />
                         }
