@@ -1,21 +1,42 @@
 .title-div {
     padding-left: 15%;
     padding-right: 15%;
-    padding-top: 3%;
 
 
     .left-part {
         align-self: center;
-        padding: 10%;
+        padding: 4% 2% 0 0;
+
     }
 
     .right-part {
         align-self: center;
-        padding: 10%;
+        padding: 4% 0 0 2%;
+
+
+        .quote {
+            padding: 6%;
+            margin: 6%;
+            border-radius: 62.988px;
+            border: 3.178px solid var(--turquoise-turquoise-100, #E9F5F5);
+            background: var(--grey-grey-0, #FFF);
+        }
+
+        .quote-author {
+            padding: 2% 5% 2% 5%;
+            border-radius: 62.988px;
+            background: var(--turquoise-turquoise-200, #D3EBEA);
+            position: relative;
+            bottom: 1px;
+            left: 5%
+        }
+
     }
+
+
 }
 
 .bullet-div {
-    margin: 3%;
+
     padding-top: 5%;
 }

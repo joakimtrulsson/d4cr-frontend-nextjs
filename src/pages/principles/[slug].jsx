@@ -62,7 +62,7 @@ export default function PrinciplesPage(props) {
             <main>
 
                 <div>
-                    <div className="flex flex-row bg-turquoise-100 flex-justify-center">{previousSlug && (
+                    <div className="flex flex-row bg-turquoise-100 flex-justify-center ">{previousSlug && (
                         <a href={`./${previousSlug}`} className="previous-link">
                             <h2>Tidigare</h2>
                         </a>
@@ -81,14 +81,14 @@ export default function PrinciplesPage(props) {
                     <div className="bg-turquoise-50 margin-tb--xxxs-negative">
                         <div className="flex flex-row flex-nowrap title-div">
                             <div className="flex flex-column width--m left-part">
-                                <h4 className="margin--zero">{'Principle ' + principle.principleNumber.number}</h4>
-                                <h1>{principle.title}</h1>
-                                <h3>{principle.subHeader}</h3>
+                                <p className="margin--zero sub-heading-m">{'Principle ' + principle.principleNumber.number}</p>
+                                <h1 classname="">{principle.title}</h1>
+                                <p className="padding-tb--xxs margin--zero">{principle.subHeader}</p>
                             </div>
                             <div className="flex flex-column width--m right-part">
                                 <div className="">
-                                    <h3>{principle.quote}</h3>
-                                    <h4>{principle.quoteAuthor}</h4>
+                                    <h3 className="quote">{principle.quote}</h3>
+                                    <h4 className="quote-author">{principle.quoteAuthor}</h4>
                                 </div>
                                 <div className="">
                                     {principle.image ? (
@@ -106,7 +106,7 @@ export default function PrinciplesPage(props) {
                                 </div>
                             </div>
                         </div>
-                        <a className="width-full flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} onMouseEnter={() => {
+                        <a className="flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} onMouseEnter={() => {
                             setLogoSrc(ButtonDownHover);
                         }}
                             onMouseOut={() => {
