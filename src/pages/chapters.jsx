@@ -1,65 +1,24 @@
 import React from 'react';
-import NavBar from '../themes/components/navbar';
-import { gql } from '@apollo/client';
-import client from '../apollo-client';
+import Navbar from '../components/navbar'
+import { fetchMainMenuData } from '../graphql'
 import '../themes/sources/scss/app.scss'
 
 export default function Chapters({ data }) {
 
-console.log("chapters: ", data)
-
-    return (
+    return (    
         <div>
-            <NavBar data={data} />
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
-            <h1>chapters page</h1>
+            <Navbar data={data} />
             <h1>chapters page</h1>
         </div>
     );
 }
 
-export async function getServerSideProps() {
-
+export async function getStaticProps() {
     try {
-        
-        const { data } = await client.query({
-            query: gql`
-                query MainMenu {
-                    mainMenu {
-                        navigation
-                        ctaAnchorText
-                        ctaUrl
-                    }
-                }
-            `,
-        });
-        
-        return { props: { data: data.mainMenu } };
+        const data = await fetchMainMenuData();
+        return { props: { data } };
     } catch (error) {
-        console.error("(chapters.js) Error fetching data:", error);
-        return {
-            notFound: true,
-        };
+        console.error("(pages/chapters.jsx) Error fetching data:", error);
+        return { notFound: true };
     }
 }

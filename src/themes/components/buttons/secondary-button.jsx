@@ -6,9 +6,9 @@ export default function SecondaryButton({ className, title, onClick }) {
 
     return (
         <div className={`secondary-button flex flex-row flex-nowrap ${className}`} onClick={onClick}>
-            <Image src={ArrowLeft} />
+            <Image src={ArrowLeft} alt="left arrow" />
             <button className='flex flex-align-center'>{title}</button>
-            <Image src={ArrowRight} />
+            <Image src={ArrowRight} alt="right arrow" />
         </div>
     )
 }

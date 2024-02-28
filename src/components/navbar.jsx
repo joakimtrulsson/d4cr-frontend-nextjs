@@ -2,19 +2,16 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Icon from '../sources/assets/graphics/icons/d4cr-icon.png';
-import SecondaryButton from './buttons/secondary-button';
+import Icon from '../themes/sources/assets/graphics/icons/d4cr-icon.png';
+import SecondaryButton from '../themes/components/buttons/secondary-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
-
 export default function NavBar({ data }) {
-
+    
     const [activeDropdownIndex, setActiveDropdownIndex] = useState(null);
     const [hoveredButton, setHoveredButton] = useState(null);
     const [hoveredItem, setHoveredItem] = useState(null);
-
-    console.log("navbar: ", data); // remove this later
 
     function toggleDropdown(index) {
         setActiveDropdownIndex(activeDropdownIndex === index ? null : index);
@@ -25,7 +22,8 @@ export default function NavBar({ data }) {
     }
 
     return (
-        <div className="navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-white">
+        <header className="navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-white">
+
             <div className="navbar-icon margin-l--m">
                 <Image
                     src={Icon}
@@ -35,8 +33,7 @@ export default function NavBar({ data }) {
                 />
             </div>
 
-            <div className='flex flex-row flex-align-center'>
-
+            <nav className='flex flex-row flex-align-center'> {/* Design guide-button */}
                 <div>
                     <Link href="chapters">
                         <button
@@ -52,7 +49,7 @@ export default function NavBar({ data }) {
                     </Link>
                 </div>
 
-                {data.navigation && data.navigation.map((group, index) => (
+                {data && data.navigation && data.navigation.map((group, index) => ( /* Another group-buttons */
 
                     <div key={index}>
                         <button
@@ -74,12 +71,11 @@ export default function NavBar({ data }) {
                         {activeDropdownIndex === index && (
                             <div className={`dropdown-container bg-yellow-300 padding-tb--xxs`}>
 
-
                                 <ul className='no-bullets flex flex-column'>
                                     {group.links.map((link, key) => (
-                                        <Link className='no-decoration' href={link.url}>
+                                        <Link key={key} className='no-decoration' href={link.url}>
 
-                                            <li key={key} className='dropdown-item padding-tb--xxs padding-l--s 
+                                            <li className='dropdown-item padding-tb--xxs padding-l--s 
                                             flex flex-row color-yellow-800'
                                                 onMouseEnter={() => setHoveredItem(key)}
                                                 onMouseLeave={() => setHoveredItem(null)}>
@@ -100,15 +96,13 @@ export default function NavBar({ data }) {
                     </div>
                 ))}
 
-
-                {
-                    data.ctaAnchorText &&
+                {data && data.ctaAnchorText && /* Call to action-button */
                     <div className='margin-lr--xxl'>
                         <SecondaryButton className='scale-up-l' title={data.ctaAnchorText} onClick={handleSecondaryButtonClick} />
                     </div>
                 }
-            </div>
 
-        </div >
+            </nav>
+        </header >
     );
 }
