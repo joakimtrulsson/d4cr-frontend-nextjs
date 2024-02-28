@@ -7,6 +7,7 @@ import LargeBulletList from '../../themes/components/large-bullet-list.jsx';
 import ButtonDown from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-default.svg'
 import ButtonDownHover from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-hover.svg'
 import BottomWave from '../../themes/components/waves/bottom-wave.jsx'
+import ButtonRight from '../../themes/sources/assets/graphics/buttons/arrow-right-default.svg'
 
 export default function PrinciplesPage(props) {
     const principle = props.principle
@@ -60,35 +61,49 @@ export default function PrinciplesPage(props) {
 
         return (
             <main>
+                <div className="flex flex-row bg-turquoise-100 flex-justify-center navbar-principle-links">{previousSlug ? (
+                    <a href={`./${previousSlug}`} className="links image-arrows">
+                        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: 'scaleX(-1)' }}>
+                            <path d="M15.4336 8.05859L9.80859 13.6836C9.57422 13.8945 9.30469 14 9 14C8.69531 14 8.42578 13.8945 8.19141 13.6836C7.98047 13.4492 7.875 13.1797 7.875 12.875C7.875 12.5703 7.98047 12.3008 8.19141 12.0664L11.918 8.375H1.125C0.796875 8.375 0.527344 8.26953 0.316406 8.05859C0.105469 7.84766 0 7.57812 0 7.25C0 6.92188 0.105469 6.65234 0.316406 6.44141C0.527344 6.23047 0.796875 6.125 1.125 6.125H11.918L8.19141 2.43359C7.98047 2.19922 7.875 1.92969 7.875 1.625C7.875 1.32031 7.98047 1.05078 8.19141 0.816406C8.42578 0.605469 8.69531 0.5 9 0.5C9.30469 0.5 9.57422 0.605469 9.80859 0.816406L15.4336 6.44141C15.6445 6.67578 15.75 6.94531 15.75 7.25C15.75 7.55469 15.6445 7.82422 15.4336 8.05859Z" fill="#090909" />
+                        </svg><p>Previous</p>
+                    </a>
+                ) : (<div className="links image-arrows">
+                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: 'scaleX(-1)' }}>
+                        <path d="M15.4336 8.05859L9.80859 13.6836C9.57422 13.8945 9.30469 14 9 14C8.69531 14 8.42578 13.8945 8.19141 13.6836C7.98047 13.4492 7.875 13.1797 7.875 12.875C7.875 12.5703 7.98047 12.3008 8.19141 12.0664L11.918 8.375H1.125C0.796875 8.375 0.527344 8.26953 0.316406 8.05859C0.105469 7.84766 0 7.57812 0 7.25C0 6.92188 0.105469 6.65234 0.316406 6.44141C0.527344 6.23047 0.796875 6.125 1.125 6.125H11.918L8.19141 2.43359C7.98047 2.19922 7.875 1.92969 7.875 1.625C7.875 1.32031 7.98047 1.05078 8.19141 0.816406C8.42578 0.605469 8.69531 0.5 9 0.5C9.30469 0.5 9.57422 0.605469 9.80859 0.816406L15.4336 6.44141C15.6445 6.67578 15.75 6.94531 15.75 7.25C15.75 7.55469 15.6445 7.82422 15.4336 8.05859Z" fill="#BDBDBD" />
+                    </svg><p className='link-no-previous'>Previous</p>
+                </div>)}
 
-                <div>
-                    <div className="flex flex-row bg-turquoise-100 flex-justify-center ">{previousSlug && (
-                        <a href={`./${previousSlug}`} className="previous-link">
-                            <h2>Tidigare</h2>
-                        </a>
-                    )} {principlesNumber.map(((numbers) => {
+                    {principlesNumber.map(((numbers) => {
                         const isActive = props.slug === numbers.principles.slug;
                         return (<div>
-                            <a key={numbers.principles.id} href={`.${numbers.principles.slug}`} className={isActive ? 'active-link' : ''}
-                                style={isActive ? { color: 'red' } : {}}> <h2> {numbers.number} </h2></a></div>
+                            <a key={numbers.principles.id} href={!isActive ? `.${numbers.principles.slug}`: null} className={`links`}
+                            > <h2 className={`numbers ${isActive ? 'active-link' : ''}`}> {numbers.number} </h2></a></div>
                         )
                     }))}
-                        {nextSlug && (<a href={`./${nextSlug}`} className="next-link">
-                            <h2>Nästa</h2>
-                        </a>)}
-                    </div>
+
+                    {nextSlug ? (<a href={`./${nextSlug}`} className="links image-arrows"><p>Next</p>
+                        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.4336 8.05859L9.80859 13.6836C9.57422 13.8945 9.30469 14 9 14C8.69531 14 8.42578 13.8945 8.19141 13.6836C7.98047 13.4492 7.875 13.1797 7.875 12.875C7.875 12.5703 7.98047 12.3008 8.19141 12.0664L11.918 8.375H1.125C0.796875 8.375 0.527344 8.26953 0.316406 8.05859C0.105469 7.84766 0 7.57812 0 7.25C0 6.92188 0.105469 6.65234 0.316406 6.44141C0.527344 6.23047 0.796875 6.125 1.125 6.125H11.918L8.19141 2.43359C7.98047 2.19922 7.875 1.92969 7.875 1.625C7.875 1.32031 7.98047 1.05078 8.19141 0.816406C8.42578 0.605469 8.69531 0.5 9 0.5C9.30469 0.5 9.57422 0.605469 9.80859 0.816406L15.4336 6.44141C15.6445 6.67578 15.75 6.94531 15.75 7.25C15.75 7.55469 15.6445 7.82422 15.4336 8.05859Z" fill="#090909" />
+                        </svg>
+                    </a>) : (<div className="links image-arrows"><p className='link-no-previous'>Next</p>
+                        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.4336 8.05859L9.80859 13.6836C9.57422 13.8945 9.30469 14 9 14C8.69531 14 8.42578 13.8945 8.19141 13.6836C7.98047 13.4492 7.875 13.1797 7.875 12.875C7.875 12.5703 7.98047 12.3008 8.19141 12.0664L11.918 8.375H1.125C0.796875 8.375 0.527344 8.26953 0.316406 8.05859C0.105469 7.84766 0 7.57812 0 7.25C0 6.92188 0.105469 6.65234 0.316406 6.44141C0.527344 6.23047 0.796875 6.125 1.125 6.125H11.918L8.19141 2.43359C7.98047 2.19922 7.875 1.92969 7.875 1.625C7.875 1.32031 7.98047 1.05078 8.19141 0.816406C8.42578 0.605469 8.69531 0.5 9 0.5C9.30469 0.5 9.57422 0.605469 9.80859 0.816406L15.4336 6.44141C15.6445 6.67578 15.75 6.94531 15.75 7.25C15.75 7.55469 15.6445 7.82422 15.4336 8.05859Z" fill="#BDBDBD" />
+                        </svg>
+                    </div>)}
+                </div>
+                <div>
 
                     <div className="bg-turquoise-50 margin-tb--xxxs-negative">
                         <div className="flex flex-row flex-nowrap title-div">
                             <div className="flex flex-column width--m left-part">
-                                <p className="margin--zero sub-heading-m">{'Principle ' + principle.principleNumber.number}</p>
+                                <p className="margin--zero sub-heading-m gray-color">{'Principle ' + principle.principleNumber.number}</p>
                                 <h1 classname="">{principle.title}</h1>
-                                <p className="padding-tb--xxs margin--zero">{principle.subHeader}</p>
+                                <p className="padding-tb--xxs margin--zero gray-color">{principle.subHeader}</p>
                             </div>
                             <div className="flex flex-column width--m right-part">
-                                <div className="">
-                                    <h3 className="quote">{principle.quote}</h3>
-                                    <h4 className="quote-author">{principle.quoteAuthor}</h4>
+                                <div className="quote-container">
+                                    <h4 className="quote">{principle.quote}</h4>
+                                    <p className="quote-author">{principle.quoteAuthor}</p>
                                 </div>
                                 <div className="">
                                     {principle.image ? (
