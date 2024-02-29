@@ -17,7 +17,7 @@ export default function Banner({ content }) {
         padding--s width--l min-width-35 borderradius--xxs'>
 
             <div className='icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
-             borderradius--half padding--xs margin-l--xxs'>
+             borderradius--half padding--s margin-l--xxs'>
 
                 <FontAwesomeIcon icon={['fas', content.iconName]} color={iconColor} size="lg" />
                     
