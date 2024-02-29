@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Known Issues
 
-- **Data from the backend needs to be adjusted:** [Include group title and content in the Banner (with null values for Chapters-pages)]
+- **Data for Footer Nav from the backend needs adjustment:** [Include group title and content in the Banner (with null values for Banner by Chapters-pages)]
 
 - **Issue 2:** [Brief description of the issue]
 
