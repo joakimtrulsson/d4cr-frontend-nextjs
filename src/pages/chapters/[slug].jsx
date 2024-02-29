@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import client from '../../apollo-client.js';
 import getLanguageName from '../../themes/sources/js/language-code.js'
-import WYSIWYG from '../../themes/components/wysiwyg.jsx'
 import SectionRender from '../../themes/sources/js/section-render.js';
 import AnimationRight from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif'
