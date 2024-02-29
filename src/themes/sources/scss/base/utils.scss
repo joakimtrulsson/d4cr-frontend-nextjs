@@ -251,6 +251,18 @@ body {
         &--m {
             margin-top: $-spacing-4;
         }
+
+        &--l {
+            margin-top: $-spacing-5;
+        }
+
+        &--xl {
+            margin-top: $-spacing-6;
+        }
+
+        &--xxl {
+            margin-top: $-spacing-7;
+        }
     }
 
     &-b {
@@ -278,6 +290,18 @@ body {
 
         &--m {
             margin-bottom: $-spacing-4; 
+        }
+
+        &--l {
+            margin-bottom: $-spacing-5; 
+        }
+
+        &--xl {
+            margin-bottom: $-spacing-6; 
+        }
+
+        &--xxl {
+            margin-bottom: $-spacing-7; 
         }
     }
 
@@ -311,6 +335,14 @@ body {
         &--l {
             margin-left: $-spacing-5;
         }
+
+        &--xl {
+            margin-left: $-spacing-6;
+        }
+
+        &--xxl {
+            margin-left: $-spacing-7;
+        }
     }
     
 
@@ -343,6 +375,14 @@ body {
 
         &--l {
             margin-right: $-spacing-5;
+        }
+
+        &--xl {
+            margin-right: $-spacing-6;
+        }
+
+        &--xxl {
+            margin-right: $-spacing-7;
         }
     }
 }
@@ -440,6 +480,11 @@ body {
             padding-left: $-spacing-6;
             padding-right: $-spacing-6;
         }
+
+        &--xxl {
+            padding-left: $-spacing-7;
+            padding-right: $-spacing-7;
+        }
     }
 
     &-t {
@@ -486,6 +531,50 @@ body {
         }
     }
 
+    &-b {
+        // bottom
+    
+        &--xxxs-negative {
+            padding-bottom: -$-spacing-1;
+        }
+    
+        &--xxxs {
+            padding-bottom: $-spacing-1;
+        }
+    
+        &--xxs {
+            padding-bottom: $-spacing-2;
+        }
+    
+        &--xs {
+            padding-bottom: $-spacing;
+        }
+    
+        &--s {
+            padding-bottom: $-spacing-3;
+        }
+    
+        &--m {
+            padding-bottom: $-spacing-4;
+        }
+    
+        &--l {
+            padding-bottom: $-spacing-5;
+        }
+
+        &--xl {
+            padding-bottom: $-spacing-6;
+        }
+
+        &--xxl {
+            padding-bottom: $-spacing-7;
+        }
+
+        &--xxxl {
+            padding-bottom: $-spacing-8;
+        }
+    }
+
     &-l {
         // left
     
@@ -515,6 +604,14 @@ body {
     
         &--l {
             padding-left: $-spacing-5;
+        }
+
+        &--xl {
+            padding-left: $-spacing-6;
+        }
+
+        &--xxl {
+            padding-left: $-spacing-7;
         }
     }
 
@@ -547,6 +644,14 @@ body {
     
         &--l {
             padding-right: $-spacing-5;
+        }
+
+        &--xl {
+            padding-right: $-spacing-6;
+        }
+
+        &--xxl {
+            padding-right: $-spacing-7;
         }
     }    
 }

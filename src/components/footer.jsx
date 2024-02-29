@@ -5,12 +5,13 @@ import Link from 'next/link'
 import React from 'react';
 import Banner from '../components/banner'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faXTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Footer({ data }) {
 
     const [hoveredItem, setHoveredItem] = React.useState({ index: null, key: null });
-    
+
     console.log(data) // remove this!
 
     const bannerContent = { // important - add this from backend! 
@@ -45,69 +46,90 @@ export default function Footer({ data }) {
                 <TopWave fillColorClass="fill-grey-700" />
             </div>
 
-            <div className="footer-body flex flex-row flex-justify-between flex-align-start 
-            bg-grey-700 full-width-height padding-t--xxxl">
+            <div className='flex flex-column full-width-height bg-grey-700'>
 
-                <div className='footer-icon-and-social-platform margin-l--m'>
-                    <div className="footer-icon margin-b--m">
-                        <Image
-                            src={Icon}
-                            width={160}
-                            height={50}
-                            alt="D4CR"
-                        />
-                    </div>
+                <div className="flex flex-row flex-justify-between flex-align-start 
+                 padding-t--xxxl padding-b--xxl margin-lr--xxl">
 
-                    <div className='flex flex-column margin-b--m'>
-                        <p className='color-orange-400 semibold'>Join us</p>
-                        <div className='flex'>
-                            <a href="#" className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">X</a>
-                            <a href="#" className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">X</a>
-                            <a href="#" className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">X</a>
-                            <a href="#" className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">X</a>
+                    <div className=''>
+                        <div className="footer-icon margin-b--m">
+                            <Image
+                                src={Icon}
+                                width={160}
+                                height={50}
+                                alt="D4CR"
+                            />
+                        </div>
+
+                        <div className='flex flex-column margin-t--xl margin-b--m'>
+                            <p className='color-orange-400 semibold margin--zero margin-b--xxs'>Join us</p>
+                            <div className='social-icon-wrapper flex flex-justify-center flex-align-center'>
+                                <Link href="https://twitter.com/D4C_Guide" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
+                                    <FontAwesomeIcon icon={faXTwitter} color="#6C9B98" size="2x" />
+                                </Link>
+                                <Link href="https://www.facebook.com/designingforchildren" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
+                                    <FontAwesomeIcon icon={faFacebook} color="#6C9B98" size="2x" />
+                                </Link>
+                                <Link href="https://www.instagram.com/d4c_guide/" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
+                                    <FontAwesomeIcon icon={faInstagram} color="#6C9B98" size="2x" />
+                                </Link>
+                                <Link href="https://www.linkedin.com/company/designing-for-childrens-rights/" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
+                                    <FontAwesomeIcon icon={faLinkedin} color="#6C9B98" size="2x" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
-                    <div className=''>
-                        <Link href="cookies" className='color-orange-50 margin-r--xs no-decoration'>
-                            <span className='margin-r--xxs'>Cookies</span>
-                            <FontAwesomeIcon icon={faArrowRight} size="sm" />
-                        </Link>
-                        <Link href="integrity-policy" className='color-orange-50 margin-r--xs no-decoration'>
-                            <span className='margin-r--xxs'>Integrity policy</span>
-                            <FontAwesomeIcon icon={faArrowRight} size="sm" />
-                        </Link>
+                    <div className='flex flex-row flex-justify-end'>
+                        {data && data.navigation && data.navigation.map((group, index) => (
+                            <div key={index} className='margin-l--m'>
+                                <p className='color-orange-400 semibold margin--zero margin-b--xxs'>{group.groupTitle}</p>
+
+                                <ul className='no-bullets flex flex-column'>
+                                    {group.links && group.links.map((link, key) => (
+                                        <Link key={key} className='no-decoration' href={link.url}>
+
+                                            <li className='margin-tb--xxs color-orange-50 width--40'
+                                                onMouseEnter={() => setHoveredItem({ index: index, key: key })}
+                                                onMouseLeave={() => setHoveredItem({ index: null, key: null })}>
+                                                <button className='button color-orange-50 flex flex-row'>
+
+                                                    <span className={`${hoveredItem === key ? 'margin-r--xs' : 'margin-r--xxs'}`}>{link.anchorText}</span>
+                                                    <div className='icon-wrapper'>
+                                                        <FontAwesomeIcon className={`fa-icon `}
+                                                            icon={faArrowRight}
+                                                            size="lg"
+                                                        />
+                                                    </div>
+                                                </button>
+                                            </li>
+                                        </Link>
+                                    ))}
+                                </ul>
+
+                            </div>
+                        ))}
                     </div>
 
                 </div>
 
-                <div className='flex flex-row flex-justify-center'>
-                    {data && data.navigation && data.navigation.map((group, index) => (
-                        <div key={index} className='margin-lr--m'>
-                            <p className='color-orange-400 semibold margin--zero margin-b--xxs'>{group.groupTitle}</p>
-
-                            <ul className='no-bullets flex flex-column'>
-                                {group.links && group.links.map((link, key) => (
-                                    <Link key={key} className='no-decoration' href={link.url}>
-
-                                        <li className='underline-background dropdown-item padding-tb--xxs 
-                                            flex flex-row color-orange-50'
-                                            onMouseEnter={() => setHoveredItem({ index: index, key: key })}
-                                            onMouseLeave={() => setHoveredItem({ index: null, key: null })}>
-                                            <span className={`${hoveredItem === key ? 'margin-r--xs' : 'margin-r--xxs'}`}>{link.anchorText}</span>
-                                            <div className={`icon-wrapper`}>
-                                                <FontAwesomeIcon className={`fa-icon `}
-                                                    icon={faArrowRight}
-                                                    size="sm"
-                                                />
-                                            </div>
-                                        </li>
-                                    </Link>
-                                ))}
-                            </ul>
-
-                        </div>
-                    ))}
+                <div className='margin-b--xxl margin-lr--xxl flex flex-row'>
+                    <Link href="cookies" className='color-orange-50 margin-r--xs no-decoration'>
+                        <button className='button color-orange-50 flex flex-row'>
+                            <span className='margin-r--xxs'>Cookies</span>
+                            <div className='icon-wrapper'>
+                                <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                            </div>
+                        </button>
+                    </Link>
+                    <Link href="integrity-policy" className='color-orange-50 margin-r--xs no-decoration'>
+                        <button className='button color-orange-50 flex flex-row'>
+                            <span className='margin-r--xxs'>Integrity policy</span>
+                            <div className='icon-wrapper'>
+                                <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                            </div>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

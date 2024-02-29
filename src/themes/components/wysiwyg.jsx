@@ -6,5 +6,3 @@ export default function WYSIWYG({ content }) {
         <DocumentRenderer document={content} />
     )
 }
-
-// margin-lr--xxxl max-width-60 margin-tb--l <--- we had this as className.. by mistake
