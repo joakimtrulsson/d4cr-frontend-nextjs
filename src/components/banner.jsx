@@ -1,11 +1,11 @@
-import '../sources/scss/base/utils.scss'
-import '../sources/scss/components/banner.scss'
-import PrimaryButton from './buttons/primary-button'
-import WYSIWYG from './wysiwyg'
+import PrimaryButton from '../themes/components/buttons/primary-button'
+import WYSIWYG from '../themes/components/wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default function Banner({ content }) {
+
+    console.log(content)
 
     const { library, config } = require('@fortawesome/fontawesome-svg-core');
     library.add(fas)
@@ -14,13 +14,13 @@ export default function Banner({ content }) {
 
     return (
         <div className='banner flex flex-row flex-justify-between flex-align-center bg-orange-50 
-        padding--s max-width-45 borderradius--xxs'>
+        padding--s width--l min-width-35 borderradius--xxs'>
 
             <div className='icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
-            borderradius--half padding--xs'>
+             borderradius--half padding--xs margin-l--xxs'>
 
                 <FontAwesomeIcon icon={['fas', content.iconName]} color={iconColor} size="lg" />
-
+                    
             </div>
 
             <div className="margin-lr--xs">

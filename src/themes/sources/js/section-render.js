@@ -1,5 +1,5 @@
 import AccordionSection from '../../components/accordion.jsx'
-import BannerSection from '../../components/banner.jsx'
+import BannerSection from '../../../components/banner.jsx'
 import ChapterSection from '../../components/chapter-teaser.jsx'
 import ImagesSection from '../../components/images-component.jsx'
 import LargeBulletListSection from '../../components/large-bullet-list.jsx'

@@ -60,8 +60,8 @@ export default function NavBar({ data }) {
                             {group.groupTitle}
                             {' '}
                             {activeDropdownIndex === index ?
-                                <FontAwesomeIcon icon={faChevronUp} />
-                                : <FontAwesomeIcon icon={faChevronDown} />
+                                <FontAwesomeIcon icon={faChevronUp} size="sm"/>
+                                : <FontAwesomeIcon icon={faChevronDown} size="sm"/>
                             }
                         </button>
 
@@ -83,6 +83,7 @@ export default function NavBar({ data }) {
                                                 <div className={`icon-wrapper ${hoveredItem === key ? 'margin-r--xxs' : ''}`}>
                                                     <FontAwesomeIcon className={`fa-icon ${hoveredItem === key ? '' : 'opacity-0'}`}
                                                         icon={faChevronRight}
+                                                        size="sm"
                                                     />
                                                 </div>
                                                 {link.anchorText}

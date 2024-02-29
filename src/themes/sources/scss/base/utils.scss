@@ -80,6 +80,14 @@ body {
     &-30 {
         min-width: 30rem;
     }
+
+    &-35 {
+        min-width: 35rem;
+    }
+
+    &-40 {
+        min-width: 40rem;
+    }
 }
 
 .max-width {
@@ -239,6 +247,10 @@ body {
         &--s {
             margin-top: $-spacing-3;
         }
+
+        &--m {
+            margin-top: $-spacing-4;
+        }
     }
 
     &-b {
@@ -265,7 +277,7 @@ body {
         }
 
         &--m {
-            margin-bottom: $-spacing-5;
+            margin-bottom: $-spacing-4; 
         }
     }
 
@@ -427,6 +439,50 @@ body {
         &--xl {
             padding-left: $-spacing-6;
             padding-right: $-spacing-6;
+        }
+    }
+
+    &-t {
+        // top
+    
+        &--xxxs-negative {
+            padding-top: -$-spacing-1;
+        }
+    
+        &--xxxs {
+            padding-top: $-spacing-1;
+        }
+    
+        &--xxs {
+            padding-top: $-spacing-2;
+        }
+    
+        &--xs {
+            padding-top: $-spacing;
+        }
+    
+        &--s {
+            padding-top: $-spacing-3;
+        }
+    
+        &--m {
+            padding-top: $-spacing-4;
+        }
+    
+        &--l {
+            padding-top: $-spacing-5;
+        }
+
+        &--xl {
+            padding-top: $-spacing-6;
+        }
+
+        &--xxl {
+            padding-top: $-spacing-7;
+        }
+
+        &--xxxl {
+            padding-top: $-spacing-8;
         }
     }
 
@@ -772,6 +828,10 @@ ol {
     text-decoration: none;
 }
 
+.semibold {
+    font-weight: 600;
+}
+
 .bold {
     font-weight: 900;
 }
@@ -812,8 +872,21 @@ ol {
     color: $-yellow-800;
 }
 
+.color-orange-50 {
+    color: $-orange-50;
+}
+
+.color-orange-400 {
+    color: $-orange-400;
+}
+
+
 .color-orange-500 {
     color: $-orange-500;
+}
+
+.color-grey-50 {
+    color: $-grey-50;
 }
 
 .color-grey-500 {
@@ -856,6 +929,10 @@ ol {
     background-color: $-orange-100;
 }
 
+.bg-turquoise-50 {
+    background-color: $-turquoise-100;
+}
+
 .bg-purple-50 {
     background-color: $-purple-50;
 }
@@ -866,6 +943,10 @@ ol {
 
 .bg-grey-500 {
     background-color: $-grey-500;
+}
+
+.bg-grey-700 {
+    background-color: $-grey-700;
 }
 
 .bg-transparent {
@@ -882,6 +963,10 @@ ol {
 
 .fill-purple-50 {
     fill: $-purple-50;
+}
+
+.fill-grey-700 {
+    fill: $-grey-700;
 }
 
 /* z-index */

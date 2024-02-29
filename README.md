@@ -34,3 +34,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Known Issues
+
+- **Data from the backend needs to be adjusted:** [Include group title and content in the Banner (with null values for Chapters-pages)]
+
+- **Issue 2:** [Brief description of the issue]
+
+- **Issue 3:** [Brief description of the issue]

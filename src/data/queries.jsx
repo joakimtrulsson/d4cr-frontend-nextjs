@@ -9,3 +9,11 @@ export const MAIN_MENU_QUERY = gql`
         }
     }
 `;
+
+export const FOOTER_MENU_QUERY = gql`
+    query FooterMenu{
+        footerMenu{
+            navigation
+        }
+    }
+`;

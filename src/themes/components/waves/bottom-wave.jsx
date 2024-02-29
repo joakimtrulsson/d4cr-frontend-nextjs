@@ -1,6 +1,6 @@
 import '../../sources/scss/base/utils.scss'
 
-const BottomWave = ({fillColorClass}) => {
+export default function BottomWave({fillColorClass}) {
 
     return (
 
@@ -17,5 +17,3 @@ const BottomWave = ({fillColorClass}) => {
         </svg>
     )
 }
-
-export default BottomWave
