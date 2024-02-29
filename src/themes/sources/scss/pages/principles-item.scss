@@ -40,6 +40,7 @@
                 position: relative;
                 text-align: center;
                 display: inline-block;
+                min-width: 200px;
             }
 
             .quote-author {
@@ -48,7 +49,7 @@
                 border-radius: 62.988px;
                 background: var(--turquoise-turquoise-200, #D3EBEA);
                 position: absolute;
-                bottom: 0;
+                bottom: 1%;
                 /* Adjust this value as needed */
                 left: 40%;
                 /* Center align the quote author relative to the quote's width */
@@ -57,6 +58,13 @@
                 transform: translateY(7%);
                 width: auto;
                 white-space: nowrap;
+            }
+
+            .quote-marks {
+                position: absolute;
+                top: 12%;
+                left: 15%;
+                transform: translateY(-12%);
             }
         }
     }
@@ -111,18 +119,19 @@
             text-decoration: none;
             padding-left: 14px;
             padding-right: 14px;
-            font-weight:400;
+            font-weight: 400;
         }
 
         .link-no-previous {
             color: #BDBDBD
         }
     }
+
     .active-link {
         color: #FC7C37;
         background-color: #FFF9EB;
         border-color: #FBBF34;
         text-decoration: none;
     }
-    
+
 }
