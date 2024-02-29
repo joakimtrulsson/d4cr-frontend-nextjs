@@ -8,7 +8,7 @@ const PrinciplesCard = ({ title, url, img }) => {
   return (
     <div
       className={`principles-card flex flex-row
-            bg-yellow-50 borderradius--xxs`}
+      bg-grey-25 borderradius--xxs`}
     >
       <div className="img-container">
         {img ? (

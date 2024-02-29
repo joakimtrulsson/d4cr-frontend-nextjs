@@ -385,6 +385,38 @@ body {
             margin-right: $-spacing-7;
         }
     }
+
+    &-l {
+        // left
+
+        &--xxxs-negative {
+            margin-right: -$-spacing-1;
+        }
+
+        &--xxxs {
+            margin-right: $-spacing-1;
+        }
+
+        &--xxs {
+            margin-right: $-spacing-2;
+        }
+
+        &--xs {
+            margin-right: $-spacing;
+        }
+
+        &--s {
+            margin-right: $-spacing-3;
+        }
+
+        &--m {
+            margin-right: $-spacing-4;
+        }
+
+        &--l {
+            margin-right: $-spacing-5;
+        }
+    }
 }
 
 
@@ -1054,6 +1086,14 @@ ol {
     background-color: $-grey-700;
 }
 
+.bg-turquoise-50 {
+    background-color: $-turquoise-50;
+}
+
+.bg-turquoise-100 {
+    background-color: $-turquoise-100;
+}
+
 .bg-transparent {
     background-color: rgba(0, 0, 0, 0);
 }
@@ -1064,6 +1104,10 @@ ol {
 
 .fill-yellow-50 {
     fill: $-yellow-50;
+}
+
+.fill-turquoise-50 {
+    fill: $-turquoise-50
 }
 
 .fill-purple-50 {
@@ -1249,3 +1293,4 @@ ol {
         text-transform: uppercase;
     }
 }
+

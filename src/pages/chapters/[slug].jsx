@@ -11,6 +11,8 @@ import styles from '../../themes/sources/scss/app.scss'
 
 export default function SlugPage({ chapters }) {
 
+  console.log(chapters)
+
   // Get current chapter
   const currentLanguage = {
     chapterLanguage: chapters.chapterLanguage,
