@@ -1,17 +1,14 @@
 import TopWave from './waves/top-wave.jsx'
 import BottomWave from './waves/bottom-wave.jsx'
-import Image from 'next/image'
-import DummyImage1 from '../sources/assets/graphics/placeholder/dummy-image1.svg'
 import PrimaryButton from './buttons/primary-button.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
 import WYSIWYG from './wysiwyg.jsx'
 import '../sources/scss/components/text-and-media.scss'
 import '../sources/scss/base/utils.scss'
 
-// ta reda på vilka färger ska användas (!)
-
-
 export default function TextMediaComponent({ content }) {
+
+    console.log(content.image.url)
 
     var bgColorClass, fillColorClass
 
@@ -50,13 +47,13 @@ export default function TextMediaComponent({ content }) {
 
                     <div className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center' >
 
-                        {content.cta1 && content.cta1.url && content.cta1.anchorText && (
+                        {content.cta1 && content.cta1.url && content.cta1.anchorText && ( /* primary button */
                             <a href={content.cta1.url}>
                                 <PrimaryButton title={content.cta1.anchorText} />
                             </a>
                         )}
-                        
-                        {content.cta2 && content.cta2.url && content.cta2.anchorText && (
+
+                        {content.cta2 && content.cta2.url && content.cta2.anchorText && ( /* secondary button */
                             <a className='no-decoration' href={content.cta2.url}>
                                 <SecondaryButton title={content.cta2.anchorText} />
                             </a>
@@ -65,13 +62,8 @@ export default function TextMediaComponent({ content }) {
                 </div>
 
                 <div className='media-content flex flex-justify-center flex-align-center'>
-
-                    {(content.imgUrl !== null && content.imgUrl !== undefined) ? // image
-                        <Image className='obj-cover' src={content.imgUrl} />
-                        :
-                        <Image className='obj-cover' src={DummyImage1} />}
+                    {content.image.url && <img className='obj-cover' src={content.image.url} alt={content.image.altText} /> /* image */}
                 </div>
-
             </div>
 
             {(content.border === 'BOTTOM' || content.border === 'TOPBOTTOM') ? // bottom wave
