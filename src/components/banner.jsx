@@ -5,8 +5,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default function Banner({ content }) {
 
-    console.log(content)
-
     const { library, config } = require('@fortawesome/fontawesome-svg-core');
     library.add(fas)
 

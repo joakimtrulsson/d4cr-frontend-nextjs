@@ -12,8 +12,6 @@ export default function Footer({ data }) {
 
     const [hoveredItem, setHoveredItem] = React.useState({ index: null, key: null });
 
-    console.log(data) // remove this!
-
     const bannerContent = { // important - add this from backend! 
         "id": "afc1f312-c1c4-4bf3-8103-e15923c58d44",
         "cta": {

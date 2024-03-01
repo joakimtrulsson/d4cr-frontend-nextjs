@@ -1,9 +1,12 @@
 @import '../variables/color-variables.scss';
+@import '../variables/layout-variables.scss';
+
 
 .navbar {
   top: 0;
   left: 0;
   position: sticky;
+  z-index: $-z-index-navbar;
 
   .secondary-button {
     scale: 1.05;
@@ -40,7 +43,7 @@
 
 .dropdown-container {
   width: 17rem;
-  margin-top: -0.1rem;
+  margin-top: -0.2rem;
   position: absolute;
   transform: translateX(-25%);
   z-index: 1000;

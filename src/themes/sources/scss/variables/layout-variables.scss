@@ -14,6 +14,8 @@ $-z-index-background: -2;
 $-z-index-header-background: -1;
 $-z-index-navbar-dropdown: 1;
 $-z-index-container: -1;
+$-z-index-navbar: 10;
+$-z-index-footer: $-z-index-navbar - 1;
 
 $display-xs: 375px;
 $display-s: 575px;
