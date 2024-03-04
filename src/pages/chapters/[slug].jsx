@@ -10,7 +10,7 @@ import NavBar from '../../components/navbar.jsx'
 import Footer from '../../components/footer.jsx'
 import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
 
-export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
+export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
 
   // Get current chapter
   const currentLanguage = {
@@ -36,18 +36,10 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
   return (
     <>
       <NavBar data={navMenuData} />
-      <div className={`${styles.container} flex flex-column flex-align-center`}>
+      <div className={`flex flex-column flex-align-center`}>
 
         {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
           <div className='language-tabs margin-tb--s'>
-
-            <div className='animation-background-right'>
-              <Image src={AnimationRight} alt="Animated GIF" />
-            </div>
-
-            <div className='animation-background-left'>
-              <Image src={AnimationLeft} alt="Animated GIF"  />
-            </div>
 
             {chapterLanguages.map((chapter, index) => (
               <Link href={chapter.slug} key={index}>
@@ -63,9 +55,17 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
           </div>
         )}
 
+        <div className='animation-background-left'>
+          <Image src={AnimationLeft} alt="Animated GIF" />
+        </div>
+
+        <div className='animation-background-right'>
+          <Image src={AnimationRight} alt="Animated GIF" />
+        </div>
+
         {chapters.heroImage.url && ( // show hero image if exists
           <div className='hero margin-t--s borderradius--xxxs'>
-              <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true} />
+            <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true} />
           </div>
         )}
 
