@@ -5,7 +5,7 @@ import "../sources/scss/components/principles.scss";
 import SecondaryButton from "./buttons/secondary-button.jsx";
 
 export default function Principles({ content: chapterContent }) {
-  
+
   const chapterContentProp = chapterContent ? chapterContent : null;
   console.log('Prop', chapterContentProp)
   const [showAllCards, setShowAllCards] = useState(false);
@@ -35,7 +35,7 @@ export default function Principles({ content: chapterContent }) {
               </h4>
               <div className="flex flex-row flex-wrap flex-justify-center flex-align-center">
                 {chapterContentProp.groups[0].principles.map((principle) => (
-                  <div className="card-wrapper">
+                  <div key={principle.id} className="card-wrapper" >
                     {console.log('cardet', principle.image.url)}
                     <PrinciplesCard
                       title={
@@ -44,7 +44,7 @@ export default function Principles({ content: chapterContent }) {
                         principle.title
                       }
                       url={"/principles" + principle.slug}
-                      key={principle.id}
+
                       img={
                         principle.image && principle.image.url
                           ? principle.image.url
@@ -62,12 +62,11 @@ export default function Principles({ content: chapterContent }) {
                 {chapterContentProp.groups[1].groupTitle}
               </h4>
               <div
-                className={`flex flex-row flex-wrap flex-justify-center flex-align-center ${
-                  showAllCards ? "" : "opacity-second-group"
-                }`}
+                className={`flex flex-row flex-wrap flex-justify-center flex-align-center ${showAllCards ? "" : "opacity-second-group"
+                  }`}
               >
                 {chapterContentProp.groups[1].principles.map((principle) => (
-                  <div className="card-wrapper">
+                  <div key={principle.id} className="card-wrapper">
                     <PrinciplesCard
                       title={
                         principle.principleNumber.number +
@@ -75,7 +74,7 @@ export default function Principles({ content: chapterContent }) {
                         principle.title
                       }
                       url={"/principles" + principle.slug}
-                      key={principle.id}
+
                       img={
                         principle.image && principle.image.url
                           ? principle.image.url
@@ -88,9 +87,8 @@ export default function Principles({ content: chapterContent }) {
               {chapterContentProp.groups.length > 2 ? (
                 <>
                   <div
-                    className={`full-width-height flex flex-column flex-wrap flex-justify-center flex-align-center ${
-                      showAllCards ? "" : "hide-cards"
-                    }`}
+                    className={`full-width-height flex flex-column flex-wrap flex-justify-center flex-align-center ${showAllCards ? "" : "hide-cards"
+                      }`}
                   >
                     {chapterContentProp.groups.slice(2).map((group, index) => (
                       <div key={index}>
