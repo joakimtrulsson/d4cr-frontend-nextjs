@@ -5,7 +5,6 @@ import SectionRender from '../../themes/sources/js/section-render.js';
 import AnimationRight from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import styles from '../../themes/sources/scss/app.scss'
 import NavBar from '../../components/navbar.jsx'
 import Footer from '../../components/footer.jsx'
 import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'

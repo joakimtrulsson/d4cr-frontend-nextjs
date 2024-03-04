@@ -16,6 +16,8 @@ $-z-index-navbar-dropdown: 1;
 $-z-index-container: -1;
 $-z-index-navbar: 10;
 $-z-index-footer: $-z-index-navbar - 1;
+$-z-index-nav-dropdown-container: $-z-index-navbar + 1;
+
 
 $display-xs: 375px;
 $display-s: 575px;

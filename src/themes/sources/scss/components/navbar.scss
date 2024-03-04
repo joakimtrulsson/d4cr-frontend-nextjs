@@ -1,7 +1,6 @@
 @import '../variables/color-variables.scss';
 @import '../variables/layout-variables.scss';
 
-
 .navbar {
   top: 0;
   left: 0;
@@ -40,17 +39,14 @@
   }
 }
 
-
 .dropdown-container {
   width: 17rem;
   margin-top: -0.2rem;
   position: absolute;
   transform: translateX(-25%);
-  z-index: 1000;
-  /* change this one! */
+  z-index: $-z-index-nav-dropdown-container;
 
   .dropdown-item {
-
     font-size: 0.9rem;
     font-weight: 500;
     white-space: nowrap;
@@ -59,11 +55,9 @@
     overflow-y: auto;
 
     .icon-wrapper {
-
       transition: margin-right 400ms ease-in-out;
 
       .fa-icon {
-        color: $-orange-500;
         transition: opacity 400ms ease-in-out;
       }
     }
