@@ -6,8 +6,6 @@ import '../themes/sources/scss/app.scss'
 
 export default function Chapters(props) {
 
-    console.log("props..", props)
-
     return (    
         <div>
             <Navbar data={props.navMenuData} />

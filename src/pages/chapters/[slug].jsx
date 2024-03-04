@@ -42,11 +42,11 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
           <div className='language-tabs margin-tb--s'>
 
             <div className='animation-background-right'>
-              <Image src={AnimationRight} alt="Animated GIF" />
+              <Image src={AnimationRight} alt="Animated GIF" fill={true} />
             </div>
 
             <div className='animation-background-left'>
-              <Image src={AnimationLeft} alt="Animated GIF" />
+              <Image src={AnimationLeft} alt="Animated GIF" fill={true} />
             </div>
 
             {chapterLanguages.map((chapter, index) => (
@@ -64,10 +64,8 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
         )}
 
         {chapters.heroImage.url && ( // show hero image if exists
-          <div className='image-container-1 margin-t--s'>
-            <div className='hero borderradius--xxs'>
-              <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} />
-            </div>
+          <div className='hero margin-t--s borderradius--xxxs'>
+              <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true} />
           </div>
         )}
 

@@ -62,7 +62,7 @@ export default function TextMediaComponent({ content }) {
                 </div>
 
                 <div className='media-content flex flex-justify-center flex-align-center'>
-                    {content.image.url && <Image className='obj-cover' src={content.image.url} alt={content.image.altText} /> /* image */}
+                    {content.image.url && <Image className='obj-cover' src={content.image.url} alt={content.image.altText} fill={true} /> /* image */}
                 </div>
             </div>
 

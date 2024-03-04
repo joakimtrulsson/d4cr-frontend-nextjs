@@ -732,7 +732,11 @@ body {
 }
 
 .borderradius {
-    // ändrade till bo(r)derradius 
+
+    &--xxxs {
+        border-radius: $-spacing-1;
+        overflow: hidden;
+    }
 
     &--xxs {
         border-radius: $-spacing-2;
@@ -1127,12 +1131,13 @@ ol {
 /* re-using */
 
 .hero {
-    width: 60rem;
-    height: 25rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 75%;
+    height: 20rem;
+    margin-left: 15%;
+    margin-right: 15%;
     overflow: hidden;
     position: relative;
+    object-fit: cover;
 }
 
 .animation-background {
