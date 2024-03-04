@@ -3,8 +3,8 @@ import BottomWave from './waves/bottom-wave.jsx'
 import PrimaryButton from './buttons/primary-button.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
 import WYSIWYG from './wysiwyg.jsx'
-import '../sources/scss/components/text-and-media.scss'
-import '../sources/scss/base/utils.scss'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function TextMediaComponent({ content }) {
 
@@ -48,21 +48,21 @@ export default function TextMediaComponent({ content }) {
                     <div className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center' >
 
                         {content.cta1 && content.cta1.url && content.cta1.anchorText && ( /* primary button */
-                            <a href={content.cta1.url}>
+                            <Link href={content.cta1.url}>
                                 <PrimaryButton title={content.cta1.anchorText} />
-                            </a>
+                            </Link>
                         )}
 
                         {content.cta2 && content.cta2.url && content.cta2.anchorText && ( /* secondary button */
-                            <a className='no-decoration' href={content.cta2.url}>
+                            <Link className='no-decoration' href={content.cta2.url}>
                                 <SecondaryButton title={content.cta2.anchorText} />
-                            </a>
+                            </Link>
                         )}
                     </div>
                 </div>
 
                 <div className='media-content flex flex-justify-center flex-align-center'>
-                    {content.image.url && <img className='obj-cover' src={content.image.url} alt={content.image.altText} /> /* image */}
+                    {content.image.url && <Image className='obj-cover' src={content.image.url} alt={content.image.altText} /> /* image */}
                 </div>
             </div>
 

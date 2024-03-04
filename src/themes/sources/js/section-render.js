@@ -28,7 +28,9 @@ export default function sectionRender({ section }) {
     case 'PRINCIPLES':
       return <PrinciplesSection content={section} />;
     case 'RESOURCES':
-      return <ResourcesSection content={section} />; // doesnt work!
+      return ( <div><h1>see at ./src/themes/sources/js/section-render.js, please!</h1></div>
+        //<ResourcesSection content={section} />
+      ) // doesnt work!
     case 'WYSIWYG':
       return (
         <div className='margin-lr--xxxl max-width-60 margin-tb--l'>

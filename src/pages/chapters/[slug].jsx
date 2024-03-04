@@ -66,7 +66,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
         {chapters.heroImage.url && ( // show hero image if exists
           <div className='image-container-1 margin-t--s'>
             <div className='hero borderradius--xxs'>
-              <img className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} />
+              <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} />
             </div>
           </div>
         )}
@@ -81,8 +81,8 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
 
 
         {chapters.sections && chapters.sections.map((section, index) => ( // Render all this chapter's sections
-          <div className='margin-tb--xs'>
-            <SectionRender key={index} section={section} />
+          <div key={index} className='margin-tb--xs'>
+            <SectionRender section={section} />
           </div>
         ))}
       </div>

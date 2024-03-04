@@ -1,5 +1,4 @@
-import '../sources/scss/base/utils.scss'
-import '../sources/scss/components/image-component.scss'
+import Image from 'next/image';
 
 export default function ImagesComponent({ content }) {
 
@@ -18,10 +17,9 @@ export default function ImagesComponent({ content }) {
         padding-tb--m `}>
 
             { content.images.map((image, index)=> (
-                <div className='image-wrapper borderradius--xxs'> 
-                    <img 
+                <div key={index} className='image-wrapper borderradius--xxs'> 
+                    <Image 
                     className='center-image' 
-                    key={index} 
                     src={image.url} 
                     alt={image.alt} />
                 </div>
