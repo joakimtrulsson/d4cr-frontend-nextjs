@@ -42,11 +42,11 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
           <div className='language-tabs margin-tb--s'>
 
             <div className='animation-background-right'>
-              <Image src={AnimationRight} alt="Animated GIF" fill={true} />
+              <Image src={AnimationRight} alt="Animated GIF" />
             </div>
 
             <div className='animation-background-left'>
-              <Image src={AnimationLeft} alt="Animated GIF" fill={true} />
+              <Image src={AnimationLeft} alt="Animated GIF"  />
             </div>
 
             {chapterLanguages.map((chapter, index) => (
