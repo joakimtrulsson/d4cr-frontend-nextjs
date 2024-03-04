@@ -6,6 +6,7 @@ import LargeBulletListSection from '../../components/large-bullet-list.jsx'
 import MediaTextSection from '../../components/text-media-component.jsx'
 import NewsTeaserSection from '../../components/news-teaser.jsx'
 import PrinciplesSection from '../../components/principles.jsx'
+//import ResourcesSection from '../../components/resource-section.jsx'
 import WYSIWYG from '../../components/wysiwyg.jsx'
 
 export default function sectionRender({ section }) {

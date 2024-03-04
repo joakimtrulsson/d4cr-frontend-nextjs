@@ -9,14 +9,35 @@ import ButtonDownHover from '../../themes/sources/assets/graphics/buttons/btn-sc
 import BottomWave from '../../themes/components/waves/bottom-wave.jsx'
 import AnimationLeft from '../../themes/sources/assets/graphics/buttons/left-gif-turqouise.gif'
 import AnimationRight from '../../themes/sources/assets/graphics/buttons/right-gif-turqouise.gif'
-
+import Resources from '../../themes/components/resource-section.jsx'
 
 
 export default function PrinciplesPage(props) {
-    const principle = props.principle
+
     const principlesNumber = props.principleNumbers
+    const principle = props.principle
+
+
+    //////////////Button-scroll/////////////////
+    const [logoSrc, setLogoSrc] = useState(ButtonDown);
 
     if (principle) {
+
+        //////////////////////////toplinks////////////////////////////////
+        // Find the index of the current principle in the principlesNumber array
+        const currentIndex = principlesNumber.findIndex(numbers => numbers.principles.slug === props.slug);
+        // Calculate the index for the "Tidigare" (Previous) principle
+        const previousIndex = currentIndex - 1;
+        // Ensure the previous index is within the array bounds
+        const previousSlug = previousIndex >= 0 ? principlesNumber[previousIndex].principles.slug : null;
+        //nästa slug
+        const nextIndex = currentIndex + 1;
+        const nextSlug = nextIndex < principlesNumber.length ? principlesNumber[nextIndex].principles.slug : null;
+
+
+
+        //console.log('top', principle, principlesNumber[currentIndex].principles)
+
 
         ////////////////change props to work in large-bullet list///////////////////
         // Assume principle.subPrinciples is the array from your GraphQL query
@@ -44,22 +65,24 @@ export default function PrinciplesPage(props) {
             listType: 'UNORDERED',
         };
 
-        //////////////////////////toplinks////////////////////////////////
-        // Find the index of the current principle in the principlesNumber array
-        const currentIndex = principlesNumber.findIndex(numbers => numbers.principles.slug === props.slug);
-        // Calculate the index for the "Tidigare" (Previous) principle
-        const previousIndex = currentIndex - 1;
-        // Ensure the previous index is within the array bounds
-        const previousSlug = previousIndex >= 0 ? principlesNumber[previousIndex].principles.slug : null;
-        //nästa slug
-        const nextIndex = currentIndex + 1;
-        const nextSlug = nextIndex < principlesNumber.length ? principlesNumber[nextIndex].principles.slug : null;
 
         //////////////////wave///////////////////////////
         const fillColorClass = 'fill-turquoise-50';
 
-        //////////////Button-scroll/////////////////
-        const [logoSrc, setLogoSrc] = useState(ButtonDown);
+
+
+
+        //////////////resources////////////////////
+
+        const resources = principlesNumber[currentIndex]?.principles?.resources ?? null;
+        if (resources) {
+
+            // const resourceTitle = resources.title
+            // const resourcePreamble = resources.preamble[0].children[0].text
+            //console.log(resources.resources, resources)
+        } else {
+            // console.log('Resources not found', principle);
+        }
 
         return (
             <main>
@@ -78,8 +101,8 @@ export default function PrinciplesPage(props) {
 
                     {principlesNumber.map(((numbers) => {
                         const isActive = props.slug === numbers.principles.slug;
-                        return (<div>
-                            <a key={numbers.principles.id} href={!isActive ? `.${numbers.principles.slug}` : null} className={`links`}
+                        return (<div key={numbers.principles.id}>
+                            <a href={!isActive ? `.${numbers.principles.slug}` : null} className={`links`}
                             > <h2 className={`numbers ${isActive ? 'active-link' : ''}`}> {numbers.number} </h2></a></div>
                         )
                     }))}
@@ -139,7 +162,7 @@ export default function PrinciplesPage(props) {
                             <Image src={AnimationRight} alt="Animated GIF" className="right-absolute"
                             />
                         </div>
-                        <a className="flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} onMouseEnter={() => {
+                        <a className="flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} alt="arrow pointing down" onMouseEnter={() => {
                             setLogoSrc(ButtonDownHover);
                         }}
                             onMouseOut={() => {
@@ -151,7 +174,9 @@ export default function PrinciplesPage(props) {
                 </div>
                 <div id="target-section" className="bullet-div">
                     <LargeBulletList content={contentForLargeBulletList} />
+
                 </div>
+                {resources ? (<Resources content={resources} />) : (null)}
 
             </main>
         )
@@ -213,6 +238,9 @@ export async function getServerSideProps({ resolvedUrl }) {
                         resources
                         principleCategory {
                             title
+                        }
+                        principleNumber{
+                            number
                         }
                     }
                 }
