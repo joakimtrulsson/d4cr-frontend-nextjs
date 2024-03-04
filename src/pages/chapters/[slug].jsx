@@ -8,6 +8,8 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 import NavBar from '../../components/navbar.jsx'
 import Footer from '../../components/footer.jsx'
 import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
+import '../../themes/sources/scss/app.scss'
+
 
 export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
 
