@@ -77,11 +77,15 @@ export default function PrinciplesPage(props) {
         const resources = principlesNumber[currentIndex]?.principles?.resources ?? null;
         if (resources) {
 
-            // const resourceTitle = resources.title
-            // const resourcePreamble = resources.preamble[0].children[0].text
-            //console.log(resources.resources, resources)
+            //tänkte här jämföra id med varandra men kriskerar att bli extrajobb om backenden ska ändras med 
+            //att ta bort grupperna eller att queriet från principle får med sig image direkt. Så lägger nog placeholder bilder som resources för tillfället.
+             
+            // console.log('nynumber', props.resources[0].image.url, props.resources[0].id)
+            // console.log('oldPrincipleNumber', principle.resources.resources[0].id, principle)
+
+
         } else {
-            // console.log('Resources not found', principle);
+            //console.log('Resources not found', principle);
         }
 
         return (
@@ -235,7 +239,7 @@ export async function getServerSideProps({ resolvedUrl }) {
                         quote
                         quoteAuthor
                         subPrinciples 
-                        resources
+                        resources 
                         principleCategory {
                             title
                         }
@@ -248,11 +252,37 @@ export async function getServerSideProps({ resolvedUrl }) {
         `
         });
 
+        // const { data: resources } = await client.query({
+        //     query: gql`
+        //         query Resources($orderBy: [ResourceOrderByInput!]!) {
+        //     resources(orderBy: $orderBy) {
+        //       id
+        //       createdAt
+        //       title
+        //       url
+        //       image
+        //       resourceType {
+        //         icon
+        //         type
+        //       }
+        //       createdAt
+        //     }
+        //   }
+        //   `, variables: {
+        //         orderBy: [
+        //             {
+        //                 "createdAt": "desc"
+        //             }
+        //         ]
+        //     }
+        // });
+
         return {
             props: {
                 slug: slug,
                 principle: principleData.principle,
-                principleNumbers: principleNumbersData.principleNumbers
+                principleNumbers: principleNumbersData.principleNumbers,
+                //resources: resources.resources
             }
         }
 
