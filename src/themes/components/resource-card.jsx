@@ -4,7 +4,7 @@ import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 import img from "../sources/assets/graphics/placeholder/dummy-image2.jpeg"
 //import "../sources/scss/components/resources-card.scss";
-
+///////////kvar: skriv i readme och hovereffekt fixa knappen
 const ResourceCard = (props) => {
     const { title, url, resourceType } = props.prop;
 
@@ -21,22 +21,23 @@ const ResourceCard = (props) => {
 
     return (
 
-        <main className="resource-card flex flex-column flex-wrap bg-yellow-50 margin-t--m">
+        <main className="resource-card flex flex-column bg-yellow-50 margin-t--m">
 
 
-            <Image src={img} className=""
+            <Image src={img} className="img-resource"
                 width={230}
-                height={150}
+                height={120}
                 alt="Image put in by user in principle-card" />
-            <div>{title}</div>
-            <div className="flex flex-row flex-nowrap flex-space-between bottom-container">
-                <a href={formattedUrl} target="_blank" rel="noopener noreferrer">{type}</a>
+            
+            <h4 className="title-div padding-lr--xs">{title}</h4>
 
-                <a href={formattedUrl}>
-                    <Image className="arrow-right" src={ArrowRight} alt="link arrow" />
-                </a>
-            </div>
+            <a className="a-div" href={formattedUrl} target="_blank" rel="noopener noreferrer"><h4>{type}</h4></a>
 
+            <a href={formattedUrl}>
+                <Image className="arrow-right" src={ArrowRight} alt="link arrow" />
+            </a>
+
+            
         </main>
     );
 };

@@ -1,5 +1,21 @@
-.resources-inner-container {
-    border: solid gray 3px;
+.resources-outer-container {
+     
+    .resources-inner-container {
+        border: solid $-grey-100 1px;
+
+
+    }
+
 
     
+    .button-wrapper {
+        margin:2rem 0 2rem 0;
+        
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .button-wrapper:hover {
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
+    }
 }

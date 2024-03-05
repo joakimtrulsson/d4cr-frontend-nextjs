@@ -12,7 +12,7 @@ export default function Resources(content) {
 
   return (
     <main >
-      <div className="resources-outer-container">
+      <div className="resources-outer-container flex flex-column flex-align-center">
 
         <h1 className="text-align-center">{resources.title}</h1>
         <h4 className="text-align-center margin-b--xl">{resourcePreamble}</h4>
@@ -33,7 +33,14 @@ export default function Resources(content) {
           }
 
         </div>
+        <div className="button-wrapper">
+          <a href="../../principles/principle-9">
+            <SecondaryButton
+              title="BROWSE ALL RESOURCES"
 
+            />
+          </a>
+        </div>
       </div>
 
     </main >

@@ -1,13 +1,46 @@
 .resource-card {
     width: 23%;
-   
+
     border-radius: 0.5rem;
 
-    .bottom-container {
-        width: 100%;
+    position: relative;
 
-        a {
-            width: 20%;
+
+
+    .title-div {
+        max-width: 100%;
+        padding-bottom: 35px;
+        
+    }
+
+    .a-div {
+        position: absolute;
+
+        left: 5%;
+        bottom: 5%;
+        padding: 0;
+        margin: 0;
+
+        h4 {
+            padding: 5px;
+            margin: 0;
+            background-color: #FEF2D6;
+            color: #BC8F27;
         }
     }
+
+    .arrow-right {
+        padding: 5px;
+        position: absolute;
+        right: 6%;
+        bottom: 6%;
+
+    }
+
+    .img-resource {
+        align-self: center;
+        width: 100%;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
 }
