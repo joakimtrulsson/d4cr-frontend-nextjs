@@ -2,8 +2,16 @@
 
 body {
     background-color: white;
-    min-height: 100vh;
     margin: 0;
     padding: 0; 
+}
+
+.site-content {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 2200px;
+    min-height: 100vh;
 }
 
