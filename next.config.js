@@ -11,6 +11,10 @@ const nextConfig = {
               protocol: "http",
               hostname: "localhost",
             },
+            {
+              protocol: "https",
+              hostname: "ew.com",
+            },
             // Add your image domains here
         ],
     },

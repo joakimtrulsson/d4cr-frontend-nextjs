@@ -38,3 +38,20 @@ export const CHAPTER_SLUG_QUERY = gql`
         }
     }
 `;
+
+export const STEERING_GROUP_MEMBERS = gql`
+    query SteeringGroupMembers {
+        steeringGroupMembers{
+            id
+            createdAt
+            fullName
+            role
+            city
+            country
+            socialMediaUrl1
+            socialMediaIcon1
+            socialMediaUrl2
+            socialMediaIcon2
+        }
+    }
+`;
