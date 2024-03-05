@@ -76,7 +76,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
 
           {chapters.title && <h1 className='heading-background margin-t--zero'>{chapters.title}</h1>}
 
-          <div className='max-width-45 text-align-center'>
+          <div className='max-width-45 text-align-center margin-lr--xxxl'>
             {chapters.preamble.document && <DocumentRenderer document={chapters.preamble.document} />}
           </div>
 
