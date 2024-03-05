@@ -7,10 +7,14 @@ import '../themes/sources/scss/app.scss'
 export default function Chapters(props) {
 
     return (    
-        <div>
-            <Navbar data={props.navMenuData} />
-            <h1>chapters page</h1>
-            <Footer data={props.navMenuData} />
+        <div className='site-container'>
+            <div className='site-container__top'>
+                <Navbar data={props.navMenuData} />
+                <main className='site-content'>
+                    <h1>Chapters.. Sweet Chapters</h1>
+                </main>
+                <Footer data={props.navMenuData} />
+            </div>
         </div>
     );
 }

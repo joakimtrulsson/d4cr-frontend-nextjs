@@ -37,7 +37,6 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
   return (
     <div className='site-container'>
       <div className='site-container__top'>
-
         <NavBar data={navMenuData} />
 
         <main className={`site-content flex flex-column flex-align-center`}>
