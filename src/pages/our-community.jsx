@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import { fetchMainMenuData, fetchFooterMenuData, fetchSteeringGroupMembersData } from '../graphql'
+import SectionRender from '../themes/sources/js/section-render'
 import xTwitterIcon from '../themes/sources/assets/graphics/icons/x-twitter-yellow-600.svg'
 import linkedinIcon from '../themes/sources/assets/graphics/icons/linkedin-yellow-600.svg'
 import Image from 'next/image'
