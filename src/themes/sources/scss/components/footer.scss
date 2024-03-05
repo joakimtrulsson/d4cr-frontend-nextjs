@@ -11,7 +11,7 @@
 .site-footer__content {
     margin-left: auto;
     margin-right: auto;
-    max-width: 2200px;
+    max-width: $max-width-site;
     width: 100%;
 
     .footer__social-links a {
