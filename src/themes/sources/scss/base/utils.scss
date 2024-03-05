@@ -19,14 +19,14 @@ body {
     1. width and height
     2. margin
     3. padding
-    4. layout
+    4. layout & image
     5. flexbox
     6. grid
     7. headings
     8. text layout & style 
     9. colors
     10. z-index
-    11. re-using
+    11. re-using (anmination-background & heading-background for H1..)
     12. buttons
 */
 
@@ -688,7 +688,7 @@ body {
     }    
 }
 
-/* layout */
+/* layout  & image */
 
 .opacity {
 
@@ -703,6 +703,24 @@ body {
     &-100 {
         opacity: 1;
     }
+}
+
+.center-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
 }
 
 .obj-cover {
@@ -836,54 +854,6 @@ body {
         align-items: space-between;
     }
 }
-
-/* grid (no in use) */
-
-.grid {
-
-    display: grid;
-
-    &-auto-cols {
-        grid-template-columns: repeat(auto-fill, minmax(min-content, 1fr));
-    }
-
-    &-col-gap {
-        column-gap: 1rem;
-    }
-
-    &-row-gap {
-        row-gap: 1rem;
-    }
-
-    &-auto-rows {
-        grid-auto-rows: minmax(min-content, max-content);
-    }
-
-    &-align-center {
-        align-items: center;
-    }
-
-    &-justify-center {
-        justify-content: center;
-    }
-
-    &-align-start {
-        align-items: start;
-    }
-
-    &-justify-start {
-        justify-content: start;
-    }
-
-    &-align-end {
-        align-items: end;
-    }
-
-    &-justify-end {
-        justify-content: end;
-    }
-}
-
 
 /* headings */
 
@@ -1134,16 +1104,6 @@ ol {
 
 /* re-using */
 
-.hero {
-    width: 75%;
-    height: 20rem;
-    margin-left: 15%;
-    margin-right: 15%;
-    overflow: hidden;
-    position: relative;
-    object-fit: cover;
-}
-
 .animation-background {
 
     &-left {
@@ -1195,24 +1155,6 @@ ol {
     background-color: $-purple-50;
     z-index: $-z-index-header-background;
     transform: translate(1.5rem, 2rem);
-}
-
-.center-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.display-block {
-    display: block;
-}
-
-.display-none {
-    display: none;
 }
 
 /* buttons */
