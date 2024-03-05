@@ -39,7 +39,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
       <div className='site-container__top'>
         <NavBar data={navMenuData} />
 
-        <main className={`site-content flex flex-column flex-align-center`}>
+        <main className='site-content flex flex-column flex-align-center'>
 
           {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
             <div className='language-tabs margin-tb--s'>
@@ -79,7 +79,6 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
           <div className='max-width-45 text-align-center margin-lr--xxxl'>
             {chapters.preamble.document && <DocumentRenderer document={chapters.preamble.document} />}
           </div>
-
 
           {chapters.sections && chapters.sections.map((section, index) => ( // Render all this chapter's sections
             <section key={index} className='margin-tb--xs'>

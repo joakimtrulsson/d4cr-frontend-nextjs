@@ -13,8 +13,9 @@ export default function Hero(props) {
                 <main className='site-content'>
                     <h1>Home.. Sweet home</h1>
                 </main>
-                <Footer data={props.navMenuData} />
             </div>
+
+            <Footer data={props.navMenuData} />
         </div>
     );
 }
