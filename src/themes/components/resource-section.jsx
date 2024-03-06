@@ -2,6 +2,7 @@
 import ResourceCard from "./resource-card.jsx";
 import "../sources/scss/base/utils.scss";
 import SecondaryButton from "./buttons/secondary-button.jsx";
+import Link from 'next/link';
 
 export default function Resources(content) {
   const resources = content.content
@@ -14,10 +15,10 @@ export default function Resources(content) {
     <main >
       <div className="resources-outer-container flex flex-column flex-align-center">
 
-        <h1 className="text-align-center">{resources.title}</h1>
-        <h4 className="text-align-center margin-b--xl">{resourcePreamble}</h4>
+        <h1 className="text-align-center  margin-b--zero">{resources.title}</h1>
+        <h4 className="text-align-center margin-t--zero margin-b--s">{resourcePreamble}</h4>
 
-        <div className="resources-inner-container padding-b--m padding-lr--m margin-lr--s flex flex-row flex-wrap flex-justify-between flex-align-between ">
+        <div className="resources-inner-container flex flex-row flex-wrap flex-justify-start flex-align-between ">
 
           {/* kommer behöva ändra struktur här om strukturen ändras i backend, antingen om allt blir en grupp eller grouptitle tas bort*/}
           {resources.resources.map((resourceGroup) => (
@@ -34,12 +35,13 @@ export default function Resources(content) {
 
         </div>
         <div className="button-wrapper">
-          <a href="../../principles/principle-9">
+          {/* {ska gå till resources} */}
+          <Link href="../../principles/principle-9" className="link-browse">
             <SecondaryButton
               title="BROWSE ALL RESOURCES"
-
+              className="button"
             />
-          </a>
+          </Link>
         </div>
       </div>
 

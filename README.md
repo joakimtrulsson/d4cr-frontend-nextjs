@@ -37,8 +37,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Known Issues
 
+- **Data setup for Resources:** [query PrincipleNumbers should get all resource data, including image so that principle[slug] can fetch all, also decide how to organixe the groups in resources groups]
+
 - **Data setup required for Footer:** [Including group-title for links and content in the Banner (with null values for Banner by Chapters-pages)]
 
 - **Data setup required for Our Community page:** [Including headers, sections, sub-headers, descriptions, and synchronization with steering group data]
 
 - **Issue 3:** [Brief description of the issue]
+ 

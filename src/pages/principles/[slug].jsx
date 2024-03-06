@@ -125,7 +125,7 @@ export default function PrinciplesPage(props) {
                     {/* main text */}
                     <div className="bg-turquoise-50 margin-tb--xxxs-negative ">
                         <div className='flex flex-row flex-nowrap title-image-container'>
-                            <Image src={AnimationLeft} alt="Animated GIF" className="left-absolute" fill={true}
+                            <Image src={AnimationLeft} alt="Animated GIF" className="left-absolute"
                             />
                             <div className="flex flex-row flex-nowrap title-div">
 
