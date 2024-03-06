@@ -2,13 +2,12 @@ import PrimaryButton from '../themes/components/buttons/primary-button'
 import WYSIWYG from '../themes/components/wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import getColorCode from '../themes/sources/js/color-code'
 
 export default function Banner({ content }) {
 
     const { library, config } = require('@fortawesome/fontawesome-svg-core');
     library.add(fas)
-
-    const iconColor = '#FC7C37'
 
     return (
         <div className='banner flex flex-row flex-justify-between flex-align-center bg-orange-50 
@@ -17,7 +16,7 @@ export default function Banner({ content }) {
             <div className='icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
              borderradius--half padding--s margin-l--xxs'>
 
-                <FontAwesomeIcon icon={['fas', content.iconName]} color={iconColor} size="lg" />
+                <FontAwesomeIcon icon={['fas', content.iconName]} color={getColorCode('orange-500')} size="lg" />
                     
             </div>
 

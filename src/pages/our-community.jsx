@@ -8,8 +8,6 @@ import '../themes/sources/scss/app.scss'
 
 export default function OurCommunity(props) {
 
-    console.log(props.steeringGroupMemberData)
-
     const sortedData = props.steeringGroupMemberData.slice().sort((a, b) => {
         const nameA = a.fullName.toLowerCase();
         const nameB = b.fullName.toLowerCase();

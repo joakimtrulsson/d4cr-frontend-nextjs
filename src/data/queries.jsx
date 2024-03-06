@@ -42,8 +42,6 @@ export const CHAPTER_SLUG_QUERY = gql`
 export const STEERING_GROUP_MEMBERS = gql`
     query SteeringGroupMembers {
         steeringGroupMembers{
-            id
-            createdAt
             fullName
             role
             city
@@ -52,6 +50,7 @@ export const STEERING_GROUP_MEMBERS = gql`
             socialMediaIcon1
             socialMediaUrl2
             socialMediaIcon2
+            image
         }
     }
 `;

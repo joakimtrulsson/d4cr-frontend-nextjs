@@ -41,4 +41,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - **Data setup required for Our Community page:** [Including headers, sections, sub-headers, descriptions, and synchronization with steering group data]
 
-- **Issue 3:** [Brief description of the issue]
+- **Font Awesome Icons in People Card:** [Ensure that we aren't receiving "fas" icons from the backend; only "fab" (free brand icons) should be functional]
