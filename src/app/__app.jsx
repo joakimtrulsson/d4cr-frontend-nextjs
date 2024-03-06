@@ -1,10 +1,8 @@
-import Layout from '../app/layout'
+import Layout from './layout'
 import { fetchMainMenuData } from '../graphql'
 import '../themes/sources/scss/app.scss'
  
 export default function App({ Component, pageProps, navMenuData }) {
-
-console.log("navMenuData..", navMenuData)
 
   return (
     <Layout>

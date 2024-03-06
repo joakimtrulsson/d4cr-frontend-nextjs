@@ -6,12 +6,15 @@ import '../themes/sources/scss/app.scss'
 
 export default function Chapters(props) {
 
-    console.log("props..", props)
-
-    return (    
-        <div>
-            <Navbar data={props.navMenuData} />
-            <h1>chapters page</h1>
+    return (
+        <div className='site-container'>
+            <div className='site-container__top'>
+                <Navbar data={props.navMenuData} />
+                <main className='site-content'>
+                    <h1>Chapters.. Sweet Chapters</h1>
+                </main>
+            </div>
+            
             <Footer data={props.navMenuData} />
         </div>
     );

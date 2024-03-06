@@ -1,0 +1,17 @@
+.container-people-cards {
+    
+}
+
+.people-card {
+    width: 18rem;
+    height: 35rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    .image-wrapper {
+        width: auto;
+        height: 20rem;
+        overflow: hidden;
+        position: relative;
+        object-fit: cover; 
+    }
+}

@@ -21,7 +21,8 @@ export default function ImagesComponent({ content }) {
                     <Image 
                     className='center-image' 
                     src={image.url} 
-                    alt={image.alt} />
+                    alt={image.alt} 
+                    fill={true} />
                 </div>
             ))}
 

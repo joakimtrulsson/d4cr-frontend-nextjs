@@ -5,12 +5,13 @@ import SectionRender from '../../themes/sources/js/section-render.js';
 import AnimationRight from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import styles from '../../themes/sources/scss/app.scss'
 import NavBar from '../../components/navbar.jsx'
 import Footer from '../../components/footer.jsx'
 import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
+import '../../themes/sources/scss/app.scss'
 
-export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
+
+export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
 
   // Get current chapter
   const currentLanguage = {
@@ -34,60 +35,61 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters  }) {
   chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage)); // 
 
   return (
-    <>
-      <NavBar data={navMenuData} />
-      <div className={`${styles.container} flex flex-column flex-align-center`}>
+    <div className='site-container'>
+      <div className='site-container__top'>
+        <NavBar data={navMenuData} />
 
-        {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
-          <div className='language-tabs margin-tb--s'>
+        <main className='site-content flex flex-column flex-align-center'>
 
-            <div className='animation-background-right'>
-              <Image src={AnimationRight} alt="Animated GIF"  fill={true}/>
-            </div>
+          {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
+            <div className='language-tabs margin-tb--s'>
 
-            <div className='animation-background-left'>
-              <Image src={AnimationLeft} alt="Animated GIF"   fill={true}/>
-            </div>
-
-            {chapterLanguages.map((chapter, index) => (
-              <Link href={chapter.slug} key={index}>
-                <button
-                  className={`lang-btn ${index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''}
+              {chapterLanguages.map((chapter, index) => (
+                <Link href={chapter.slug} key={index}>
+                  <button
+                    className={`lang-btn ${index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''}
                   ${index === 0 ? 'lang-btn-left' : ''}
                   ${chapter.slug === currentLanguage.slug ? 'lang-btn-active' : ''}`}>
-                  {getLanguageName(chapter.chapterLanguage)}
-                </button>
-              </Link>
-            ))}
+                    {getLanguageName(chapter.chapterLanguage)}
+                  </button>
+                </Link>
+              ))}
 
-          </div>
-        )}
-
-        {chapters.heroImage.url && ( // show hero image if exists
-          <div className='image-container-1 margin-t--s'>
-            <div className='hero borderradius--xxs'>
-              <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true}/>
             </div>
+          )}
+
+          <div className='animation-background-left'>
+            <Image src={AnimationLeft} alt="Animated GIF" />
           </div>
-        )}
 
-        <p className='sub-heading-m color-yellow-600 margin-t--s'>D4CR PRESENTS</p>
-
-        {chapters.title && <h1 className='heading-background margin-t--zero'>{chapters.title}</h1>}
-
-        <div className='max-width-45 text-align-center'>
-          {chapters.preamble.document && <DocumentRenderer document={chapters.preamble.document} />}
-        </div>
-
-
-        {chapters.sections && chapters.sections.map((section, index) => ( // Render all this chapter's sections
-          <div key={index} className='margin-tb--xs'>
-            <SectionRender section={section} />
+          <div className='animation-background-right'>
+            <Image src={AnimationRight} alt="Animated GIF" fill={false} /> { /* set as true later.. */}
           </div>
-        ))}
+
+          {chapters.heroImage.url && ( // show hero image if exists
+            <div className='hero margin-t--s borderradius--xxxs'>
+              <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true} />
+            </div>
+          )}
+
+          <p className='sub-heading-m color-yellow-600 margin-t--s'>D4CR PRESENTS</p>
+
+          {chapters.title && <h1 className='heading-background margin-t--zero'>{chapters.title}</h1>}
+
+          <div className='max-width-45 text-align-center margin-lr--xxxl'>
+            {chapters.preamble.document && <DocumentRenderer document={chapters.preamble.document} />}
+          </div>
+
+          {chapters.sections && chapters.sections.map((section, index) => ( // Render all this chapter's sections
+            <section key={index} className='margin-tb--xs'>
+              <SectionRender section={section} />
+            </section>
+          ))}
+        </main>
       </div>
-      <Footer data={navMenuData} /> { /* change to footerMenuData later */}
-    </>
+
+        <Footer data={navMenuData} /> { /* please change to footerMenuData later when backend is working */}
+    </div>
   )
 }
 

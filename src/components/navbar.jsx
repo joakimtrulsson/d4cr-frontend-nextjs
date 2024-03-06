@@ -1,14 +1,15 @@
-"use client";
+"use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Icon from '../themes/sources/assets/graphics/icons/d4cr-icon.png';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import chevronRight from '../themes/sources/assets/graphics/icons/chevron-right-orange-500.svg'
+import chevronUp from '../themes/sources/assets/graphics/icons/chevron-up-orange-500.svg'
+import chevronDown from '../themes/sources/assets/graphics/icons/chevron-down-grey-500.svg'
 
 export default function NavBar({ data }) {
-    
+
     const [activeDropdownIndex, setActiveDropdownIndex] = useState(null);
     const [hoveredButton, setHoveredButton] = useState(null);
     const [hoveredItem, setHoveredItem] = useState(null);
@@ -60,8 +61,9 @@ export default function NavBar({ data }) {
                             {group.groupTitle}
                             {' '}
                             {activeDropdownIndex === index ?
-                                <FontAwesomeIcon icon={faChevronUp} size="sm"/>
-                                : <FontAwesomeIcon icon={faChevronDown} size="sm"/>
+                                <Image src={chevronUp} alt="arrow up" />
+                                :
+                                <Image src={chevronDown} alt="arrow down" />
                             }
                         </button>
 
@@ -75,15 +77,15 @@ export default function NavBar({ data }) {
                                     {group.links.map((link, key) => (
                                         <Link key={key} className='no-decoration' href={link.url}>
 
-                                            <li className='dropdown-item padding-tb--xxs padding-l--s 
+                                            <li className='dropdown-item padding-tb--xxs padding-l--xs 
                                             flex flex-row color-yellow-800'
                                                 onMouseEnter={() => setHoveredItem(key)}
                                                 onMouseLeave={() => setHoveredItem(null)}>
 
                                                 <div className={`icon-wrapper ${hoveredItem === key ? 'margin-r--xxs' : ''}`}>
-                                                    <FontAwesomeIcon className={`fa-icon ${hoveredItem === key ? '' : 'opacity-0'}`}
-                                                        icon={faChevronRight}
-                                                        size="sm"
+                                                    <Image className={`fa-icon ${hoveredItem === key ? '' : 'opacity-0'}`}
+                                                        src={chevronRight}
+                                                        alt="right arrow"
                                                     />
                                                 </div>
                                                 {link.anchorText}

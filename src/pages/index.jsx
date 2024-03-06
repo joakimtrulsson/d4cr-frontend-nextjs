@@ -6,10 +6,15 @@ import '../themes/sources/scss/app.scss'
 
 export default function Hero(props) {
 
-    return (    
-        <div>
-            <Navbar data={props.navMenuData} />
-            <h1>Hero</h1>
+    return (
+        <div className='site-container'>
+            <div className='site-container__top'>
+                <Navbar data={props.navMenuData} />
+                <main className='site-content'>
+                    <h1>Home.. Sweet home</h1>
+                </main>
+            </div>
+
             <Footer data={props.navMenuData} />
         </div>
     );

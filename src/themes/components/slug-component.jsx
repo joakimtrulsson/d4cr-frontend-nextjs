@@ -12,7 +12,7 @@ export default function SlugPageComponent({ content }) {
       {content.heroImage.url && (
         <div className='image-container-1 margin-t--s'>
           <div className='image-wrapper  borderradius--xxs'>
-            <Image className='center-image' src={content.heroImage.url} alt={content.heroImage.alt} />
+            <Image className='center-image' src={content.heroImage.url} alt={content.heroImage.alt} fill={true} />
           </div>
         </div>
       )}
