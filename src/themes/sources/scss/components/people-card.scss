@@ -1,17 +1,17 @@
 .people-card {
-    width: 18rem;
+    width: 16rem;
     height: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
     .image-wrapper {
         width: auto;
-        height: 20rem;
+        height: 16rem;
         overflow: hidden;
         position: relative;
         object-fit: cover; 
     }
 
     .text-wrapper {
-        height: 12rem;
+        height: 10rem;
     }
 }

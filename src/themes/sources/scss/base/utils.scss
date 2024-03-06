@@ -62,6 +62,10 @@ body {
         width: 80%;
     }
 
+    &--xxxl {
+        width: 90%;
+    }
+
     &-full {
         width: 100%;
     }
@@ -119,6 +123,14 @@ body {
     &--xl {
         max-width: 70%;
     }
+
+    &--xxl {
+        max-width: 80%;
+    }
+
+    &--xxxl {
+        max-width: 90%;
+    }
 }
 
 .full-width-height {
@@ -130,7 +142,7 @@ body {
 
 /* margin */
 
-// (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (negative) 
+// (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (if negative) 
 
 .margin {
 
@@ -178,6 +190,11 @@ body {
             margin-bottom: -$-spacing-1;
         }
 
+        &--xxxs {
+            margin-top: $-spacing-1;
+            margin-bottom: $-spacing-1;
+        }
+
         &--xxs {
             margin-top: $-spacing-2;
             margin-bottom: $-spacing-2;
@@ -212,9 +229,14 @@ body {
     &-lr {
         // left & right
 
+        &-auto {
+            margin-left: auto;
+            margin-left: auto;
+        }
+
         &--xxxs {
-            margin-left: $-spacing-1; // ändrat från $-spacing
-            margin-right: $-spacing-1; // (se om andra fil blev påverkade)
+            margin-left: $-spacing-1;
+            margin-right: $-spacing-1;
         }
 
         &--xs {
@@ -297,7 +319,7 @@ body {
 
         // bottom
         &--xxxs-negative {
-            margin-bottom: -$-spacing-1; // not in use
+            margin-bottom: -$-spacing-1;
         }
 
         &--zero {
@@ -413,44 +435,12 @@ body {
             margin-right: $-spacing-7;
         }
     }
-
-    &-l {
-        // left
-
-        &--xxxs-negative {
-            margin-right: -$-spacing-1;
-        }
-
-        &--xxxs {
-            margin-right: $-spacing-1;
-        }
-
-        &--xxs {
-            margin-right: $-spacing-2;
-        }
-
-        &--xs {
-            margin-right: $-spacing;
-        }
-
-        &--s {
-            margin-right: $-spacing-3;
-        }
-
-        &--m {
-            margin-right: $-spacing-4;
-        }
-
-        &--l {
-            margin-right: $-spacing-5;
-        }
-    }
 }
 
 
 /* padding */
 
-// (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (negative) 
+// (margin) or (padding) -> (b)ottom or (t)op -> size (xs) or (m) -> (if negative) 
 
 .padding {
 
@@ -522,8 +512,8 @@ body {
     }
 
     &-lr {
-
         // left and right
+
         &--xs {
             padding-left: $-spacing;
             padding-right: $-spacing;
@@ -821,13 +811,12 @@ body {
         border-bottom-left-radius: $-spacing-2;
         overflow: hidden;
     }
-
-
 }
 
 /* flexbox */
 
 .flex {
+
     display: flex;
 
     &-wrap {
@@ -916,9 +905,31 @@ h3,
 
 h4,
 .heading-4 {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: 0.01rem;
+}
+
+h5,
+.heading-5 { // haven't used this one yet, adjust it if needed
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01rem;
+}
+
+h6,
+.heading-6 { // haven't used this one yet, adjust it if needed
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.01rem;
+}
+
+/* text */
+
+.sub-heading-l { // haven't used this one yet, adjust it if needed
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.08rem;
 }
 
 .sub-heading-m {
@@ -927,18 +938,23 @@ h4,
     letter-spacing: 0.08rem;
 }
 
-/* text */
-
 p {
     color: $-grey-700;
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.4rem;
     letter-spacing: 0.04rem;
     font-weight: 400;
 }
 
 .large-text {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.03rem;
+    font-weight: 400;
+}
+
+.small-text { // haven't used this one yet, adjust it if needed
+    font-size: 0.85rem;
     line-height: 1.4rem;
     letter-spacing: 0.04rem;
     font-weight: 400;
@@ -1261,7 +1277,6 @@ ol {
     }
 
     button {
-
         cursor: pointer;
         padding: 0rem 1rem;
         background-color: transparent;
@@ -1281,4 +1296,3 @@ ol {
         text-transform: uppercase;
     }
 }
-

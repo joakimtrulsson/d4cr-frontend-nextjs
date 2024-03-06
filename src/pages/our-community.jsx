@@ -9,14 +9,9 @@ import '../themes/sources/scss/app.scss'
 export default function OurCommunity(props) {
 
     const sortedData = props.steeringGroupMemberData.slice().sort((a, b) => {
-        const nameA = a.fullName.toLowerCase();
-        const nameB = b.fullName.toLowerCase();
-        
-        if (nameA < nameB) return -1;
-        if (nameA > nameB) return 1;
-        return 0;
-      });
-
+        return a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase());
+    });
+    
     return (
         <div className='site-container'>
             <div className='site-container__top'>
@@ -33,9 +28,9 @@ export default function OurCommunity(props) {
                     <p className='bg-orange-50'>add data to section renderer here, please!</p> {/* remove this one later when backend is done */}
 
                     <h2 className='heading-1 margin--zero margin-t--xl'>Steering group</h2>
-                    <p className='max-width-35 text-align-center'>Our work is done in groups. These awesome people are making it all happen. In alphabetical order:</p>
+                    <p className='max-width-35 text-align-center large-text'>Our work is done in groups. These awesome people are making it all happen. In alphabetical order:</p>
 
-                    <div className='container-people-cards full-width-height flex flex-row flex-justify-start flex-align-center flex-wrap max-width--xl'> { /* flex-align-start doesnt works */}
+                    <div className='container-people-cards full-width-height flex flex-row flex-justify-start flex-align-center flex-wrap max-width--xxxl margin-lr-auto'> { /* flex-align-start doesnt works */}
 
                     {sortedData && sortedData.map((peopleCard, index) => (
 
