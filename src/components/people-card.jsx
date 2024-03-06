@@ -9,7 +9,6 @@ export default function PeopleCard({ data }) {
 
     console.log(data)
 
-
     return (
         <div className='people-card bg-yellow-50 borderradius--xxs margin--xs'>
 
@@ -19,16 +18,16 @@ export default function PeopleCard({ data }) {
                     fill={true} />
             </div>
 
-            <div className='text-wrapper dev-border margin--s flex flex-column flex-justify-between'>
-                <div className='dev-border'>
-                <h3 className='margin--zero'>{abbreviateWord(data.fullName, 30)}</h3>
-                <p className='margin--zero'>{abbreviateWord(data.role, 20)}</p>
+            <div className='text-wrapper margin--s flex flex-column flex-justify-between'>
+                <div className=''>
+                    <h3 className='margin--zero color-grey-700'>{abbreviateWord(data.fullName, 30)}</h3>
+                    <p className='margin--zero color-grey-700'>{abbreviateWord(data.role, 20)}</p>
+                </div>
 
+                <div className=''>
+                    <p className='margin--zero color-grey-700'>{abbreviateWord(data.country, 16)}, {abbreviateWord(data.city, 16)}</p>
                 </div>
-                <div className='dev-border'>
-                    <p className='margin--zero'>{abbreviateWord(data.country, 16)}, {abbreviateWord(data.city, 16)}</p>
-                </div>
-                <div className='dev-border flex flex-row flex-justify-end flex-align-center'>
+                <div className=' flex flex-row flex-justify-end flex-align-center'>
                     <Link className='margin-r--xxs' href={"null"} >
                         <Image src={xTwitterIcon} alt="twitter" />
                     </Link>

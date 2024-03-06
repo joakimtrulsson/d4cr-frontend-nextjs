@@ -16,7 +16,7 @@ body {
 }
 
 /*
-    1. width and height
+    1. width, min-width, max-width & full-width-auto-height
     2. margin
     3. padding
     4. layout & image
@@ -24,10 +24,10 @@ body {
     6. grid
     7. headings
     8. text layout & style 
-    9. colors
+    9. color, bg-color & fill-color
     10. z-index
     11. re-using (anmination-background & heading-background for H1..)
-    12. buttons
+    12. lang-, nav-, primary- and secondary-button
 */
 
 /* width and height */
@@ -115,6 +115,10 @@ body {
     &-60 {
         max-width: 60rem;
     }
+
+    &--xl {
+        max-width: 70%;
+    }
 }
 
 .full-width-height {
@@ -132,6 +136,10 @@ body {
 
     &--zero {
         margin: 0;
+    }
+
+    &--xxxs {
+        margin: $-spacing-1;
     }
 
     &--xxs {
@@ -152,6 +160,14 @@ body {
 
     &--l {
         margin: $-spacing-5;
+    }
+
+    &--xl {
+        margin: $-spacing-6;
+    }
+
+    &--xxl {
+        margin: $-spacing-7;
     }
 
     &-tb {
@@ -438,6 +454,10 @@ body {
 
 .padding {
 
+    &--xxxs {
+        padding: $-spacing-1;
+    }
+
     &--xxs {
         padding: $-spacing-2;
     }
@@ -460,6 +480,10 @@ body {
 
     &--xl {
         padding: $-spacing-6;
+    }
+
+    &--xxl {
+        padding: $-spacing-7;
     }
 
     &-tb {

@@ -37,7 +37,7 @@ export default function OurCommunity(props) {
                     <h2 className='heading-1 margin--zero margin-t--xl'>Steering group</h2>
                     <p className='max-width-35 text-align-center'>Our work is done in groups. These awesome people are making it all happen. In alphabetical order:</p>
 
-                    <div className='container-people-cards full-width-height flex flex-row flex-align-start'> { /* flex-align-start doesnt works */}
+                    <div className='container-people-cards full-width-height flex flex-row flex-justify-start flex-align-center flex-wrap max-width--xl'> { /* flex-align-start doesnt works */}
 
                     {sortedData && sortedData.map((peopleCard, index) => (
 
