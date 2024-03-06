@@ -34,13 +34,13 @@ export default function PeopleCard({ data }) {
                 <div className=' flex flex-row flex-justify-end flex-align-center'>
 
                     {data.socialMediaIcon1 && data.socialMediaUrl1 &&
-                        <Link className='' href={data.socialMediaUrl1} >
+                        <Link className='' href={data.socialMediaUrl1} passHref>
                             <FontAwesomeIcon icon={['fab', data.socialMediaIcon1.iconName]} color={getColorCode('yellow-600')} size="2x" />
                         </Link>
                     }
 
                     {data.socialMediaIcon2 && data.socialMediaUrl2 &&
-                        <Link className='margin-l--xxs' href={data.socialMediaUrl2} >
+                        <Link className='margin-l--xxs' href={data.socialMediaUrl2} passHref>
                             <FontAwesomeIcon icon={['fab', data.socialMediaIcon2.iconName]} color={getColorCode('yellow-600')} size="2x" />
                         </Link>
                     }
