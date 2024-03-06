@@ -23,6 +23,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Known Issues
 
+- **Data setup for Resources:** [query PrincipleNumbers should get all resource data, including image so that principle[slug] can fetch all, also decide how to organixe the groups in resources groups]
+
 - **Data setup required for Footer:** [Including group-title for links and content in the Banner (with null values for Banner by Chapters-pages)]
 
 - **Data setup required for Our Community page:** [Including headers, sections, sub-headers, descriptions, and synchronization with steering group data]
@@ -30,3 +32,4 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - **Font Awesome Icons in People Card:** [Ensure that we aren't receiving "fas" icons from the backend; only "fab" (free brand icons) should be functional]
 
 - **Link in People Card:** [Ensure that the URLs are consistently prefixed with 'https://' for correctness, as it should be the standard format for all URLs]
+ 

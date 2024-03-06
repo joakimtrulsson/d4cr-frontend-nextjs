@@ -77,11 +77,15 @@ export default function PrinciplesPage(props) {
         const resources = principlesNumber[currentIndex]?.principles?.resources ?? null;
         if (resources) {
 
-            // const resourceTitle = resources.title
-            // const resourcePreamble = resources.preamble[0].children[0].text
-            //console.log(resources.resources, resources)
+            //tänkte här jämföra id med varandra men kriskerar att bli extrajobb om backenden ska ändras med 
+            //att ta bort grupperna eller att queriet från principle får med sig image direkt. Så lägger nog placeholder bilder som resources för tillfället.
+             
+            // console.log('nynumber', props.resources[0].image.url, props.resources[0].id)
+            // console.log('oldPrincipleNumber', principle.resources.resources[0].id, principle)
+
+
         } else {
-            // console.log('Resources not found', principle);
+            //console.log('Resources not found', principle);
         }
 
         return (
@@ -119,9 +123,9 @@ export default function PrinciplesPage(props) {
                 </div>
                 <div>
                     {/* main text */}
-                    <div className="bg-turquoise-50 margin-tb--xxxs-negative ">
+                    <div className="bg-turquoise-50 margin-tb--xxxs-negative main-container">
                         <div className='flex flex-row flex-nowrap title-image-container'>
-                            <Image src={AnimationLeft} alt="Animated GIF" className="left-absolute" fill={true}
+                            <Image src={AnimationLeft} alt="Animated GIF" className="left-absolute"
                             />
                             <div className="flex flex-row flex-nowrap title-div">
 
@@ -152,7 +156,7 @@ export default function PrinciplesPage(props) {
                                             />
                                         ) : (
                                             <div className="no-image-placeholder">No Image</div>
-                                            // Or simply do not render anything or render a placeholder div
+                                            // Ändra till null eller exempelbild?
                                         )}
                                     </div>
 
@@ -162,7 +166,7 @@ export default function PrinciplesPage(props) {
                             <Image src={AnimationRight} alt="Animated GIF" className="right-absolute"
                             />
                         </div>
-                        <a className="flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} alt="arrow pointing down" onMouseEnter={() => {
+                        <a className="image-container" href="#target-section"><Image src={logoSrc} alt="arrow pointing down" onMouseEnter={() => {
                             setLogoSrc(ButtonDownHover);
                         }}
                             onMouseOut={() => {
@@ -170,7 +174,7 @@ export default function PrinciplesPage(props) {
                             }} className="scroll-button" /></a>
 
                     </div>
-                    <BottomWave fillColorClass={fillColorClass} />
+                    <BottomWave fillColorClass={fillColorClass} className="bottom-wave"/>
                 </div>
                 <div id="target-section" className="bullet-div">
                     <LargeBulletList content={contentForLargeBulletList} />
@@ -235,7 +239,7 @@ export async function getServerSideProps({ resolvedUrl }) {
                         quote
                         quoteAuthor
                         subPrinciples 
-                        resources
+                        resources 
                         principleCategory {
                             title
                         }
@@ -248,11 +252,37 @@ export async function getServerSideProps({ resolvedUrl }) {
         `
         });
 
+        // const { data: resources } = await client.query({
+        //     query: gql`
+        //         query Resources($orderBy: [ResourceOrderByInput!]!) {
+        //     resources(orderBy: $orderBy) {
+        //       id
+        //       createdAt
+        //       title
+        //       url
+        //       image
+        //       resourceType {
+        //         icon
+        //         type
+        //       }
+        //       createdAt
+        //     }
+        //   }
+        //   `, variables: {
+        //         orderBy: [
+        //             {
+        //                 "createdAt": "desc"
+        //             }
+        //         ]
+        //     }
+        // });
+
         return {
             props: {
                 slug: slug,
                 principle: principleData.principle,
-                principleNumbers: principleNumbersData.principleNumbers
+                principleNumbers: principleNumbersData.principleNumbers,
+                //resources: resources.resources
             }
         }
 
