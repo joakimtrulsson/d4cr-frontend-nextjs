@@ -3,15 +3,21 @@ import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import { fetchMainMenuData, fetchFooterMenuData, fetchSteeringGroupMembersData } from '../graphql'
 import SectionRender from '../themes/sources/js/section-render'
-import xTwitterIcon from '../themes/sources/assets/graphics/icons/x-twitter-yellow-600.svg'
-import linkedinIcon from '../themes/sources/assets/graphics/icons/linkedin-yellow-600.svg'
-import Image from 'next/image'
-import Link from 'next/link'
+import PeopleCard from '../components/people-card'
 import '../themes/sources/scss/app.scss'
 
 export default function OurCommunity(props) {
 
     console.log(props.steeringGroupMemberData)
+
+    const sortedData = props.steeringGroupMemberData.slice().sort((a, b) => {
+        const nameA = a.fullName.toLowerCase();
+        const nameB = b.fullName.toLowerCase();
+        
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
 
     return (
         <div className='site-container'>
@@ -33,32 +39,10 @@ export default function OurCommunity(props) {
 
                     <div className='container-people-cards full-width-height flex flex-row flex-align-start'> { /* flex-align-start doesnt works */}
 
-                        {props.steeringGroupMemberData && props.steeringGroupMemberData.map((peopleCard, index) => (
-                            <div className='people-card bg-yellow-50 borderradius--xxs margin--xs' key={index}>
+                    {sortedData && sortedData.map((peopleCard, index) => (
 
-                                <div className='image-wrapper'>
-                                    <Image className='center-image' src="https://ew.com/thmb/0fht_kipVY-H92xQQVgR4srP5QI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/liam-neeson-taken-021823-2000-cc3a9a86583845a9a35302b40c2145ff.jpg"
-                                        alt="portrait"
-                                        fill={true} />
-                                </div>
+                            <PeopleCard key={index} data={peopleCard} />
 
-                                <div className='margin--s'>
-                                    <div>
-                                        <h3 className='margin--zero'>{peopleCard.fullName}</h3>
-                                        <p className='margin--zero'>{peopleCard.role}</p>
-                                        <p className='margin--zero'>{peopleCard.country}, {peopleCard.city}</p>
-                                    </div>
-                                    <div className='flex flex-row flex-justify-end flex-align-center'>
-                                        <Link className='margin-r--xxs' href={"null"} >
-                                            <Image src={xTwitterIcon} alt="twitter" />
-                                        </Link>
-                                        <Link className='' href={"null"} >
-                                            <Image src={linkedinIcon} alt="twitter" />
-                                        </Link>
-
-                                    </div>
-                                </div>
-                            </div>
                         ))}
                     </div>
 

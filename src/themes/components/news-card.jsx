@@ -15,7 +15,7 @@ const Newscard = ({type, title, url}) => {
     return (
             <div className={`news-card full-width-height flex flex-column flex-justify-start 
             bg-yellow-50 borderradius--xs`}>            
-                <Image className='full-width-height' src={PlaceHolder} alt="" />
+                <Image className='full-width-height' src={PlaceHolder} alt="" /> 
 
             <div className='sub-head-wrapper bg-yellow-100 width-full margin-t--xxxs-negative'>
                 <h2 className='sub-heading-m text-align-center color-yellow-600 uppercase'>{type}</h2>
