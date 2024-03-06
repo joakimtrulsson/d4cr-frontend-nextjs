@@ -123,7 +123,7 @@ export default function PrinciplesPage(props) {
                 </div>
                 <div>
                     {/* main text */}
-                    <div className="bg-turquoise-50 margin-tb--xxxs-negative ">
+                    <div className="bg-turquoise-50 margin-tb--xxxs-negative main-container">
                         <div className='flex flex-row flex-nowrap title-image-container'>
                             <Image src={AnimationLeft} alt="Animated GIF" className="left-absolute"
                             />
@@ -156,7 +156,7 @@ export default function PrinciplesPage(props) {
                                             />
                                         ) : (
                                             <div className="no-image-placeholder">No Image</div>
-                                            // Or simply do not render anything or render a placeholder div
+                                            // Ändra till null eller exempelbild?
                                         )}
                                     </div>
 
@@ -166,7 +166,7 @@ export default function PrinciplesPage(props) {
                             <Image src={AnimationRight} alt="Animated GIF" className="right-absolute"
                             />
                         </div>
-                        <a className="flex flex-justify-center padding--m" href="#target-section"><Image src={logoSrc} alt="arrow pointing down" onMouseEnter={() => {
+                        <a className="image-container" href="#target-section"><Image src={logoSrc} alt="arrow pointing down" onMouseEnter={() => {
                             setLogoSrc(ButtonDownHover);
                         }}
                             onMouseOut={() => {
@@ -174,7 +174,7 @@ export default function PrinciplesPage(props) {
                             }} className="scroll-button" /></a>
 
                     </div>
-                    <BottomWave fillColorClass={fillColorClass} />
+                    <BottomWave fillColorClass={fillColorClass} className="bottom-wave"/>
                 </div>
                 <div id="target-section" className="bullet-div">
                     <LargeBulletList content={contentForLargeBulletList} />
