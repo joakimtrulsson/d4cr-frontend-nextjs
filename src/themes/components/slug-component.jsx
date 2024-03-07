@@ -2,6 +2,8 @@ import SectionRender from '../sources/js/section-render.js'
 import WYSIWYG from './wysiwyg.jsx'
 import Image from 'next/image'
 
+// delete this file ? 
+
 export default function SlugPageComponent({ content }) {
 
   console.log(content)

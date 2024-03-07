@@ -1045,9 +1045,16 @@ ol {
     color: $-orange-400;
 }
 
-
 .color-orange-500 {
     color: $-orange-500;
+}
+
+.color-orange-600 {
+    color: $-orange-600;
+}
+
+.color-orange-800 {
+    color: $-orange-800;
 }
 
 .color-grey-50 {
@@ -1260,7 +1267,7 @@ ol {
     cursor: pointer;
     border: none;
     white-space: nowrap;
-    clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
+    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
     transition: scale 200ms ease-in-out;
 
     &:hover {

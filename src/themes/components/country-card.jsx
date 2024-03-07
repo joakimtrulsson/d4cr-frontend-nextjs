@@ -1,11 +1,8 @@
 import Image from 'next/image'
 import ArrowRight from '../sources/assets/graphics/icons/arrow-right.svg'
 import Link from 'next/link';
-import '../sources/scss/components/country-card.scss'
-import '../sources/scss/base/utils.scss'
 
-
-const CountryCard = ({ item }) => {
+export default function CountryCard({ item }) {
 
     return(
         item.status === "published" ? (
@@ -19,5 +16,3 @@ const CountryCard = ({ item }) => {
         : null
     )
 }
-
-export default CountryCard

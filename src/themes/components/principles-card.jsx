@@ -1,5 +1,3 @@
-import "../sources/scss/components/principles-card.scss";
-import "../sources/scss/base/utils.scss";
 import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 

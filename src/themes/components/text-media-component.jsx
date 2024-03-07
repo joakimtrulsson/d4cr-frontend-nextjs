@@ -2,13 +2,13 @@ import TopWave from './waves/top-wave.jsx'
 import BottomWave from './waves/bottom-wave.jsx'
 import PrimaryButton from './buttons/primary-button.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
-import WYSIWYG from './wysiwyg.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
+import { DocumentRenderer } from '@keystone-6/document-renderer'
 
 export default function TextMediaComponent({ content }) {
 
-    console.log(content.image.url)
+    console.log(content)
 
     var bgColorClass, fillColorClass
 
@@ -33,36 +33,39 @@ export default function TextMediaComponent({ content }) {
                 null
             }
 
-            <div className={`text-and-media-container flex flex-row flex-nowrap padding-tb--xxl margin-tb--xxxs-negative ${bgColorClass}
-                ${(content.imagePosition === 'LEFT') ? 'flex-reverse-row' : null}`} >
+            <div className={`text-and-media-container flex flex-row flex-nowrap flex-justify-around flex-align-center padding-tb--xxl padding-lr--xs margin-tb--xxxs-negative ${bgColorClass}
 
-                <div className='text-content flex flex-column flex-nowrap margin-lr--xl'>
+                ${(content.imagePosition === 'LEFT') ? 'flex-reverse-row' : null}`} > { /* check media's position */}
 
-                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero'>{content.subHeading}</h2>
-                    <h3 className='heading2-lineheight-l margin--zero'>{content.title}</h3>
+                <div className='text-content flex flex-column flex-nowrap margin-lr--s'>
 
-                    <WYSIWYG content={content.preamble} />
+                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>{content.subHeading}</h2>
+                    <h3 className='heading2-lineheight-l margin--zero color-orange-800'>{content.title}</h3>
 
-                    <p>{content.description}</p>
+                    <DocumentRenderer document={content.preamble} />
 
-                    <div className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center' >
+                    {(content.cta1 || content.cta2) && (
 
-                        {content.cta1 && content.cta1.url && content.cta1.anchorText && ( /* primary button */
-                            <Link href={content.cta1.url}>
-                                <PrimaryButton title={content.cta1.anchorText} />
-                            </Link>
-                        )}
+                        <div className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center margin-tb--xxxs' >
 
-                        {content.cta2 && content.cta2.url && content.cta2.anchorText && ( /* secondary button */
-                            <Link className='no-decoration' href={content.cta2.url}>
-                                <SecondaryButton title={content.cta2.anchorText} />
-                            </Link>
-                        )}
-                    </div>
+                            {content.cta1 && content.cta1.url && content.cta1.anchorText && ( /* primary button */
+                                <Link href={content.cta1.url} className='margin-r--xxxs'>
+                                    <PrimaryButton title={content.cta1.anchorText} />
+                                </Link>
+                            )}
+
+                            {content.cta2 && content.cta2.url && content.cta2.anchorText && ( /* secondary button */
+                                <Link className='no-decoration' href={content.cta2.url}>
+                                    <SecondaryButton title={content.cta2.anchorText} />
+                                </Link>
+                            )}
+                        </div>
+                    )}
+                    
                 </div>
 
-                <div className='media-content flex flex-justify-center flex-align-center'>
-                    {content.image.url && <Image className='obj-cover' src={content.image.url} alt={content.image.altText} fill={true} /> /* image */}
+                <div className='media-content flex flex-justify-center flex-align-center borderradius--xxs'>
+                    {content.image.url && <Image className='center-image' src={content.image.url} alt={content.image.altText} fill={true} /> /* image */}
                 </div>
             </div>
 

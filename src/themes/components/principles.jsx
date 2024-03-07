@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import PrinciplesCard from "./principles-card.jsx";
-import "../sources/scss/base/utils.scss";
-import "../sources/scss/components/principles.scss";
 import SecondaryButton from "./buttons/secondary-button.jsx";
 
 export default function Principles({ content: chapterContent }) {

@@ -1,5 +1,3 @@
-import '../../sources/scss/base/utils.scss'
-
 export default function BottomWave({fillColorClass}) {
 
     return (
