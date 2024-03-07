@@ -54,3 +54,22 @@ export const STEERING_GROUP_MEMBERS = gql`
         }
     }
 `;
+
+export const FRONT_PAGE_QUERY = gql`
+  query Frontpage {
+    frontPage{
+        heroTitle
+        heroPreamble{
+            document
+        }
+  heroVideo
+        ctaOneAnchorText
+        ctaOneUrl
+        ctaTwoUrlAnchorText
+        ctaTwoUrl
+        status
+        sections
+    }
+}
+`;
+

@@ -1,5 +1,5 @@
 import client from './apollo-client';
-import { MAIN_MENU_QUERY, FOOTER_MENU_QUERY, CHAPTER_SLUG_QUERY, STEERING_GROUP_MEMBERS } from './data/queries';
+import { MAIN_MENU_QUERY, FOOTER_MENU_QUERY, CHAPTER_SLUG_QUERY, STEERING_GROUP_MEMBERS, FRONT_PAGE_QUERY } from './data/queries';
 
 export async function fetchMainMenuData() {
     try {
@@ -55,6 +55,21 @@ export async function fetchSteeringGroupMembersData() {
         });
 
         return data?.steeringGroupMembers || null
+
+    } catch (error) {
+        console.error("(graphql.jsx) Error fetching data:", error);
+        throw error;
+    }
+}
+
+export async function fetchFrontPageData() {
+    try {
+
+        const { data } = await client.query({
+            query: FRONT_PAGE_QUERY,
+        });
+
+        return data || null
 
     } catch (error) {
         console.error("(graphql.jsx) Error fetching data:", error);

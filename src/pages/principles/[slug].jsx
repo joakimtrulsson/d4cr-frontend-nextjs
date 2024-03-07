@@ -77,7 +77,7 @@ export default function PrinciplesPage(props) {
         const resources = principlesNumber[currentIndex]?.principles?.resources ?? null;
         if (resources) {
 
-            //tänkte här jämföra id med varandra men kriskerar att bli extrajobb om backenden ska ändras med 
+            //tänkte här jämföra id med varandra men kriskerar att bli extrajobb om backenden ska ändras t.ex. för
             //att ta bort grupperna eller att queriet från principle får med sig image direkt. Så lägger nog placeholder bilder som resources för tillfället.
              
             // console.log('nynumber', props.resources[0].image.url, props.resources[0].id)

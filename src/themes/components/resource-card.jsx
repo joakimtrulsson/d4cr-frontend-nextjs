@@ -4,8 +4,7 @@ import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 import img from "../sources/assets/graphics/placeholder/dummy-image2.jpeg"
 import Link from 'next/link'
-//import "../sources/scss/components/resources-card.scss";
-///////////kvar: skriv i readme och hovereffekt fixa knappen
+
 const ResourceCard = (props) => {
     const { title, url, resourceType } = props.prop;
     console.log('props', props)
