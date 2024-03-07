@@ -1261,6 +1261,11 @@ ol {
     border: none;
     white-space: nowrap;
     clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
+    transition: scale 200ms ease-in-out;
+
+    &:hover {
+        scale: 1.1;
+    }
 }
 
 .secondary-button {

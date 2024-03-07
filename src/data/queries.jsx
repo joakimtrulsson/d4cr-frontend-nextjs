@@ -18,6 +18,22 @@ export const FOOTER_MENU_QUERY = gql`
     }
 `;
 
+export const STEERING_GROUP_MEMBERS_QUERY = gql`
+    query SteeringGroupMembers {
+        steeringGroupMembers{
+            fullName
+            role
+            city
+            country
+            socialMediaUrl1
+            socialMediaIcon1
+            socialMediaUrl2
+            socialMediaIcon2
+            image
+        }
+    }
+`;
+
 export const CHAPTER_SLUG_QUERY = gql`
     query Query($slug: String!) {
         chapters(where: { slug: { equals: $slug } }) {
@@ -39,18 +55,20 @@ export const CHAPTER_SLUG_QUERY = gql`
     }
 `;
 
-export const STEERING_GROUP_MEMBERS = gql`
-    query SteeringGroupMembers {
-        steeringGroupMembers{
-            fullName
-            role
-            city
-            country
-            socialMediaUrl1
-            socialMediaIcon1
-            socialMediaUrl2
-            socialMediaIcon2
-            image
-        }
-    }
+export const GET_PAGE_BY_SLUG_QUERY = gql`
+query Page($where: PageWhereUniqueInput!) {
+    page(where: $where) {
+                title
+                slug
+                heroPreamble{
+                  document
+                }
+                ctaOneAnchorText
+                ctaOneUrl
+                ctaTwoUrlAnchorText
+                ctaTwoUrl
+                status
+                sections
+              }
+            }
 `;

@@ -14,7 +14,7 @@ const Hero = () => {
 
             </div>
             
-            <div className="hero-player">
+            <div className="hero-player">x
                 <VideoPlayer />
             </div>
         </div>

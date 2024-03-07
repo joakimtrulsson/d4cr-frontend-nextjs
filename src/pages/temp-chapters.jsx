@@ -11,7 +11,11 @@ export default function Chapters(props) {
             <div className='site-container__top'>
                 <Navbar data={props.navMenuData} />
                 <main className='site-content'>
-                    <h1>Chapters.. Sweet Chapters</h1>
+
+
+                    <h1 className=''>About local chapters</h1>
+
+
                 </main>
             </div>
             
