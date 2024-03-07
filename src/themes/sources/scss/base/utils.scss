@@ -26,8 +26,9 @@ body {
     8. text layout & style 
     9. color, bg-color & fill-color
     10. z-index
-    11. re-using (anmination-background & heading-background for H1..)
-    12. lang-, nav-, primary- and secondary-button
+    11. cursor
+    12. re-using (anmination-background & heading-background for H1..)
+    13. lang-, nav-, primary- and secondary-button
 */
 
 /* width and height */
@@ -1161,6 +1162,12 @@ ol {
 
 .background-layer {
     z-index: $-z-index-background;
+}
+
+/* cursor */
+
+.pointer {
+    cursor: pointer;
 }
 
 /* re-using */

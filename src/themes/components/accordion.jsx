@@ -32,8 +32,8 @@ export default function Accordion({ content }) {
                     <ul className='no-bullets'>
 
                         {content.fields.map((field, index) => (
-                            <li className={`heading-4 flex flex-align-center padding-tb--xs padding-lr--xs 
-                            ${index === clickedValue ? 'bg-yellow-200 color-yellow-700' : 'bg-yellow-50 color-grey-700'}`}
+                            <li className={`heading-5 flex flex-align-center padding-tb--s padding-lr--s 
+                            ${index === clickedValue ? 'bg-yellow-200 color-yellow-700' : 'bg-yellow-50 color-grey-700 pointer'}`}
                                 key={index} onClick={() => setClickedValue(index)}>
                                 {field.heading}
                             </li>
