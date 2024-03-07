@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Newscard from './news-card.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
 import WYSIWYG from './wysiwyg.jsx'
+import Link from 'next/link'
 
 export default function NewsTeaser({ content }) {
 
@@ -33,9 +34,9 @@ export default function NewsTeaser({ content }) {
             </div>
 
             <div className='button-wrapper margin-tb--s'>
-                <a className='no-decoration' href="get-url-from-database">
+                <Link className='no-decoration' href="get-url-from-database">
                     <SecondaryButton title={"SEE ALL"} />
-                </a>
+                </Link>
             </div>
 
         </div>

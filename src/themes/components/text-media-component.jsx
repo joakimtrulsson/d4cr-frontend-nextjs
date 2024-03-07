@@ -8,8 +8,6 @@ import { DocumentRenderer } from '@keystone-6/document-renderer'
 
 export default function TextMediaComponent({ content }) {
 
-    console.log(content)
-
     var bgColorClass, fillColorClass
 
     /* "bg" is for the body, and "fill" is for the wave */
