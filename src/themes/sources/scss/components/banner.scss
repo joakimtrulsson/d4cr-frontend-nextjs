@@ -7,11 +7,15 @@
     .icon-wrapper {
         shape-outside: circle();
         clip-path: circle();
-        transition: background-color 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     .primary-button {
-        transition: background-color 0.2s ease-in-out
+        transition: all 0.2s ease-in-out
+    }
+
+    svg {
+        transition: scale 200ms ease-in-out;
     }
 
     &:hover, &:focus {
@@ -20,24 +24,18 @@
         transition: transform 0.2s ease-in-out;
 
         .icon-wrapper {
+
             background-color: $-orange-200;
-            transition: background-color 0.2s ease-in-out;
+
+            svg {
+                scale: 1.5;
+            }
         }
 
         .primary-button {
             background-color: $-orange-200;
-            transition: background-color 0.2s ease-in-out;
+            scale: 1.1;
+            transition: all 0.2s ease-in-out;
         }
     }
-}
-
-
-#circle {
-    float: left;
-    width: 300px;
-    height: 300px;
-    margin: 20px;
-    shape-outside: circle();
-    clip-path: circle();
-    background: lightblue;
 }
