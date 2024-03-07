@@ -63,7 +63,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
           </div>
 
           <div className='animation-background-right'>
-            <Image src={AnimationRight} alt="Animated GIF" fill={false} /> { /* set as true later.. */}
+            <Image src={AnimationRight} alt="Animated GIF" /> 
           </div>
 
           {chapters.heroImage.url && ( // show hero image if exists

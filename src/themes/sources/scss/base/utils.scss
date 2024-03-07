@@ -1189,6 +1189,21 @@ ol {
         }
     }
 
+    &-left-large {
+
+        height: auto;
+        width: 100%;
+        position: absolute;
+        left: -13rem;
+        top: 2rem;
+        z-index: $-z-index-animination-background;
+
+        img {
+            height: auto;
+            width: 25rem;
+        }
+    }
+
     &-right {
 
         position: absolute;
