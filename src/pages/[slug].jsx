@@ -47,7 +47,7 @@ export default function SlugPage(props) {
                     }
 
                     {props.pageData.sections && props.pageData.sections.map((section, index) => (
-                        <section key={index} className='margin-tb--xs'>
+                        <section key={index} className=''>
                             <SectionRender key={index} section={section} />
                         </section>
                     ))}
