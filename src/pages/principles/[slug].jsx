@@ -35,12 +35,8 @@ export default function PrinciplesPage(props) {
         const nextSlug = nextIndex < principlesNumber.length ? principlesNumber[nextIndex].principles.slug : null;
 
 
-
-        //console.log('top', principle, principlesNumber[currentIndex].principles)
-
-
         ////////////////change props to work in large-bullet list///////////////////
-        // Assume principle.subPrinciples is the array from your GraphQL query
+        
         const transformedSubPrinciples = Array.isArray(principle.subPrinciples) ? principle.subPrinciples.map(subPrinciple => {
             // Check if subPrinciple.text is an array and not undefined or null
             const bodyText = Array.isArray(subPrinciple.text) ? subPrinciple.text.map(textItem => {

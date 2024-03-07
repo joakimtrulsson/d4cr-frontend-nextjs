@@ -3,30 +3,19 @@ import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import { fetchMainMenuData, fetchFooterMenuData, fetchChapterSlugData, fetchFrontPageData } from '../graphql'
 import '../themes/sources/scss/app.scss'
+import HeroComponent from '../themes/components/hero-frontpage'
 
-
-export default function Hero(props) {
-
+export default function FrontPage(props) {
+    
     const frontPageData = props.frontPageData.frontPage
-    console.log(frontPageData, frontPageData.heroPreamble.document[0].children[0].text)
-
+    
+    //responsive design
     return (
         <div className='site-container'>
             <div className='site-container__top'>
                 <Navbar data={props.navMenuData} />
                 <main className='site-content'>
-                    <h1>{frontPageData.heroTitle}</h1>
-                    <h4>{frontPageData.heroPreamble.document[0].children[0].text}</h4>
-                    <video width="320" height="240" controls preload="none">
-                        <source src={frontPageData.heroVideo.url} type="video/mp4" />
-                        <track
-                            src="/path/to/captions.vtt"
-                            kind="subtitles"
-                            srcLang="en"
-                            label="English"
-                        />
-                        Your browser does not support the video tag.
-                    </video>
+                    <HeroComponent prop={frontPageData } />
                 </main>
             </div>
 
