@@ -1174,7 +1174,7 @@ ol {
         position: absolute;
         left: -3rem;
         top: 2rem;
-        z-index: $-z-index-background;
+        z-index: $-z-index-animination-background;
 
         img {
             height: auto;
@@ -1187,7 +1187,7 @@ ol {
         position: absolute;
         right: -3rem;
         top: 2rem;
-        z-index: $-z-index-background;
+        z-index: $-z-index-animination-background;
 
         img {
             height: auto;
@@ -1197,7 +1197,6 @@ ol {
 
     &-container {
         position: relative;
-        z-index: $-z-index-container;
     }
 }
 
