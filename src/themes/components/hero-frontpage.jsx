@@ -1,13 +1,14 @@
 import VideoPlayer from "./videoplayer"
 import PrimaryButton from "./buttons/primary-button"
+import SecondaryButton from "./buttons/secondary-button"
 import Link from 'next/link'
 
-
+ //polygon primary  större video? annan färg på play button
 const Hero = ({ prop }) => {
     const propData = prop
 
     console.log('hero', propData)
-    ///börja med mobile friendly
+    
     return (
         <main>
             <div className="hero-container">
@@ -15,11 +16,11 @@ const Hero = ({ prop }) => {
                     <h1 className="title">{propData.heroTitle}</h1>
                     <h4 className="preamble">{propData.heroPreamble.document[0].children[0].text}</h4>
                     <div className="buttons-bottom flex flex-row">
-                        <Link className="link" href='../../chapters/berlin'>
+                        <Link className="link left" href='../../chapters/berlin'>
                             <PrimaryButton title={propData.ctaOneAnchorText} />
                         </Link>
-                        <Link  className="link"  href='../../chapters/berlin'>
-                            <PrimaryButton title={propData.ctaTwoUrlAnchorText} />
+                        <Link  className="link right"  href='../../chapters/berlin'>
+                            <SecondaryButton title={propData.ctaTwoUrlAnchorText} />
                         </Link>
 
                     </div>
