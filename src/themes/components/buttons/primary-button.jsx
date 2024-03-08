@@ -1,4 +1,4 @@
-const PrimaryButton = ({title}) => {
+export default function PrimaryButton({title}) {
 
     return (
         <div>
@@ -6,5 +6,3 @@ const PrimaryButton = ({title}) => {
         </div>
     )
 }
-
-export default PrimaryButton

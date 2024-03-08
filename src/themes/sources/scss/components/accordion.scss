@@ -17,6 +17,10 @@
 
     .content-text {
 
+        border-top-right-radius: $-spacing-2;
+        border-bottom-left-radius: $-spacing-2;
+        border-bottom-right-radius: $-spacing-2;
+
         p {
             color: $-grey-700;
         }

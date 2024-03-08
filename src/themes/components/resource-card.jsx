@@ -1,5 +1,4 @@
 
-import "../sources/scss/base/utils.scss";
 import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 import img from "../sources/assets/graphics/placeholder/dummy-image2.jpeg"

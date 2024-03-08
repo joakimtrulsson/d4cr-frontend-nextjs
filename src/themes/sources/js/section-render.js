@@ -29,14 +29,14 @@ export default function sectionRender({ section }) {
     case 'PRINCIPLES':
       return <PrinciplesSection content={section} />;
     case 'RESOURCES':
-      return <ResourcesSection content={section} />
-      
+      return <ResourcesSection content={section} />;
+
     case 'WYSIWYG':
       return (
         <div className='margin-lr--xxxl max-width-60 margin-tb--l'>
           <WYSIWYG content={section.preamble} />
         </div>
-      )
+      );
     default:
       return null;
   }

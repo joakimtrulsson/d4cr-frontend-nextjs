@@ -1,5 +1,3 @@
-import '../sources/scss/components/accordion.scss';
-import '../sources/scss/base/utils.scss'
 import { useState, useEffect } from 'react';
 import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
@@ -20,7 +18,7 @@ export default function Accordion({ content }) {
         <div className="accordion-container animation-background-container flex flex-column flex-justify-center flex-align-center 
         padding-tb--xxl">
 
-            <div className='animation-background'>
+            <div className='animation-background-left-large'>
                 <Image src={Animation} alt="Animated GIF" />
             </div>
 
@@ -34,8 +32,8 @@ export default function Accordion({ content }) {
                     <ul className='no-bullets'>
 
                         {content.fields.map((field, index) => (
-                            <li className={`heading-4 flex flex-align-center padding-tb--xs padding-lr--xs 
-                            ${index === clickedValue ? 'bg-yellow-200 color-yellow-700' : 'bg-yellow-50 color-grey-700'}`}
+                            <li className={`heading-5 flex flex-align-center padding-tb--s padding-lr--s 
+                            ${index === clickedValue ? 'bg-yellow-200 color-yellow-700' : 'bg-yellow-50 color-grey-700 pointer'}`}
                                 key={index} onClick={() => setClickedValue(index)}>
                                 {field.heading}
                             </li>

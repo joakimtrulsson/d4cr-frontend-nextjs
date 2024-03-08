@@ -2,9 +2,9 @@ import SectionRender from '../sources/js/section-render.js'
 import WYSIWYG from './wysiwyg.jsx'
 import Image from 'next/image'
 
-export default function SlugPageComponent({ content }) {
+// delete this file ? 
 
-  console.log(content)
+export default function SlugPageComponent({ content }) {
 
     return (
     <div className='margin-lr--xxxl max-width-60 flex flex-column flex-align-center'>

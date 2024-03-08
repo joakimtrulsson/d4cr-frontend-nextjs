@@ -63,7 +63,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
           </div>
 
           <div className='animation-background-right'>
-            <Image src={AnimationRight} alt="Animated GIF" fill={false} /> { /* set as true later.. */}
+            <Image src={AnimationRight} alt="Animated GIF" /> 
           </div>
 
           {chapters.heroImage.url && ( // show hero image if exists
@@ -98,10 +98,8 @@ export async function getServerSideProps({ resolvedUrl }) {
 
     const chapters = await fetchChapterSlugData(resolvedUrl);
 
-    if (chapters === null) {
-      return {
-        notFound: true,
-      };
+    if (!chapters) {
+      return null;
     }
 
     const navMenuData = await fetchMainMenuData();
@@ -113,8 +111,6 @@ export async function getServerSideProps({ resolvedUrl }) {
   } catch (error) {
 
     console.error("(chapters/[slug].jsx) Error fetching data:", error)
-    return {
-      notFound: true,
-    }
+    return null;
   }
 }

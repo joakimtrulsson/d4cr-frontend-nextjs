@@ -36,7 +36,7 @@ export default function NavBar({ data }) {
 
             <nav className='flex flex-row flex-align-center'> {/* Design guide-button */}
                 <div>
-                    <Link href="chapters">
+                    <Link href="/design-guide">
                         <button
                             className={`nav-button ${activeDropdownIndex === -1 ? 'color-orange-500' : 'color-grey-500'}`}
                             onClick={() => toggleDropdown(-1)}

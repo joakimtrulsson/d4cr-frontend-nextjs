@@ -1,6 +1,5 @@
 
 import ResourceCard from "./resource-card.jsx";
-import "../sources/scss/base/utils.scss";
 import SecondaryButton from "./buttons/secondary-button.jsx";
 import Link from 'next/link';
 

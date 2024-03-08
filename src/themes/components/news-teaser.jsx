@@ -1,5 +1,3 @@
-import '../sources/scss/components/news-teaser.scss';
-import '../sources/scss/base/utils.scss'
 import { gql } from '@apollo/client';
 import client from '../../apollo-client.js';
 import Animation from '../sources/assets/graphics/animation.gif'
@@ -7,23 +5,9 @@ import Image from 'next/image'
 import Newscard from './news-card.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
 import WYSIWYG from './wysiwyg.jsx'
+import Link from 'next/link'
 
 export default function NewsTeaser({ content }) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // const sortedNews = content.news.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
 
@@ -50,9 +34,9 @@ export default function NewsTeaser({ content }) {
             </div>
 
             <div className='button-wrapper margin-tb--s'>
-                <a className='no-decoration' href="get-url-from-database">
+                <Link className='no-decoration' href="get-url-from-database">
                     <SecondaryButton title={"SEE ALL"} />
-                </a>
+                </Link>
             </div>
 
         </div>

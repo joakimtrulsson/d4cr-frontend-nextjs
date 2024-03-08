@@ -13,7 +13,7 @@ const nextConfig = {
             },
             {
               protocol: "https",
-              hostname: "ew.com",
+              hostname: "ryds.se", // delete this one!
             },
             // Add your image domains here
         ],

@@ -1,5 +1,11 @@
 import client from './apollo-client';
-import { MAIN_MENU_QUERY, FOOTER_MENU_QUERY, CHAPTER_SLUG_QUERY, STEERING_GROUP_MEMBERS, FRONT_PAGE_QUERY } from './data/queries';
+import { 
+    MAIN_MENU_QUERY, 
+    FOOTER_MENU_QUERY, 
+    CHAPTER_SLUG_QUERY, 
+    STEERING_GROUP_MEMBERS_QUERY, 
+    GET_PAGE_BY_SLUG_QUERY,
+    FRONT_PAGE_QUERY } from './data/queries';
 
 export async function fetchMainMenuData() {
     try {
@@ -31,6 +37,21 @@ export async function fetchFooterMenuData() {
     }
 }
 
+export async function fetchSteeringGroupMembersData() {
+    try {
+
+        const { data } = await client.query({
+            query: STEERING_GROUP_MEMBERS_QUERY,
+        });
+
+        return data?.steeringGroupMembers || null
+
+    } catch (error) {
+        console.error("(graphql.jsx) Error fetching data:", error);
+        throw error;
+    }
+}
+
 export async function fetchChapterSlugData(resolvedUrl) {
     try {
 
@@ -47,14 +68,15 @@ export async function fetchChapterSlugData(resolvedUrl) {
     }
 }
 
-export async function fetchSteeringGroupMembersData() {
+export async function fetchGetPageBySlugData(resolvedUrl) {
     try {
 
         const { data } = await client.query({
-            query: STEERING_GROUP_MEMBERS,
-        });
+            query: GET_PAGE_BY_SLUG_QUERY,
+            variables: { where: { slug: resolvedUrl} }
+        })
 
-        return data?.steeringGroupMembers || null
+        return data?.page || null
 
     } catch (error) {
         console.error("(graphql.jsx) Error fetching data:", error);
