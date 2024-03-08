@@ -1,15 +1,13 @@
 import client from './apollo-client';
-import { 
-    MAIN_MENU_QUERY, 
-    FOOTER_MENU_QUERY, 
-    CHAPTER_SLUG_QUERY, 
-    STEERING_GROUP_MEMBERS_QUERY, 
+import {
+    MAIN_MENU_QUERY,
+    FOOTER_MENU_QUERY,
+    CHAPTER_SLUG_QUERY,
+    STEERING_GROUP_MEMBERS_QUERY,
     GET_PAGE_BY_SLUG_QUERY,
-<<<<<<< HEAD
-    GET_NEWS_ITEM_BY_SLUG_QUERY } from './data/queries';
-=======
-    FRONT_PAGE_QUERY } from './data/queries';
->>>>>>> upstream/dev
+    GET_NEWS_ITEM_BY_SLUG_QUERY,
+    FRONT_PAGE_QUERY
+} from './data/queries';
 
 export async function fetchMainMenuData() {
     try {
@@ -77,7 +75,7 @@ export async function fetchGetPageBySlugData(resolvedUrl) {
 
         const { data } = await client.query({
             query: GET_PAGE_BY_SLUG_QUERY,
-            variables: { where: { slug: resolvedUrl} }
+            variables: { where: { slug: resolvedUrl } }
         })
 
         return data?.page || null
@@ -93,10 +91,19 @@ export async function fetchGetNewsItemBySlugData(resolvedUrl) {
     try {
         const { data } = await client.query({
             query: GET_NEWS_ITEM_BY_SLUG_QUERY,
-            variables: { where: { slug: resolvedUrl} }
+            variables: { where: { slug: resolvedUrl } }
         })
 
         return data?.news || null
+
+    } catch (error) {
+        console.error("(graphql.jsx) Error fetching data:", error);
+        throw error;
+    }
+}
+
+
+
 export async function fetchFrontPageData() {
     try {
 
