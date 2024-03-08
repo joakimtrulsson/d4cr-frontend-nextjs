@@ -21,15 +21,15 @@ export default function SlugPage(props) {
         <div className='site-container'>
             <div className='site-container__top'>
                 <Navbar data={props.navMenuData} />
-                <main className='site-content flex flex-column flex-align-center'>
+                <main className='site-content flex flex-column flex-align-center flex-justify-center'>
 
-                    {props.pageData.title && <h1 className='heading-background'>{props.pageData.title}</h1>}
+                    {props.pageData.title && <h1 className='heading-background color-grey-700'>{props.pageData.title}</h1>}
 
                     {props.pageData.heroPreamble && <DocumentRenderer document={props.pageData.heroPreamble.document} />}
 
                     {props.pageData.ctaOneUrl && props.pageData.ctaTwoUrlAnchorText &&
 
-                        <div className='flex flex-row'>
+                        <nav className='flex flex-row'>
 
                             {props.pageData.ctaOneAnchorText && props.pageData.ctaOneUrl &&
                                 <Link href={props.pageData.ctaOneUrl} passHref className='margin-lr--xxxs'>
@@ -43,11 +43,11 @@ export default function SlugPage(props) {
                                 </Link>
                             }
 
-                        </div>
+                        </nav>
                     }
 
                     {props.pageData.sections && props.pageData.sections.map((section, index) => (
-                        <section key={index} className=''>
+                        <section key={index}>
                             <SectionRender key={index} section={section} />
                         </section>
                     ))}

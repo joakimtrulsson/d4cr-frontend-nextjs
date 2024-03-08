@@ -7,6 +7,7 @@ import Banner from '../components/banner'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faXTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import getColorCode from '../themes/sources/js/color-code';
 
 export default function Footer({ data }) {
 
@@ -41,7 +42,7 @@ export default function Footer({ data }) {
             }
 
             <div className='margin-b--xxxs-negative full-width-height'>
-                <TopWave fillColorClass="fill-grey-700" />
+                <TopWave fillColorCode={getColorCode('grey-700')} />
             </div>
 
             <div className='bg-grey-700 full-width-height'>
