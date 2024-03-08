@@ -5,7 +5,11 @@ import {
     CHAPTER_SLUG_QUERY, 
     STEERING_GROUP_MEMBERS_QUERY, 
     GET_PAGE_BY_SLUG_QUERY,
+<<<<<<< HEAD
     GET_NEWS_ITEM_BY_SLUG_QUERY } from './data/queries';
+=======
+    FRONT_PAGE_QUERY } from './data/queries';
+>>>>>>> upstream/dev
 
 export async function fetchMainMenuData() {
     try {
@@ -93,6 +97,14 @@ export async function fetchGetNewsItemBySlugData(resolvedUrl) {
         })
 
         return data?.news || null
+export async function fetchFrontPageData() {
+    try {
+
+        const { data } = await client.query({
+            query: FRONT_PAGE_QUERY,
+        });
+
+        return data || null
 
     } catch (error) {
         console.error("(graphql.jsx) Error fetching data:", error);

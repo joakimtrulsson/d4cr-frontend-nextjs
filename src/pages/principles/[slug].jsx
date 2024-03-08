@@ -35,12 +35,8 @@ export default function PrinciplesPage(props) {
         const nextSlug = nextIndex < principlesNumber.length ? principlesNumber[nextIndex].principles.slug : null;
 
 
-
-        //console.log('top', principle, principlesNumber[currentIndex].principles)
-
-
         ////////////////change props to work in large-bullet list///////////////////
-        // Assume principle.subPrinciples is the array from your GraphQL query
+        
         const transformedSubPrinciples = Array.isArray(principle.subPrinciples) ? principle.subPrinciples.map(subPrinciple => {
             // Check if subPrinciple.text is an array and not undefined or null
             const bodyText = Array.isArray(subPrinciple.text) ? subPrinciple.text.map(textItem => {
@@ -77,7 +73,7 @@ export default function PrinciplesPage(props) {
         const resources = principlesNumber[currentIndex]?.principles?.resources ?? null;
         if (resources) {
 
-            //tänkte här jämföra id med varandra men kriskerar att bli extrajobb om backenden ska ändras med 
+            //tänkte här jämföra id med varandra men kriskerar att bli extrajobb om backenden ska ändras t.ex. för
             //att ta bort grupperna eller att queriet från principle får med sig image direkt. Så lägger nog placeholder bilder som resources för tillfället.
              
             // console.log('nynumber', props.resources[0].image.url, props.resources[0].id)
