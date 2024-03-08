@@ -5,7 +5,7 @@ const VideoPlayer = ({video}) => {
     return (
     <main>
         {/* {console.log(videoData)} */}
-        <video width="320" height="240" controls preload="none">
+        <video className="video-player" width="320" height="260" controls>
             <source src={videoData.url} type="video/mp4" />
             <track
                 src="/path/to/captions.vtt"
