@@ -24,7 +24,7 @@ export default function TextMediaComponent({ content }) {
     }
 
     return (
-        <div className="bg-transparent" >
+        <div className="text-media-section bg-transparent" >
 
             {(content.border === 'TOP' || content.border === 'TOPBOTTOM') && // top wave
                 <TopWave fillColorCode={fillColorCode} />

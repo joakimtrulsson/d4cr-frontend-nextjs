@@ -33,7 +33,7 @@ export default function sectionRender({ section }) {
 
     case 'WYSIWYG':
       return (
-        <div className='margin-lr--xxxl max-width-60 margin-tb--l'>
+        <div className='margin-lr--xxxl max-width-60 margin-tb--l' >
           <WYSIWYG content={section.preamble} />
         </div>
       );

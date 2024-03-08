@@ -17,6 +17,7 @@ export default function SlugPage(props) {
     if (!props.navMenuData && !props.pageData) { // add footerMenuData here please!
         return notFound(); // Don't render this page if data from the backend is misssing
     }
+    
     return (
         <div className='site-container'>
             <div className='site-container__top'>
