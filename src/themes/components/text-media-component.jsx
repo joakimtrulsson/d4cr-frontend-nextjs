@@ -9,8 +9,6 @@ import getColorCode from '../sources/js/color-code.js'
 
 export default function TextMediaComponent({ content }) {
 
-    console.log("text-media-component.jsx ", content)
-
     var bgColorClass, fillColorCode
 
     /* "bg" is for the body, and "fill" is for the svg in waves */

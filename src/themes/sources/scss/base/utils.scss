@@ -340,49 +340,49 @@ body {
         }
 
         &--m {
-            margin-bottom: $-spacing-4; 
+            margin-bottom: $-spacing-4;
         }
 
         &--l {
-            margin-bottom: $-spacing-5; 
+            margin-bottom: $-spacing-5;
         }
 
         &--xl {
-            margin-bottom: $-spacing-6; 
+            margin-bottom: $-spacing-6;
         }
 
         &--xxl {
-            margin-bottom: $-spacing-7; 
+            margin-bottom: $-spacing-7;
         }
     }
 
     &-l {
         // left
-    
+
         &--xxxs-negative {
             margin-left: -$-spacing-1;
         }
-    
+
         &--xxxs {
             margin-left: $-spacing-1;
         }
-    
+
         &--xxs {
             margin-left: $-spacing-2;
         }
-    
+
         &--xs {
             margin-left: $-spacing;
         }
-    
+
         &--s {
             margin-left: $-spacing-3;
         }
-    
+
         &--m {
             margin-left: $-spacing-4;
         }
-    
+
         &--l {
             margin-left: $-spacing-5;
         }
@@ -395,7 +395,7 @@ body {
             margin-left: $-spacing-7;
         }
     }
-    
+
 
     &-r {
         // right
@@ -437,7 +437,7 @@ body {
         }
     }
 
-    
+
 }
 
 
@@ -550,31 +550,31 @@ body {
 
     &-t {
         // top
-    
+
         &--xxxs-negative {
             padding-top: -$-spacing-1;
         }
-    
+
         &--xxxs {
             padding-top: $-spacing-1;
         }
-    
+
         &--xxs {
             padding-top: $-spacing-2;
         }
-    
+
         &--xs {
             padding-top: $-spacing;
         }
-    
+
         &--s {
             padding-top: $-spacing-3;
         }
-    
+
         &--m {
             padding-top: $-spacing-4;
         }
-    
+
         &--l {
             padding-top: $-spacing-5;
         }
@@ -594,31 +594,31 @@ body {
 
     &-b {
         // bottom
-    
+
         &--xxxs-negative {
             padding-bottom: -$-spacing-1;
         }
-    
+
         &--xxxs {
             padding-bottom: $-spacing-1;
         }
-    
+
         &--xxs {
             padding-bottom: $-spacing-2;
         }
-    
+
         &--xs {
             padding-bottom: $-spacing;
         }
-    
+
         &--s {
             padding-bottom: $-spacing-3;
         }
-    
+
         &--m {
             padding-bottom: $-spacing-4;
         }
-    
+
         &--l {
             padding-bottom: $-spacing-5;
         }
@@ -638,31 +638,31 @@ body {
 
     &-l {
         // left
-    
+
         &--xxxs-negative {
             padding-left: -$-spacing-1;
         }
-    
+
         &--xxxs {
             padding-left: $-spacing-1;
         }
-    
+
         &--xxs {
             padding-left: $-spacing-2;
         }
-    
+
         &--xs {
             padding-left: $-spacing;
         }
-    
+
         &--s {
             padding-left: $-spacing-3;
         }
-    
+
         &--m {
             padding-left: $-spacing-4;
         }
-    
+
         &--l {
             padding-left: $-spacing-5;
         }
@@ -678,31 +678,31 @@ body {
 
     &-r {
         // right
-    
+
         &--xxxs-negative {
             padding-right: -$-spacing-1;
         }
-    
+
         &--xxxs {
             padding-right: $-spacing-1;
         }
-    
+
         &--xxs {
             padding-right: $-spacing-2;
         }
-    
+
         &--xs {
             padding-right: $-spacing;
         }
-    
+
         &--s {
             padding-right: $-spacing-3;
         }
-    
+
         &--m {
             padding-right: $-spacing-4;
         }
-    
+
         &--l {
             padding-right: $-spacing-5;
         }
@@ -714,7 +714,7 @@ body {
         &--xxl {
             padding-right: $-spacing-7;
         }
-    }    
+    }
 }
 
 /* layout  & image */
@@ -914,14 +914,16 @@ h4,
 }
 
 h5,
-.heading-5 { // haven't used this one yet, adjust it if needed
+.heading-5 {
+    // haven't used this one yet, adjust it if needed
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.01rem;
 }
 
 h6,
-.heading-6 { // haven't used this one yet, adjust it if needed
+.heading-6 {
+    // haven't used this one yet, adjust it if needed
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.01rem;
@@ -929,7 +931,8 @@ h6,
 
 /* text */
 
-.sub-heading-l { // haven't used this one yet, adjust it if needed
+.sub-heading-l {
+    // haven't used this one yet, adjust it if needed
     font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: 0.08rem;
@@ -956,7 +959,8 @@ p {
     font-weight: 400;
 }
 
-.small-text { // haven't used this one yet, adjust it if needed
+.small-text {
+    // haven't used this one yet, adjust it if needed
     font-size: 0.85rem;
     line-height: 1.4rem;
     letter-spacing: 0.04rem;
@@ -1280,16 +1284,23 @@ ol {
 }
 
 .primary-button {
-    padding: 0.63rem 1.4rem;
-    color: $-orange-700;
+    padding: 10px 20px;
     background-color: $-orange-300;
-    font-weight: bold;
-    font-size: 0.6rem;
     cursor: pointer;
     border: none;
     white-space: nowrap;
     clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
     transition: scale 200ms ease-in-out;
+
+
+    /* font style*/
+    white-space: nowrap;
+    color: $-orange-700;
+    font-weight: 680;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
 
     &:hover {
         scale: 1.1;
@@ -1297,12 +1308,12 @@ ol {
 }
 
 .secondary-button {
-    height: 2.1rem;
-    width: 9rem;
+    height: 34px;
+    width: auto;
     transition: scale 200ms ease-in-out;
 
     img {
-        height: 2.1rem;
+        height: 34px;
         display: block;
         margin: 0;
     }
@@ -1313,21 +1324,21 @@ ol {
 
     button {
         cursor: pointer;
-        padding: 0rem 1rem;
+        padding: 0 16px;
         background-color: transparent;
         border-top: 2.18px solid $-orange-200;
         border-bottom: 2.18px solid $-orange-200;
         border-left: none;
         border-right: none;
-        margin-left: -0.32rem;
-        margin-right: -0.32rem;
+        margin-left: -5px;
+        margin-right: -5px;
 
         /* font style*/
         white-space: nowrap;
         color: $-orange-500;
         font-weight: 680;
-        font-size: 0.6rem;
-        letter-spacing: 0.045rem;
+        font-size: 10px;
+        letter-spacing: 0.5px;
         text-transform: uppercase;
     }
 }

@@ -23,31 +23,39 @@ export default function SlugPage(props) {
                 <Navbar data={props.navMenuData} />
                 <main className='site-content flex flex-column flex-align-center flex-justify-center'>
 
-                    {props.pageData.title && <h1 className='heading-background color-grey-700'>{props.pageData.title}</h1>}
+                    {props.pageData.title && <h1 className='heading-background'>{props.pageData.title}</h1>}
 
-                    {props.pageData.heroPreamble && <DocumentRenderer document={props.pageData.heroPreamble.document} />}
+                    {(props.pageData.heroPreamble || props.pageData.ctaOneAnchorText || props.pageData.ctaTwoUrlAnchorText) && (
 
-                    {props.pageData.ctaOneUrl && props.pageData.ctaTwoUrlAnchorText &&
+                        <div className='flex flex-column flex-align-center flex-justify-center margin-b--xl width--m max-width-40 text-align-center'>
 
-                        <nav className='flex flex-row'>
+                            {props.pageData.heroPreamble && <DocumentRenderer document={props.pageData.heroPreamble.document} />}
 
-                            {props.pageData.ctaOneAnchorText && props.pageData.ctaOneUrl &&
-                                <Link href={props.pageData.ctaOneUrl} passHref className='margin-lr--xxxs'>
-                                    <PrimaryButton title={props.pageData.ctaOneAnchorText} />
-                                </Link>
+                            {props.pageData.ctaOneUrl && props.pageData.ctaTwoUrlAnchorText &&
+
+                                <nav className='flex flex-row'>
+
+                                    {props.pageData.ctaOneAnchorText && props.pageData.ctaOneUrl &&
+                                        <Link href={props.pageData.ctaOneUrl} passHref className='margin-lr--xxxs'>
+                                            <PrimaryButton title={props.pageData.ctaOneAnchorText} />
+                                        </Link>
+                                    }
+
+                                    {props.pageData.ctaTwoUrlAnchorText && props.pageData.ctaTwoUrl &&
+                                        <Link href={props.pageData.ctaTwoUrl} passHref className='no-decoration margin-lr--xxxs'>
+                                            <SecondaryButton title={props.pageData.ctaTwoUrlAnchorText} />
+                                        </Link>
+                                    }
+
+                                </nav>
+
+
                             }
-
-                            {props.pageData.ctaTwoUrlAnchorText && props.pageData.ctaTwoUrl &&
-                                <Link href={props.pageData.ctaTwoUrl} passHref className='no-decoration margin-lr--xxxs'>
-                                    <SecondaryButton title={props.pageData.ctaTwoUrlAnchorText} />
-                                </Link>
-                            }
-
-                        </nav>
-                    }
+                        </div>
+                    )}
 
                     {props.pageData.sections && props.pageData.sections.map((section, index) => (
-                        <section key={index}>
+                        <section key={index} className='flex flex-column flex-align-center flex-justify-center'>
                             <SectionRender key={index} section={section} />
                         </section>
                     ))}
