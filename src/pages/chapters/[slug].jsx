@@ -11,7 +11,7 @@ import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '..
 import '../../themes/sources/scss/app.scss'
 
 
-export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
+export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters }) {
 
   // Get current chapter
   const currentLanguage = {
@@ -67,7 +67,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
           </div>
 
           {chapters.heroImage.url && ( // show hero image if exists
-            <div className='hero margin-t--s borderradius--xxxs'>
+            <div className='hero-image-medium margin-t--s borderradius--xxxs'>
               <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true} />
             </div>
           )}

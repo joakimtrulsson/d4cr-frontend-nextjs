@@ -1,8 +1,8 @@
 import PrimaryButton from '../themes/components/buttons/primary-button'
-import WYSIWYG from '../themes/components/wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import getColorCode from '../themes/sources/js/color-code'
+import { DocumentRenderer } from '@keystone-6/document-renderer'
 
 export default function Banner({ content }) {
 
@@ -20,9 +20,9 @@ export default function Banner({ content }) {
                     
             </div>
 
-            <div className="margin-lr--xs">
+            <div className="margin-lr--s">
                 <h4 className='margin--zero color-grey-700'>{content.title}</h4>
-                <WYSIWYG className='margin--zero color-grey-500 large-text margin-t--xxxs' content={content.preamble} />
+                <DocumentRenderer document={content.preamble} />
             </div>
 
             <div className="margin-r--xxs">

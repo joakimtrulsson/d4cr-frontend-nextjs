@@ -1,17 +1,13 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import getLanguageName from '../../themes/sources/js/language-code.js'
 import SectionRender from '../../themes/sources/js/section-render.js';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
 import NavBar from '../../components/navbar.jsx'
 import Footer from '../../components/footer.jsx'
 import { fetchGetNewsItemBySlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
 import '../../themes/sources/scss/app.scss'
 
+export default function NewsSlugPage(props) {
 
-export default function SlugPage(props) {
-
-    console.log(props.newsData)
+    console.log("NewsSlugPage", props.newsData)
 
     return (
         <div className='site-container'>
@@ -19,7 +15,12 @@ export default function SlugPage(props) {
                 <NavBar data={props.navMenuData} />
                 <main className='site-content flex flex-column flex-align-center'>
 
-                    {props.newsData.image.url && <Image className='center-image' href={props.newsData.image.url} alt={props.newsData.image.altText} fill={true} />}
+                    {props.newsData.image.url && (
+
+                        <div className='hero-image-large margin-tb--s borderradius--xxxs '>
+                            <Image className='center-image' src={"https://ryds.se/wp-content/uploads/2023/03/Bygg_din_bat_puff.jpg" /* props.newsData.image.url */} alt={props.newsData.image.altText} fill={true} />
+                        </div>
+                    )}
 
                     {props.newsData.newsCategory.categoryTitle &&
                         <p className='margin--zero full-width-height max-width-60 color-yellow-600 sub-heading-m'>{props.newsData.newsCategory.categoryTitle}</p>
@@ -31,9 +32,7 @@ export default function SlugPage(props) {
 
 
                     {props.newsData.sections && props.newsData.sections.map((section, index) => (
-
                         <SectionRender key={index} section={section} />
-
                     )
                     )}
 
