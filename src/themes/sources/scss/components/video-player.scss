@@ -64,31 +64,57 @@
     }
 
     .clicked {
-        position: fixed; // Keeps the element in the same place even when scrolling
-        z-index: 100; // Ensures it's above most other content
-        top: 50%; // Position it halfway down the viewport
-        left: 50%; // Position it halfway across the viewport
-        transform: translate(-50%, -50%); // Adjusts the position based on its own dimensions to center
-        width: 60vw; // Set the width to 50% of the viewport width
-        height: 60vh; // Set the height to 50% of the viewport height
-        display: flex; // Enables flexbox for its children, useful for centering
-        justify-content: center; // Horizontally center any child content
-        align-items: center; // Vertically center any child content
-        
-        
-        .video-player-popup {
-            width: 100%; // Make the video fill the container
-            height: auto; // Maintain aspect ratio
-            border-radius: 16px;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        animation: fadeInBackground 0.5s ease-out forwards;
+
+        .modal {
+            position: fixed;
+            top: 42%; // Position it halfway down the viewport
+            left: 50%; // Position it halfway across the viewport
+            transform: translate(-50%, -50%); // Adjusts the position based on its own dimensions to center
+            width: 60vw; // Set the width to 50% of the viewport width
+            height: 60vh; // Set the height to 50% of the viewport height
+            animation: slideInFromBottom 0.5s ease-out forwards;
+
+            .video-player-popup {
+                width: 100%; // Make the video fill the container
+                height: auto; // Maintain aspect ratio
+                border-radius: 16px;
+            }
+
+            .btn-exit-video {
+                position: absolute;
+                top: -2%;
+                right: -2%;
+                height: 5vh;
+                width: 5vh;
+                border-radius: 50%;
+                background-color: #d4eae9; 
+                border: none;
+                transform: scale(1);
+                transition: transform 0.4s ease-in-out;
+                &:hover,
+                &:focus {
+                   
+                    transform: scale(1.1);
+                    transition: transform 0.4s ease-in-out;
+                    background-color: #b7f0ee; 
+                }
+            }
+
+            &.slide-out {
+                animation: slideOut 0.5s ease-out forwards;
+            }
         }
 
-        .btn-exit-video {
-            position: absolute;
-            top:-16%;
-            right: 0;
-            height: 5vh;
-            width: 5vh;
-            border-radius: 50%;
+        &.clicked-exit {
+            animation: fadeOutBackground 0.5s ease-in forwards
         }
     }
 
@@ -99,6 +125,55 @@
 
 }
 
+@keyframes fadeInBackground {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+@keyframes fadeOutBackground {
+    from {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        /* Start from below the visible area of the screen */
+        transform: translate(-50%, 100vh);
+        /* Adjust this value if needed */
+
+    }
+
+    to {
+        /* End at the center of the screen */
+        transform: translate(-50%, -50%);
+
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translate(-50%, -50%);
+
+    }
+
+    to {
+        /* End at the center of the screen */
+        transform: translate(-50%, 100vh);
+    }
+}
+
+
+//scale-wooble like jelly
 @keyframes jelly-hover {
     0% {
         transform: scale(1);
