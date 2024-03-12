@@ -59,9 +59,9 @@ const VideoPlayer = ({ video }) => {
                     <Image className="play-bg" src={PlayBg} width={80} height={80} />
                 </button>
             </div>
-            <div className={`flex flex-column ${isClicked ? 'clicked' : 'not-clicked'}`}>
-                <button onClick={exitVideo}>X</button>
-                <video className={`video-player-popup`} width="320" height="260" controls>
+            <div className={`flex flex-column flex-align-center ${isClicked ? 'clicked' : 'not-clicked'}`}>
+                <button onClick={exitVideo} className="btn-exit-video">X</button>
+                <video className={`video-player-popup`} width="640" height="520" controls>
                     <source src={videoData.url} type="video/mp4" />
                     <track
                         src="/path/to/captions.vtt"
