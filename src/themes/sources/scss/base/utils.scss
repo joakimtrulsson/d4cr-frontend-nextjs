@@ -1290,7 +1290,7 @@ ol {
     cursor: pointer;
     border: none;
     white-space: nowrap;
-    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    clip-path: polygon(calc(0% + 10px) 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, calc(0% + 10px) 100%, 0% 50%);
     transition: scale 200ms ease-in-out;
 
 

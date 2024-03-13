@@ -9,7 +9,6 @@ import HeroComponent from '../themes/components/hero-frontpage'
 export default function FrontPage(props) {
     const frontPageData = props.frontPageData && props.frontPageData.frontPage ? props.frontPageData.frontPage : null;
 
-    //responsive design
     return (
         <div className='site-container'>
             <div className='site-container__top'>
