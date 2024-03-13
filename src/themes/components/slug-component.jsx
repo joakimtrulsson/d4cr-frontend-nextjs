@@ -1,4 +1,4 @@
-import SectionRender from '../sources/js/section-render.js'
+import SectionRender from '../sources/js/section-renderer.js'
 import WYSIWYG from './wysiwyg.jsx'
 import Image from 'next/image'
 

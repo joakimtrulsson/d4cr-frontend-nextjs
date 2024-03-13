@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import getLanguageName from '../../themes/sources/js/language-code.js'
-import SectionRender from '../../themes/sources/js/section-render.js';
+import SectionRender from '../../themes/sources/js/section-renderer.js';
 import AnimationRight from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif'
 import { DocumentRenderer } from '@keystone-6/document-renderer';

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import SectionRender from '../../themes/sources/js/section-render.js';
+import SectionRender from '../../themes/sources/js/section-renderer.js';
 import NavBar from '../../components/navbar.jsx'
 import Footer from '../../components/footer.jsx'
 import { fetchGetNewsItemBySlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
@@ -18,7 +18,7 @@ export default function NewsSlugPage(props) {
                     {props.newsData.image.url && (
 
                         <div className='hero-image-large margin-tb--s borderradius--xxxs '>
-                            <Image className='center-image' src={"https://ryds.se/wp-content/uploads/2023/03/Bygg_din_bat_puff.jpg" /* props.newsData.image.url */} alt={props.newsData.image.altText} fill={true} />
+                            <Image className='center-image' src={props.newsData.image.url} alt={props.newsData.image.altText} fill={true} />
                         </div>
                     )}
 
@@ -39,7 +39,7 @@ export default function NewsSlugPage(props) {
                 </main>
             </div>
 
-            <Footer data={props.navMenuData} /> { /* please change to footerMenuData later when backend is working */}
+            <Footer data={props.navMenuData} /> { /* please change to footerMenuData */}
         </div>
     )
 }

@@ -1,13 +1,11 @@
 import React from 'react';
-import { fetchSteeringGroupMembersData } from '../graphql'
 import PeopleCard from './people-card'
-import '../themes/sources/scss/app.scss'
 
-export default function SteeringGroup(props) {
+export default function SteeringGroup({ content }) {
 
-    console.log("steeringGroupMemberData: ", props.steeringGroupMemberData)
+    console.log("steeringGroupMemberData: ", content.steeringGroupMemberData)
 
-    /* const sortedData = props.steeringGroupMemberData.slice().sort((a, b) => {
+    /* const sortedData = content.steeringGroupMemberData.slice().sort((a, b) => {
         return a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase());
     }); */
 
@@ -26,16 +24,4 @@ export default function SteeringGroup(props) {
             </div>
         </div>
     );
-}
-
-export async function getServerSideProps() {
-    try {
-
-        const steeringGroupMemberData = await fetchSteeringGroupMembersData();
-
-        return { props: { steeringGroupMemberData } };
-    } catch (error) {
-        console.error("(component/steering-group.jsx) Error fetching data:", error);
-        return { notFound: true };
-    }
 }

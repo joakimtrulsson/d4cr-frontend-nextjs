@@ -10,7 +10,7 @@ import ResourcesSection from '../../components/resource-section.jsx'
 import SteeringGroup from '../../../components/steering-group.jsx'
 import WYSIWYG from '../../components/wysiwyg.jsx'
 
-export default function sectionRender({ section }) {
+export default function sectionRenderer({ section }) {
 
   switch (section.sectionType) {
     case 'ACCORDION':
@@ -32,7 +32,7 @@ export default function sectionRender({ section }) {
     case 'RESOURCES':
       return <ResourcesSection content={section} />;
     case 'STEERINGGROUP':
-      return <SteeringGroup />;
+      return <SteeringGroup content={section} />;
 
     case 'WYSIWYG':
       return (
