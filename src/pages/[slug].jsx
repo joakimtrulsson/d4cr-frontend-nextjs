@@ -28,10 +28,9 @@ export default function SlugPage(props) {
         <>
             <Head>
                 <title>{props.pageData.title} | Designing for Children's Rights</title>
-                <meta name="description" content="Designing for Children's Rights is a global non-profit association, supporting the Designing for Children's Rights Guide that integrates the U.N. rights of the child in design, business and development of products and services around the world." />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-                <meta property="og:title" content={`${props.pageData.title} | Designing for Children's Rights`} />
-                <meta property="og:type" content="website" />
+                <meta name="description" content="Designing for Children's Rights is a global non-profit association, supporting the Designing for Children's Rights Guide that integrates the U.N. rights of the child in design, business, and development of products and services around the world." />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta property="og:title" content={`${props.pageData.title} | Designing for Children's Rights`} />                <meta property="og:type" content="website" />
                 <meta property="og:url" content={fullUrl} />
                 <meta property="og:image" content={d4crIcon}></meta>
                 <meta property="og:image:type" content="image/png" />
@@ -39,7 +38,7 @@ export default function SlugPage(props) {
                 <meta property="og:image:width" content="1200"></meta>
                 <meta property="og:image:height" content="630"></meta>
                 <meta property="og:locale" content="en" />
-             </Head>
+            </Head>
             <div className='site-container'>
                 <div className='site-container__top'>
                     <Navbar data={props.navMenuData} />
