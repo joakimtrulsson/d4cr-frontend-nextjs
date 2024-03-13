@@ -50,12 +50,7 @@ const VideoPlayer = ({ video }) => {
                 onMouseLeave={handleMouseLeave}>
                 <video className={`video-player`} width="320" height="260">
                     <source src={videoData.url} type="video/mp4" />
-                    <track
-                        src="/path/to/captions.vtt"
-                        kind="subtitles"
-                        srcLang="en"
-                        label="English"
-                    />
+                    
                     Your browser does not support the video tag.
                 </video>
                 <button className="custom-play-button">
@@ -68,12 +63,7 @@ const VideoPlayer = ({ video }) => {
                     <button onClick={exitVideo} className="btn-exit-video">X</button>
                     <video className={`video-player-popup`} width="640" height="520" controls>
                         <source src={videoData.url} type="video/mp4" />
-                        <track
-                            src="/path/to/captions.vtt"
-                            kind="subtitles"
-                            srcLang="en"
-                            label="English"
-                        />
+                       
                         Your browser does not support the video tag.
                     </video>
                 </div>

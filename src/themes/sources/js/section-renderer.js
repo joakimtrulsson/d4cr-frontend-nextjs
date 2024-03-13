@@ -11,7 +11,7 @@ import SteeringGroup from '../../../components/steering-group.jsx'
 import WYSIWYG from '../../components/wysiwyg.jsx'
 
 export default function sectionRenderer({ section }) {
-
+  
   switch (section.sectionType) {
     case 'ACCORDION':
       return <AccordionSection content={section} />;

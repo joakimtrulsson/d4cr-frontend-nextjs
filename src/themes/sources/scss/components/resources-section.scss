@@ -1,6 +1,6 @@
 .resources-outer-container {
     color: $-grey-700;
-
+    width: 100vw;
     .resources-inner-container {
         border: solid $-grey-100 1px;
         margin: 2%;
@@ -16,8 +16,8 @@
         button {
 
 
-            margin-left: -0.10rem;
-            margin-right: -0.10rem;
+            margin-left: -0.30rem;
+            margin-right: -0.30rem;
            
 
         }
