@@ -9,7 +9,7 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
 import Head from 'next/head';
-import d4crIcon from '../themes/sources/assets/graphics/d4cr_logo@2x.png'
+import d4crIcon from '../themes/sources/assets/graphics/d4cr-logo-meta.png'
 import '../themes/sources/scss/app.scss'
 
 export default function SlugPage(props) {
@@ -26,7 +26,11 @@ export default function SlugPage(props) {
                 <title>{props.pageData.title}</title>
                 <meta name="description" content="designing for children's rights" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-                <meta name="og:image" content={d4crIcon}></meta>
+                <meta property="og:title" content={props.pageData.title} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
+                <meta property="og:image" content="https://ryds.se/wp-content/uploads/2022/11/Generation_VI3.jpg"></meta>
+                <meta property="og:locale" content="en_GB" />
              </Head>
             <div className='site-container'>
                 <div className='site-container__top'>
