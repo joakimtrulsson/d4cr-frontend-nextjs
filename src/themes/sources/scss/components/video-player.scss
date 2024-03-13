@@ -13,8 +13,6 @@
             width: 100%;
             height: 100%;
             border-radius: 16px;
-
-
         }
 
         .custom-play-button {
@@ -22,8 +20,6 @@
             top: 50%;
             left: 50%;
             cursor: pointer;
-
-
 
             .play-btn {
                 position: absolute;
@@ -45,14 +41,12 @@
         &.hovered {
             animation: jelly-back 0.6s ease-in-out forwards;
 
-
             .custom-play-button {
                 animation: jelly-btn-back 0.6s ease-in-out forwards;
             }
 
             &:hover,
             &:focus {
-                /* Replaced transform with animation trigger */
                 animation: jelly-hover 0.6s ease-in-out forwards;
 
                 .custom-play-button {
@@ -75,16 +69,16 @@
 
         .modal {
             position: fixed;
-            top: 42%; // Position it halfway down the viewport
-            left: 50%; // Position it halfway across the viewport
-            transform: translate(-50%, -50%); // Adjusts the position based on its own dimensions to center
-            width: 60vw; // Set the width to 50% of the viewport width
-            height: 60vh; // Set the height to 50% of the viewport height
+            top: 42%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vh; 
             animation: slideInFromBottom 0.5s ease-out forwards;
 
             .video-player-popup {
-                width: 100%; // Make the video fill the container
-                height: auto; // Maintain aspect ratio
+                width: 100%;
+                height: auto; 
                 border-radius: 16px;
             }
 
@@ -95,34 +89,54 @@
                 height: 5vh;
                 width: 5vh;
                 border-radius: 50%;
-                background-color: #d4eae9; 
+                background-color: #d4eae9;
                 border: none;
                 transform: scale(1);
                 transition: transform 0.4s ease-in-out;
+                font-weight: 600;
+                font-family: Courier 'Courier New';
+
                 &:hover,
                 &:focus {
-                   
                     transform: scale(1.1);
                     transition: transform 0.4s ease-in-out;
-                    background-color: #b7f0ee; 
+                    background-color: #b7f0ee;
                 }
             }
-
             &.slide-out {
                 animation: slideOut 0.5s ease-out forwards;
             }
         }
-
         &.clicked-exit {
             animation: fadeOutBackground 0.5s ease-in forwards
         }
     }
-
-    .not-clicked {
+  .not-clicked {
         visibility: hidden;
     }
 
+}
 
+@media (max-width: 900px) {
+    .main {
+
+        .clicked {
+            .modal {
+                width: 95vw; 
+
+                .btn-exit-video {
+
+                    top: -1%;
+                    right: -1%;
+                    height: 2.7vh;
+                    width: 2.7vh;
+                    font-size: small;
+                    font-weight: 600;
+
+                }
+            }
+        }
+    }
 }
 
 @keyframes fadeInBackground {
@@ -147,14 +161,10 @@
 
 @keyframes slideInFromBottom {
     from {
-        /* Start from below the visible area of the screen */
         transform: translate(-50%, 100vh);
-        /* Adjust this value if needed */
-
     }
 
     to {
-        /* End at the center of the screen */
         transform: translate(-50%, -50%);
 
     }
@@ -163,17 +173,15 @@
 @keyframes slideOut {
     from {
         transform: translate(-50%, -50%);
-
     }
 
     to {
-        /* End at the center of the screen */
         transform: translate(-50%, 100vh);
     }
 }
 
 
-//scale-wooble like jelly
+//when hovering it is wobbling like jelly
 @keyframes jelly-hover {
     0% {
         transform: scale(1);

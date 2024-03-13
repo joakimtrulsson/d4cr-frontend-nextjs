@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PlayBtn from "../sources/assets/graphics/buttons/play.png"
 import PlayBg from "../sources/assets/graphics/buttons/play-bg.png"
-///mobile version
+
 const VideoPlayer = ({ video }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [leaveTimeout, setLeaveTimeout] = useState(null);
@@ -10,7 +10,6 @@ const VideoPlayer = ({ video }) => {
     const [slideOut, setSlideOut] = useState(false)
 
     useEffect(() => {
-        // Cleanup timeout on component unmount
         return () => {
             if (leaveTimeout) clearTimeout(leaveTimeout);
         };
@@ -24,7 +23,7 @@ const VideoPlayer = ({ video }) => {
         setIsHovered(true);
     };
     const handleMouseLeave = () => {
-        // Set a timeout that matches the duration of your longest animation
+
         const timeoutId = setTimeout(() => {
             setIsHovered(false);
         }, 600); // 600ms is the duration of the jelly-hover animation
@@ -38,9 +37,9 @@ const VideoPlayer = ({ video }) => {
         setSlideOut(true); // Start the slide-out animation
         // Wait for the animation to complete before hiding the modal
         setTimeout(() => {
-            setIsClicked(false); // Now properly passed as a callback
-            setSlideOut(false); // Reset slideOut state for next open
-        }, 500); // Make sure this duration matches your animation duration
+            setIsClicked(false);
+            setSlideOut(false);
+        }, 500);
     }
     const videoData = video
     console.log(videoData)
@@ -49,7 +48,6 @@ const VideoPlayer = ({ video }) => {
             <div onClick={clickedVideo} className={`video-container ${isHovered ? 'hovered' : ''}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}>
-                {/* {console.log(videoData)} */}
                 <video className={`video-player`} width="320" height="260">
                     <source src={videoData.url} type="video/mp4" />
                     <track
