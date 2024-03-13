@@ -1,7 +1,7 @@
-import WYSIWYG from './wysiwyg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import getColorCode from '../sources/js/color-code';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
 
 export default function LargeBulletList({ content }) {
 
@@ -22,7 +22,7 @@ export default function LargeBulletList({ content }) {
                             <FontAwesomeIcon icon={['fas', 'arrow-right']} color={getColorCode('orange-500')} />
                             : <FontAwesomeIcon icon={['fas', `${index + 1}`]} color={getColorCode('orange-500')} />
                         }
-                        <WYSIWYG content={bullet.bodyText} />
+                        <DocumentRenderer document={bullet.bodyText} />
                     </div>
                 )
             })}

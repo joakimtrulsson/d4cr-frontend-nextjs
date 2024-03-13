@@ -9,12 +9,16 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
 import Head from 'next/head';
-import d4crIcon from '../themes/sources/assets/graphics/d4cr-logo-meta.png'
+import d4crIcon from '../themes/sources/assets/graphics/d4cr-icon-OG.png'
+import { useRouter } from 'next/router';
 import '../themes/sources/scss/app.scss'
 
 export default function SlugPage(props) {
 
     console.log(props)
+
+    const router = useRouter();
+    const fullUrl = `${window.location.origin}${router.pathname}`;
 
     if (!props.navMenuData && !props.pageData) { // add footerMenuData here please!
         return notFound();
@@ -23,14 +27,18 @@ export default function SlugPage(props) {
     return (
         <>
             <Head>
-                <title>{props.pageData.title}</title>
-                <meta name="description" content="designing for children's rights" />
+                <title>{props.pageData.title} | Designing for Children's Rights</title>
+                <meta name="description" content="Designing for Children's Rights is a global non-profit association, supporting the Designing for Children's Rights Guide that integrates the U.N. rights of the child in design, business and development of products and services around the world." />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-                <meta property="og:title" content={props.pageData.title} />
+                <meta property="og:title" content={`${props.pageData.title} | Designing for Children's Rights`} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="https://ryds.se/wp-content/uploads/2022/11/Generation_VI3.jpg"></meta>
-                <meta property="og:locale" content="en_GB" />
+                <meta property="og:url" content={fullUrl} />
+                <meta property="og:image" content={d4crIcon}></meta>
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:alt" content="D4CR"></meta>
+                <meta property="og:image:width" content="1200"></meta>
+                <meta property="og:image:height" content="630"></meta>
+                <meta property="og:locale" content="en" />
              </Head>
             <div className='site-container'>
                 <div className='site-container__top'>
