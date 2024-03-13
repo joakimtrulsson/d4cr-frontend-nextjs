@@ -27,11 +27,10 @@ export default function SlugPage(props) {
     return (
         <>
             <Head>
-                <title>{props.pageData.title} | Designing for Children's Rights</title>
-                <meta name="description" content="Designing for Children's Rights is a global non-profit association, supporting the Designing for Children's Rights Guide that integrates the U.N. rights of the child in design, business, and development of products and services around the world." />
+                <title>{props.pageData.title} | Designing for Children&apos;s Rights</title>
+                <meta name="description" content="Designing for Children&apos;s Rights is a global non-profit association, supporting the Designing for Children&apos;s Rights Guide that integrates the U.N. rights of the child in design, business, and development of products and services around the world." />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta property="og:title" content={`${props.pageData.title} | Designing for Children's Rights`} />                <meta property="og:type" content="website" />
-                <meta property="og:url" content={fullUrl} />
+                <meta property="og:title" content={`${props.pageData.title} | Designing for Children&apos;s Rights`} />                <meta property="og:url" content={fullUrl} />
                 <meta property="og:image" content={d4crIcon}></meta>
                 <meta property="og:image:type" content="image/png" />
                 <meta property="og:image:alt" content="D4CR"></meta>
