@@ -8,17 +8,19 @@ import Link from 'next/link'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
-import Head from 'next/head';
-import d4crIcon from '../themes/sources/assets/graphics/d4cr-icon-OG.png'
-import { useRouter } from 'next/router';
 import '../themes/sources/scss/app.scss'
+import MetaHeader from '../components/meta-header';
 
 export default function SlugPage(props) {
 
     console.log(props)
-
-    const router = useRouter();
-    const fullUrl = `${window.location.origin}${router.pathname}`;
+    var fullUrl 
+    
+    try {
+        fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${props.resolvedUrl}`;
+    } catch (error) {
+        console.error("Canonical & meta property og:url links is null")
+    }
 
     if (!props.navMenuData && !props.pageData) { // add footerMenuData here please!
         return notFound();
@@ -26,18 +28,8 @@ export default function SlugPage(props) {
 
     return (
         <>
-            <Head>
-                <title>{props.pageData.title} | Designing for Children&apos;s Rights</title>
-                <meta name="description" content="Designing for Children&apos;s Rights is a global non-profit association, supporting the Designing for Children&apos;s Rights Guide that integrates the U.N. rights of the child in design, business, and development of products and services around the world." />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta property="og:title" content={`${props.pageData.title} | Designing for Children&apos;s Rights`} />                <meta property="og:url" content={fullUrl} />
-                <meta property="og:image" content={d4crIcon}></meta>
-                <meta property="og:image:type" content="image/png" />
-                <meta property="og:image:alt" content="D4CR"></meta>
-                <meta property="og:image:width" content="1200"></meta>
-                <meta property="og:image:height" content="630"></meta>
-                <meta property="og:locale" content="en" />
-            </Head>
+            <MetaHeader title={props.pageData.title ? props.pageData.title : null} resolvedUrl={props.resolvedUrl} language="en" />
+
             <div className='site-container'>
                 <div className='site-container__top'>
                     <Navbar data={props.navMenuData} />
@@ -52,9 +44,7 @@ export default function SlugPage(props) {
                                 {props.pageData.heroPreamble && <DocumentRenderer document={props.pageData.heroPreamble.document} />}
 
                                 {props.pageData.ctaOneUrl && props.pageData.ctaTwoUrlAnchorText &&
-
                                     <nav className='flex flex-row'>
-
                                         {props.pageData.ctaOneAnchorText && props.pageData.ctaOneUrl &&
                                             <Link href={props.pageData.ctaOneUrl} passHref className='margin-lr--xxxs'>
                                                 <PrimaryButton title={props.pageData.ctaOneAnchorText} />
@@ -66,10 +56,7 @@ export default function SlugPage(props) {
                                                 <SecondaryButton title={props.pageData.ctaTwoUrlAnchorText} />
                                             </Link>
                                         }
-
                                     </nav>
-
-
                                 }
                             </div>
                         )}
@@ -101,7 +88,7 @@ export async function getServerSideProps({ resolvedUrl }) {
         const navMenuData = await fetchMainMenuData();
         const footerMenuData = await fetchFooterMenuData();
 
-        return { props: { navMenuData, footerMenuData, pageData } };
+        return { props: { navMenuData, footerMenuData, pageData, resolvedUrl } };
 
     } catch (error) {
         console.error("([slug].jsx) Error fetching data:", error);
