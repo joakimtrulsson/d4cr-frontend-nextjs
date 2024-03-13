@@ -7,9 +7,10 @@ import MediaTextSection from '../../components/text-media-component.jsx'
 import NewsTeaserSection from '../../components/news-teaser.jsx'
 import PrinciplesSection from '../../components/principles.jsx'
 import ResourcesSection from '../../components/resource-section.jsx'
+import SteeringGroup from '../../../components/steering-group.jsx'
 import WYSIWYG from '../../components/wysiwyg.jsx'
 
-export default function sectionRender({ section }) {
+export default function sectionRenderer({ section }) {
 
   switch (section.sectionType) {
     case 'ACCORDION':
@@ -30,10 +31,12 @@ export default function sectionRender({ section }) {
       return <PrinciplesSection content={section} />;
     case 'RESOURCES':
       return <ResourcesSection content={section} />;
+    case 'STEERINGGROUP':
+      return <SteeringGroup content={section} />;
 
     case 'WYSIWYG':
       return (
-        <div className='margin-lr--xxxl max-width-60 margin-tb--l'>
+        <div className='margin-lr--xxxl max-width-60 margin-tb--l' >
           <WYSIWYG content={section.preamble} />
         </div>
       );

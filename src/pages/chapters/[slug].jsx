@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import getLanguageName from '../../themes/sources/js/language-code.js'
-import SectionRender from '../../themes/sources/js/section-render.js';
+import SectionRender from '../../themes/sources/js/section-renderer.js';
 import AnimationRight from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
@@ -11,7 +11,7 @@ import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '..
 import '../../themes/sources/scss/app.scss'
 
 
-export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
+export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters }) {
 
   // Get current chapter
   const currentLanguage = {
@@ -39,7 +39,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
       <div className='site-container__top'>
         <NavBar data={navMenuData} />
 
-        <main className='site-content flex flex-column flex-align-center'>
+        <main className='site-content flex flex-column flex-align-center flex-justify-center'>
 
           {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
             <div className='language-tabs margin-tb--s'>
@@ -67,7 +67,7 @@ export default function SlugPage({ navMenuData, footerMenuData, chapters }) {
           </div>
 
           {chapters.heroImage.url && ( // show hero image if exists
-            <div className='hero margin-t--s borderradius--xxxs'>
+            <div className='hero-image-medium margin-t--s borderradius--xxxs'>
               <Image className='center-image' src={chapters.heroImage.url} alt={chapters.heroImage.alt} fill={true} />
             </div>
           )}

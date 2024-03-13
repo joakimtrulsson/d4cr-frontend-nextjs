@@ -29,7 +29,7 @@ const Hero = ({ prop }) => {
                     <div className="ball-3"></div>
                     <div className="ball-2"></div>
                     
-                    <VideoPlayer video={propData.heroVideo} />
+                    {propData.heroVideo && <VideoPlayer video={propData.heroVideo} />  /* la till denna funktion så det går att deploya webbsidan */ } 
                 </div>
             </div>
         </main>

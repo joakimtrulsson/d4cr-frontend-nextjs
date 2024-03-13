@@ -73,6 +73,19 @@ query Page($where: PageWhereUniqueInput!) {
             }
 `;
 
+export const GET_NEWS_ITEM_BY_SLUG_QUERY = gql`
+query News($where: NewsWhereUniqueInput!) {
+    news(where: $where) {
+      title
+      slug
+      newsCategory {
+        categoryTitle
+      }
+      image
+      sections
+      status
+    }
+  }`;
 
 export const FRONT_PAGE_QUERY = gql`
   query Frontpage {
