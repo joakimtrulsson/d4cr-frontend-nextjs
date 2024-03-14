@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '../components/navbar'
-import Footer from '../components/footer'
 import { fetchMainMenuData, fetchFooterMenuData, fetchGetPageBySlugData } from '../graphql'
 import SectionRender from '../themes/sources/js/section-renderer'
 import { notFound } from 'next/navigation'
@@ -8,7 +6,7 @@ import Link from 'next/link'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
-import MetaHeader from '../components/meta-header';
+import RootLayout from '../app/layout'
 import '../themes/sources/scss/app.scss'
 
 export default function SlugPage(props) {
@@ -20,12 +18,8 @@ export default function SlugPage(props) {
     }
 
     return (
-        <>
-            <MetaHeader title={props.pageData.title ? props.pageData.title : null} resolvedUrl={props.resolvedUrl} language="en" />
+        <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={props.pageData.title} resolvedUrl={props.resolvedUrl} language="en">
 
-            <div className='site-container'>
-                <div className='site-container__top'>
-                    <Navbar data={props.navMenuData} />
                     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
                         {props.pageData.title && <h1 className='heading-background'>{props.pageData.title}</h1>}
@@ -61,11 +55,7 @@ export default function SlugPage(props) {
                         ))}
 
                     </main>
-                </div>
-
-                <Footer data={props.navMenuData} /> { /* please change to footerMenuData */}
-            </div>
-        </>
+        </RootLayout>
     );
 }
 
@@ -73,11 +63,6 @@ export async function getServerSideProps({ resolvedUrl }) {
     try {
 
         const pageData = await fetchGetPageBySlugData(resolvedUrl);
-
-        if (!pageData) {
-            return null;
-        }
-
         const navMenuData = await fetchMainMenuData();
         const footerMenuData = await fetchFooterMenuData();
 

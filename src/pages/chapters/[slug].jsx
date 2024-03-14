@@ -4,14 +4,11 @@ import getLanguageName from '../../themes/sources/js/language-code.js'
 import SectionRender from '../../themes/sources/js/section-renderer.js';
 import AnimationRight from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif'
+import RootLayout from '../../app/layout.jsx'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import NavBar from '../../components/navbar.jsx'
-import Footer from '../../components/footer.jsx'
 import { fetchChapterSlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
-import '../../themes/sources/scss/app.scss'
 
-
-export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters }) {
+export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters, resolvedUrl }) {
 
   // Get current chapter
   const currentLanguage = {
@@ -35,10 +32,7 @@ export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters 
   chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage)); // 
 
   return (
-    <div className='site-container'>
-      <div className='site-container__top'>
-        <NavBar data={navMenuData} />
-
+    <RootLayout navMenuData={navMenuData} footerMenuData={null} tabTitle={chapters.title} resolvedUrl={resolvedUrl} language={currentLanguage.chapterLanguage}>
         <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
           {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
@@ -86,10 +80,7 @@ export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters 
             </section>
           ))}
         </main>
-      </div>
-
-        <Footer data={navMenuData} /> { /* please change to footerMenuData later when backend is working */}
-    </div>
+    </RootLayout>
   )
 }
 
@@ -97,15 +88,10 @@ export async function getServerSideProps({ resolvedUrl }) {
   try {
 
     const chapters = await fetchChapterSlugData(resolvedUrl);
-
-    if (!chapters) {
-      return null;
-    }
-
     const navMenuData = await fetchMainMenuData();
     const footerMenuData = await fetchFooterMenuData();
 
-    return { props: { navMenuData, footerMenuData, chapters } };
+    return { props: { navMenuData, footerMenuData, chapters, resolvedUrl } };
 
 
   } catch (error) {
