@@ -15,7 +15,7 @@ export default function MetaHeader({ tabTitle, resolvedUrl, language }) {
 
     return (
         <Head>
-            {tabTitle ? <title>{tabTitle} | {metadata.title}</title> :
+            {tabTitle ? <title>{tabTitle}</title> :
                 <title>{metadata.title}</title>}
 
             <link rel="canonical" href={fullUrl} />
@@ -36,7 +36,7 @@ export default function MetaHeader({ tabTitle, resolvedUrl, language }) {
             
             <meta name="description" content={metadata.description} />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <meta property="og:title" content={`${tabTitle} | ${metadata.title}`} />
+            <meta property="og:title" content={tabTitle} />
             <meta property="og:site_name" content={metadata.title}></meta>
             {fullUrl && <meta property="og:url" content={fullUrl} />}
 
