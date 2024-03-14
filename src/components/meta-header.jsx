@@ -2,28 +2,20 @@ import Head from 'next/head';
 import Icon from '../themes/sources/assets/graphics/d4cr-icon-OG.png'
 import { metadata } from '../data/metadata';
 
-export default function MetaHeader({ title, resolvedUrl, language }) {
-
-    let fullUrl
-
     /**
-     * Component for managing metadata, including the webpage title, URL, and language,
-     * commonly used by search engines and browsers.
-     */
+    #### Component for managing metadata, including the webpage title, URL, and language, commonly used by search engines and browsers.
+    */
+export default function MetaHeader({ tabTitle, resolvedUrl, language }) {
 
-    try { /* Attempting to retrieve the full URL for metadata */
-        if (process.env.NEXT_PUBLIC_BASE_URL && resolvedUrl) {
-            fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${resolvedUrl}`
-        } else {
-            throw new Error("NEXT_PUBLIC_BASE_URL or resolvedUrl is not defined")
-        }
-    } catch (error) {
-        console.error("(meta-header.jsx) fullUrl variable couldn't be created:", error.message)
-    }
+    // Generate full URL for meta property
+    const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${resolvedUrl}`
+
+    // Ensure tabTitle doesn't show undefined or null
+    tabTitle = (tabTitle === undefined || !tabTitle) ? metadata.title : `${tabTitle} | ${metadata.title}`
 
     return (
         <Head>
-            {title ? <title>{title} | {metadata.title}</title> :
+            {tabTitle ? <title>{tabTitle} | {metadata.title}</title> :
                 <title>{metadata.title}</title>}
 
             <link rel="canonical" href={fullUrl} />
@@ -44,7 +36,7 @@ export default function MetaHeader({ title, resolvedUrl, language }) {
             
             <meta name="description" content={metadata.description} />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <meta property="og:title" content={`${title} | ${metadata.title}`} />
+            <meta property="og:title" content={`${tabTitle} | ${metadata.title}`} />
             <meta property="og:site_name" content={metadata.title}></meta>
             {fullUrl && <meta property="og:url" content={fullUrl} />}
 

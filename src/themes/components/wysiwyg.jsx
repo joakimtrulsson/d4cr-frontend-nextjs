@@ -1,5 +1,7 @@
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 
+/* Please solve this issue with Spotify/YouTube embed. */
+
 const renderers = {
 
     block: {
