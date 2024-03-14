@@ -104,3 +104,24 @@ export const FRONT_PAGE_QUERY = gql`
     }
 }
 `;
+
+export const CASE_ITEM_BY_SLUG_QUERY = gql`
+query Case($where: CaseWhereUniqueInput!) {
+    case(where: $where  ) {
+      id
+      slug
+      status
+      title
+      preamble {
+        document
+      }
+      sections
+      caseImage
+      quote
+      caseLink
+      principles
+      resources
+      createdAt
+    }
+  }
+`

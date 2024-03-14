@@ -14,8 +14,8 @@ export default function Resources(content) {
     <main >
       <div className="resources-outer-container flex flex-column flex-align-center">
 
-        <h1 className="text-align-center  margin-b--zero">{resources.title}</h1>
-        <h4 className="text-align-center margin-t--zero margin-b--s">{resourcePreamble}</h4>
+        <h2 className="text-align-center  margin-b--zero">{resources.title}</h2>
+        <p className="text-align-center margin-t--zero margin-b--s large-text">{resourcePreamble}</p>
 
         <div className="resources-inner-container flex flex-row flex-wrap flex-justify-start flex-align-between ">
 

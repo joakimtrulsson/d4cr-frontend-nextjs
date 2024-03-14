@@ -6,7 +6,8 @@ import {
     STEERING_GROUP_MEMBERS_QUERY,
     GET_PAGE_BY_SLUG_QUERY,
     GET_NEWS_ITEM_BY_SLUG_QUERY,
-    FRONT_PAGE_QUERY
+    FRONT_PAGE_QUERY,
+    CASE_ITEM_BY_SLUG_QUERY
 } from './data/queries';
 
 export async function fetchMainMenuData() {
@@ -117,4 +118,21 @@ export async function fetchFrontPageData() {
         console.error("(graphql.jsx) Error fetching data:", error);
         throw error;
     }
+}
+
+
+export async function fetchCaseItemBySlug(resolvedUrl){
+    try {
+        const { data } = await client.query({
+            query: CASE_ITEM_BY_SLUG_QUERY,
+            variables: { where: { slug: resolvedUrl } }
+        })
+
+        return data?.case || null
+
+    } catch (error) {
+        console.error("(graphql.jsx) Error fetching data:", error);
+        throw error;
+    }
+    
 }
