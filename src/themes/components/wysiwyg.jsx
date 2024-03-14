@@ -31,5 +31,7 @@ const renderers = {
 
 export default function WYSIWYG({ content }) {
 
+    console.log('DocumentRenderer', content)
+
     return <DocumentRenderer document={content} renderers={renderers} />;
 }

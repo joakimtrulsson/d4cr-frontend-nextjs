@@ -7,8 +7,6 @@ import '../../themes/sources/scss/app.scss'
 
 export default function NewsSlugPage(props) {
 
-    console.log("NewsSlugPage", props.newsData)
-
     return (
         <div className='site-container'>
             <div className='site-container__top'>

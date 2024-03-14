@@ -5,7 +5,6 @@ import SecondaryButton from "./buttons/secondary-button.jsx";
 export default function Principles({ content: chapterContent }) {
 
   const chapterContentProp = chapterContent ? chapterContent : null;
-  console.log('Prop', chapterContentProp)
   const [showAllCards, setShowAllCards] = useState(false);
 
   const handleToggleCardsVisibility = () => {
