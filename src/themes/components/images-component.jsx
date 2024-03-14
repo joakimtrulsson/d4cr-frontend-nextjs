@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 export default function ImagesComponent({ content }) {
-
+   
     var containerClass;
 
     if (content.images.length === 3) {
