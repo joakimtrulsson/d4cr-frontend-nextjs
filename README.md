@@ -21,6 +21,12 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 
+## Important information
+
+ - Please change the value of NEXT_PUBLIC_BASE_URL in the .env.local file to the customer's actual URL
+
+ 
+
 ## Known Issues
 
 - **Data setup for Resources:** [query PrincipleNumbers should get all resource data, including image so that principle[slug] can fetch all, also decide how to organixe the groups in resources groups]

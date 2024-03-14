@@ -111,7 +111,7 @@ export async function fetchFrontPageData() {
             query: FRONT_PAGE_QUERY,
         });
 
-        return data || null
+        return data?.frontPage || null
 
     } catch (error) {
         console.error("(graphql.jsx) Error fetching data:", error);

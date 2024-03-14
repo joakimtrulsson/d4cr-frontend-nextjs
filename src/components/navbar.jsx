@@ -26,12 +26,14 @@ export default function NavBar({ data }) {
         <header className="navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-white">
 
             <div className="navbar-icon margin-l--m">
-                <Image
-                    src={Icon}
-                    width={150}
-                    height={42}
-                    alt="D4CR"
-                />
+                <Link className='pointer' href="/">
+                    <Image
+                        src={Icon}
+                        width={150}
+                        height={42}
+                        alt="D4CR"
+                    />
+                </Link>
             </div>
 
             <nav className='flex flex-row flex-align-center'> {/* Design guide-button */}

@@ -39,7 +39,7 @@ export default function ChapterSlugPage({ navMenuData, footerMenuData, chapters 
       <div className='site-container__top'>
         <NavBar data={navMenuData} />
 
-        <main className='site-content flex flex-column flex-align-center flex-justify-center'>
+        <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
           {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
             <div className='language-tabs margin-tb--s'>

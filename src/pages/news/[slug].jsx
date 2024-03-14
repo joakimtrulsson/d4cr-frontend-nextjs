@@ -13,7 +13,7 @@ export default function NewsSlugPage(props) {
         <div className='site-container'>
             <div className='site-container__top'>
                 <NavBar data={props.navMenuData} />
-                <main className='site-content flex flex-column flex-align-center'>
+                <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
                     {props.newsData.image.url && (
 

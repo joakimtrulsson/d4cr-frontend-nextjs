@@ -8,19 +8,12 @@ import Link from 'next/link'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
-import '../themes/sources/scss/app.scss'
 import MetaHeader from '../components/meta-header';
+import '../themes/sources/scss/app.scss'
 
 export default function SlugPage(props) {
 
-    console.log(props)
-    var fullUrl 
-    
-    try {
-        fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${props.resolvedUrl}`;
-    } catch (error) {
-        console.error("Canonical & meta property og:url links is null")
-    }
+    console.log("([slug].jsx) :", props) // remove this later! 
 
     if (!props.navMenuData && !props.pageData) { // add footerMenuData here please!
         return notFound();
@@ -33,7 +26,7 @@ export default function SlugPage(props) {
             <div className='site-container'>
                 <div className='site-container__top'>
                     <Navbar data={props.navMenuData} />
-                    <main className='site-content flex flex-column flex-align-center flex-justify-center'>
+                    <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
                         {props.pageData.title && <h1 className='heading-background'>{props.pageData.title}</h1>}
 

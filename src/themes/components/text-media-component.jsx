@@ -36,8 +36,8 @@ export default function TextMediaComponent({ content }) {
 
                 <div className='text-content flex flex-column flex-nowrap width--s'> { /* text content */}
 
-                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>{content.subHeading}</h2>
-                    <h3 className='heading-2 margin--zero color-orange-800'>{content.title}</h3>
+                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>{content.title}</h2>
+                    <h3 className='heading-2 margin--zero color-orange-800'>{content.subHeading}</h3>
 
                     <DocumentRenderer document={content.preamble} />
 
@@ -63,7 +63,7 @@ export default function TextMediaComponent({ content }) {
                 </div>
 
                 <div className='media-content flex flex-justify-center flex-align-center borderradius--xs'> { /* media content */}
-                    {content.image.url && <Image className='center-image' src={content.image.url} alt={content.image.altText} fill={true} />}
+                    {(content.image && content.image.url) && <Image className='center-image' src={content.image.url} alt={content.image.altText} fill={true} />}
                 </div>
             </div>
 

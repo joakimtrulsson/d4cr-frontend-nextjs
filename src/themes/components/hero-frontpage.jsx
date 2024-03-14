@@ -4,9 +4,8 @@ import SecondaryButton from "./buttons/secondary-button"
 import Link from 'next/link'
 
 const Hero = ({ prop }) => {
+    
     const propData = prop
-
-    console.log('hero', propData)
     
     return (
         <main>
