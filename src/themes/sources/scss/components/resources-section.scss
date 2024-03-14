@@ -1,6 +1,7 @@
 .resources-outer-container {
     color: $-grey-700;
     width: 100vw;
+    max-width: 100%;
     .resources-inner-container {
         border: solid $-grey-100 1px;
         margin: 2%;
