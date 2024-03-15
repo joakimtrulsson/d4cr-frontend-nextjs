@@ -7,7 +7,6 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
 import RootLayout from '../app/layout'
-import '../themes/sources/scss/app.scss'
 
 export default function SlugPage(props) {
 
@@ -18,7 +17,7 @@ export default function SlugPage(props) {
     }
 
     return (
-        <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={props.pageData.title} resolvedUrl={props.resolvedUrl} language="en">
+        <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={props.pageData.title} resolvedUrl={props.resolvedUrl} language="en_GB">
 
                     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 

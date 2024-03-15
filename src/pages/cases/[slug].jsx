@@ -47,7 +47,7 @@ export async function getServerSideProps({ resolvedUrl }) {
 
     } catch (error) {
 
-        console.error("(chapters/[slug].jsx) Error fetching data:", error)
+        console.error("(cases/[slug].jsx) Error fetching data:", error)
         return null;
     }
 }

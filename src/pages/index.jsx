@@ -8,7 +8,7 @@ import '../themes/sources/scss/app.scss'
 export default function FrontPage(props) {
 
     return (
-        <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={null} resolvedUrl={props.resolvedUrl} language="en">
+        <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={null} resolvedUrl={props.resolvedUrl} language="en_GB">
                     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
                         { props.pageData ? (<HeroComponent prop={props.pageData} />) : null }

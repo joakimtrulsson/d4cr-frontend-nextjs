@@ -4,6 +4,7 @@ import '../themes/sources/scss/app.scss'
  
 export default function App({ Component, pageProps, navMenuData }) {
 
+
   return (
     <Layout>
       <Component {...pageProps} />
