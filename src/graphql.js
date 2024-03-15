@@ -7,7 +7,8 @@ import {
     GET_PAGE_BY_SLUG_QUERY,
     GET_NEWS_ITEM_BY_SLUG_QUERY,
     FRONT_PAGE_QUERY,
-    CASE_ITEM_BY_SLUG_QUERY
+    CASE_ITEM_BY_SLUG_QUERY,
+    CASES_ALL_DESC_QUERY
 } from './data/queries';
 
 export async function fetchMainMenuData() {
@@ -135,4 +136,21 @@ export async function fetchCaseItemBySlug(resolvedUrl){
         throw error;
     }
     
+}
+
+export async function fetchGetAllCases() {
+    try {
+
+        const { data } = await client.query({
+            query: CASES_ALL_DESC_QUERY,
+        });
+
+        return data?.cases || null
+
+    } catch (error) {
+        console.error("(graphql.jsx) Error fetching data:", error);
+        throw error;
+    }
+    
+   
 }
