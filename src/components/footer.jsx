@@ -4,16 +4,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react';
 import Banner from '../components/banner'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { faFacebook, faXTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import getColorCode from '../themes/sources/js/color-code';
+import { TwitterSvg, LinkedinSvg, FacebookSvg, InstagramSvg, ArrowRightSvg } from '../components/svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Footer({ data }) {
 
     const [hoveredItem, setHoveredItem] = React.useState({ index: null, key: null });
-
-    const bannerContent = { // important - add this from backend! 
+    const socialplatformIcons = { width: "28", height: "30", color: getColorCode('turquoise-600') }
+    const rightArrowIcon = { width: "16", height: "14", color: getColorCode('') }
+    const bannerContent = { // important - remove this and add data from keystone! 
         "id": "afc1f312-c1c4-4bf3-8103-e15923c58d44",
         "cta": {
             "url": "/chapters/los-angeles",
@@ -59,17 +60,25 @@ export default function Footer({ data }) {
                                 <div className='flex flex-column margin-t--xl margin-b--m'>
                                     <p className='color-orange-400 semibold margin--zero margin-b--xxs'>Join us</p>
                                     <nav className='footer__social-links flex flex-justify-center flex-align-center'>
-                                        <Link href="https://twitter.com/D4C_Guide" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
-                                            <FontAwesomeIcon icon={faXTwitter} color="#6C9B98" size="2x" />
+                                        <Link href="https://twitter.com/D4C_Guide" passHref
+                                            className="flex flex-justify-center flex-align-center no-decoration borderradius--half 
+                                            margin--xxs padding--xs bg-turquoise-50">
+                                            <TwitterSvg width={socialplatformIcons.width} height={socialplatformIcons.height} color={socialplatformIcons.color} />
                                         </Link>
-                                        <Link href="https://www.facebook.com/designingforchildren" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
-                                            <FontAwesomeIcon icon={faFacebook} color="#6C9B98" size="2x" />
+                                        <Link href="https://www.facebook.com/designingforchildren" passHref
+                                            className="flex flex-justify-center flex-align-center no-decoration borderradius--half 
+                                            margin--xxs padding--xs bg-turquoise-50">
+                                            <FacebookSvg width={socialplatformIcons.width} height={socialplatformIcons.height} color={socialplatformIcons.color} />
                                         </Link>
-                                        <Link href="https://www.instagram.com/d4c_guide/" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
-                                            <FontAwesomeIcon icon={faInstagram} color="#6C9B98" size="2x" />
+                                        <Link href="https://www.instagram.com/d4c_guide/" passHref
+                                            className="flex flex-justify-center flex-align-center no-decoration borderradius--half 
+                                            margin--xxs padding--xs bg-turquoise-50">
+                                            <InstagramSvg width={socialplatformIcons.width} height={socialplatformIcons.height} color={socialplatformIcons.color} />
                                         </Link>
-                                        <Link href="https://www.linkedin.com/company/designing-for-childrens-rights/" passHref className="no-decoration borderradius--half margin--xxs padding--xs bg-turquoise-50">
-                                            <FontAwesomeIcon icon={faLinkedin} color="#6C9B98" size="2x" />
+                                        <Link href="https://www.linkedin.com/company/designing-for-childrens-rights/" passHref
+                                            className="flex flex-justify-center flex-align-center no-decoration borderradius--half 
+                                            margin--xxs padding--xs bg-turquoise-50">
+                                            <LinkedinSvg width={socialplatformIcons.width} height={socialplatformIcons.height} color={socialplatformIcons.color} />
                                         </Link>
                                     </nav>
                                 </div>
@@ -91,10 +100,7 @@ export default function Footer({ data }) {
 
                                                             <span className={`${hoveredItem === key ? 'margin-r--xs' : 'margin-r--xxs'}`}>{link.anchorText}</span>
                                                             <div className='icon-wrapper'>
-                                                                <FontAwesomeIcon className={`fa-icon `}
-                                                                    icon={faArrowRight}
-                                                                    size="lg"
-                                                                />
+                                                                <ArrowRightSvg width={rightArrowIcon.width} height={rightArrowIcon.height} color={rightArrowIcon.color} />
                                                             </div>
                                                         </button>
                                                     </li>
@@ -113,7 +119,7 @@ export default function Footer({ data }) {
                                 <button className='button color-orange-50 flex flex-row'>
                                     <span className='margin-r--xxs'>Cookies</span>
                                     <div className='icon-wrapper'>
-                                        <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                                        <ArrowRightSvg width={rightArrowIcon.width} height={rightArrowIcon.height} color={rightArrowIcon.color} />
                                     </div>
                                 </button>
                             </Link>
@@ -121,7 +127,7 @@ export default function Footer({ data }) {
                                 <button className='button color-orange-50 flex flex-row'>
                                     <span className='margin-r--xxs'>Integrity policy</span>
                                     <div className='icon-wrapper'>
-                                        <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                                        <ArrowRightSvg width={rightArrowIcon.width} height={rightArrowIcon.height} color={rightArrowIcon.color} />
                                     </div>
                                 </button>
                             </Link>

@@ -35,7 +35,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 - **Data setup required for Our Community page:** [Including steering group data direct from Page]
 
-- **Font Awesome Icons in People Card:** [Ensure that we aren't receiving "fas" icons from the backend; only "fab" (free brand icons) should be functional]
+- **Font Awesome Icons in People Card:** [Ensure that we aren't receiving "fas" icons from the backend; only "fab" (free brand icons) should be functional] 
 
 - **Link in People Card:** [Ensure that the URLs are consistently prefixed with 'https://' for correctness, as it should be the standard format for all URLs]
  

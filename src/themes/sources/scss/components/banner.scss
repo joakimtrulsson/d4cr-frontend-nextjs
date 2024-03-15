@@ -20,6 +20,8 @@
     }
 
     svg {
+        width: 3rem; // It's better to directly import svg-icons.jsx rather than importing from Awesome Fonts...
+        height: 3rem;
         transition: scale 200ms ease-in-out;
     }
 
