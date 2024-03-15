@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
-import { fetchMainMenuData, fetchFooterMenuData, fetchGetPageBySlugData } from '../graphql'
+import { fetchMainMenuData, fetchFooterMenuData, fetchGetPageBySlugData, fetchGetAllCases } from '../graphql'
 import SectionRender from '../themes/sources/js/section-renderer'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -71,17 +71,17 @@ export default function SlugPage(props) {
 
 export async function getServerSideProps({ resolvedUrl }) {
     try {
-
+        const allCasesData = await fetchGetAllCases();
         const pageData = await fetchGetPageBySlugData(resolvedUrl);
 
         if (!pageData) {
             return null;
         }
-
+        
         const navMenuData = await fetchMainMenuData();
         const footerMenuData = await fetchFooterMenuData();
 
-        return { props: { navMenuData, footerMenuData, pageData, resolvedUrl } };
+        return { props: { navMenuData, footerMenuData, pageData, resolvedUrl, allCasesData } };
 
     } catch (error) {
         console.error("([slug].jsx) Error fetching data:", error);

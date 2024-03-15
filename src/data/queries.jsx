@@ -125,3 +125,25 @@ query Case($where: CaseWhereUniqueInput!) {
     }
   }
 `
+
+export const CASES_ALL_DESC_QUERY = gql`
+query Cases {
+  cases(orderBy: { createdAt: desc }) {
+    id
+    slug
+    status
+    title
+    preamble {
+      document
+    }
+    sections
+
+    caseImage
+    quote
+    caseLink
+    principles
+    resources
+    createdAt
+  }
+}
+`
