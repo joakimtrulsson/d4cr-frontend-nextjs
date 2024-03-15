@@ -40,5 +40,3 @@ export const ArrowRightSvg = ({ width, height, color }) => {
 
     )
 }
-
-

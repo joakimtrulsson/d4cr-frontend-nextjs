@@ -3,7 +3,6 @@ import { fetchMainMenuData, fetchFooterMenuData, fetchFrontPageData } from '../g
 import HeroComponent from '../themes/components/hero-frontpage'
 import SectionRenderer from '../themes/sources/js/section-renderer';
 import RootLayout from '../app/layout';
-import '../themes/sources/scss/app.scss'
 
 export default function FrontPage(props) {
 

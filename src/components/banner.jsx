@@ -6,7 +6,7 @@ import { DocumentRenderer } from '@keystone-6/document-renderer'
 
 export default function Banner({ content }) {
 
-    const { library, config } = require('@fortawesome/fontawesome-svg-core');
+    const { library } = require('@fortawesome/fontawesome-svg-core');
     library.add(fas)
 
     return (
@@ -15,9 +15,7 @@ export default function Banner({ content }) {
 
             <div className='icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
              borderradius--half padding--s margin-l--xxs'>
-
                 <FontAwesomeIcon icon={['fas', content.iconName]} color={getColorCode('orange-500')} size="lg" />
-                    
             </div>
 
             <div className="margin-lr--s">

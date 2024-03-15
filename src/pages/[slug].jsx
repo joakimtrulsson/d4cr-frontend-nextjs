@@ -12,7 +12,7 @@ export default function SlugPage(props) {
 
     console.log("([slug].jsx) :", props) // remove this later! 
 
-    if (!props.navMenuData && !props.pageData) { // add footerMenuData here please!
+    if (!props.navMenuData || !props.pageData) { // add footerMenuData here please!
         return notFound();
     }
 
