@@ -1,0 +1,59 @@
+.case-card-container {
+    background-color: $-grey-25;
+    width: 95vw;
+    margin-top: 0.7rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+    height: 100px;
+
+    .img-div {
+        width: 100px;
+        height: 100px;
+        background-color: $-grey-50;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text-div {
+        
+        width: 70%;
+        
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+
+        h3{
+            font-size: medium;
+            font-weight: 650;
+            margin-top: 0;
+            margin-bottom: 4px;
+        }
+
+        .quote {
+            font-size: small;
+            max-height: 100px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-top: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+    }
+
+    .link-div {
+        width: auto;
+        margin: 3%;
+    }
+}
+
+//media query
