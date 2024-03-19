@@ -10,7 +10,7 @@ import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
 import RootLayout from '../app/layout'
 import CaseCard from '../themes/components/case-card'
-//jobba vidare med allcases
+
 export default function SlugPage(props) {
 
     console.log("([slug].jsx) :", props) // remove this later! 
@@ -61,10 +61,12 @@ export default function SlugPage(props) {
 
 
             </main>) : (<main className='site-content flex flex-column flex-align-center flex-justify-start'><h1>Cases</h1>{props.allCasesData && props.allCasesData.map((caseData) => {
-
+//fixa link vid external, ta bort localhost innan www. fiza title background
                 console.log("caseItems", caseData.caseLink, caseData.id, caseData.quote, caseData.title, caseData.status, caseData);
+                const check = caseData.caseLink || null;
+                console.log('the check ', check)
                 return (
-                    <CaseCard link={caseData.caseLink} quote={caseData.quote} title={caseData.title} className="flex flex-column" key={caseData.id} />
+                    <CaseCard check={check} link={caseData.caseLink ? caseData.caseLink : caseData.slug} quote={caseData.quote} title={caseData.title} className="flex flex-column" key={caseData.id} />
                 );
             })
             }</main>)}
