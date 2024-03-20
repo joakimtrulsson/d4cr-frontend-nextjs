@@ -5,8 +5,8 @@ import img from "../sources/assets/graphics/placeholder/dummy-image2.jpeg"
 import Link from 'next/link'
 
 const ResourceCard = (props) => {
-    const { title, url, resourceType } = props.prop;
-    console.log('props', props)
+     const { title, url, resourceType } = props.prop;
+    console.log('props', props, props.prop.title)
     // Initialize `type` variable
     let type = null;
 

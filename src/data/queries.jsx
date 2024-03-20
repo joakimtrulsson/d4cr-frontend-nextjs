@@ -147,3 +147,22 @@ query Cases {
   }
 }
 `
+
+export const RESOURCES = gql`
+query Resources{
+  resources {
+    id
+    title
+    url
+    image 
+    category {
+      title
+    }
+    resourceType{
+      type
+      icon
+    }
+    createdAt
+  }
+}
+`

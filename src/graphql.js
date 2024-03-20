@@ -8,7 +8,8 @@ import {
     GET_NEWS_ITEM_BY_SLUG_QUERY,
     FRONT_PAGE_QUERY,
     CASE_ITEM_BY_SLUG_QUERY,
-    CASES_ALL_DESC_QUERY
+    CASES_ALL_DESC_QUERY,
+    RESOURCES
 } from './data/queries';
 
 export async function fetchMainMenuData() {
@@ -150,7 +151,17 @@ export async function fetchGetAllCases() {
     } catch (error) {
         console.error("(graphql.jsx) Error fetching data:", error);
         throw error;
+    }  
+}
+
+export async function fetchResourcesCategories() {
+    try {
+        const {data} = await client.query({
+            query: RESOURCES,
+        });
+        return data?.resources || null
+    } catch (error) {
+        console.error("(graphql.jsx) Error fetching data:", error);
+        throw error;
     }
-    
-   
 }
