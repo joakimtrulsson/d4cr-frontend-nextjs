@@ -60,8 +60,8 @@ export default function SlugPage(props) {
 
 
 
-            </main>) : (<main className='site-content flex flex-column flex-align-center flex-justify-start'><h1>Cases</h1>{props.allCasesData && props.allCasesData.map((caseData) => {
-//fixa link vid external, ta bort localhost innan www. fiza title background
+            </main>) : (<main className='site-content flex flex-column flex-align-center flex-justify-start'><h1 className="heading-background">Cases</h1>{props.allCasesData && props.allCasesData.map((caseData) => {
+                //fixa link vid external om BE inte ändras
                 console.log("caseItems", caseData.caseLink, caseData.id, caseData.quote, caseData.title, caseData.status, caseData);
                 const check = caseData.caseLink || null;
                 console.log('the check ', check)

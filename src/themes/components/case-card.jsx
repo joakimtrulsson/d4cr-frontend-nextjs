@@ -2,9 +2,22 @@ import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 import Link from "next/link"
 const CaseCard = ({ link, quote, title, img, check }) => {
-    const linkText = check ? ('Go to their website') : ('Read our case'); 
+    const linkText = check ? ('Go to their website') : ('Read our case');
     //oklart hur man ska göra här, bäst om backenden bestömmer och ger linkexternalpage eller linkinternal? varför behövs linkinternal?
     // Eller så kollar frontenden url:n på nåt sätt. Nu blir det Go to our website oavsett om det är länkat till vår sida eller external
+    //om vi antar att vi tar bort linkinternal från BE så anpassar jag också adressen till external page. Annars får vi ifxa till detta också
+    // Function to prepend "http://" to the link if it is missing and "check" is true
+    const ensureHttpForExternalLink = (url, shouldCheck) => {
+        if (shouldCheck && !url.startsWith('http://') && !url.startsWith('https://')) {
+            // Assuming all external links are not secure (http). If you need to support https,
+            // you might need additional logic to determine when to use http vs https.
+            return `http://${url}`;
+        }
+        return url;
+    };
+
+    // Only modify the link if "check" is true
+    const finalLink = ensureHttpForExternalLink(link, check);
     return (
         <div className="case-card-container">
             <div className="img-div"><Image src={img} width={60} height={60} /></div>
@@ -17,7 +30,7 @@ const CaseCard = ({ link, quote, title, img, check }) => {
                     <p className="quote">{quote}</p>
                 </div>
             </div>
-            <Link href={link} className="link-div"><p className="text-link small-text">{linkText}</p><Image className="img-link" height={13} width={13} src={ArrowRight} /></Link>
+            <Link href={finalLink} className="link-div"><p className="text-link small-text">{linkText}</p><Image className="img-link" height={13} width={13} src={ArrowRight} /></Link>
 
         </div>)
 }
