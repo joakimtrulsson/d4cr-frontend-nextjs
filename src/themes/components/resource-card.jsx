@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const ResourceCard = (props) => {
      const { title, url, resourceType } = props.prop;
-    console.log('props', props, props.prop.title)
+   // console.log('props', props, props.prop.title)
     // Initialize `type` variable
     let type = null;
 
@@ -15,7 +15,7 @@ const ResourceCard = (props) => {
         type = resourceType.type; // Assign the type if it exists
     }
 
-    console.log(props.prop); // Now `type` will either be null or `resourceType.type`
+    //console.log(props.prop); // Now `type` will either be null or `resourceType.type`
     const formattedUrl = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
 
     return (

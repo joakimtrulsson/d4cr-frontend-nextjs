@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import { fetchMainMenuData, fetchFooterMenuData, fetchGetPageBySlugData, fetchGetAllCases, fetchResourcesCategories } from '../graphql'
@@ -15,7 +15,7 @@ import ResourceCard from '../themes/components/resource-card'
 
 export default function SlugPage(props) {
     const { resolvedUrl } = props;
-    console.log("([slug].jsx) :", props.allCasesData, props.resolvedUrl) // remove this later! 
+    //console.log("([slug].jsx) :", props.allCasesData, props.resolvedUrl) // remove this later! 
 
     let title;
     switch (resolvedUrl) {
@@ -45,7 +45,7 @@ export default function SlugPage(props) {
     };
 
     return (
-        
+
         <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={title} resolvedUrl={props.resolvedUrl} language="en_GB">
             {renderMainContent()}
         </RootLayout >
@@ -106,18 +106,56 @@ function renderAllCasesContent(allCasesData, title) {
 }
 
 function renderResourcesContent(resourcesCat) {
+    const numberOfCards = resourcesCat.length
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = resourcesCat.slice(startIndex, endIndex);
+    const goToNextPage = () => setCurrentPage((prev) => prev + 1);
+    const goToPreviousPage = () => setCurrentPage((prev) => prev - 1);
+    const isFirstPage = currentPage === 1;
+    const isLastPage = endIndex >= resourcesCat.length;
+    const goToPage = (page) => setCurrentPage(page);
+    const totalPageCount = Math.ceil(numberOfCards / itemsPerPage);
+
     return (
-        <main className="resources-outer-container flex flex-column flex-align-center">
+        <main className="slug-resources-outer-container flex flex-column flex-align-center">
             <h1 className="heading-background">Supporting resources</h1>
-            < div className="resources-inner-container flex flex-row flex-wrap flex-justify-start flex-align-between ">
-                {resourcesCat.map(resource => (
+            < div className="slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between ">
+                {currentItems.map((resource, index) => (
                     // console.log(resource.title, resource.url, resource.resourceType.type)
                     //sortera och max 20 per sida
-                    <ResourceCard prop={resource} />
-
+                    <>
+                        <ResourceCard key={index} prop={resource} />
+                    </>
                 ))
 
                 }
+
+            </div>
+            <div className="pagination-buttons flex flex-row flex-wrap flex-justify-start flex-align-between ">
+                <button className="arrow-button" onClick={goToPreviousPage} disabled={isFirstPage}>
+                    <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill={`${isFirstPage ? '#DEDEDE' : '#FC7C37'}`}>
+                        <g transform="translate(320, 0) scale(-1, 1)">
+                            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </g>  </svg>
+                </button>
+                {Array.from({ length: totalPageCount }, (_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => goToPage(index + 1)}
+                        className={`page-button ${currentPage === index + 1 ? "active" : ""} heading-4`}
+                    >
+                        {index + 1}
+                    
+                    </button>
+                ))}
+                <button className={`arrow-button`} onClick={goToNextPage} disabled={isLastPage}>
+                    <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill={`${isLastPage ? '#DEDEDE' : '#FC7C37'}`}>
+                        <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                    </svg>
+                </button>
             </div>
         </main>)
 }
