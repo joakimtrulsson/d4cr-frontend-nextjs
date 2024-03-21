@@ -104,29 +104,70 @@ function renderAllCasesContent(allCasesData, title) {
         })
         }</main>)
 }
-
+///fixa dropdown för types och se till så att man får förstasidan om man byter från en med flea sidor till en med mindre(lägg till 20+ och nån med 40+)
 function renderResourcesContent(resourcesCat) {
-    const numberOfCards = resourcesCat.length
+    const [showType, setShowType] = useState('All areas')
+    console.log(showType, resourcesCat[0].resourceType.type)
+    const groupedByType = resourcesCat.reduce((acc, resource) => {
+        // Assuming resourceType.type is always defined
+        const type = resource.resourceType.type;
+
+        // If acc does not have a key for this type, initialize it with an empty array
+        if (!acc[type]) {
+            acc[type] = [];
+        }
+
+        // Add the current resource to the group corresponding to its type
+        acc[type].push(resource);
+
+        return acc; // Always return the accumulator for the next iteration
+    }, {}); // Initialize the accumulator as an empty object
+
+    console.log('by type', groupedByType);
+    const groupsBtn = Object.entries(groupedByType).map(([type, resources]) => {
+        console.log('get back', type, resources)
+        return (
+            <button key={type} onClick={() => setShowType(type)}>
+                {type}
+                {/* {resources.map(resource => <div key={resource.id}>{resource.title}</div>)} */}
+            </button>
+        )
+    })
+    let arrayToShow
+    const renderResourcesForSelectedType = () => {
+        if (showType !== 'All areas') {
+            arrayToShow = groupedByType[showType]
+        }
+        else arrayToShow = resourcesCat
+    }
+    renderResourcesForSelectedType()
+    console.log('ghroups', groupsBtn[1])
+
+
+    const numberOfCards = arrayToShow.length
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 20;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentItems = resourcesCat.slice(startIndex, endIndex);
+    const currentItems = arrayToShow.slice(startIndex, endIndex);
     const goToNextPage = () => setCurrentPage((prev) => prev + 1);
     const goToPreviousPage = () => setCurrentPage((prev) => prev - 1);
     const isFirstPage = currentPage === 1;
-    const isLastPage = endIndex >= resourcesCat.length;
+    const isLastPage = endIndex >= arrayToShow.length;
     const goToPage = (page) => setCurrentPage(page);
     const totalPageCount = Math.ceil(numberOfCards / itemsPerPage);
 
     return (
         <main className="slug-resources-outer-container flex flex-column flex-align-center">
             <h1 className="heading-background">Supporting resources</h1>
+            <div><button onClick={() => setShowType('All areas')}>All areas</button>{groupsBtn}</div>
+            {/* <button>{showType}</button> */}
             < div className="slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 {currentItems.map((resource, index) => (
-                    // console.log(resource.title, resource.url, resource.resourceType.type)
-                    //sortera och max 20 per sida
+
+
                     <>
+                        {console.log(resource.resourceType.type)}
                         <ResourceCard key={index} prop={resource} />
                     </>
                 ))
@@ -134,7 +175,7 @@ function renderResourcesContent(resourcesCat) {
                 }
 
             </div>
-            <div className="pagination-buttons flex flex-row flex-wrap flex-justify-start flex-align-between ">
+            {arrayToShow.length > 20 ? <div className="pagination-buttons flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 <button className="arrow-button" onClick={goToPreviousPage} disabled={isFirstPage}>
                     <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill={`${isFirstPage ? '#DEDEDE' : '#FC7C37'}`}>
                         <g transform="translate(320, 0) scale(-1, 1)">
@@ -148,7 +189,7 @@ function renderResourcesContent(resourcesCat) {
                         className={`page-button ${currentPage === index + 1 ? "active" : ""} heading-4`}
                     >
                         {index + 1}
-                    
+
                     </button>
                 ))}
                 <button className={`arrow-button`} onClick={goToNextPage} disabled={isLastPage}>
@@ -156,7 +197,7 @@ function renderResourcesContent(resourcesCat) {
                         <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                     </svg>
                 </button>
-            </div>
+            </div> : null}
         </main>)
 }
 
