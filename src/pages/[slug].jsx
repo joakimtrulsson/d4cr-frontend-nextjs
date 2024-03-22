@@ -107,7 +107,8 @@ function renderAllCasesContent(allCasesData, title) {
 ///fixa dropdown för types och se till så att man får förstasidan om man byter från en med flea sidor till en med mindre(lägg till 20+ och nån med 40+)
 function renderResourcesContent(resourcesCat) {
     const [showType, setShowType] = useState('All areas')
-    console.log(showType, resourcesCat[0].resourceType.type)
+    const [currentPage, setCurrentPage] = useState(1);
+    //console.log(showType, resourcesCat[0].resourceType.type)
     const groupedByType = resourcesCat.reduce((acc, resource) => {
         // Assuming resourceType.type is always defined
         const type = resource.resourceType.type;
@@ -123,13 +124,15 @@ function renderResourcesContent(resourcesCat) {
         return acc; // Always return the accumulator for the next iteration
     }, {}); // Initialize the accumulator as an empty object
 
-    console.log('by type', groupedByType);
+   // console.log('by type', groupedByType);
     const groupsBtn = Object.entries(groupedByType).map(([type, resources]) => {
-        console.log('get back', type, resources)
+       // console.log('get back', type, resources)
         return (
-            <button key={type} onClick={() => setShowType(type)}>
+            <button key={type} onClick={() => {
+                setShowType(type); 
+                setCurrentPage(1);}}>
                 {type}
-                {/* {resources.map(resource => <div key={resource.id}>{resource.title}</div>)} */}
+                
             </button>
         )
     })
@@ -141,11 +144,12 @@ function renderResourcesContent(resourcesCat) {
         else arrayToShow = resourcesCat
     }
     renderResourcesForSelectedType()
-    console.log('ghroups', groupsBtn[1])
+    //console.log('ghroups', groupsBtn[1])
 
 
     const numberOfCards = arrayToShow.length
-    const [currentPage, setCurrentPage] = useState(1);
+    console.log(arrayToShow)
+    
     const itemsPerPage = 20;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -160,7 +164,7 @@ function renderResourcesContent(resourcesCat) {
     return (
         <main className="slug-resources-outer-container flex flex-column flex-align-center">
             <h1 className="heading-background">Supporting resources</h1>
-            <div><button onClick={() => setShowType('All areas')}>All areas</button>{groupsBtn}</div>
+            <div><button onClick={() => {setShowType('All areas');  setCurrentPage(1);}}>All areas</button>{groupsBtn}</div>
             {/* <button>{showType}</button> */}
             < div className="slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 {currentItems.map((resource, index) => (
