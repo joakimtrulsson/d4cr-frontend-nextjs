@@ -11,7 +11,7 @@ import SecondaryButton from '../themes/components/buttons/secondary-button';
 import RootLayout from '../app/layout'
 import CaseCard from '../themes/components/case-card'
 import ResourceCard from '../themes/components/resource-card'
-
+import DropdownMenu from '../themes/components/drop-down';
 
 export default function SlugPage(props) {
     const { resolvedUrl } = props;
@@ -104,52 +104,43 @@ function renderAllCasesContent(allCasesData, title) {
         })
         }</main>)
 }
-///fixa dropdown för types och se till så att man får förstasidan om man byter från en med flea sidor till en med mindre(lägg till 20+ och nån med 40+)
+
 function renderResourcesContent(resourcesCat) {
     const [showType, setShowType] = useState('All areas')
     const [currentPage, setCurrentPage] = useState(1);
-    //console.log(showType, resourcesCat[0].resourceType.type)
+
+    //dela upp hela resources array till sina typer
     const groupedByType = resourcesCat.reduce((acc, resource) => {
-        // Assuming resourceType.type is always defined
         const type = resource.resourceType.type;
 
-        // If acc does not have a key for this type, initialize it with an empty array
         if (!acc[type]) {
             acc[type] = [];
         }
 
-        // Add the current resource to the group corresponding to its type
         acc[type].push(resource);
-
-        return acc; // Always return the accumulator for the next iteration
+        return acc;
     }, {}); // Initialize the accumulator as an empty object
 
-   // console.log('by type', groupedByType);
     const groupsBtn = Object.entries(groupedByType).map(([type, resources]) => {
-       // console.log('get back', type, resources)
-        return (
-            <button key={type} onClick={() => {
-                setShowType(type); 
-                setCurrentPage(1);}}>
+        console.log('type', type, showType)
+        return (<>
+            {type !== showType ? (<h4 key={type} onClick={() => {
+                setShowType(type);
+                setCurrentPage(1);
+            }}>
                 {type}
-                
-            </button>
+
+            </h4>) : (null)}</>
         )
     })
-    let arrayToShow
-    const renderResourcesForSelectedType = () => {
-        if (showType !== 'All areas') {
-            arrayToShow = groupedByType[showType]
-        }
-        else arrayToShow = resourcesCat
+
+    let arrayToShow = resourcesCat
+    if (showType !== 'All areas') {
+        arrayToShow = groupedByType[showType]
     }
-    renderResourcesForSelectedType()
-    //console.log('ghroups', groupsBtn[1])
 
-
+    //Bestäm hur många som visas på sidorna
     const numberOfCards = arrayToShow.length
-    console.log(arrayToShow)
-    
     const itemsPerPage = 20;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -164,8 +155,8 @@ function renderResourcesContent(resourcesCat) {
     return (
         <main className="slug-resources-outer-container flex flex-column flex-align-center">
             <h1 className="heading-background">Supporting resources</h1>
-            <div><button onClick={() => {setShowType('All areas');  setCurrentPage(1);}}>All areas</button>{groupsBtn}</div>
-            {/* <button>{showType}</button> */}
+
+            <DropdownMenu showType={showType} currentPage={currentPage} groupsBtn={groupsBtn} setShowType={setShowType} setCurrentPage={setCurrentPage} />
             < div className="slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 {currentItems.map((resource, index) => (
 
