@@ -40,7 +40,7 @@ export default function SlugPage(props) {
         } else if (props.resourcesCat) {
             return renderResourcesContent(props.resourcesCat);
         }
-        // Default or fallback content
+
         return <div>Default Content</div>;
     };
 
@@ -119,10 +119,10 @@ function renderResourcesContent(resourcesCat) {
 
         acc[type].push(resource);
         return acc;
-    }, {}); // Initialize the accumulator as an empty object
+    }, {});
 
     const groupsBtn = Object.entries(groupedByType).map(([type, resources]) => {
-        console.log('type', type, showType)
+
         return (<>
             {type !== showType ? (<p key={type} onClick={() => {
                 setShowType(type);
@@ -139,7 +139,7 @@ function renderResourcesContent(resourcesCat) {
         arrayToShow = groupedByType[showType]
     }
 
-    //Bestäm hur många som visas på sidorna
+    //Bestäm hur många som visas på sidorna mm
     const numberOfCards = arrayToShow.length
     const itemsPerPage = 20;
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -159,14 +159,11 @@ function renderResourcesContent(resourcesCat) {
             <DropdownMenu className="margin-tb--m" showType={showType} currentPage={currentPage} groupsBtn={groupsBtn} setShowType={setShowType} setCurrentPage={setCurrentPage} />
             < div className="slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 {currentItems.map((resource, index) => (
-                    <>
-                        {console.log(resource.resourceType.type)}
-                        <ResourceCard key={index} prop={resource} />
-                    </>
+
+                    <ResourceCard key={index} prop={resource} />
+
                 ))
-
                 }
-
             </div>
             {arrayToShow.length > 20 ? <div className="pagination-buttons flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 <button className="arrow-button" onClick={goToPreviousPage} disabled={isFirstPage}>
@@ -223,35 +220,3 @@ export async function getServerSideProps({ resolvedUrl }) {
         return { props: { error: error.message } };
     }
 }
-
-
-// export async function getServerSideProps({ resolvedUrl }) {
-//     try {
-//         if (resolvedUrl === '/resources') {
-//             const resourcesCat = await fetchResourcesCategories();
-//             const navMenuData = await fetchMainMenuData();
-//             const footerMenuData = await fetchFooterMenuData();
-
-//             return { props: { navMenuData, footerMenuData, resolvedUrl, resourcesCat } };
-//         }
-//         else if (resolvedUrl === '/cases') {
-//             const allCasesData = await fetchGetAllCases();
-//             const navMenuData = await fetchMainMenuData();
-//             const footerMenuData = await fetchFooterMenuData();
-
-//             return { props: { navMenuData, footerMenuData, resolvedUrl, allCasesData } };
-//         }
-
-//         else {
-//             const pageData = await fetchGetPageBySlugData(resolvedUrl);
-//             const navMenuData = await fetchMainMenuData();
-//             const footerMenuData = await fetchFooterMenuData();
-//             return { props: { navMenuData, footerMenuData, pageData, resolvedUrl } };
-
-//         }
-
-//     } catch (error) {
-//         console.error("([slug].jsx) Error fetching data:", error);
-//         return null;
-//     }
-// }
