@@ -124,13 +124,13 @@ function renderResourcesContent(resourcesCat) {
     const groupsBtn = Object.entries(groupedByType).map(([type, resources]) => {
         console.log('type', type, showType)
         return (<>
-            {type !== showType ? (<h4 key={type} onClick={() => {
+            {type !== showType ? (<p key={type} onClick={() => {
                 setShowType(type);
                 setCurrentPage(1);
             }}>
                 {type}
 
-            </h4>) : (null)}</>
+            </p>) : (null)}</>
         )
     })
 
@@ -156,11 +156,9 @@ function renderResourcesContent(resourcesCat) {
         <main className="slug-resources-outer-container flex flex-column flex-align-center">
             <h1 className="heading-background">Supporting resources</h1>
 
-            <DropdownMenu showType={showType} currentPage={currentPage} groupsBtn={groupsBtn} setShowType={setShowType} setCurrentPage={setCurrentPage} />
+            <DropdownMenu className="margin-tb--m" showType={showType} currentPage={currentPage} groupsBtn={groupsBtn} setShowType={setShowType} setCurrentPage={setCurrentPage} />
             < div className="slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between ">
                 {currentItems.map((resource, index) => (
-
-
                     <>
                         {console.log(resource.resourceType.type)}
                         <ResourceCard key={index} prop={resource} />
@@ -196,34 +194,64 @@ function renderResourcesContent(resourcesCat) {
         </main>)
 }
 
+async function fetchMenuData() {
+    const navMenuData = await fetchMainMenuData();
+    const footerMenuData = await fetchFooterMenuData();
+    return { navMenuData, footerMenuData };
+}
 
 export async function getServerSideProps({ resolvedUrl }) {
     try {
-        if (resolvedUrl === '/resources') {
-            const resourcesCat = await fetchResourcesCategories();
-            const navMenuData = await fetchMainMenuData();
-            const footerMenuData = await fetchFooterMenuData();
+        const { navMenuData, footerMenuData } = await fetchMenuData();
 
-            return { props: { navMenuData, footerMenuData, resolvedUrl, resourcesCat } };
+        let specificData;
+        switch (resolvedUrl) {
+            case '/resources':
+                specificData = { resourcesCat: await fetchResourcesCategories() };
+                break;
+            case '/cases':
+                specificData = { allCasesData: await fetchGetAllCases() };
+                break;
+            default:
+                specificData = { pageData: await fetchGetPageBySlugData(resolvedUrl) };
         }
-        else if (resolvedUrl === '/cases') {
-            const allCasesData = await fetchGetAllCases();
-            const navMenuData = await fetchMainMenuData();
-            const footerMenuData = await fetchFooterMenuData();
 
-            return { props: { navMenuData, footerMenuData, resolvedUrl, allCasesData } };
-        }
-
-        else {
-            const pageData = await fetchGetPageBySlugData(resolvedUrl);
-            const navMenuData = await fetchMainMenuData();
-            const footerMenuData = await fetchFooterMenuData();
-            return { props: { navMenuData, footerMenuData, pageData, resolvedUrl } };
-
-        }
+        return { props: { navMenuData, footerMenuData, resolvedUrl, ...specificData } };
 
     } catch (error) {
         console.error("([slug].jsx) Error fetching data:", error);
-        return null;
+        return { props: { error: error.message } };
     }
 }
+
+
+// export async function getServerSideProps({ resolvedUrl }) {
+//     try {
+//         if (resolvedUrl === '/resources') {
+//             const resourcesCat = await fetchResourcesCategories();
+//             const navMenuData = await fetchMainMenuData();
+//             const footerMenuData = await fetchFooterMenuData();
+
+//             return { props: { navMenuData, footerMenuData, resolvedUrl, resourcesCat } };
+//         }
+//         else if (resolvedUrl === '/cases') {
+//             const allCasesData = await fetchGetAllCases();
+//             const navMenuData = await fetchMainMenuData();
+//             const footerMenuData = await fetchFooterMenuData();
+
+//             return { props: { navMenuData, footerMenuData, resolvedUrl, allCasesData } };
+//         }
+
+//         else {
+//             const pageData = await fetchGetPageBySlugData(resolvedUrl);
+//             const navMenuData = await fetchMainMenuData();
+//             const footerMenuData = await fetchFooterMenuData();
+//             return { props: { navMenuData, footerMenuData, pageData, resolvedUrl } };
+
+//         }
+
+//     } catch (error) {
+//         console.error("([slug].jsx) Error fetching data:", error);
+//         return null;
+//     }
+// }

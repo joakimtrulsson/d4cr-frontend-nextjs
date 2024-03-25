@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 export default function DropdownMenu(prop) {
-    const { showType, groupsBtn , setCurrentPage, setShowType } = prop
+    const { showType, groupsBtn, setCurrentPage, setShowType } = prop
     console.log(prop, prop.currentPage, groupsBtn)
 
     const [showDropdown, setShowDropdown] = useState(false);
 
     const toggleDropdown = () => setShowDropdown(!showDropdown);
 
-    
+
     useEffect(() => {
         const handleOutsideClick = (event) => {
-            if (!event.target.matches('.dropbtn')) {
+            if (!event.target.matches('.dropClick')) {
                 setShowDropdown(false);
             }
         };
@@ -22,12 +22,17 @@ export default function DropdownMenu(prop) {
     }, [showDropdown]);
 
     return (
-        <div className="dropdown">
-            <button onClick={toggleDropdown} className="dropbtn">{showType}</button>
+        <div className="dropdown margin-tb--m">
+            <button onClick={toggleDropdown} className="dropbtn dropClick">{showType}
+            <svg className="dropClick" width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#2D2D2D">
+                <path className="dropClick" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+            </svg>
+            
+            </button>
+
             {showDropdown && (
-                <div id="myDropdown" className="dropdown-content">
-                
-                    {showType !== 'All areas' ? <h4 onClick={() => { setShowType('All areas'); setCurrentPage(1); }}>All areas</h4>: null}
+                <div className="dropdown-content">
+                    {showType !== 'All areas' ? <p onClick={() => { setShowType('All areas'); setCurrentPage(1); }}>All areas</p> : null}
                     {groupsBtn}
                 </div>
             )}
