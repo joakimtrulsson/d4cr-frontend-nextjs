@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import RootLayout from '../../app/layout';
 import { AppContext } from '../_app';
 import FeedbackForm from '../../themes/components/feedbackForm';
-import ThankYouMessage from '../../themes/components/thankYouMessage'
+
 import { fetchMainMenuData, fetchFooterMenuData } from '../../graphql'
 export default function ContactUs(props) {
     const { submitted } = useContext(AppContext);

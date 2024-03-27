@@ -2,15 +2,31 @@
 import nodemailer from 'nodemailer';
 
 export default function handler(req, res) {
-  const body = req.body;
+  const { email, name, feedback } = req.body;
+  let errors = {};
+
+  if (!email) errors.email = "Email is required.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      errors.email = "Invalid email address.";
+
+  if (!name) errors.name = "Name is required.";
+
+  if (!feedback) errors.feedback = "Feedback is required.";
+
+  // If there are any errors, return them
+  if (Object.keys(errors).length > 0) {
+      return res.status(400).json({ errors });
+  }
 
   const mailData = {
-    from: `${body.email}`,
+    from: `${email}`,
     to: 'test@example.com',
-    subject: `New feedback from ${body.name}`,
-    text: `${body.feedback}`,
-    html: `<p>${body.feedback}</p>`,
+    subject: `New feedback from ${name}`,
+    text: `${feedback}`,
+    html: `<p>${feedback}</p>`,
   };
+
+  // SMTP transport setup and email sending logic...
 
   const transport = nodemailer.createTransport({
     host: 'sandbox.smtp.mailtrap.io',
