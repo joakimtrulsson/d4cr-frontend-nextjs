@@ -5,14 +5,13 @@ import FeedbackForm from '../../themes/components/feedbackForm';
 
 import { fetchMainMenuData, fetchFooterMenuData } from '../../graphql'
 export default function ContactUs(props) {
-    const { submitted } = useContext(AppContext);
+    
 
     return (
         <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={null} resolvedUrl={props.resolvedUrl} language="en_GB">
             <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-                <section className="">
-                    <FeedbackForm />
-                </section>
+
+                <FeedbackForm />
 
             </main>
         </RootLayout >

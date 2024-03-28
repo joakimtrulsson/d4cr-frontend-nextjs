@@ -1,0 +1,18 @@
+.contact-us-form-container {
+
+    .left-absolute {
+        position: absolute;
+        left: -15%;
+        width: auto;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .right-absolute {
+        position: absolute;
+        right: -5%;
+        width: auto;
+        height: 92%;
+        z-index: 1;
+    }
+}

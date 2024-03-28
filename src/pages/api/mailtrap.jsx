@@ -1,7 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import nodemailer from 'nodemailer';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+ 
   const { email, name, feedback } = req.body;
   let errors = {};
 
@@ -20,7 +21,7 @@ export default function handler(req, res) {
 
   const mailData = {
     from: `${email}`,
-    to: 'test@example.com',
+    to: 'test@example.com',  //ändra till riktiga email sen
     subject: `New feedback from ${name}`,
     text: `${feedback}`,
     html: `<p>${feedback}</p>`,
@@ -37,10 +38,14 @@ export default function handler(req, res) {
     },
   });
 
-  transport.sendMail(mailData, (error, info) => {
-    if (error) console.log(error);
-    console.log(`Message sent: ${info.messageId}`);
-  });
+  
+  try {
+    await transport.sendMail(mailData);
+    res.status(200).json({ message: "Email sent successfully." });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to send email." });
+  }
 
-  res.status(200).json({ body });
 }
