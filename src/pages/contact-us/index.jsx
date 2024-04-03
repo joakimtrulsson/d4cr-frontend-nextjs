@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import RootLayout from '../../app/layout';
 import { AppContext } from '../_app';
-import FeedbackForm from '../../themes/components/feedbackForm';
+import ContactForm from '../../themes/components/contact-us-form';
 
 import { fetchMainMenuData, fetchFooterMenuData } from '../../graphql'
 export default function ContactUs(props) {
@@ -11,7 +11,7 @@ export default function ContactUs(props) {
         <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={null} resolvedUrl={props.resolvedUrl} language="en_GB">
             <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
-                <FeedbackForm />
+                <ContactForm />
 
             </main>
         </RootLayout >

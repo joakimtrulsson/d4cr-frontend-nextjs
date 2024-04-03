@@ -95,7 +95,8 @@ function renderAllCasesContent(allCasesData, title) {
     return (
         <main className='site-content flex flex-column flex-align-center flex-justify-start'><h1 className="heading-background">{title}</h1>{allCasesData && allCasesData.map((caseData) => {
             //fixa link vid external om BE inte ändras
-            //console.log("caseItems", caseData.caseLink, caseData.id, caseData.quote, caseData.title, caseData.status, caseData);
+            console.log("caseItems", caseData.caseLink, caseData.id, caseData.quote, caseData.title, caseData.status, caseData);
+
             const check = caseData.caseLink || null;
 
             return (

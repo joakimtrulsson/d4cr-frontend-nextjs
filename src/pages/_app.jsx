@@ -2,27 +2,37 @@
 import { fetchMainMenuData } from '../graphql'
 import '../themes/sources/scss/app.scss'
 import { createContext, useState } from 'react';
- 
-export const AppContext = createContext();
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
 
 function MyApp({ Component, pageProps, navMenuData }) {
-  const [submitted, setSubmitted] = useState(false);
+
 
 
   return (
-    <AppContext.Provider value={{ submitted, setSubmitted }}>
+    <>
+      <GoogleReCaptchaProvider
+        reCaptchaKey={process.env.RECAPTCH_SITE_KEY}
+        scriptProps={{
+          async: false,
+          defer: false,
+          appendTo: "head",
+          nonce: undefined,
+        }}
+      >
         <Component {...pageProps} />
-    </AppContext.Provider>
+      </GoogleReCaptchaProvider>
+    </>
   );
 }
 
 export async function getStaticProps() {
   try {
-      const navMenuData = await fetchMainMenuData();
-      return { props: { navMenuData: navMenuData } };
+    const navMenuData = await fetchMainMenuData();
+    return { props: { navMenuData: navMenuData } };
   } catch (error) {
-      console.error("(_app.jsx) Error fetching data:", error);
-      return { notFound: true };
+    console.error("(_app.jsx) Error fetching data:", error);
+    return { notFound: true };
   }
 }
 

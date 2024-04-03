@@ -1,8 +1,8 @@
-export default function PrimaryButton({title}) {
+export default function PrimaryButton({title, type, disabled}) {
 
     return (
         <div>
-            <button className='primary-button uppercase' >{title}</button>
+            <button type={type} disabled={disabled} className='primary-button uppercase' >{title}</button>
         </div>
     )
 }

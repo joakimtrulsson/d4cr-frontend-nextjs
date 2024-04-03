@@ -19,7 +19,7 @@ export default function PrinciplesPage(props) {
     const principlesNumber = props.principleNumbers
     const principle = props.principle
 
-
+console.log('principle', principle, principlesNumber)
     //////////////Button-scroll/////////////////
     const [logoSrc, setLogoSrc] = useState(ButtonDown);
 

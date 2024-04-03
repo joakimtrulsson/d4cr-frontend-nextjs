@@ -1,3 +1,4 @@
+'use client';
 import TopWave from '../themes/components/waves/top-wave'
 import Icon from '../themes/sources/assets/graphics/icons/d4cr-icon.png'
 import Image from 'next/image'
