@@ -182,7 +182,7 @@ export default function ContactUsForm() {
 
 
                         : <p>Sending..</p>}
-                    <div className="recaptcha-div"><ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_SITEKEY} />
+                    <div className="recaptcha-div"><ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} />
                     </div>
                 </form>
                 {successMessage && <p role="alert" className="success-message">{successMessage}</p>}
