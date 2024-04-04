@@ -32,13 +32,13 @@ export default function SlugPage(props) {
         return notFound();
     }
     // Function to decide what main content to render
-    const renderMainContent = () => {
+    const RenderMainContent = () => {
         if (props.pageData) {
-            return renderPageDataContent(props.pageData);
+            return RenderPageDataContent(props.pageData);
         } else if (props.allCasesData) {
-            return renderAllCasesContent(props.allCasesData, title);
+            return RenderAllCasesContent(props.allCasesData, title);
         } else if (props.resourcesCat) {
-            return renderResourcesContent(props.resourcesCat);
+            return RenderResourcesContent(props.resourcesCat);
         }
 
         return <div>Default Content</div>;
@@ -47,12 +47,12 @@ export default function SlugPage(props) {
     return (
 
         <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={title} resolvedUrl={props.resolvedUrl} language="en_GB">
-            {renderMainContent()}
+            {RenderMainContent()}
         </RootLayout >
     );
 }
 
-function renderPageDataContent(pageData) {
+function RenderPageDataContent(pageData) {
     return (
         <main className='site-content flex flex-column flex-align-center flex-justify-start'>
 
@@ -91,7 +91,7 @@ function renderPageDataContent(pageData) {
         </main>)
 }
 
-function renderAllCasesContent(allCasesData, title) {
+function RenderAllCasesContent(allCasesData, title) {
     return (
         <main className='site-content flex flex-column flex-align-center flex-justify-start'><h1 className="heading-background">{title}</h1>{allCasesData && allCasesData.map((caseData) => {
             //fixa link vid external om BE inte ändras
@@ -106,7 +106,7 @@ function renderAllCasesContent(allCasesData, title) {
         }</main>)
 }
 
-function renderResourcesContent(resourcesCat) {
+function RenderResourcesContent(resourcesCat) {
     const [showType, setShowType] = useState('All areas')
     const [currentPage, setCurrentPage] = useState(1);
 

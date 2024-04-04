@@ -54,8 +54,8 @@ const VideoPlayer = ({ video }) => {
                     Your browser does not support the video tag.
                 </video>
                 <button className="custom-play-button">
-                    <Image className="play-btn" src={PlayBtn} width={80} height={80} />
-                    <Image className="play-bg" src={PlayBg} width={80} height={80} />
+                    <Image className="play-btn" src={PlayBtn} width={80} height={80} alt="the play button icon arrow"/>
+                    <Image className="play-bg" src={PlayBg} width={80} height={80} alt="the play button background"/>
                 </button>
             </div>
             <div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>

@@ -25,8 +25,8 @@ export default function CasesPage(props) {
                     </div>
                     <div className="flex flex-column flex-align-center">
                         {props.cases.sections && props.cases.sections.map((section, index) => (
-                            <div className="renderer" >
-                                <SectionRenderer key={index} section={section} />
+                            <div key={index} className="renderer" >
+                                <SectionRenderer section={section} />
                             </div>
                         ))
                         }

@@ -20,7 +20,7 @@ const CaseCard = ({ link, quote, title, img, check }) => {
     const finalLink = ensureHttpForExternalLink(link, check);
     return (
         <div className="case-card-container">
-            <div className="img-div"><Image src={img} width={60} height={60} /></div>
+            <div className="img-div"><Image src={img} width={60} height={60} alt="showing the logo for the case"/></div>
             <div className="text-div">
                 <h3>{title}</h3>
                 <div className="quote-div">
@@ -30,7 +30,7 @@ const CaseCard = ({ link, quote, title, img, check }) => {
                     <p className="quote">{quote}</p>
                 </div>
             </div>
-            <Link href={finalLink} className="link-div"><p className="text-link small-text">{linkText}</p><Image className="img-link" height={13} width={13} src={ArrowRight} /></Link>
+            <Link href={finalLink} className="link-div"><p className="text-link small-text">{linkText}</p><Image className="img-link" height={13} width={13} src={ArrowRight} alt="an arrow symbol for the link"/></Link>
 
         </div>)
 }
