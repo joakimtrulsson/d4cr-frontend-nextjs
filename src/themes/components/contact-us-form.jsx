@@ -5,9 +5,11 @@ import Image from 'next/image'
 import AnimationLeft from '../../themes/sources/assets/graphics/animation.gif'
 import AnimationRight from '../../themes/sources/assets/graphics/animation-2.gif'
 import PrimaryButton from "./buttons/primary-button"
+import ReCAPTCHA from 'react-google-recaptcha';
 //implementrecaptcha
 export default function ContactUsForm() {
-
+    const recaptcha = React.useRef(null);
+    const [reCAPTCHAError, setReCAPTCHAError] = useState(false)
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,6 +23,18 @@ export default function ContactUsForm() {
     const [data, setData] = useState(initialFormData);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    const verifyCaptcha = async (captchaValue) => {
+        const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL, {
+            method: 'POST',
+            body: JSON.stringify({ captchaValue }),
+            headers: {
+                'content-type': 'application/json',
+            },
+        });
+        const data = await res.json();
+
+        return data.success;
+    };
     function handleChange(e) {
 
         const { name, value } = e.target;
@@ -54,33 +68,46 @@ export default function ContactUsForm() {
             return;
         }
         console.log(data)
-        setIsSubmitting(true);
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/email`, {
-                method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            console.log('res', response)
-            if (!response.ok) {
-                const error = await response.json();
-                throw error;
-            }
-            const result = await response.json();
-            setSuccessMessage('Message sent. We’ll get back to you within a couple of days.');
-            setData(initialFormData);
-            setErrorMessage({});
-            console.log('result', result)
-        } catch (error) {
-            console.error("Submission error:", error);
-            if (error.errors) {
-                setErrorMessage(error.errors);
-            } else {
-                setSubmissionError("There was an issue submitting the form. Please try again later.");
+        const captchaValue = recaptcha.current?.getValue();
+        console.log('captcha', captchaValue)
+        if (!captchaValue) {
 
+            setReCAPTCHAError(true)
+            // setLoading(false);
+        } else {
+            const isCaptchaValid = await verifyCaptcha(captchaValue);
+
+            if (isCaptchaValid) {
+                setIsSubmitting(true);
+                setReCAPTCHAError(false)
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/email`, {
+                        method: 'POST',
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify(data),
+                    });
+                    console.log('res', response)
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw error;
+                    }
+                    const result = await response.json();
+                    setSuccessMessage('Message sent. We’ll get back to you within a couple of days.');
+                    setData(initialFormData);
+                    setErrorMessage({});
+                    console.log('result', result)
+                } catch (error) {
+                    console.error("Submission error:", error);
+                    if (error.errors) {
+                        setErrorMessage(error.errors);
+                    } else {
+                        setSubmissionError("There was an issue submitting the form. Please try again later.");
+
+                    }
+                } finally {
+                    setIsSubmitting(false);
+                }
             }
-        } finally {
-            setIsSubmitting(false);
         }
     }
     return (
@@ -152,10 +179,12 @@ export default function ContactUsForm() {
 
 
                         : <p>Sending..</p>}
-
+                    <ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_SITEKEY} />
                 </form>
                 {successMessage && <p role="alert" className="success-message">{successMessage}</p>}
                 {(submissionError && !successMessage) ? <p role="alert" className="submission-error">{submissionError}</p> : null}
+
+                {reCAPTCHAError && <p>Please verify that you are human</p>}
             </div >
             <Image src={AnimationRight} alt="Animated GIF" className="right-absolute"
             />
