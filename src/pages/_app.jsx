@@ -1,27 +1,12 @@
 
 import { fetchMainMenuData } from '../graphql'
 import '../themes/sources/scss/app.scss'
-import { createContext, useState } from 'react';
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
-
 
 function MyApp({ Component, pageProps, navMenuData }) {
 
-
-
   return (
     <>
-      <GoogleReCaptchaProvider
-        reCaptchaKey={process.env.RECAPTCH_SITE_KEY}
-        scriptProps={{
-          async: false,
-          defer: false,
-          appendTo: "head",
-          nonce: undefined,
-        }}
-      >
-        <Component {...pageProps} />
-      </GoogleReCaptchaProvider>
+      <Component {...pageProps} />
     </>
   );
 }

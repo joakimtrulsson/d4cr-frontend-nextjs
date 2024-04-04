@@ -41,12 +41,17 @@
             font-style: italic;
             font-size: x-small;
             background-color: $-turquoise-200;
-            margin-top: 20px;
+
             padding: 0 8px 0 8px;
             border-radius: 3px;
             color: $-turquoise-700;
             font-weight: 600;
             z-index: 4;
+        }
+
+        .verify-error {
+            margin: 0;
+            font-size: small;
         }
 
         .no-vis {
@@ -60,6 +65,14 @@
                 border: none;
                 background-color: white;
             }
+
+            .recaptcha-div {
+                display: flex;
+                flex-flow: row;
+                justify-content: center;
+                margin-top: 4%;
+                margin-bottom: 4%;
+            }
         }
 
         .title-text-div {
@@ -72,7 +85,7 @@
 
             .preamble {
                 color: $-grey-500;
-                
+
                 font-weight: 500;
 
                 .link {
