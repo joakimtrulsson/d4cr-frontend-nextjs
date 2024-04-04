@@ -19,7 +19,7 @@ export default function PrinciplesPage(props) {
     const principlesNumber = props.principleNumbers
     const principle = props.principle
 
-console.log('principle', principle, principlesNumber)
+//console.log('principle', principle, principlesNumber)
     //////////////Button-scroll/////////////////
     const [logoSrc, setLogoSrc] = useState(ButtonDown);
 
@@ -76,7 +76,7 @@ console.log('principle', principle, principlesNumber)
 
 
         } else {
-            //console.log('Resources not found', principle);
+            console.log('Resources not found', principle);
         }
 
         return (

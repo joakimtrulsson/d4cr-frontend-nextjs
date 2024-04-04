@@ -18,7 +18,7 @@ export default function Resources(content) {
         <p className="text-align-center margin-t--zero margin-b--s large-text">{resourcePreamble ? resourcePreamble : null}</p>
 
         <div className="resources-inner-container flex flex-row flex-wrap flex-justify-start flex-align-between ">
-      {console.log('lolol', resources)}
+      {/* {console.log('lolol', resources)} */}
           {/* kommer behöva ändra struktur här om strukturen ändras i backend, antingen om allt blir en grupp eller grouptitle tas bort*/}
           {resources.resources.map((resourceGroup) => (
             resourceGroup.resources.map((group) => (

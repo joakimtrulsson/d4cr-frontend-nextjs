@@ -8,7 +8,7 @@ import PrimaryButton from "./buttons/primary-button"
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function ContactUsForm() {
-    console.log('sitekey', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
+    
     const recaptcha = React.useRef(null);
     const [reCAPTCHAError, setReCAPTCHAError] = useState(false)
     const [successMessage, setSuccessMessage] = useState('');
@@ -80,7 +80,7 @@ export default function ContactUsForm() {
         } else {
 
             const isCaptchaValid = await verifyCaptcha(captchaValue);
-            console.log('sitekey', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
+            
             if (isCaptchaValid) {
                 setIsSubmitting(true);
                 setReCAPTCHAError(false)
@@ -183,7 +183,7 @@ export default function ContactUsForm() {
 
 
                         : <p>Sending..</p>}
-                    {console.log('sitekey', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)}
+                    
                     <div className="recaptcha-div"><ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} />
                     </div>
                 </form>

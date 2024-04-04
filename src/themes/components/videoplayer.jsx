@@ -42,7 +42,7 @@ const VideoPlayer = ({ video }) => {
         }, 500);
     }
     const videoData = video
-    console.log(videoData)
+    //console.log(videoData)
     return (
         <main className="main">
             <div onClick={clickedVideo} className={`video-container ${isHovered ? 'hovered' : ''}`}

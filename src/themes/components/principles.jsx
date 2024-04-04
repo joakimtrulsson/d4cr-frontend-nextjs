@@ -33,7 +33,7 @@ export default function Principles({ content: chapterContent }) {
               <div className="flex flex-row flex-wrap flex-justify-center flex-align-center">
                 {chapterContentProp.groups[0].principles.map((principle) => (
                   <div key={principle.id} className="card-wrapper" >
-                    {console.log('cardet', principle.image.url)}
+                    
                     <PrinciplesCard
                       title={
                         principle.principleNumber.number +
