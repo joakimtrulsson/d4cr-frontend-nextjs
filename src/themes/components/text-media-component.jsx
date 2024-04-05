@@ -6,9 +6,34 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { DocumentRenderer } from '@keystone-6/document-renderer'
 import getColorCode from '../sources/js/color-code.js'
-
+import { useState } from 'react'
+import ContactUsForm from './contact-us-form.jsx'
+//använda contactus form muterad eller göra ny modal
 export default function TextMediaComponent({ content }) {
+  
+    const [isClicked, setIsClicked] = useState(false)
+    const [slideOut, setSlideOut] = useState(false)
+    let shareIsTrue = false
+    console.log('content-url', content.cta2)
+    //se till så att även cta1 funkar att göra till popupen
+    if (content.cta2 && content.cta2.url) {
+        console.log(content.cta2.url)
+ 
+        shareIsTrue = true
+    }
+    function clickedVideo() {
 
+        setIsClicked(true)
+
+    }
+    function exitVideo() {
+        setSlideOut(true); // Start the slide-out animation
+        // Wait for the animation to complete before hiding the modal
+        setTimeout(() => {
+            setIsClicked(false);
+            setSlideOut(false);
+        }, 500);
+    }
     var bgColorClass, fillColorCode
 
     /* "bg" is for the body, and "fill" is for the svg in waves */
@@ -53,17 +78,29 @@ export default function TextMediaComponent({ content }) {
                             )}
 
                             {content.cta2 && content.cta2.url && content.cta2.anchorText && ( /* secondary button */
-                                <Link className='no-decoration' href={content.cta2.url}>
-                                    <SecondaryButton title={content.cta2.anchorText} />
-                                </Link>
+                                <>
+                                    {!shareIsTrue ?
+                                        <Link className='no-decoration' href={content.cta2.url}>
+                                            <SecondaryButton title={content.cta2.anchorText} />
+                                        </Link> : <SecondaryButton title={content.cta2.anchorText} onClick={clickedVideo} />
+                                    }
+
+                                </>
                             )}
                         </nav>
                     )}
-                    
+
                 </div>
 
                 <div className='media-content flex flex-justify-center flex-align-center borderradius--xs'> { /* media content */}
                     {(content.image && content.image.url) && <Image className='center-image' src={content.image.url} alt={content.image.altText} fill={true} />}
+                </div>
+
+                <div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
+                        <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
+                        <button onClick={exitVideo} className="btn-exit-video">X</button>
+                        <div className="box"><ContactUsForm/></div>
+                    </div>
                 </div>
             </div>
 

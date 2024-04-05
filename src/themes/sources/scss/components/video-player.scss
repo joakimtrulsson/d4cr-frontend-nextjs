@@ -69,16 +69,16 @@
 
         .modal {
             position: fixed;
-            top: 42%; 
+            top: 42%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 60vw;
-            height: 60vh; 
+            height: 60vh;
             animation: slideInFromBottom 0.5s ease-out forwards;
 
             .video-player-popup {
                 width: 100%;
-                height: auto; 
+                height: 100%;
                 border-radius: 16px;
             }
 
@@ -103,15 +103,18 @@
                     background-color: #b7f0ee;
                 }
             }
+
             &.slide-out {
                 animation: slideOut 0.5s ease-out forwards;
             }
         }
+
         &.clicked-exit {
             animation: fadeOutBackground 0.5s ease-in forwards
         }
     }
-  .not-clicked {
+
+    .not-clicked {
         visibility: hidden;
     }
 
@@ -122,7 +125,7 @@
 
         .clicked {
             .modal {
-                width: 95vw; 
+                width: 95vw;
 
                 .btn-exit-video {
 

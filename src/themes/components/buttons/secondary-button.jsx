@@ -3,7 +3,7 @@ import ArrowRight from '../../../themes/sources/assets/graphics/buttons/secondar
 import Image from 'next/image'
 
 export default function SecondaryButton({ className, title, onClick }) {
-
+    console.log(onClick)
     return (
         <div className={`secondary-button flex flex-row flex-nowrap ${className}`} onClick={onClick}>
             <Image src={ArrowLeft} alt="<" />

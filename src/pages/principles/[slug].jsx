@@ -15,7 +15,7 @@ import getColorCode from '../../themes/sources/js/color-code.js';
 
 
 export default function PrinciplesPage(props) {
-
+     console.log(props.slug)
     const principlesNumber = props.principleNumbers
     const principle = props.principle
 

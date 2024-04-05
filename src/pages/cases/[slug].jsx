@@ -6,7 +6,7 @@ import ResourcesSection from '../../themes/components/resource-section.jsx'
 import PrinciplesSection from '../../themes/components/principles.jsx'
 import RootLayout from "../../app/layout.jsx";
 
-//kolla varför heroku inte funkar
+
 export default function CasesPage(props) {
 
     return (
