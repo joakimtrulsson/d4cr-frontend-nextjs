@@ -3,36 +3,36 @@ import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
 import img from "../sources/assets/graphics/placeholder/dummy-image2.jpeg"
 import Link from 'next/link'
-
+import placeholder from '../sources/assets/graphics/placeholder/dummy-image1.svg'
+//placeholder kommer sedan finnas i backend
 const ResourceCard = (props) => {
-     const { title, url, resourceType } = props.prop;
-   // console.log('props', props, props.prop.title)
-    // Initialize `type` variable
-    let type = null;
+    const { title, url, resourceType, img } = props;
+   
+    // // Initialize `type` variable
+     let type = null;
 
-    // Check if `resourceType` and `resourceType.type` exist
-    if (resourceType && resourceType.type) {
-        type = resourceType.type; // Assign the type if it exists
+    if (resourceType) {
+        type = resourceType; // Assign the type if it exists
     }
 
-    //console.log(props.prop); // Now `type` will either be null or `resourceType.type`
-    const formattedUrl = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
+    // Now `type` will either be null or `resourceType.type`
+     const formattedUrl = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
 
     return (
 
         <main className="resource-card flex flex-column ">
 
 
-            <Image src={img} className="img-resource"
+            <Image src={img ? img : placeholder} className="img-resource"
                 width={230}
                 height={120}
                 alt="Image put in by user in principle-card" />
 
-            <Link href={formattedUrl} className="title-link"><h5 className="title-div padding-lr--xs">{title}</h5></Link>
+            <Link href={formattedUrl && formattedUrl} className="title-link"><h5 className="title-div padding-lr--xs">{title && title}</h5></Link>
 
-            <Link className="a-div" href={formattedUrl}><h5>{type}</h5></Link>
+            <Link className="a-div" href={formattedUrl && formattedUrl}><h5>{type && type}</h5></Link>
 
-            <Link href={formattedUrl}>
+            <Link href={formattedUrl && formattedUrl}>
                 <Image className="arrow-right" src={ArrowRight} alt="link arrow" />
             </Link>
 

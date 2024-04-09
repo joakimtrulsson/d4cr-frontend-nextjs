@@ -1,167 +1,147 @@
-import client from './apollo-client';
+import client from "./apollo-client";
 import {
-    MAIN_MENU_QUERY,
-    FOOTER_MENU_QUERY,
-    CHAPTER_SLUG_QUERY,
-    STEERING_GROUP_MEMBERS_QUERY,
-    GET_PAGE_BY_SLUG_QUERY,
-    GET_NEWS_ITEM_BY_SLUG_QUERY,
-    FRONT_PAGE_QUERY,
-    CASE_ITEM_BY_SLUG_QUERY,
-    CASES_ALL_DESC_QUERY,
-    RESOURCES
-} from './data/queries';
+  MAIN_MENU_QUERY,
+  FOOTER_MENU_QUERY,
+  CHAPTER_SLUG_QUERY,
+  STEERING_GROUP_MEMBERS_QUERY,
+  GET_PAGE_BY_SLUG_QUERY,
+  GET_NEWS_ITEM_BY_SLUG_QUERY,
+  FRONT_PAGE_QUERY,
+  CASE_ITEM_BY_SLUG_QUERY,
+  CASES_ALL_DESC_QUERY,
+  RESOURCES,
+} from "./data/queries";
 
 export async function fetchMainMenuData() {
-    try {
+  try {
+    const { data } = await client.query({
+      query: MAIN_MENU_QUERY,
+    });
 
-        const { data } = await client.query({
-            query: MAIN_MENU_QUERY,
-        });
-
-        return data?.mainMenu || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.mainMenu || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchFooterMenuData() {
-    try {
+  try {
+    const { data } = await client.query({
+      query: FOOTER_MENU_QUERY,
+    });
 
-        const { data } = await client.query({
-            query: FOOTER_MENU_QUERY,
-        });
-
-        return data?.footerMenu || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.footerMenu || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchSteeringGroupMembersData() {
-    try {
+  try {
+    const { data } = await client.query({
+      query: STEERING_GROUP_MEMBERS_QUERY,
+    });
 
-        const { data } = await client.query({
-            query: STEERING_GROUP_MEMBERS_QUERY,
-        });
-
-        return data?.steeringGroupMembers || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.steeringGroupMembers || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchChapterSlugData(resolvedUrl) {
-    try {
+  try {
+    const { data } = await client.query({
+      query: CHAPTER_SLUG_QUERY,
+      variables: { slug: resolvedUrl },
+    });
 
-        const { data } = await client.query({
-            query: CHAPTER_SLUG_QUERY,
-            variables: { slug: resolvedUrl }
-        })
-
-        return data?.chapters[0] || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.chapters[0] || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchGetPageBySlugData(resolvedUrl) {
-    try {
+  try {
+    const { data } = await client.query({
+      query: GET_PAGE_BY_SLUG_QUERY,
+      variables: { where: { slug: resolvedUrl } },
+    });
 
-        const { data } = await client.query({
-            query: GET_PAGE_BY_SLUG_QUERY,
-            variables: { where: { slug: resolvedUrl } }
-        })
-
-        return data?.page || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.page || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchGetNewsItemBySlugData(resolvedUrl) {
+  try {
+    const { data } = await client.query({
+      query: GET_NEWS_ITEM_BY_SLUG_QUERY,
+      variables: { where: { slug: resolvedUrl } },
+    });
 
-    try {
-        const { data } = await client.query({
-            query: GET_NEWS_ITEM_BY_SLUG_QUERY,
-            variables: { where: { slug: resolvedUrl } }
-        })
-
-        return data?.news || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.news || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
-
-
 
 export async function fetchFrontPageData() {
-    try {
+  try {
+    const { data } = await client.query({
+      query: FRONT_PAGE_QUERY,
+    });
 
-        const { data } = await client.query({
-            query: FRONT_PAGE_QUERY,
-        });
-
-        return data?.frontPage || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+    return data?.frontPage || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
+export async function fetchCaseItemBySlug(resolvedUrl) {
+  try {
+    const { data } = await client.query({
+      query: CASE_ITEM_BY_SLUG_QUERY,
+      variables: { where: { slug: resolvedUrl } },
+    });
 
-export async function fetchCaseItemBySlug(resolvedUrl){
-    try {
-        const { data } = await client.query({
-            query: CASE_ITEM_BY_SLUG_QUERY,
-            variables: { where: { slug: resolvedUrl } }
-        })
-
-        return data?.case || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
-    
+    return data?.case || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchGetAllCases() {
-    try {
+  try {
+    const { data } = await client.query({
+      query: CASES_ALL_DESC_QUERY,
+    });
 
-        const { data } = await client.query({
-            query: CASES_ALL_DESC_QUERY,
-        });
-
-        return data?.cases || null
-
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }  
+    return data?.cases || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function fetchResourcesCategories() {
-    try {
-        const {data} = await client.query({
-            query: RESOURCES,
-        });
-        return data?.resources || null
-    } catch (error) {
-        console.error("(graphql.jsx) Error fetching data:", error);
-        throw error;
-    }
+  try {
+    const { data } = await client.query({
+      query: RESOURCES,
+      variables: { orderBy: { createdAt: "desc" } },
+    });
+    return data?.resources || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
 }

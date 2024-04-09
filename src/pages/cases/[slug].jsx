@@ -31,7 +31,7 @@ export default function CasesPage(props) {
                         ))
                         }
                         <div className="renderer">
-                            {props.cases.resources.resources.length != 0 ? (<ResourcesSection content={props.cases.resources} />) : null}
+                            {/* {props.cases.resources.resources.length != 0 ? (<ResourcesSection content={props.cases.resources} />) : null} */}
                             {props.cases.principles.groups.length != 0 ? (<PrinciplesSection content={props.cases.principles} />) : null}
                         </div>
                     </div>

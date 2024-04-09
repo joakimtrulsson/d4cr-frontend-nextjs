@@ -5,6 +5,10 @@ const nextConfig = {
         remotePatterns: [
             {
               protocol: "https",
+              hostname: "bucketeer-1f163294-7339-4eb0-af5c-400b0ce7209a.s3.eu-west-1.amazonaws.com",
+            },
+            {
+              protocol: "https",
               hostname: "d4cr-keystone-19d55dc6f889.herokuapp.com",
             },
             {

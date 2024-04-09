@@ -137,32 +137,59 @@ query Cases {
       document
     }
     sections
-
     caseImage
     quote
     caseLink
     principles
-    resources
+    resourcesTitle
+    resourcesPreamble
+    resources {
+        id
+        title
+        resourceType {
+        type
+        }
+        image
+        url
+
+    }
     createdAt
   }
 }
 `
 
 export const RESOURCES = gql`
-query Resources{
-  resources {
+query Resources($orderBy: [ResourceOrderByInput!]!) {
+  resources(orderBy: $orderBy) {
     id
+    createdAt
     title
     url
-    image 
-    category {
-      title
-    }
-    resourceType{
-      type
+    image
+    resourceType {
       icon
+      type
     }
     createdAt
   }
-}
-`
+}`
+
+
+// export const RESOURCES = gql`
+// query Resources{
+//   resources {
+//     id
+//     title
+//     url
+//     image 
+//     category {
+//       title
+//     }
+//     resourceType{
+//       type
+//       icon
+//     }
+//     createdAt
+//   }
+// }
+// `
