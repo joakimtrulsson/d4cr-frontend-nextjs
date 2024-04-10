@@ -174,22 +174,37 @@ query Resources($orderBy: [ResourceOrderByInput!]!) {
   }
 }`
 
-
-// export const RESOURCES = gql`
-// query Resources{
-//   resources {
-//     id
-//     title
-//     url
-//     image 
-//     category {
-//       title
-//     }
-//     resourceType{
-//       type
-//       icon
-//     }
-//     createdAt
-//   }
-// }
-// `
+export const PRINCIPLES_BY_NUMBER = gql`
+query PrincipleNumbers {
+    principleNumbers(orderBy: { number: asc } 
+    where: { principles: { status: { equals: "published" } } } )  {
+      number
+      principles {
+        id
+        status
+        title
+        subHeader
+        slug
+        image
+        quote
+        quoteAuthor
+        subPrinciples 
+        resourcesTitle
+      resourcesPreamble
+      resources {
+          id
+          title
+          resourceType {
+          type
+          }
+          image
+          url
+  
+      }
+        principleCategory {
+          title
+        }
+      }
+    }
+  }
+    `

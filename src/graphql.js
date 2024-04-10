@@ -10,6 +10,7 @@ import {
   CASE_ITEM_BY_SLUG_QUERY,
   CASES_ALL_DESC_QUERY,
   RESOURCES,
+  PRINCIPLES_BY_NUMBER,
 } from "./data/queries";
 
 export async function fetchMainMenuData() {
@@ -140,6 +141,18 @@ export async function fetchResourcesCategories() {
       variables: { orderBy: { createdAt: "desc" } },
     });
     return data?.resources || null;
+  } catch (error) {
+    console.error("(graphql.jsx) Error fetching data:", error);
+    throw error;
+  }
+}
+
+export async function fetchPrinciplesSortedByNumber() {
+  try {
+    const { data } = await client.query({
+      query: PRINCIPLES_BY_NUMBER,
+    });
+    return data?.principleNumbers || null;
   } catch (error) {
     console.error("(graphql.jsx) Error fetching data:", error);
     throw error;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
-import { fetchMainMenuData, fetchFooterMenuData, fetchGetPageBySlugData, fetchGetAllCases, fetchResourcesCategories } from '../graphql'
+import { fetchMainMenuData, fetchFooterMenuData, fetchGetPageBySlugData, fetchGetAllCases} from '../graphql'
 import SectionRender from '../themes/sources/js/section-renderer'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -25,9 +25,9 @@ export default function SlugPage(props) {
         default:
             title = props.pageData ? props.pageData.title : 'Default Title';
     }
-    // if (!props.navMenuData || (!props.pageData && !props.allCasesData && !props.resourcesCat)) { // add footerMenuData here please!
-    //     return notFound();
-    // }
+    if (!props.navMenuData || (!props.pageData && !props.allCasesData)) { // add footerMenuData here please!
+        return notFound();
+    }
     //Function to decide what main content to render
     const RenderMainContent = () => {
         if (props.pageData) {
