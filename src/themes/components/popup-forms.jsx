@@ -23,13 +23,13 @@ export default function PopupForm({ type }) {
         logoFeaturedOnWebpage: false,
         target: "shareyourstory"
     } :
-    type === 'slack' ? {
-        name: "",
-        contactEmail: "",
-        linkedIn: "",
-        message: "",
-        target: "joinslack"
-    }: null ;
+        type === 'slack' ? {
+            name: "",
+            contactEmail: "",
+            linkedIn: "",
+            message: "",
+            target: "joinslack"
+        } : null;
     const [data, setData] = useState(initialFormData);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -84,7 +84,7 @@ export default function PopupForm({ type }) {
         } else if (!message.trim() && type === 'slack') {
             errorMessages.message = messageErrorMessage;
         }
-        
+
         if (Object.keys(errorMessages).length) {
             // Handle and display error messages
             setErrorMessage(errorMessages);
@@ -167,13 +167,13 @@ export default function PopupForm({ type }) {
                                 name="name"
                                 id="name"
                                 placeholder="Name"
-                                value={data.name} // Bind input value to state
+                                value={data?.name} // Bind input value to state
                                 onChange={handleChange}
                                 aria-required="true"
-                                aria-invalid={errorMessage.name ? "true" : "false"}
+                                aria-invalid={errorMessage?.name ? "true" : "false"}
                                 aria-describedby="name-error"
                             />
-                            {errorMessage.name ? <p className="error">{errorMessage.name}</p> : <p className="error no-vis">Not visible</p>}
+                            {errorMessage?.name ? <p className="error">{errorMessage?.name}</p> : <p className="error no-vis">Not visible</p>}
                         </div>
                         <div className='right'>
                             <input
@@ -183,13 +183,13 @@ export default function PopupForm({ type }) {
                                 type="email"
 
                                 className=""
-                                value={data.contactEmail} // Bind input value to state
+                                value={data?.contactEmail} // Bind input value to state
                                 onChange={handleChange}
                                 aria-required="true"
-                                aria-invalid={errorMessage.contactEmail ? "true" : "false"}
+                                aria-invalid={errorMessage?.contactEmail ? "true" : "false"}
                                 aria-describedby="email-error"
                             />
-                            {errorMessage.contactEmail ? <p className="error">{errorMessage.contactEmail}</p> : <p className="error no-vis">Not visible</p>}
+                            {errorMessage?.contactEmail ? <p className="error">{errorMessage?.contactEmail}</p> : <p className="error no-vis">Not visible</p>}
                         </div>
                     </div>
                     <div className='linkedin'>
@@ -200,13 +200,13 @@ export default function PopupForm({ type }) {
                             type="text"
 
                             className=""
-                            value={data.linkedIn} // Bind input value to state
+                            value={data?.linkedIn} // Bind input value to state
                             onChange={handleChange}
                             aria-required="true"
-                            aria-invalid={errorMessage.linkedIn ? "true" : "false"}
+                            aria-invalid={errorMessage?.linkedIn ? "true" : "false"}
                             aria-describedby="linkedIn-error"
                         />
-                        {errorMessage.linkedIn ? <p className="error">{errorMessage.linkedIn}</p> : <p className="error no-vis">Not visible</p>}
+                        {errorMessage?.linkedIn ? <p className="error">{errorMessage?.linkedIn}</p> : <p className="error no-vis">Not visible</p>}
                     </div>
                     <div className='text-area-div'>
                         <textarea
@@ -214,20 +214,20 @@ export default function PopupForm({ type }) {
                             id="message"
                             placeholder="Message"
                             className=""
-                            value={data.message} // Bind input value to state
+                            value={data?.message} // Bind input value to state
                             onChange={handleChange}
                             aria-required="true"
-                            aria-invalid={errorMessage.message ? "true" : "false"}
+                            aria-invalid={errorMessage?.message ? "true" : "false"}
                             aria-describedby="message-error"
                         />
-                        {errorMessage.message ? <p className="message-error">{errorMessage.message}</p> : <p className="message-error no-vis">Not visible</p>}
+                        {errorMessage?.message ? <p className="message-error">{errorMessage?.message}</p> : <p className="message-error no-vis">Not visible</p>}
                     </div>
-                   {type === 'share' && <div className="check-boxes">
+                    {type === 'share' && <div className="check-boxes">
                         <input
                             type="checkbox"
                             id="usingD4CRGuideAndPrinciples"
                             name="usingD4CRGuideAndPrinciples"
-                            checked={data.usingD4CRGuideAndPrinciples}
+                            checked={data?.usingD4CRGuideAndPrinciples}
                             onChange={handleChange}
                         />
                         <label htmlFor="usingD4CRGuideAndPrinciples">We, as a company/initiative/educational institusion, are using the D4CR Guide and principles.</label>
@@ -235,11 +235,11 @@ export default function PopupForm({ type }) {
                             type="checkbox"
                             id="logoFeaturedOnWebpage"
                             name="logoFeaturedOnWebpage"
-                            checked={data.logoFeaturedOnWebpage}
+                            checked={data?.logoFeaturedOnWebpage}
                             onChange={handleChange}
                         />
                         <label htmlFor="logoFeaturedOnWebpage">I’d like my logo to be featured on the D4CR’s webpage.</label>
-                    </div> }
+                    </div>}
                     {!isSubmitting ?
 
                         <PrimaryButton type="submit" title="SEND MESSAGE" disabled={Object.keys(errorMessage).length > 0} />

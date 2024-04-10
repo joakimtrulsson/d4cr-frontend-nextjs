@@ -14,7 +14,7 @@ import CaseCard from '../themes/components/case-card'
 
 export default function SlugPage(props) {
     const { resolvedUrl } = props;
-    console.log(props)
+   // console.log(props)
     //console.log("([slug].jsx) :", props.allCasesData, props.resolvedUrl) // remove this later! 
 
     let title;

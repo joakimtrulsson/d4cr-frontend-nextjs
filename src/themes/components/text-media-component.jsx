@@ -8,29 +8,20 @@ import { DocumentRenderer } from '@keystone-6/document-renderer'
 import getColorCode from '../sources/js/color-code.js'
 import { useState } from 'react'
 import PopupForm from './popup-forms.jsx'
-//kolla om logiken är kontsig
+
 export default function TextMediaComponent({ content }) {
 
     const [isClicked, setIsClicked] = useState(false)
     const [slideOut, setSlideOut] = useState(false)
-    let shareIsTrueCTA2
-    let shareIsTrueCTA1
     const [shareOrSlack, setShareOrSlack] = useState('')
-    if (content.cta2 && content.cta2.url) {
-        console.log(content.cta2.url, 'share funkae')
 
-        shareIsTrueCTA2 = content.cta2.url
-    }
-    if (content.cta1 && content.cta1.url) {
-        console.log(content.cta1.url)
+    function clickedBtnCTA1() {
+        setShareOrSlack(content.cta1.url)
+        setIsClicked(true)
 
-        shareIsTrueCTA1 = content.cta1.url
     }
-    console.log(shareIsTrueCTA1, shareIsTrueCTA2)
-    function clickedVideo() {
-        console.log(shareIsTrueCTA1)
-        setShareOrSlack(shareIsTrueCTA1)
-        console.log('kontroll')
+    function clickedBtnCTA2() {
+        setShareOrSlack(content.cta2.url)
         setIsClicked(true)
 
     }
@@ -80,19 +71,11 @@ export default function TextMediaComponent({ content }) {
                             margin-tb--xxxs' >
 
                                 {content.cta1 && content.cta1.url && content.cta1.anchorText && (
-                                    (shareIsTrueCTA1 === 'share' || shareIsTrueCTA1 === 'slack') ? (
-                                        // Popup logic for CTA1
+                                    (content.cta1.url === 'share' || content.cta1.url === 'slack') ? (
                                         <>
-                                            <SecondaryButton title={content.cta1.anchorText} onClick={clickedVideo} />
-                                            {/* <div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
-                                                <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
-                                                    <button onClick={exitVideo} className="btn-exit-video">X</button>
-                                                    <div className="box"><PopupForm type={shareIsTrueCTA1} /></div>
-                                                </div>
-                                            </div> */}
+                                            <SecondaryButton title={content.cta1.anchorText} onClick={clickedBtnCTA1} />
                                         </>
                                     ) : (
-                                        // Link logic for CTA1
                                         <Link href={content.cta1.url} className='margin-r--xxxs'>
                                             <PrimaryButton title={content.cta1.anchorText} />
                                         </Link>
@@ -100,34 +83,25 @@ export default function TextMediaComponent({ content }) {
                                 )}
 
                                 {content.cta2 && content.cta2.url && content.cta2.anchorText && (
-                                    (shareIsTrueCTA2 === 'share' || shareIsTrueCTA2 === 'slack') ? (
-                                        // Popup logic for CTA2
+                                    (content.cta2.url === 'share' || content.cta2.url === 'slack') ? (
                                         <>
-                                            <SecondaryButton title={content.cta2.anchorText} onClick={clickedVideo} />
-
-                                            {/* {<div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
-                                                <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
-                                                    <button onClick={exitVideo} className="btn-exit-video">X</button>
-                                                    <div className="box"><PopupForm type={shareIsTrueCTA2} /></div>
-                                                </div>
-                                            </div>} */}
+                                            <SecondaryButton title={content.cta2.anchorText} onClick={clickedBtnCTA2} />
                                         </>
                                     ) : (
-                                        // Link logic for CTA2
                                         <Link className='no-decoration' href={content.cta2.url}>
                                             <SecondaryButton title={content.cta2.anchorText} />
                                         </Link>
                                     )
                                 )}
                             </nav>
-                            
-                                <> < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
-                                    <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
-                                        <button onClick={exitVideo} className="btn-exit-video">X</button>
-                                        <div className="box"><PopupForm type={'slack'} /></div>
-                                    </div>
+
+                            <> < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
+                                <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
+                                    <button onClick={exitVideo} className="btn-exit-video">X</button>
+                                    <div className="box"><PopupForm type={shareOrSlack} /></div>
                                 </div>
-                                </>
+                            </div>
+                            </>
                         </>
                     )}
 
