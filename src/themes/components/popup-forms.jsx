@@ -5,7 +5,7 @@ import PrimaryButton from "./buttons/primary-button"
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function PopupForm({ type }) {
-    console.log(type)
+    console.log('inside popoup', type)
 
     const recaptcha = React.useRef(null);
     const [reCAPTCHAError, setReCAPTCHAError] = useState(false)

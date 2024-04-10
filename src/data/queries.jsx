@@ -99,7 +99,6 @@ export const FRONT_PAGE_QUERY = gql`
         ctaOneUrl
         ctaTwoUrlAnchorText
         ctaTwoUrl
-        status
         sections
     }
 }
