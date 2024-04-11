@@ -109,7 +109,6 @@ export const CASE_ITEM_BY_SLUG_QUERY = gql`
   query Case($where: CaseWhereUniqueInput!) {
     case(where: $where) {
       id
-      slug
       status
       title
       linkType
@@ -132,9 +131,10 @@ export const CASES_ALL_DESC_QUERY = gql`
   query Cases {
     cases(orderBy: { createdAt: desc }) {
       id
-      slug
       status
       title
+      linkType
+      url
       preamble {
         document
       }
