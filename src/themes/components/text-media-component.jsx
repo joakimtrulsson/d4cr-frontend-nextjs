@@ -6,24 +6,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { DocumentRenderer } from '@keystone-6/document-renderer'
 import getColorCode from '../sources/js/color-code.js'
-import { useState } from 'react'
-import PopupForm from './popup-forms.jsx'
+import { useState, useEffect } from 'react'
+import PopupForm from './popup-form-share.jsx'
+import SlackForm from './popup-form-slack.jsx'
 
 export default function TextMediaComponent({ content }) {
-
+    
+    const url1 = content.cta1?.url && content.cta1.url
+    const url2 = content.cta2?.url && content.cta2.url
     const [isClicked, setIsClicked] = useState(false)
     const [slideOut, setSlideOut] = useState(false)
     const [shareOrSlack, setShareOrSlack] = useState('')
 
     function clickedBtnCTA1() {
-        setShareOrSlack(content.cta1.url)
-        setIsClicked(true)
-
+        setShareOrSlack(url1)
+        setIsClicked(true);
     }
     function clickedBtnCTA2() {
-        setShareOrSlack(content.cta2.url)
-        setIsClicked(true)
-
+        setShareOrSlack(url2)
+        setIsClicked(true);
     }
     function exitVideo() {
         setSlideOut(true); // Start the slide-out animation
@@ -70,25 +71,25 @@ export default function TextMediaComponent({ content }) {
                             <nav className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center 
                             margin-tb--xxxs' >
 
-                                {content.cta1 && content.cta1.url && content.cta1.anchorText && (
-                                    (content.cta1.url === 'share' || content.cta1.url === 'slack') ? (
+                                {content.cta1 && url1 && content.cta1.anchorText && (
+                                    (url1 === 'share' || url1 === 'slack') ? (
                                         <>
                                             <SecondaryButton title={content.cta1.anchorText} onClick={clickedBtnCTA1} />
                                         </>
                                     ) : (
-                                        <Link href={content.cta1.url} className='margin-r--xxxs'>
+                                        <Link href={url1} className='margin-r--xxxs'>
                                             <PrimaryButton title={content.cta1.anchorText} />
                                         </Link>
                                     )
                                 )}
 
-                                {content.cta2 && content.cta2.url && content.cta2.anchorText && (
-                                    (content.cta2.url === 'share' || content.cta2.url === 'slack') ? (
+                                {content.cta2 && url2 && content.cta2.anchorText && (
+                                    (url2 === 'share' || url2 === 'slack') ? (
                                         <>
                                             <SecondaryButton title={content.cta2.anchorText} onClick={clickedBtnCTA2} />
                                         </>
                                     ) : (
-                                        <Link className='no-decoration' href={content.cta2.url}>
+                                        <Link className='no-decoration' href={url2}>
                                             <SecondaryButton title={content.cta2.anchorText} />
                                         </Link>
                                     )
@@ -98,7 +99,10 @@ export default function TextMediaComponent({ content }) {
                             <> < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
                                 <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
                                     <button onClick={exitVideo} className="btn-exit-video">X</button>
-                                    <div className="box"><PopupForm type={shareOrSlack} /></div>
+                                    <div className="box">
+                                        {shareOrSlack === 'slack' && <SlackForm />}
+                                        {shareOrSlack === 'share' && <PopupForm />}
+                                    </div>
                                 </div>
                             </div>
                             </>

@@ -42,7 +42,7 @@
                 top: 2%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 50%;
+                width: 90%;
                 height: 95vh;
                 animation: slideInFromBottomForm 0.5s ease-out forwards;
 
@@ -67,6 +67,7 @@
                     transition: transform 0.4s ease-in-out;
                     font-weight: 600;
                     font-family: Courier 'Courier New';
+                    z-index: 3;
 
                     &:hover,
                     &:focus {
@@ -104,6 +105,31 @@
     }
 
 
+}
+
+@media (min-width: 600px) {
+
+    .text-and-media-container {
+
+        .text-content {
+
+            .clicked {
+
+                .modal {
+                    position: fixed;
+                    top: 2%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 50%;
+                    height: 95vh;
+                    animation: slideInFromBottomForm 0.5s ease-out forwards;
+
+                }
+            }
+        }
+
+
+    }
 }
 
 @keyframes slideInFromBottomForm {
