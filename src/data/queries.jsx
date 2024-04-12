@@ -18,6 +18,35 @@ export const FOOTER_MENU_QUERY = gql`
   }
 `;
 
+export const ALL_MENU_DATA = gql`
+  query Query {
+    footerBanner {
+      preamble {
+        document
+      }
+      title
+    }
+    mainMenu {
+      ctaAnchorText
+      ctaUrl
+      navigation
+    }
+    footerJoinUs {
+      url1
+      icon1
+      url2
+      icon2
+      url3
+      icon3
+      url4
+      icon4
+    }
+    footerMenu {
+      navigation
+    }
+  }
+`;
+
 export const STEERING_GROUP_MEMBERS_QUERY = gql`
   query SteeringGroupMembers {
     steeringGroupMembers {
