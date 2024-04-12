@@ -19,7 +19,7 @@ function RenderAllNews({ allNews, newsCategories }) {
     newsCategories.map((category) => category.categoryTitle)
   );
 
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(9);
 
   const filteredNews =
     showType.length === 0
@@ -66,17 +66,15 @@ function RenderAllNews({ allNews, newsCategories }) {
       >
         {newsCategories &&
           newsCategories.map((category) => (
-            <>
-              <label className='checkbox-container '>
-                <input
-                  checked={showType.includes(category.categoryTitle)}
-                  type='checkbox'
-                  onChange={() => handleCheckboxChange(category.categoryTitle)}
-                />
-                <span className='checkmark'></span>
-                <span className='heading-4'>{category.categoryTitle}</span>
-              </label>
-            </>
+            <label key={category.categoryTitle} className='checkbox-container '>
+              <input
+                checked={showType.includes(category.categoryTitle)}
+                type='checkbox'
+                onChange={() => handleCheckboxChange(category.categoryTitle)}
+              />
+              <span className='checkmark'></span>
+              <span className='heading-4'>{category.categoryTitle}</span>
+            </label>
           ))}
       </div>
 

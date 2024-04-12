@@ -20,8 +20,8 @@ const Newscard = ({ type, title, url, imageUrl }) => {
         src={imageUrl}
         alt=''
         fill={false}
-        objectFit={'cover'}
-        // style={{ objectFit: 'cover' }}
+        // objectFit={'cover'}
+        style={{ objectFit: 'cover' }}
       />
 
       <div className='sub-head-wrapper bg-yellow-100 width-full margin-t--xxxs-negative'>
