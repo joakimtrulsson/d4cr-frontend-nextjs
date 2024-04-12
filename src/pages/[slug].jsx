@@ -144,7 +144,7 @@ export async function getServerSideProps({ resolvedUrl }) {
       default:
         specificData = { pageData: await fetchGetPageBySlugData(resolvedUrl) };
     }
-    console.log(specificData);
+    // console.log(specificData);
     return { props: { navMenuData, footerMenuData, resolvedUrl, ...specificData } };
   } catch (error) {
     console.error('([slug].jsx) Error fetching data:', error);
