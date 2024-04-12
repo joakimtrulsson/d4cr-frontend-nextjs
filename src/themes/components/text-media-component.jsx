@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import getColorCode from '../sources/js/color-code.js';
 import { useState } from 'react';
-// import PopupForm from './popup-forms.jsx';
+import PopupForm from './popup-forms.jsx';
 //kolla om logiken är kontsig
 export default function TextMediaComponent({ content }) {
   const [isClicked, setIsClicked] = useState(false);
@@ -149,7 +149,9 @@ export default function TextMediaComponent({ content }) {
                     <button onClick={exitVideo} className='btn-exit-video'>
                       X
                     </button>
-                    <div className='box'>{/* <PopupForm type={'slack'} /> */}</div>
+                    <div className='box'>
+                      <PopupForm type={'slack'} />
+                    </div>
                   </div>
                 </div>
               </>
