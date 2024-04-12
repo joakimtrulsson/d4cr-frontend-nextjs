@@ -102,9 +102,45 @@ export const GET_PAGE_BY_SLUG_QUERY = gql`
   }
 `;
 
+export const GET_ALL_NEWS_QUERY = gql`
+  query NewsItems($orderBy: [NewsOrderByInput!]!) {
+    newsItems(orderBy: $orderBy) {
+      id
+      title
+      slug
+      status
+      image
+      sections
+      newsCategory {
+        categoryTitle
+      }
+      relatedChapters {
+        title
+      }
+      resourcesTitle
+      resourcesPreamble
+      resources {
+        id
+        title
+        resourceType {
+          type
+        }
+        image
+        url
+      }
+      createdAt
+    }
+    newsCategories {
+      categoryTitle
+    }
+  }
+`;
+
 export const GET_NEWS_ITEM_BY_SLUG_QUERY = gql`
   query News($where: NewsWhereUniqueInput!) {
     news(where: $where) {
+      id
+      createdAt
       title
       slug
       newsCategory {
@@ -112,6 +148,17 @@ export const GET_NEWS_ITEM_BY_SLUG_QUERY = gql`
       }
       image
       sections
+      resourcesTitle
+      resourcesPreamble
+      resources {
+        id
+        title
+        resourceType {
+          type
+        }
+        image
+        url
+      }
       status
     }
   }

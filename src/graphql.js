@@ -12,6 +12,7 @@ import {
   RESOURCES,
   PRINCIPLES_BY_NUMBER,
   ALL_MENU_DATA,
+  GET_ALL_NEWS_QUERY,
 } from './data/queries';
 
 export async function fetchMainMenuData() {
@@ -88,6 +89,20 @@ export async function fetchGetPageBySlugData(resolvedUrl) {
     });
 
     return data?.page || null;
+  } catch (error) {
+    console.error('(graphql.jsx) Error fetching data:', error);
+    throw error;
+  }
+}
+
+export async function fetchAllNews(resolvedUrl) {
+  try {
+    const { data } = await client.query({
+      query: GET_ALL_NEWS_QUERY,
+      variables: { orderBy: { createdAt: 'desc' } },
+    });
+
+    return data || null;
   } catch (error) {
     console.error('(graphql.jsx) Error fetching data:', error);
     throw error;

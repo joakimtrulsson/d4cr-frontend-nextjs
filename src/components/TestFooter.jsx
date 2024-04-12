@@ -29,7 +29,6 @@ export default function TestFooter() {
 
   const rightArrowIcon = { width: '16', height: '14', color: getColorCode('') };
 
-  console.log('joinUsContent', JSON.stringify(joinUsContent));
   const urlIconPairs = [];
   for (let i = 1; i <= 4; i++) {
     urlIconPairs.push({ url: joinUsContent[`url${i}`], icon: joinUsContent[`icon${i}`] });
