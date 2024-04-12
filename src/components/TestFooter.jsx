@@ -152,12 +152,17 @@ const SocialMediaLink = ({ url, icon }) => {
     height: '30',
     color: getColorCode('turquoise-600'),
   };
+
+  const fullUrl =
+    url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`;
+
   return (
-    <Link
-      href={url}
-      passHref
+    <a
+      href={fullUrl}
+      target='_blank'
+      rel='noopener noreferrer'
       className='flex flex-justify-center flex-align-center no-decoration borderradius--half 
-                    margin--xxs padding--xs bg-turquoise-50'
+                  margin--xxs padding--xs bg-turquoise-50'
     >
       {icon && icon.iconName && (
         <FontAwesomeIcon
@@ -169,6 +174,6 @@ const SocialMediaLink = ({ url, icon }) => {
           }}
         />
       )}
-    </Link>
+    </a>
   );
 };
