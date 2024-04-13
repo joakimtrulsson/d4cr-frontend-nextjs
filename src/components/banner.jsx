@@ -44,7 +44,11 @@ export default function Banner({ content }) {
 
         <div className='margin-lr--s'>
           <h4 className='margin--zero color-grey-700'>{content.title}</h4>
-          <DocumentRenderer document={content.preamble.document} />
+          <DocumentRenderer
+            document={
+              content.preamble.document ? content.preamble.document : content.preamble
+            }
+          />
         </div>
 
         <div className='margin-r--xxs'>
