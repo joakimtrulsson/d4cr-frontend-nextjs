@@ -182,8 +182,8 @@ export const FRONT_PAGE_QUERY = gql`
 `;
 
 export const CASE_ITEM_BY_SLUG_QUERY = gql`
-  query Case($where: CaseWhereUniqueInput!) {
-    case(where: $where) {
+  query Cases($where: CaseWhereInput!) {
+    cases(where: $where) {
       id
       status
       title
@@ -195,9 +195,17 @@ export const CASE_ITEM_BY_SLUG_QUERY = gql`
       sections
       caseImage
       quote
-
-      principles
-      resources
+      resourcesTitle
+      resourcesPreamble
+      resources {
+        id
+        title
+        resourceType {
+          type
+        }
+        image
+        url
+      }
       createdAt
     }
   }

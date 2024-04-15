@@ -118,7 +118,7 @@ function RenderAllCasesContent(allCasesData, title) {
               title={caseData.title}
               className='flex flex-column'
               key={caseData.id}
-              img={caseData.caseImage.url}
+              img={caseData.caseImage?.url}
             />
           );
         })}

@@ -138,12 +138,19 @@ export async function fetchFrontPageData() {
 
 export async function fetchCaseItemBySlug(resolvedUrl) {
   try {
+    console.log(resolvedUrl);
     const { data } = await client.query({
       query: CASE_ITEM_BY_SLUG_QUERY,
-      variables: { where: { slug: resolvedUrl } },
+      variables: {
+        where: {
+          url: {
+            equals: `${resolvedUrl}`,
+          },
+        },
+      },
     });
 
-    return data?.case || null;
+    return data?.cases || null;
   } catch (error) {
     console.error('(graphql.jsx) Error fetching data:', error);
     throw error;
