@@ -10,6 +10,7 @@ import {
   fetchChapterSlugData,
   fetchMainMenuData,
   fetchFooterMenuData,
+ 
 } from '../../graphql.js';
 
 export default function ChapterSlugPage({
@@ -17,7 +18,12 @@ export default function ChapterSlugPage({
   footerMenuData,
   chapters,
   resolvedUrl,
+  
 }) {
+  //console.log(chapters)
+
+
+
   // Get current chapter
   const currentLanguage = {
     chapterLanguage: chapters.chapterLanguage,
@@ -25,11 +31,10 @@ export default function ChapterSlugPage({
   };
 
   // Get the translated chapters
-  const chapterLanguages = chapters.translatedChapters
-    .filter(
-      (chapter) =>
-        chapter.status === 'published' && chapter.chapterLanguage && chapter.slug
-    )
+  const chapterLanguages = chapters.translatedChapters?.filter(
+    (chapter) =>
+      chapter.status === 'published' && chapter.chapterLanguage && chapter.slug
+  )
     .map((chapter) => ({ chapterLanguage: chapter.chapterLanguage, slug: chapter.slug }));
 
   // Check if the current chapter is not in the array, and if it isn't, then add it
@@ -48,6 +53,7 @@ export default function ChapterSlugPage({
   chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage)); //
 
   return (
+    //<></>
     <RootLayout
       navMenuData={navMenuData}
       footerMenuData={null}
@@ -55,17 +61,16 @@ export default function ChapterSlugPage({
       resolvedUrl={resolvedUrl}
       language={currentLanguage.chapterLanguage}
     >
-      <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+      <main className='site-content chapter-main flex flex-column flex-align-center flex-justify-start'>
         {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
           <div className='language-tabs margin-tb--s'>
             {chapterLanguages.map((chapter, index) => (
               <Link href={chapter.slug} key={index}>
                 <button
-                  className={`lang-btn ${
-                    index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''
-                  }
-                  ${index === 0 ? 'lang-btn-left' : ''}
-                  ${chapter.slug === currentLanguage.slug ? 'lang-btn-active' : ''}`}
+                  className={`lang-btn ${index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''
+                    }
+                ${index === 0 ? 'lang-btn-left' : ''}
+                ${chapter.slug === currentLanguage.slug ? 'lang-btn-active' : ''}`}
                 >
                   {getLanguageName(chapter.chapterLanguage)}
                 </button>
@@ -126,7 +131,7 @@ export async function getServerSideProps({ resolvedUrl }) {
     const chapters = await fetchChapterSlugData(resolvedUrl);
     const navMenuData = await fetchMainMenuData();
     const footerMenuData = await fetchFooterMenuData();
-
+    
     return { props: { navMenuData, footerMenuData, chapters, resolvedUrl } };
   } catch (error) {
     console.error('(chapters/[slug].jsx) Error fetching data:', error);

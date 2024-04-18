@@ -1,8 +1,17 @@
-.hero-image-medium {
-    width: 85%;
-    max-width: 60rem;
-    height: 20rem;
-    overflow: hidden;
+.chapter-main {
     position: relative;
-    object-fit: cover;
+    overflow: hidden;
+
+    .hero-image-medium {
+        width: 85%;
+        max-width: 60rem;
+        height: 20rem;
+        overflow: hidden;
+        position: relative;
+        object-fit: cover;
+    }
+
+    .animation-background-right {
+        right: -10%;
+    }
 }

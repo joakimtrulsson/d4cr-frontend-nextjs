@@ -1,91 +1,76 @@
-import { gql } from '@apollo/client';
-import client from '../../apollo-client.js';
+
 import Animation from '../sources/assets/graphics/animation.gif'
 import Image from 'next/image'
 import Newscard from './news-card.jsx'
 import SecondaryButton from './buttons/secondary-button.jsx'
 import WYSIWYG from './wysiwyg.jsx'
 import Link from 'next/link'
+import { fetchGetNewsItemByChapter, fetchAllNews, fetchGetNewsItemByCategory, fetchGetNewsItemByCategoryAndChapter } from '../../graphql.js'
+import React, { useEffect, useState } from 'react';
 
 export default function NewsTeaser({ content }) {
 
-    // const sortedNews = content.news.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
+  const newsVar = content.selectedNews
+  const [data, setData] = useState(null);
 
-    // Fetcha news (på detta sätt får vi senaste news)
-
-    return (
-        <div className="news-teaser-container animation-background-container flex flex-column flex-justify-center flex-align-center 
-        padding-tb--xxl margin-lr--m">
-
-            <div className='animation-background'>
-                <Image src={Animation} alt="Animated GIF" />
-            </div>
-
-            <div className='text-align-center'>
-                <h2 className='margin-t--xxs margin--zero'>{content.title}</h2>
-                <WYSIWYG content={content.subHeading} />
-            </div>
-
-            <div className='news-card-container full-width-height  margin-tb--s flex flex-row flex-wrap
-            flex-justify-center flex-align-center'>
-
-             { /* PRINTOUT NEWS CARDS */}
-
-            </div>
-
-            <div className='button-wrapper margin-tb--s'>
-                <Link className='no-decoration' href="get-url-from-database">
-                    <SecondaryButton title={"SEE ALL"} />
-                </Link>
-            </div>
-
-        </div>
-    );
-};
-
-/*
-
-{content.selectedNews.map(({category, title, url}, index) => (
-                    <div key={index} className="card-wrapper margin--xs">
-                        <Newscard type={category} title={title} url={"get-url-from-database"} /> 
-                    </div>
-                ))}
-
-*/
-
-
-export async function getServerSideProps({ params }) {
-  try {
-
-    const { data } = await client.query({
-      query: gql`
-        query Query($slug: String!) {
-          chapters(where: { slug: { equals: $slug } }) {
-            slug
-            chapterLanguage
-            status
-            title
-            heroImage
-            sections
-            }
-          }
+  useEffect(() => {
+    async function fetchData() {
+      let response;
+      if (newsVar.chapter === "ALLCHAPTERS") {
+        if (newsVar.category === "ALL") {
+          response = await fetchAllNews();
+        } else {
+          response = await fetchGetNewsItemByCategory(newsVar.category);
         }
-      `,
-      variables: { slug: resolvedUrl }
-    });
+      } else {
+        if (newsVar.category === "ALL") {
 
-    if (!data.chapters || data.chapters.length === 0) {
-      console.error("Data couldn't be found for slug:", slug);
-      return {
-        notFound: true,
+          response = await fetchGetNewsItemByChapter(newsVar.chapter);
+        } else {
+
+          response = await fetchGetNewsItemByCategoryAndChapter(newsVar.category, newsVar.chapter);
+        }
       }
+
+      setData(response);
+
     }
 
-    return { props: { chapters: data.chapters[0] } }
+    fetchData();
+  }, [newsVar.chapter, newsVar.category]);
 
-  } catch (error) {
 
-    console.error("(chapters/[slug].js) Error fetching data:", error)
-    return { props: { chapters: null } }
-  }
-}
+  return (
+    <div className="news-teaser-container flex flex-column flex-justify-center flex-align-center 
+        padding-tb--xxl">
+
+      <div className='animation-background'>
+        <Image src={Animation} alt="Animated GIF" />
+      </div>
+
+      <div className='text-align-center heading-text'>
+        <h2 className='margin-t--xxs margin--zero'>{content.title}</h2>
+        <WYSIWYG content={content.subHeading ? content.subHeading : content.preamble} />
+
+      </div>
+
+      <div className='news-card-container  margin-tb--s flex flex-row
+            flex-justify-center flex-align-center'>
+
+        {data?.newsItems?.slice(0, 3).map(item => (
+          <Newscard type={item.newsCategory.categoryTitle} title={item.title} url={item.slug} imageUrl={item.image?.url} />
+        ))
+        }
+
+      </div>
+
+      <div className='button-wrapper margin-tb--s'>
+        <Link className='no-decoration' href="../news">
+          <SecondaryButton title={"SEE ALL"} />
+        </Link>
+      </div>
+
+    </div>
+  );
+};
+

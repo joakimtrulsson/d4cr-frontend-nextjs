@@ -1,15 +1,40 @@
-.news-teaser-container {
 
-    .card-wrapper {
-        transition: transform 0.2s ease-in-out;
+
+.news-teaser-container {
+    position: relative;
+    max-width: 100vw;
+    width: 98vw;
+    overflow: hidden;
+    
+    .animation-background {
+        position: absolute;
+        left: -20%;
+        right: 0;
+        top: -1%;
+        overflow: hidden;
+        transform: scale(0.9);
+        z-index: 0;
     }
-    .card-wrapper:hover, .card-wrapper:focus {
-        transform: scale(1.05);
-        transition: transform 0.2s ease-in-out;
+
+    .heading-text {
+        position: relative;
+    }
+
+    .news-card-container {
+        
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: stretch; // This ensures all child cards stretch to the same height
+        width: 90%;
+        height: auto;
+        //min-height: 90vh;
+        
     }
 
     .button-wrapper {
         transition: transform 0.2s ease-in-out;
+        z-index: 2;
     }
 
     .button-wrapper:hover {
