@@ -12,7 +12,7 @@ export default function NewsTeaser({ content }) {
 
   const newsVar = content.selectedNews
   const [data, setData] = useState(null);
-
+  
   useEffect(() => {
     async function fetchData() {
       let response;
@@ -58,7 +58,7 @@ export default function NewsTeaser({ content }) {
             flex-justify-center flex-align-center'>
 
         {data?.newsItems?.slice(0, 3).map(item => (
-          <Newscard type={item.newsCategory.categoryTitle} title={item.title} url={item.slug} imageUrl={item.image?.url} />
+          <Newscard key={item.id} type={item.newsCategory.categoryTitle} title={item.title} url={item.slug} imageUrl={item.image?.url} />
         ))
         }
 

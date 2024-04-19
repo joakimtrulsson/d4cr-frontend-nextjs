@@ -22,13 +22,16 @@
     }
 
     .title-link {
-      text-decoration: underline;
+      
+      .title-div{
+        text-decoration: underline;
+      }
     }
   }
 
   .title-link {
     text-decoration: none;
-
+    overflow: hidden;
     .title-div {
       color: $-grey-700;
       max-width: 100%;

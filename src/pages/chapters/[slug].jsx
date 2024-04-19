@@ -20,7 +20,7 @@ export default function ChapterSlugPage({
   resolvedUrl,
   
 }) {
-  //console.log(chapters)
+
 
 
 

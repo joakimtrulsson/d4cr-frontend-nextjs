@@ -89,7 +89,8 @@ function RenderAllNews({ allNews, newsCategories }) {
               imageUrl={news.image?.url}
               type={news.newsCategory.categoryTitle}
               title={news.title}
-              url={`/news/${news.slug}`}
+              url={`${news.slug}`}
+              alt="news image"
             />
           ))
         )}

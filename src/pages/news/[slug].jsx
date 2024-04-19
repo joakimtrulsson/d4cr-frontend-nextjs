@@ -2,16 +2,18 @@ import Image from 'next/image'
 import SectionRender from '../../themes/sources/js/section-renderer.js';
 import RootLayout from '../../app/layout.jsx'
 import { fetchGetNewsItemBySlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
+import Resources from '../../themes/components/resource-section.jsx';
 
 export default function NewsSlugPage(props) {
 
     if (!props.navMenuData || !props.pageData) { // add footerMenuData here please!
         return notFound();
     }
+    const resources = props.pageData.resources
 
     return (
         <RootLayout navMenuData={props.navMenuData}
-            footerMenuData={null} 
+            footerMenuData={null}
             tabTitle={props.pageData.title}
             resolvedUrl={props.resolvedUrl}
             language="en_GB">
@@ -44,6 +46,11 @@ export default function NewsSlugPage(props) {
                 {props.pageData.sections && props.pageData.sections.map((section, index) => (
                     <SectionRender key={index} section={section} />
                 ))}
+                {resources && <Resources
+                    resources={resources}
+                    title={props?.pageData?.resourcesTitle}
+                    preamble={props?.pageData?.resourcesPreamble}
+                />}
             </main>
         </RootLayout>
     )
