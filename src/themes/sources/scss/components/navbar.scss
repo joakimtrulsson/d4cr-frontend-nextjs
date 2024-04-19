@@ -4,9 +4,11 @@
 .navbar {
   top: 0;
   left: 0;
+  height: 11.5vh;
   position: sticky;
   z-index: $-z-index-navbar;
   background-color: $-background-color;
+  margin-bottom: 0;
 
   .secondary-button {
     scale: 1.05;

@@ -5,12 +5,14 @@ import { fetchGetNewsItemBySlugData, fetchMainMenuData, fetchFooterMenuData } fr
 import Resources from '../../themes/components/resource-section.jsx';
 
 export default function NewsSlugPage(props) {
-
+    
     if (!props.navMenuData || !props.pageData) { // add footerMenuData here please!
         return notFound();
     }
-    const resources = props.pageData.resources
-
+    let resources
+    if (props?.pageData?.resources?.length !== 0) {
+        resources = props.pageData.resources
+    }
     return (
         <RootLayout navMenuData={props.navMenuData}
             footerMenuData={null}
@@ -46,11 +48,11 @@ export default function NewsSlugPage(props) {
                 {props.pageData.sections && props.pageData.sections.map((section, index) => (
                     <SectionRender key={index} section={section} />
                 ))}
-                {resources && <Resources
+                {resources ? <Resources
                     resources={resources}
                     title={props?.pageData?.resourcesTitle}
                     preamble={props?.pageData?.resourcesPreamble}
-                />}
+                /> : null}
             </main>
         </RootLayout>
     )

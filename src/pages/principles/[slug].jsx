@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import RootLayout from '../../app/layout.jsx';
 import {
@@ -37,26 +37,26 @@ export default function PrinciplesPage(props) {
   //Change props to work in large-bullet list
   const transformedSubPrinciples = Array.isArray(useIndex?.subPrinciples)
     ? useIndex.subPrinciples.map((subPrinciple) => {
-        // Check if subPrinciple.text is an array and not undefined or null
-        const bodyText = Array.isArray(subPrinciple.text)
-          ? subPrinciple.text.map((textItem) => {
-              // Check each textItem for 'children' array existence
-              return {
-                type: 'paragraph',
-                children: Array.isArray(textItem.children)
-                  ? textItem.children.map((child) => {
-                      // Assuming 'child.text' is always present if 'child' exists, but you could add more checks here if needed
-                      return { text: child.text };
-                    })
-                  : [], // Return an empty array if 'children' does not exist or is not an array
-              };
-            })
-          : []; // Return an empty array if 'text' does not exist or is not an array
+      // Check if subPrinciple.text is an array and not undefined or null
+      const bodyText = Array.isArray(subPrinciple.text)
+        ? subPrinciple.text.map((textItem) => {
+          // Check each textItem for 'children' array existence
+          return {
+            type: 'paragraph',
+            children: Array.isArray(textItem.children)
+              ? textItem.children.map((child) => {
+                // Assuming 'child.text' is always present if 'child' exists, but you could add more checks here if needed
+                return { text: child.text };
+              })
+              : [], // Return an empty array if 'children' does not exist or is not an array
+          };
+        })
+        : []; // Return an empty array if 'text' does not exist or is not an array
 
-        return {
-          bodyText: bodyText,
-        };
-      })
+      return {
+        bodyText: bodyText,
+      };
+    })
     : [];
 
   const contentForLargeBulletList = {
@@ -64,17 +64,18 @@ export default function PrinciplesPage(props) {
     listType: 'UNORDERED',
   };
 
-  const resources = principleNumber[currentIndex]?.principles?.resources ?? null;
+  const resources = (principleNumber[currentIndex]?.principles?.resources.length !== 0) ? principleNumber[currentIndex]?.principles?.resources : null;
 
   return (
-    <RootLayout
-      navMenuData={props.navMenuData}
-      footerMenuData={null}
-      tabTitle={useIndex?.title}
-      resolvedUrl={props.resolvedUrl}
-      language='en_GB'
-    >
-      <main>
+    // <RootLayout
+    //   className="navmenu"
+    //   navMenuData={props.navMenuData}
+    //   footerMenuData={null}
+    //   tabTitle={useIndex?.title}
+    //   resolvedUrl={props.resolvedUrl}
+    //   language='en_GB'
+    // >
+      <main className="outer-main-principle">
         {/*nav between principles */}
         <div className='flex flex-row bg-turquoise-100 flex-justify-center navbar-principle-links'>
           {previousSlug ? (
@@ -250,7 +251,7 @@ export default function PrinciplesPage(props) {
           ) : null}
         </>
       </main>
-    </RootLayout>
+    //</RootLayout>
   );
 }
 

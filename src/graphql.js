@@ -212,7 +212,7 @@ export async function fetchGetNewsItemByChapter(chapter) {
           relatedChapters: {
             some: {
               slug: {
-                equals: `/chapters/${chapter.toLowerCase()}`,
+                equals: `${chapter.toLowerCase()}`,
               },
             },
           },
@@ -260,7 +260,7 @@ export async function fetchGetNewsItemByCategoryAndChapter(category, chapter) {
           },
         ],
         categoryTitle: `${category}`,
-        relatedChapterSlug: `/chapters/${chapter.toLowerCase()}`
+        relatedChapterSlug: `${chapter.toLowerCase()}`
       },
     });
 

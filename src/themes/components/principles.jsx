@@ -10,7 +10,7 @@ export default function Principles({ content: chapterContent }) {
   const handleToggleCardsVisibility = () => {
     setShowAllCards(!showAllCards);
   };
-
+  console.log('get', chapterContentProp)
   return (
     <main className="flex flex-column flex-align-center principles margin-t--s">
       {chapterContentProp ? (
@@ -30,25 +30,24 @@ export default function Principles({ content: chapterContent }) {
               <h4 className={"color-grey-400"}>
                 {chapterContentProp.groups[0].groupTitle}
               </h4>
-              <div className="flex flex-row flex-wrap flex-justify-center flex-align-center">
+              <div className="principles-container flex flex-row flex-wrap flex-justify-center flex-align-center">
                 {chapterContentProp.groups[0].principles.map((principle) => (
-                  <div key={principle.id} className="card-wrapper" >
-                    
-                    <PrinciplesCard
-                      title={
-                        principle.principleNumber.number +
-                        ". " +
-                        principle.title
-                      }
-                      url={"/principles" + principle.slug}
+                  <PrinciplesCard
+                    key={principle.id}
+                    title={
+                      principle.principleNumber.number +
+                      ". " +
+                      principle.title
+                    }
+                    url={"/principles" + principle.slug}
 
-                      img={
-                        principle.image && principle.image.url
-                          ? principle.image.url
-                          : ""
-                      }
-                    />
-                  </div>
+                    img={
+                      principle.image && principle.image.url
+                        ? principle.image.url
+                        : ""
+                    }
+                  />
+
                 ))}
               </div>
             </>

@@ -28,7 +28,7 @@ export default function TestNavBar() {
   }
 
   return (
-    <header className='navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-white'>
+    <header className='navbar flex flex-row flex-justify-between flex-align-center padding-lr--xl bg-white'>
       <div className='navbar-icon margin-l--m'>
         <Link className='pointer' href='/'>
           <Image src={Icon} width={150} height={42} alt='D4CR' />

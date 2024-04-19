@@ -1,15 +1,19 @@
 @import '../variables/color-variables.scss';
 
 .principles {
-    .card-wrapper {
-        transition: transform 0.2s ease-in-out;
+    // .card-wrapper {
+    //     //transition: transform 0.2s ease-in-out;
 
-    }
+    // }
 
-    .card-wrapper:hover,
-    .card-wrapper:focus {
-        transform: scale(1.05);
-        transition: transform 0.2s ease-in-out;
+    // .card-wrapper:hover,
+    // .card-wrapper:focus {
+    //     // transform: scale(1.05);
+    //     // transition: transform 0.2s ease-in-out;
+    // }
+    .principles-container {
+        align-items: stretch;
+        height: auto;
     }
 
     .hide-cards {
