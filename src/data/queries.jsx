@@ -296,100 +296,122 @@ export const PRINCIPLES_BY_NUMBER = gql`
 `;
 
 export const GET_ALL_NEWS_BY_CHAPTER = gql`
-query NewsItems($orderBy: [NewsOrderByInput!]!, $where: NewsWhereInput!) {
-  newsItems(orderBy: $orderBy, where: $where) {
-    id
-    title
-    slug
-    image
-    createdAt
-    newsCategory {
-      categoryTitle
-    }
-    resourcesTitle
-    resourcesPreamble
-    resources {
-      url
-      title
-      resourceType {
-        type
-        icon
-      }
-      image
-      createdAt
-    }
-    sections
-  }
-}
-`;
-
-
-export const GET_ALL_NEWS_BY_CATEGORY = gql`
-query NewsItems($orderBy: [NewsOrderByInput!]!, $categoryTitle: String!) {
-  newsItems(orderBy: $orderBy, where: { newsCategory: { categoryTitle: { equals: $categoryTitle } } }) {
-     id
-     title
-     slug
-     status
-     image
-     sections
-     newsCategory {
-       categoryTitle
-     }
-     relatedChapters {
-       title
-     }
-     resourcesTitle
-     resourcesPreamble
-     resources {
-         id
-         title
-         resourceType {
-         type
-         }
-         image
-         url
- 
-     }
-     createdAt
-   }
- }
- 
-`;
-
-export const GET_ALL_NEWS_BY_CATEGORY_AND_CHAPTER = gql`
-query NewsItems($orderBy: [NewsOrderByInput!]!, $categoryTitle: String!, $relatedChapterSlug: String) {
-  newsItems(orderBy: $orderBy, where: { 
-    newsCategory: { categoryTitle: { equals: $categoryTitle } }, 
-  relatedChapters: { some: { slug: { equals: $relatedChapterSlug } } }
-  }) {
-    id
-    title
-    slug
-    status
-    image
-    sections
-    newsCategory {
-      categoryTitle
-    }
-    relatedChapters {
+  query NewsItems($orderBy: [NewsOrderByInput!]!, $where: NewsWhereInput!) {
+    newsItems(orderBy: $orderBy, where: $where) {
+      id
       title
       slug
+      image
+      createdAt
+      newsCategory {
+        categoryTitle
+      }
+      resourcesTitle
+      resourcesPreamble
+      resources {
+        url
+        title
+        resourceType {
+          type
+          icon
+        }
+        image
+        createdAt
+      }
+      sections
     }
-    resourcesTitle
-    resourcesPreamble
-    resources {
+  }
+`;
+
+export const GET_ALL_NEWS_BY_CATEGORY = gql`
+  query NewsItems($orderBy: [NewsOrderByInput!]!, $categoryTitle: String!) {
+    newsItems(
+      orderBy: $orderBy
+      where: { newsCategory: { categoryTitle: { equals: $categoryTitle } } }
+    ) {
+      id
+      title
+      slug
+      status
+      image
+      sections
+      newsCategory {
+        categoryTitle
+      }
+      relatedChapters {
+        title
+      }
+      resourcesTitle
+      resourcesPreamble
+      resources {
         id
         title
         resourceType {
-        type
+          type
         }
         image
         url
-
+      }
+      createdAt
     }
-    createdAt
   }
-}
+`;
 
+export const GET_ALL_NEWS_BY_CATEGORY_AND_CHAPTER = gql`
+  query NewsItems(
+    $orderBy: [NewsOrderByInput!]!
+    $categoryTitle: String!
+    $relatedChapterSlug: String
+  ) {
+    newsItems(
+      orderBy: $orderBy
+      where: {
+        newsCategory: { categoryTitle: { equals: $categoryTitle } }
+        relatedChapters: { some: { slug: { equals: $relatedChapterSlug } } }
+      }
+    ) {
+      id
+      title
+      slug
+      status
+      image
+      sections
+      newsCategory {
+        categoryTitle
+      }
+      relatedChapters {
+        title
+        slug
+      }
+      resourcesTitle
+      resourcesPreamble
+      resources {
+        id
+        title
+        resourceType {
+          type
+        }
+        image
+        url
+      }
+      createdAt
+    }
+  }
+`;
+
+export const GET_PEOPLE_BY_IDS = gql`
+  query PeopleList($where: PeopleWhereInput!) {
+    peopleList(where: $where) {
+      id
+      fullName
+      image
+      city
+      country
+      role
+      socialMediaIcon1
+      socialMediaUrl1
+      socialMediaIcon2
+      socialMediaUrl2
+    }
+  }
 `;
