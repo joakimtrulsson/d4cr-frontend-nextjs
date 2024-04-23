@@ -1,7 +1,7 @@
 import '../themes/sources/scss/app.scss';
-import NavBar from '../components/Navbar';
 import MenuProvider from '../context/MenuProvider';
-import Footer from '../components/Footer';
+import NavBar from '../components/navbar';
+import Footer from '../components/footer';
 
 function MyApp({ Component, pageProps }) {
   return (
