@@ -225,7 +225,6 @@ export const CASES_ALL_DESC_QUERY = gql`
       sections
       caseImage
       quote
-      principles
       resourcesTitle
       resourcesPreamble
       resources {
