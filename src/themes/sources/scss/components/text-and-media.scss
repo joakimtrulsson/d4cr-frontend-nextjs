@@ -58,21 +58,24 @@
                     position: absolute;
                     top: -2%;
                     right: -2%;
-                    height: 5vh;
-                    width: 5vh;
+                    height: 1.8em; /* Adjust size as needed */
+                    width: 1.8em;
+                    font-size: 1.1em;
+                    line-height: 1em;
                     border-radius: 50%;
                     background-color: #d4eae9;
                     border: none;
                     transform: scale(1);
-                    transition: transform 0.4s ease-in-out;
+                    text-align: center;
+                    transition: background-color 0.4s ease-in-out, transform 0.4s ease-in-out;
                     font-weight: 600;
                     font-family: Courier 'Courier New';
                     z-index: 3;
-
+                    
                     &:hover,
                     &:focus {
                         transform: scale(1.1);
-                        transition: transform 0.4s ease-in-out;
+                        transition: background-color 0.4s ease-in-out, transform 0.4s ease-in-out;
                         background-color: #b7f0ee;
 
                     }

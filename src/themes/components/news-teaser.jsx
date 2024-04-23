@@ -12,7 +12,7 @@ export default function NewsTeaser({ content }) {
 
   const newsVar = content.selectedNews
   const [data, setData] = useState(null);
-  
+
   useEffect(() => {
     async function fetchData() {
       let response;
@@ -38,39 +38,41 @@ export default function NewsTeaser({ content }) {
 
     fetchData();
   }, [newsVar.chapter, newsVar.category]);
-
+  console.log(data)
 
   return (
-    <div className="news-teaser-container flex flex-column flex-justify-center flex-align-center 
+    <>
+      {data ? (<div className="news-teaser-container flex flex-column flex-justify-center flex-align-center 
         padding-tb--xxl">
 
-      <div className='animation-background'>
-        <Image src={Animation} alt="Animated GIF" />
-      </div>
+        <div className='animation-background'>
+          <Image src={Animation} alt="Animated GIF" />
+        </div>
 
-      <div className='text-align-center heading-text'>
-        <h2 className='margin-t--xxs margin--zero'>{content.title}</h2>
-        <WYSIWYG content={content.subHeading ? content.subHeading : content.preamble} />
+        <div className='text-align-center heading-text'>
+          <h2 className='margin-t--xxs margin--zero'>{content.title}</h2>
+          <WYSIWYG content={content.subHeading ? content.subHeading : content.preamble} />
 
-      </div>
+        </div>
 
-      <div className='news-card-container  margin-tb--s flex flex-row
+        <div className='news-card-container  margin-tb--s flex flex-row
             flex-justify-center flex-align-center'>
 
-        {data?.newsItems?.slice(0, 3).map(item => (
-          <Newscard key={item.id} type={item.newsCategory.categoryTitle} title={item.title} url={item.slug} imageUrl={item.image?.url} />
-        ))
-        }
+          {data?.newsItems?.slice(0, 3).map(item => (
+            <Newscard key={item.id} type={item.newsCategory.categoryTitle} title={item.title} url={item.slug} imageUrl={item.image?.url} />
+          ))
+          }
 
-      </div>
+        </div>
 
-      <div className='button-wrapper margin-tb--s'>
-        <Link className='no-decoration' href="../news">
-          <SecondaryButton title={"SEE ALL"} />
-        </Link>
-      </div>
+        <div className='button-wrapper margin-tb--s'>
+          <Link className='no-decoration' href="../news">
+            <SecondaryButton title={"SEE ALL"} />
+          </Link>
+        </div>
 
-    </div>
+      </div>) : (null)}
+    </>
   );
 };
 
