@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ArrowRight from "../sources/assets/graphics/icons/arrow-right.svg";
-///får inte preamble med queriet/subheader på pages
-const PrinciplesCard = ({ title, url, img }) => {
+
+const PrinciplesCard = ({ title, url, img, subHeader }) => {
 
   return (
     <div
@@ -19,24 +19,28 @@ const PrinciplesCard = ({ title, url, img }) => {
           />
         ) : (
           <div className="no-image-placeholder"></div>
-          // Or simply do not render anything or render a placeholder div
+        
         )}
       </div>
       <div className="text-container">
         <div className="title-text">
           <a className="no-decoration" href={url}>
-            <h3 className="color-grey-700 text-overflow">{title}</h3>
+            <h4 className="color-grey-700">{title}</h4>
           </a>
         </div>
         <div className="sub-header">
           <a className="no-decoration" href={url}>
-            <h5 className="color-grey-700 text-overflow">PEFEF F EFEF EFFE EF EF EF E FEF</h5>
+            <p className="color-grey-700">{subHeader}</p>
           </a>
         </div>
         <div className="arrow-text">
           <a href={url}>
-            Learn more
-            <Image className="arrow-right" src={ArrowRight} alt="link arrow" />
+            <p>Learn more</p>
+            <Image className="arrow-right"
+              src={ArrowRight}
+             
+              height={14}
+              alt="link arrow" />
           </a>
         </div>
       </div>
