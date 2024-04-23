@@ -10,7 +10,6 @@ export default function PeopleCard({ data }) {
   const { library, config } = require('@fortawesome/fontawesome-svg-core');
   library.add(fab);
 
-  console.log(data);
   return (
     <div className='people-card bg-yellow-50 borderradius--xxs margin--xs'>
       <div className='image-wrapper bg-yellow-100'>

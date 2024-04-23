@@ -59,7 +59,7 @@ export default function NavBar() {
           data.navigation.map((group, index) => (
             <>
               {group.links.length === 1 ? (
-                <div>
+                <div key={index}>
                   <Link href={group.links[0].url}>
                     <button
                       className={`nav-button ${

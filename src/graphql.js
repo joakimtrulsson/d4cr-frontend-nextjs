@@ -250,7 +250,7 @@ export async function fetchGetNewsItemByCategory(category) {
 }
 
 export async function fetchGetNewsItemByCategoryAndChapter(category, chapter) {
-  console.log(chapter);
+
   try {
     const response = await client.query({
       query: GET_ALL_NEWS_BY_CATEGORY_AND_CHAPTER,
