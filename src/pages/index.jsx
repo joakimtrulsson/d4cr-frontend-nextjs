@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchMainMenuData, fetchFooterMenuData, fetchFrontPageData } from '../graphql';
+import { fetchFrontPageData } from '../graphql';
 import HeroComponent from '../themes/components/hero-frontpage';
 import SectionRenderer from '../themes/sources/js/section-renderer';
 import RootLayout from '../app/layout';
@@ -33,9 +33,9 @@ export default function FrontPage(props) {
 export async function getServerSideProps({ resolvedUrl }) {
   try {
     const pageData = await fetchFrontPageData();
-    const navMenuData = await fetchMainMenuData();
-    const footerMenuData = await fetchFooterMenuData();
-    return { props: { navMenuData, footerMenuData, pageData, resolvedUrl } };
+    // const navMenuData = await fetchMainMenuData();
+    // const footerMenuData = await fetchFooterMenuData();
+    return { props: { pageData, resolvedUrl } };
   } catch (error) {
     console.error('(index.jsx) Error fetching data:', error);
     return { notFound: true };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
+
 import {
   fetchMainMenuData,
   fetchFooterMenuData,
@@ -126,15 +125,15 @@ function RenderAllCasesContent(allCasesData, title) {
   );
 }
 
-async function fetchMenuData() {
-  const navMenuData = await fetchMainMenuData();
-  const footerMenuData = await fetchFooterMenuData();
-  return { navMenuData, footerMenuData };
-}
+// async function fetchMenuData() {
+//   const navMenuData = await fetchMainMenuData();
+//   const footerMenuData = await fetchFooterMenuData();
+//   return { navMenuData, footerMenuData };
+// }
 
 export async function getServerSideProps({ resolvedUrl }) {
   try {
-    const { navMenuData, footerMenuData } = await fetchMenuData();
+    // const { navMenuData, footerMenuData } = await fetchMenuData();
 
     let specificData;
     switch (resolvedUrl) {
@@ -145,7 +144,7 @@ export async function getServerSideProps({ resolvedUrl }) {
         specificData = { pageData: await fetchGetPageBySlugData(resolvedUrl) };
     }
     // console.log(specificData);
-    return { props: { navMenuData, footerMenuData, resolvedUrl, ...specificData } };
+    return { props: { resolvedUrl, ...specificData } };
   } catch (error) {
     console.error('([slug].jsx) Error fetching data:', error);
     return { props: { error: error.message } };
