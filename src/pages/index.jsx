@@ -1,5 +1,4 @@
 import React from 'react';
-// import { fetchFrontPageData } from '../graphql';
 import HeroComponent from '../themes/components/hero-frontpage';
 import SectionRenderer from '../themes/sources/js/section-renderer';
 import RootLayout from '../app/layout';
@@ -12,13 +11,7 @@ export default function FrontPage() {
   const { loading, error, data } = useQuery(FRONT_PAGE_QUERY);
 
   return (
-    <RootLayout
-      // navMenuData={props.navMenuData}
-      // footerMenuData={null}
-      tabTitle={null}
-      // resolvedUrl={props.resolvedUrl}
-      language='en_GB'
-    >
+    <RootLayout tabTitle={null} language='en_GB'>
       <main className='site-content flex flex-column flex-align-center flex-justify-start'>
         {data.frontPage ? <HeroComponent prop={data.frontPage} /> : null}
 
@@ -42,10 +35,7 @@ export async function getServerSideProps({ resolvedUrl }) {
     await apolloClient.query({
       query: FRONT_PAGE_QUERY,
     });
-    // const pageData = await fetchFrontPageData();
-    // const navMenuData = await fetchMainMenuData();
-    // const footerMenuData = await fetchFooterMenuData();
-    // return { props: { pageData, resolvedUrl } };
+
     return addApolloState(apolloClient, {
       props: {},
     });

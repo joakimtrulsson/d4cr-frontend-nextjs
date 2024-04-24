@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { fetchAllNews } from '../../graphql';
 import RootLayout from '../../app/layout';
 import Newscard from '../../themes/components/news-card';
 
-export default function NewsPage(props) {
+import { useQuery } from '@apollo/client';
+import { initializeApollo, addApolloState } from '../../data/apollo-client';
+import { GET_ALL_NEWS_QUERY } from '../../data/queries';
+
+export default function NewsPage() {
+  const { loading, error, data } = useQuery(GET_ALL_NEWS_QUERY, {
+    variables: { orderBy: { createdAt: 'desc' } },
+  });
+
   const title = 'News';
 
   return (
     <RootLayout tabTitle={title} language='en_GB'>
-      <RenderAllNews allNews={props.allNews} newsCategories={props.newsCategories} />
+      <RenderAllNews allNews={data.newsItems} newsCategories={data.newsCategories} />
     </RootLayout>
   );
 }
@@ -90,7 +97,7 @@ function RenderAllNews({ allNews, newsCategories }) {
               type={news.newsCategory.categoryTitle}
               title={news.title}
               url={`${news.slug}`}
-              alt="news image"
+              alt='news image'
             />
           ))
         )}
@@ -145,14 +152,16 @@ function RenderAllNews({ allNews, newsCategories }) {
 
 export async function getServerSideProps({ resolvedUrl }) {
   try {
-    const { newsItems: allNews, newsCategories: newsCategories } = await fetchAllNews();
+    const apolloClient = initializeApollo();
 
-    return {
-      props: {
-        allNews,
-        newsCategories,
-      },
-    };
+    await apolloClient.query({
+      query: GET_ALL_NEWS_QUERY,
+      variables: { orderBy: { createdAt: 'desc' } },
+    });
+
+    return addApolloState(apolloClient, {
+      props: {},
+    });
   } catch (error) {
     console.error('Error fetching data:', error);
     return { props: { error: error.message } };

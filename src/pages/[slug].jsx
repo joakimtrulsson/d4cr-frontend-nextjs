@@ -5,7 +5,7 @@ import {
   fetchFooterMenuData,
   fetchGetPageBySlugData,
   fetchGetAllCases,
-} from '../graphql';
+} from '../graphql.js';
 import SectionRender from '../themes/sources/js/section-renderer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
