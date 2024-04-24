@@ -18,13 +18,11 @@ export default function ChapterSlugPage({ resolvedUrl }) {
 
   const chapters = data?.chapters[0] || null;
 
-  // Get current chapter
   const currentLanguage = {
     chapterLanguage: chapters.chapterLanguage,
     slug: chapters.slug,
   };
 
-  // // Get the translated chapters
   const chapterLanguages = chapters.translatedChapters
     ?.filter(
       (chapter) =>
@@ -32,7 +30,6 @@ export default function ChapterSlugPage({ resolvedUrl }) {
     )
     .map((chapter) => ({ chapterLanguage: chapter.chapterLanguage, slug: chapter.slug }));
 
-  // Check if the current chapter is not in the array, and if it isn't, then add it
   if (
     currentLanguage &&
     !chapterLanguages.some(
@@ -44,7 +41,6 @@ export default function ChapterSlugPage({ resolvedUrl }) {
     chapterLanguages.push(currentLanguage);
   }
 
-  // Sort the chapterLanguages array alphabetically based on chapterLanguage
   chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage));
 
   return (
@@ -54,7 +50,7 @@ export default function ChapterSlugPage({ resolvedUrl }) {
       language={currentLanguage.chapterLanguage}
     >
       <main className='site-content chapter-main flex flex-column flex-align-center flex-justify-start'>
-        {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
+        {chapterLanguages.length > 1 && (
           <div className='language-tabs margin-tb--s'>
             {chapterLanguages.map((chapter, index) => (
               <Link href={chapter.slug} key={index}>
@@ -80,7 +76,7 @@ export default function ChapterSlugPage({ resolvedUrl }) {
           <Image src={AnimationRight} alt='Animated GIF' />
         </div>
 
-        {chapters.heroImage.url && ( // show hero image if exists
+        {chapters.heroImage.url && (
           <div className='hero-image-medium margin-t--s borderradius--xxxs'>
             <Image
               className='center-image'
@@ -104,16 +100,11 @@ export default function ChapterSlugPage({ resolvedUrl }) {
         </div>
 
         {chapters.sections &&
-          chapters.sections.map(
-            (
-              section,
-              index // Render all this chapter's sections
-            ) => (
-              <section key={index} className='margin-tb--xs'>
-                <SectionRender section={section} />
-              </section>
-            )
-          )}
+          chapters.sections.map((section, index) => (
+            <section key={index} className='margin-tb--xs'>
+              <SectionRender section={section} />
+            </section>
+          ))}
       </main>
     </RootLayout>
   );

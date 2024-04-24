@@ -1,8 +1,3 @@
-// import {
-//   fetchCaseItemBySlug,
-//   fetchMainMenuData,
-//   fetchFooterMenuData,
-// } from '../../graphql';
 import SectionRenderer from '../../themes/sources/js/section-renderer.js';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import ResourcesSection from '../../themes/components/resource-section.jsx';

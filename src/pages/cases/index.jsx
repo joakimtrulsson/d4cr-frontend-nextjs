@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { fetchGetAllCases } from '../../graphql';
 import CaseCard from '../../themes/components/case-card';
 
 import { useQuery } from '@apollo/client';
@@ -35,12 +33,10 @@ export default function RenderAllCasesContent() {
 export async function getServerSideProps({ resolvedUrl }) {
   const apolloClient = initializeApollo();
   try {
-    //const { navMenuData, footerMenuData } = await fetchMenuData();
     await apolloClient.query({
       query: CASES_ALL_DESC_QUERY,
     });
-    // const allCasesData = await fetchGetAllCases();
-    // return { props: { resolvedUrl, allCasesData } };
+
     return addApolloState(apolloClient, {
       props: {},
     });

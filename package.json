@@ -4,6 +4,9 @@
   "engines": {
     "node": "20.x"
   },
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
