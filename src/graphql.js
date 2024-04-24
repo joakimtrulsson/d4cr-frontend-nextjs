@@ -132,7 +132,7 @@ export async function fetchGetNewsItemBySlugData(resolvedUrl) {
 export async function fetchFrontPageData() {
   const testClient = initializeApollo();
   try {
-    const { data } = await testClient.query({
+    const { data } = await client.query({
       query: FRONT_PAGE_QUERY,
     });
 
