@@ -19,6 +19,8 @@ import {
   GET_PEOPLE_BY_IDS,
 } from './data/queries';
 
+import initializeApollo from './initApollo';
+
 export async function fetchMainMenuData() {
   try {
     const { data } = await client.query({
@@ -128,6 +130,7 @@ export async function fetchGetNewsItemBySlugData(resolvedUrl) {
 }
 
 export async function fetchFrontPageData() {
+  const testClient = initializeApollo();
   try {
     const { data } = await client.query({
       query: FRONT_PAGE_QUERY,
@@ -250,7 +253,6 @@ export async function fetchGetNewsItemByCategory(category) {
 }
 
 export async function fetchGetNewsItemByCategoryAndChapter(category, chapter) {
-  console.log(chapter);
   try {
     const response = await client.query({
       query: GET_ALL_NEWS_BY_CATEGORY_AND_CHAPTER,

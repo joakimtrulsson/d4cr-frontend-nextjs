@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
+
 import {
   fetchMainMenuData,
   fetchFooterMenuData,
@@ -102,7 +101,7 @@ async function fetchMenuData() {
 
 export async function getServerSideProps({ resolvedUrl }) {
   try {
-    const { navMenuData, footerMenuData } = await fetchMenuData();
+    // const { navMenuData, footerMenuData } = await fetchMenuData();
 
     const pageData = await fetchGetPageBySlugData(resolvedUrl) ;
 

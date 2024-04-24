@@ -1,39 +1,24 @@
-import { fetchMainMenuData } from '../graphql';
 import '../themes/sources/scss/app.scss';
-import TestNavBar from '../components/TestNavBar';
 import MenuProvider from '../context/MenuProvider';
-import TestFooter from '../components/TestFooter';
+import NavBar from '../components/navbar';
+import Footer from '../components/footer';
+
+// Test
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '../data/apollo-client';
 
 function MyApp({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps);
+
   return (
-    <MenuProvider>
-      <TestNavBar />
-      <Component {...pageProps} />
-      <TestFooter />
-    </MenuProvider>
+    <ApolloProvider client={apolloClient}>
+      <MenuProvider>
+        <NavBar />
+        <Component {...pageProps} />
+        <Footer />
+      </MenuProvider>
+    </ApolloProvider>
   );
 }
-
-export async function getStaticProps() {
-  try {
-    const navMenuData = await fetchMainMenuData();
-
-    return { props: { navMenuData } };
-  } catch (error) {
-    console.error('(_app.jsx) Error fetching data:', error);
-    return { notFound: true };
-  }
-}
-
-// MyApp.getInitialProps = async () => {
-//   try {
-//     const navMenuData = await fetchMainMenuData();
-//     // const testDataToNavbar = 'HELLO WORLD!';
-//     return {};
-//   } catch (error) {
-//     console.error('(_app.jsx) Error fetching data:', error);
-//     return { testDataToNavbar: undefined };
-//   }
-// };
 
 export default MyApp;

@@ -98,60 +98,50 @@
 
     }
 
-    .media-content {
-        width: 50%;
-        height: 25rem;
-        max-width: 53rem;
-        overflow: hidden;
-        position: relative;
-        object-fit: cover;
-    }
-
-
+  .media-content {
+    width: 50%;
+    height: 25rem;
+    max-width: 53rem;
+    overflow: hidden;
+    position: relative;
+    object-fit: cover;
+  }
 }
 
 @media (min-width: 600px) {
-
-    .text-and-media-container {
-
-        .text-content {
-
-            .clicked {
-
-                .modal {
-                    position: fixed;
-                    top: 2%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 50%;
-                    height: 95vh;
-                    animation: slideInFromBottomForm 0.5s ease-out forwards;
-
-                }
-            }
+  .text-and-media-container {
+    .text-content {
+      .clicked {
+        .modal {
+          position: fixed;
+          top: 2%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 50%;
+          height: 95vh;
+          animation: slideInFromBottomForm 0.5s ease-out forwards;
         }
-
-
+      }
     }
+  }
 }
 
 @keyframes slideInFromBottomForm {
-    from {
-        transform: translate(-50%, 100vh);
-    }
+  from {
+    transform: translate(-50%, 100vh);
+  }
 
-    to {
-        transform: translate(-50%, 0vh);
-
-    }
+  to {
+    transform: translate(-50%, 0vh);
+  }
 }
 
 @keyframes slideOutForm {
-    from {
-        transform: translate(-50%, -50%);
-    }
+  from {
+    transform: translate(-50%, -50%);
+  }
 
-    to {
-        transform: translate(-50%, 100vh);
-    }
+  to {
+    transform: translate(-50%, 100vh);
+  }
 }

@@ -1,7 +1,4 @@
 'use client';
-// import React from 'react';
-import { useContext } from 'react';
-import MenuContext from '../context/MenuContext';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,10 +8,7 @@ import chevronRight from '../themes/sources/assets/graphics/icons/chevron-right-
 import chevronUp from '../themes/sources/assets/graphics/icons/chevron-up-orange-500.svg';
 import chevronDown from '../themes/sources/assets/graphics/icons/chevron-down-grey-500.svg';
 
-export default function TestNavBar() {
-  const menuContext = useContext(MenuContext);
-  const data = menuContext ? menuContext.mainMenu : null;
-
+export default function NavBarOld({ data }) {
   const [activeDropdownIndex, setActiveDropdownIndex] = useState(null);
   const [hoveredButton, setHoveredButton] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
