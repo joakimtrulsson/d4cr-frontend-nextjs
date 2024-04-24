@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  fetchMainMenuData,
-  fetchFooterMenuData,
-  fetchGetPageBySlugData,
-  fetchGetAllCases,
-} from '../graphql.js';
 import SectionRender from '../themes/sources/js/section-renderer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -14,36 +8,30 @@ import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
 import RootLayout from '../app/layout';
 
+import { useQuery } from '@apollo/client';
+import { initializeApollo, addApolloState } from '../data/apollo-client';
+import { GET_PAGE_BY_SLUG_QUERY } from '../data/queries.jsx';
+
 //kolla textfil vilka sidor man ska kolla modal url slack share osv
 
-export default function SlugPage(props) {
-  //const { resolvedUrl } = props;
-  //console.log("slug", props.pageData.ctaOneUrl, props.pageData.ctaTwoUrl)
-  //console.log("([slug].jsx) :", props.allCasesData, props.resolvedUrl) // remove this later!
+export default function SlugPage({ resolvedUrl }) {
+  const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
+    variables: { where: { slug: resolvedUrl } },
+  });
 
-  const title = props.pageData ? props.pageData.title : 'Default Title';
-
-  // if (!props.navMenuData || (!props.pageData && !props.allCasesData)) { // add footerMenuData here please!
-  //     return notFound();
-  // }
+  const title = data.page ? data.page.title : 'Default Title';
 
   return (
-    <RootLayout
-      navMenuData={props.navMenuData}
-      footerMenuData={null}
-      tabTitle={title}
-      resolvedUrl={props.resolvedUrl}
-      language='en_GB'
-    >
-      {RenderPageDataContent(props.pageData)}
+    <RootLayout tabTitle={title} resolvedUrl={resolvedUrl} language='en_GB'>
+      {RenderPageDataContent(data.page)}
     </RootLayout>
   );
 }
 
 function RenderPageDataContent(pageData) {
-  if (!pageData) {
-    return notFound();
-  }
+  // if (!pageData) {
+  //   return notFound();
+  // }
   return (
     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
       {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
@@ -91,19 +79,19 @@ function RenderPageDataContent(pageData) {
   );
 }
 
-async function fetchMenuData() {
-  const navMenuData = await fetchMainMenuData();
-  const footerMenuData = await fetchFooterMenuData();
-  return { navMenuData, footerMenuData };
-}
+export async function getServerSideProps({ req }) {
+  const resolvedUrl = req.url;
+  const apolloClient = initializeApollo();
 
-export async function getServerSideProps({ resolvedUrl }) {
   try {
-    // const { navMenuData, footerMenuData } = await fetchMenuData();
+    await apolloClient.query({
+      query: GET_PAGE_BY_SLUG_QUERY,
+      variables: { where: { slug: resolvedUrl } },
+    });
 
-    const pageData = await fetchGetPageBySlugData(resolvedUrl);
-
-    return { props: { navMenuData, footerMenuData, resolvedUrl, pageData } };
+    return addApolloState(apolloClient, {
+      props: { resolvedUrl },
+    });
   } catch (error) {
     console.error('([slug].jsx) Error fetching data:', error);
     return { props: { error: error.message } };
