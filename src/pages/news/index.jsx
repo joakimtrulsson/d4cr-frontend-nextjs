@@ -151,9 +151,8 @@ function RenderAllNews({ allNews, newsCategories }) {
 }
 
 export async function getServerSideProps({ resolvedUrl }) {
+  const apolloClient = initializeApollo();
   try {
-    const apolloClient = initializeApollo();
-
     await apolloClient.query({
       query: GET_ALL_NEWS_QUERY,
       variables: { orderBy: { createdAt: 'desc' } },

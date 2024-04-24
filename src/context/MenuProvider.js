@@ -7,7 +7,7 @@ function MenuProvider({ children }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const navbarData = await fetchMainMenuData();
+      // const navbarData = await fetchMainMenuData();
       const data = await fetchAllMenuData();
 
       setAllData(data);
