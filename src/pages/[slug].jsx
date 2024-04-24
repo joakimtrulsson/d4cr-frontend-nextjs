@@ -79,8 +79,8 @@ function RenderPageDataContent(pageData) {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const resolvedUrl = req.url;
+export async function getServerSideProps({ params }) {
+  const resolvedUrl = `/${params.slug}`;
   const apolloClient = initializeApollo();
 
   try {

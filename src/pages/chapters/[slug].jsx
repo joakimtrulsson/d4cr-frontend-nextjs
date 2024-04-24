@@ -119,9 +119,9 @@ export default function ChapterSlugPage({ resolvedUrl }) {
   );
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ params }) {
   const apolloClient = initializeApollo();
-  const resolvedUrl = req.url;
+  const resolvedUrl = `/chapters/${params.slug}`;
 
   try {
     await apolloClient.query({

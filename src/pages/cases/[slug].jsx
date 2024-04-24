@@ -63,12 +63,6 @@ export async function getServerSideProps({ params }) {
   const apolloClient = initializeApollo();
   const resolvedUrl = `/cases/${params.slug}`;
   try {
-    // const cases = await fetchCaseItemBySlug(resolvedUrl);
-
-    // if (!cases) {
-    //   return null;
-    // }
-
     await apolloClient.query({
       query: CASE_ITEM_BY_SLUG_QUERY,
       variables: {
@@ -80,7 +74,6 @@ export async function getServerSideProps({ params }) {
       },
     });
 
-    // return { props: { cases, navMenuData, footerMenuData, resolvedUrl } };
     return addApolloState(apolloClient, {
       props: { resolvedUrl },
     });
