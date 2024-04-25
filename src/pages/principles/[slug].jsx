@@ -87,7 +87,6 @@ export default function PrinciplesPage({ resolvedUrl }) {
     //   language='en_GB'
     // >
     <main className='outer-main-principle'>
-      nav between principles
       <div className='flex flex-row bg-turquoise-100 flex-justify-center navbar-principle-links'>
         {previousSlug ? (
           <a href={`./${previousSlug}`} className='links image-arrows'>

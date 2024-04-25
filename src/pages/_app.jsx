@@ -3,7 +3,6 @@ import MenuProvider from '../context/MenuProvider';
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
 
-// Test
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../data/apollo-client';
 import MetaHeader from '../components/meta-header';
@@ -22,13 +21,12 @@ function MyApp({ Component, pageProps }) {
       <ApolloProvider client={apolloClient}>
         <MenuProvider>
           <div className='site-container'>
-            <div className='site-container__top'>
+            <div className='site-content'>
               <NavBar />
-              {/* <main> */}
+
               <Component {...pageProps} />
-              {/* </main> */}
-              <Footer />
             </div>
+            <Footer />
           </div>
         </MenuProvider>
       </ApolloProvider>
