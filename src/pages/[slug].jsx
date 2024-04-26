@@ -20,8 +20,8 @@ export default function SlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
     variables: { where: { slug: resolvedUrl } },
   });
-  console.log(data)
-  const pageData = data
+  //console.log(data.page)
+  const pageData = data.page
   const url1 = pageData?.ctaOneUrl && ensureValidUrl(pageData.ctaOneUrl)
   const url2 = pageData?.ctaTwoUrl && ensureValidUrl(pageData.ctaTwoUrl)
 
@@ -45,20 +45,13 @@ export default function SlugPage({ resolvedUrl }) {
     }, 500);
   }
   const title = data.page ? data.page.title : 'Default Title';
-
+  if (!pageData) {
+    return notFound();
+  }
   return (
     <RootLayout tabTitle={title} resolvedUrl={resolvedUrl} language='en_GB'>
-      {RenderPageDataContent(data.page)}
-    </RootLayout>
-  );
-}
-
-function RenderPageDataContent(pageData) {
-  // if (!pageData) {
-  //   return notFound();
-  // }
-  return (
-    <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+      
+      <main className='site-content flex flex-column flex-align-center flex-justify-start'>
       {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
 
         {(pageData?.heroPreamble ||
@@ -127,9 +120,87 @@ function RenderPageDataContent(pageData) {
             </section>
           ))}
       </main>
-    
+    </RootLayout>
   );
 }
+
+/*function RenderPageDataContent(pageData) {
+  if (!pageData) {
+    return notFound();
+  }
+  return (
+    // <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+    //   {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
+
+    //     {(pageData?.heroPreamble ||
+    //       pageData?.ctaOneAnchorText ||
+    //       pageData?.ctaTwoUrlAnchorText) && (
+    //       <div className='flex flex-column flex-align-center flex-justify-center margin-b--xl width--m max-width-40 text-align-center'>
+    //         {pageData.heroPreamble && (
+    //           <DocumentRenderer document={pageData.heroPreamble.document} />
+    //         )}
+
+
+    //           <nav className='flex flex-row'>
+    //             {pageData.ctaOneAnchorText && url1 && (
+    //               (url1 === 'share' || url1 === 'slack') ? (
+    //                 <>
+    //                   <PrimaryButton className='margin-r--xxs' title={pageData.ctaOneAnchorText} onClick={clickedBtnCTA1} />
+    //                 </>
+    //               ) : (
+    //                 url1.startsWith("/") ? (
+    //                   <Link href={url1} passHref className='margin-lr--xxxs'>
+    //                     <PrimaryButton title={pageData.ctaOneAnchorText} />
+    //                   </Link>) :
+    //                   (< Link href={url1} className='margin-r--xxxs' rel="noopener noreferrer" target="_blank">
+    //                     <PrimaryButton title={pageData.ctaOneAnchorText} />
+    //                   </Link>)
+    //               )
+    //             )}
+
+    //             {pageData.ctaTwoUrlAnchorText && url2 && (
+    //               (url2 === 'share' || url2 === 'slack') ? (<>
+    //                 <SecondaryButton className='margin-r--xxs' title={pageData.ctaTwoUrlAnchorText} onClick={clickedBtnCTA2} />
+    //               </>) : (
+    //                 url2.startsWith("/") ? (
+    //                   <Link
+    //                     href={url2}
+    //                     passHref
+    //                     className='no-decoration margin-lr--xxxs'
+    //                   >
+    //                     <SecondaryButton title={pageData.ctaTwoUrlAnchorText} />
+    //                   </Link>) : (< Link href={url2} className='margin-r--xxxs' rel="noopener noreferrer" target="_blank">
+    //                     <PrimaryButton title={pageData.ctaTwoUrlAnchorText} />
+    //                   </Link>)
+    //               )
+    //             )}
+    //           </nav>
+
+
+    //         </div>
+    //       )}
+    //     < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
+    //       <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
+    //         <button onClick={exitModal} className="btn-exit-video">X</button>
+    //         <div className="box">
+    //           {shareOrSlack === 'slack' && <SlackForm />}
+    //           {shareOrSlack === 'share' && <PopupForm />}
+    //         </div>
+    //       </div>
+    //     </div>
+    //     {pageData?.sections &&
+    //       pageData?.sections.map((section, index) => (
+    //         <section
+    //           key={index}
+    //           className='flex flex-column flex-align-center flex-justify-center'
+    //         >
+    //           <SectionRender key={index} section={section} />
+    //         </section>
+    //       ))}
+    //   </main>
+    
+  );
+}*/
 
 export async function getServerSideProps({ params }) {
   const resolvedUrl = `/${params.slug}`;

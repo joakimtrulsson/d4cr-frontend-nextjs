@@ -7,14 +7,14 @@ import { useState } from 'react';
 import SlackForm from '../themes/components/popup-form-slack';
 import PopupForm from '../themes/components/popup-form-share';
 import Link from 'next/link'
-import {ensureValidUrl} from '../../src/themes/sources/js/modal-functions.js'
+import { ensureValidUrl } from '../../src/themes/sources/js/modal-functions.js'
 
 export default function Banner({ content }) {
 
   const { library } = require('@fortawesome/fontawesome-svg-core');
   library.add(fas);
 
-  const url = content.cta.url && ensureValidUrl(content.cta.url);
+  const url = content?.cta?.url && ensureValidUrl(content.cta.url);
 
   const [isClicked, setIsClicked] = useState(false)
   const [slideOut, setSlideOut] = useState(false)
@@ -61,15 +61,15 @@ export default function Banner({ content }) {
           />
         </div>
         {
-          (url === 'share' || url === 'slack') ? (
+          url && ((url === 'share' || url === 'slack') ? (
 
-            <PrimaryButton className='margin-r--xxs' title={content.cta.anchorText} onClick={clickedBtnCTA1} />
+            <PrimaryButton className='margin-r--xxs' title={content.cta?.anchorText} onClick={clickedBtnCTA1} />
 
           ) : (
             <Link href={url} className='margin-r--xxs'>
-              <PrimaryButton title={content.cta.anchorText} />
+              <PrimaryButton title={content.cta?.anchorText} />
             </Link>
-          )
+          ))
         }
       </div>
 
