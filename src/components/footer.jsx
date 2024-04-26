@@ -20,6 +20,25 @@ export default function Footer() {
   const { library } = require('@fortawesome/fontawesome-svg-core');
   library.add(fab);
 
+  const [isClicked, setIsClicked] = useState(false)
+  const [slideOut, setSlideOut] = useState(false)
+  const [shareOrSlack, setShareOrSlack] = useState('')
+
+  function clickedBtnMenu(url, e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('clicked')
+    setShareOrSlack(url)
+    setIsClicked(true);
+  }
+
+  function exitModal() {
+    setSlideOut(true);
+    setTimeout(() => {
+      setIsClicked(false);
+      setSlideOut(false);
+    }, 500);
+  }
   if (!menuContext) {
     return null;
   }
@@ -29,7 +48,7 @@ export default function Footer() {
     footerJoinUs: joinUsContent,
     footerMenu: footerMenuContent,
   } = menuContext;
-  //console.log(footerMenuContent.navigation)
+ 
   const rightArrowIcon = { width: '16', height: '14', color: getColorCode('') };
 
   const urlIconPairs = [];
@@ -78,35 +97,65 @@ export default function Footer() {
                       <ul className='no-bullets flex flex-column'>
                         {group.links &&
                           group.links.map((link, key) => (
-                            <Link key={key} className='no-decoration' href={link.url}>
-                              <li
-                                className='margin-tb--xxs color-orange-50 width--40'
-                                onMouseEnter={() =>
-                                  setHoveredItem({ index: index, key: key })
-                                }
-                                onMouseLeave={() =>
-                                  setHoveredItem({ index: null, key: null })
-                                }
-                              >
-                                <button className='button color-orange-50 flex flex-row'>
-                                  <span
-                                    className={`${hoveredItem === key
-                                      ? 'margin-r--xs'
-                                      : 'margin-r--xxs'
-                                      }`}
-                                  >
-                                    {link.anchorText}
-                                  </span>
-                                  <div className='icon-wrapper'>
-                                    <ArrowRightSvg
-                                      width={rightArrowIcon.width}
-                                      height={rightArrowIcon.height}
-                                      color={rightArrowIcon.color}
-                                    />
-                                  </div>
-                                </button>
-                              </li>
-                            </Link>
+                            (link.url === 'share' || link.url === 'slack') ? (
+                              <div key={key} className='no-decoration'>
+                                <li
+                                  className='margin-tb--xxs color-orange-50 width--40'
+                                  onMouseEnter={() =>
+                                    setHoveredItem({ index: index, key: key })
+                                  }
+                                  onMouseLeave={() =>
+                                    setHoveredItem({ index: null, key: null })
+                                  }
+                                >
+                                  <button className='button color-orange-50 flex flex-row' onClick={(e) => clickedBtnMenu(link.url, e)}>
+                                    <span
+                                      className={`${hoveredItem === key
+                                        ? 'margin-r--xs'
+                                        : 'margin-r--xxs'
+                                        }`}
+                                    >
+                                      {link.anchorText}
+                                    </span>
+                                    <div className='icon-wrapper'>
+                                      <ArrowRightSvg
+                                        width={rightArrowIcon.width}
+                                        height={rightArrowIcon.height}
+                                        color={rightArrowIcon.color}
+                                      />
+                                    </div>
+                                  </button>
+                                </li>
+                              </div>) : (
+                              <Link key={key} className='no-decoration' href={link.url}>
+                                <li
+                                  className='margin-tb--xxs color-orange-50 width--40'
+                                  onMouseEnter={() =>
+                                    setHoveredItem({ index: index, key: key })
+                                  }
+                                  onMouseLeave={() =>
+                                    setHoveredItem({ index: null, key: null })
+                                  }
+                                >
+                                  <button className='button color-orange-50 flex flex-row'>
+                                    <span
+                                      className={`${hoveredItem === key
+                                        ? 'margin-r--xs'
+                                        : 'margin-r--xxs'
+                                        }`}
+                                    >
+                                      {link.anchorText}
+                                    </span>
+                                    <div className='icon-wrapper'>
+                                      <ArrowRightSvg
+                                        width={rightArrowIcon.width}
+                                        height={rightArrowIcon.height}
+                                        color={rightArrowIcon.color}
+                                      />
+                                    </div>
+                                  </button>
+                                </li>
+                              </Link>)
                           ))}
                       </ul>
                     </nav>
@@ -124,12 +173,21 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
+        <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
+          <button onClick={exitModal} className="btn-exit-video">X</button>
+          <div className="box">
+            {shareOrSlack === 'slack' && <SlackForm />}
+            {shareOrSlack === 'share' && <PopupForm />}
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }
 
 const FooterMenuLink = ({ url, anchorText }) => {
-  console.log(url, anchorText)
+  
   const rightArrowIcon = { width: '16', height: '14', color: getColorCode('') };
 
 
