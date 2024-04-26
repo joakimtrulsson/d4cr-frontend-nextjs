@@ -9,11 +9,13 @@ import getColorCode from '../sources/js/color-code.js'
 import { useState, useEffect } from 'react'
 import PopupForm from './popup-form-share.jsx'
 import SlackForm from './popup-form-slack.jsx'
+import { ensureValidUrl } from '../sources/js/modal-functions.js'
 
 export default function TextMediaComponent({ content }) {
-    
-    const url1 = content.cta1?.url && content.cta1.url
-    const url2 = content.cta2?.url && content.cta2.url
+
+    const url1 = content.cta1?.url ? ensureValidUrl(content.cta1?.url) : content.cta1?.page
+    const url2 = content.cta2?.url ? ensureValidUrl(content.cta2?.url) : content.cta2?.page
+    //console.log(content.cta1 , url1)
     const [isClicked, setIsClicked] = useState(false)
     const [slideOut, setSlideOut] = useState(false)
     const [shareOrSlack, setShareOrSlack] = useState('')
@@ -61,8 +63,8 @@ export default function TextMediaComponent({ content }) {
 
                 <div className='text-content flex flex-column flex-nowrap width--s'> { /* text content */}
 
-                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>{content.title}</h2>
-                    <h3 className='heading-2 margin--zero color-orange-800'>{content.subHeading}</h3>
+                    <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>{content.subHeading}</h2>
+                    <h3 className='heading-2 margin--zero color-orange-800'>{content.title}</h3>
 
                     <DocumentRenderer document={content.preamble} />
 
@@ -74,12 +76,19 @@ export default function TextMediaComponent({ content }) {
                                 {content.cta1 && url1 && content.cta1.anchorText && (
                                     (url1 === 'share' || url1 === 'slack') ? (
                                         <>
-                                            <SecondaryButton title={content.cta1.anchorText} onClick={clickedBtnCTA1} />
+                                            <PrimaryButton title={content.cta1.anchorText} onClick={clickedBtnCTA1} />
                                         </>
                                     ) : (
-                                        <Link href={url1} className='margin-r--xxxs'>
-                                            <PrimaryButton title={content.cta1.anchorText} />
-                                        </Link>
+
+                                        content.cta1?.url ? (
+                                            <Link href={url1} className='margin-r--xxxs' rel="noopener noreferrer" target="_blank">
+                                                <PrimaryButton title={content.cta1.anchorText} />
+                                            </Link>) :
+                                            (
+                                                <Link href={url1} className='margin-r--xxxs'>
+                                                    <PrimaryButton title={content.cta1.anchorText} />
+                                                </Link>)
+
                                     )
                                 )}
 
@@ -88,10 +97,14 @@ export default function TextMediaComponent({ content }) {
                                         <>
                                             <SecondaryButton title={content.cta2.anchorText} onClick={clickedBtnCTA2} />
                                         </>
+                                    ) : (content.cta2?.url ? (
+                                        <Link href={url2} className='margin-r--xxxs' rel="noopener noreferrer" target="_blank">
+                                            <PrimaryButton title={content.cta2.anchorText} />
+                                        </Link>
                                     ) : (
                                         <Link className='no-decoration' href={url2}>
                                             <SecondaryButton title={content.cta2.anchorText} />
-                                        </Link>
+                                        </Link>)
                                     )
                                 )}
                             </nav>

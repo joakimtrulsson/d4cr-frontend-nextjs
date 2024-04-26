@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import { fetchFrontPageData } from '../graphql';
 import HeroComponent from '../themes/components/hero-frontpage';
 import SectionRenderer from '../themes/sources/js/section-renderer';
 import RootLayout from '../app/layout';
-
+import PrimaryButton from '../themes/components/buttons/primary-button.jsx'
+import SecondaryButton from '../themes/components/buttons/secondary-button.jsx'
+import Link from 'next/link'
 import { useQuery } from '@apollo/client';
 import { initializeApollo, addApolloState } from '../data/apollo-client';
 import { FRONT_PAGE_QUERY } from '../data/queries';
 
 export default function FrontPage() {
   const { loading, error, data } = useQuery(FRONT_PAGE_QUERY);
-
+  //console.log('index', data.frontPage, data.frontPage)
+  
+ 
   return (
     <RootLayout
       // navMenuData={props.navMenuData}

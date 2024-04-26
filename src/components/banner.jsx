@@ -5,21 +5,31 @@ import getColorCode from '../themes/sources/js/color-code';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import { useState } from 'react';
 import SlackForm from '../themes/components/popup-form-slack';
+import PopupForm from '../themes/components/popup-form-share';
+import Link from 'next/link'
+import {ensureValidUrl} from '../../src/themes/sources/js/modal-functions.js'
 
 export default function Banner({ content }) {
+
   const { library } = require('@fortawesome/fontawesome-svg-core');
   library.add(fas);
 
-  const [isClicked, setIsClicked] = useState(false);
-  const [slideOut, setSlideOut] = useState(false);
+  const url = content.cta.url && ensureValidUrl(content.cta.url);
 
-  function clickedBtn() {
+  const [isClicked, setIsClicked] = useState(false)
+  const [slideOut, setSlideOut] = useState(false)
+  const [shareOrSlack, setShareOrSlack] = useState('')
+
+  function clickedBtnCTA1(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('clicked')
+    setShareOrSlack(url)
     setIsClicked(true);
   }
 
-  function exitVideo() {
-    setSlideOut(true); // Start the slide-out animation
-    // Wait for the animation to complete before hiding the modal
+  function exitModal() {
+    setSlideOut(true);
     setTimeout(() => {
       setIsClicked(false);
       setSlideOut(false);
@@ -50,29 +60,30 @@ export default function Banner({ content }) {
             }
           />
         </div>
+        {
+          (url === 'share' || url === 'slack') ? (
 
-        <div className='margin-r--xxs'>
-          <PrimaryButton title='Fill out form' onClick={clickedBtn} />
-        </div>
+            <PrimaryButton className='margin-r--xxs' title={content.cta.anchorText} onClick={clickedBtnCTA1} />
+
+          ) : (
+            <Link href={url} className='margin-r--xxs'>
+              <PrimaryButton title={content.cta.anchorText} />
+            </Link>
+          )
+        }
       </div>
-      <div
-        className={` ${isClicked ? 'clicked' : 'not-clicked'} ${
-          slideOut ? 'clicked-exit' : ''
-        }`}
-      >
-        <div
-          className={`modal flex flex-column flex-align-center ${
-            slideOut ? 'slide-out' : ''
-          }`}
-        >
-          <button onClick={exitVideo} className='btn-exit-video'>
-            X
-          </button>
-          <div className='box'>
-            <SlackForm />
+
+      < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
+        <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
+          <button onClick={exitModal} className="btn-exit-video">X</button>
+          <div className="box">
+            {shareOrSlack === 'slack' && <SlackForm />}
+            {shareOrSlack === 'share' && <PopupForm />}
           </div>
         </div>
       </div>
     </>
   );
 }
+
+
