@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import PopupForm from '../themes/components/popup-form-share.jsx'
 import SlackForm from '../themes/components/popup-form-slack.jsx'
-import {
-  fetchMainMenuData,
-  fetchFooterMenuData,
-  fetchGetPageBySlugData,
 
-} from '../graphql';
 import SectionRender from '../themes/sources/js/section-renderer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -25,7 +20,30 @@ export default function SlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
     variables: { where: { slug: resolvedUrl } },
   });
+  console.log(data)
+  const pageData = data
+  const url1 = pageData?.ctaOneUrl && ensureValidUrl(pageData.ctaOneUrl)
+  const url2 = pageData?.ctaTwoUrl && ensureValidUrl(pageData.ctaTwoUrl)
 
+  const [isClicked, setIsClicked] = useState(false)
+  const [slideOut, setSlideOut] = useState(false)
+  const [shareOrSlack, setShareOrSlack] = useState('')
+
+  function clickedBtnCTA1() {
+    setShareOrSlack(url1)
+    setIsClicked(true);
+  }
+  function clickedBtnCTA2() {
+    setShareOrSlack(url2)
+    setIsClicked(true);
+  }
+  function exitModal() {
+    setSlideOut(true);
+    setTimeout(() => {
+      setIsClicked(false);
+      setSlideOut(false);
+    }, 500);
+  }
   const title = data.page ? data.page.title : 'Default Title';
 
   return (
@@ -109,7 +127,7 @@ function RenderPageDataContent(pageData) {
             </section>
           ))}
       </main>
-    </RootLayout >
+    
   );
 }
 
