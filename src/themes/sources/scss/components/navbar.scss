@@ -4,7 +4,7 @@
 .navbar {
   top: 0;
   left: 0;
-  height: 11.5vh;
+  // height: 11.5vh;
   position: sticky;
   z-index: $-z-index-navbar;
   background-color: $-background-color;
@@ -78,5 +78,13 @@
 
   100% {
     width: 100%;
+  }
+}
+
+// media qyeries for navbar
+@media (max-width: $display-xxxl) {
+  .navbar {
+    padding-left: $-spacing;
+    padding-right: $-spacing;
   }
 }

@@ -16,27 +16,21 @@ export default function FrontPage() {
   
  
   return (
-    <RootLayout
-      // navMenuData={props.navMenuData}
-      // footerMenuData={null}
-      tabTitle={null}
-      // resolvedUrl={props.resolvedUrl}
-      language='en_GB'
-    >
-      <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-        {data.frontPage ? <HeroComponent prop={data.frontPage} /> : null}
+    // <RootLayout tabTitle={null} language='en_GB'>
+    <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+      {data.frontPage ? <HeroComponent prop={data.frontPage} /> : null}
 
-        {data.frontPage.sections &&
-          data.frontPage.sections.map((section, index) => (
-            <section
-              key={index}
-              className='flex flex-column flex-align-center flex-justify-center'
-            >
-              <SectionRenderer key={index} section={section} />
-            </section>
-          ))}
-      </main>
-    </RootLayout>
+      {data.frontPage.sections &&
+        data.frontPage.sections.map((section, index) => (
+          <section
+            key={index}
+            className='flex flex-column flex-align-center flex-justify-center'
+          >
+            <SectionRenderer key={index} section={section} />
+          </section>
+        ))}
+    </main>
+    // </RootLayout>
   );
 }
 
@@ -46,10 +40,7 @@ export async function getServerSideProps({ resolvedUrl }) {
     await apolloClient.query({
       query: FRONT_PAGE_QUERY,
     });
-    // const pageData = await fetchFrontPageData();
-    // const navMenuData = await fetchMainMenuData();
-    // const footerMenuData = await fetchFooterMenuData();
-    // return { props: { pageData, resolvedUrl } };
+
     return addApolloState(apolloClient, {
       props: {},
     });

@@ -45,9 +45,9 @@ export default function NavBar() {
   return (
     <header
       ref={menuRef}
-      className='navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs padding-lr--xl bg-white'
+      className='navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs  bg-white'
     >
-      <div className='navbar-icon margin-l--m'>
+      <div className='navbar-icon'>
         <Link className='pointer' href='/'>
           <Image src={Icon} width={150} height={42} alt='D4CR' />
         </Link>
@@ -149,7 +149,7 @@ export default function NavBar() {
             </>
           ))}
         {data && data.ctaAnchorText && (
-          <div className='margin-lr--xxl'>
+          <div className='margin-lr--m'>
             <SecondaryButton
               className='scale-up-l'
               title={data.ctaAnchorText}

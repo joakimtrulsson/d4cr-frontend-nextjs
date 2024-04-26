@@ -1,73 +1,83 @@
-import Image from 'next/image'
+import Image from 'next/image';
 import SectionRender from '../../themes/sources/js/section-renderer.js';
-import RootLayout from '../../app/layout.jsx'
-import { fetchGetNewsItemBySlugData, fetchMainMenuData, fetchFooterMenuData } from '../../graphql.js'
+import RootLayout from '../../app/layout.jsx';
 import Resources from '../../themes/components/resource-section.jsx';
 
-export default function NewsSlugPage(props) {
-    
-    if (!props.navMenuData || !props.pageData) { // add footerMenuData here please!
-        return notFound();
-    }
-    let resources
-    if (props?.pageData?.resources?.length !== 0) {
-        resources = props.pageData.resources
-    }
-    return (
-        <RootLayout navMenuData={props.navMenuData}
-            footerMenuData={null}
-            tabTitle={props.pageData.title}
-            resolvedUrl={props.resolvedUrl}
-            language="en_GB">
+import { useQuery } from '@apollo/client';
+import { initializeApollo, addApolloState } from '../../data/apollo-client';
+import { GET_NEWS_ITEM_BY_SLUG_QUERY } from '../../data/queries.jsx';
 
-            <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-                {props.pageData.image.url && (
+export default function NewsSlugPage({ resolvedUrl }) {
+  const { loading, error, data } = useQuery(GET_NEWS_ITEM_BY_SLUG_QUERY, {
+    variables: { where: { slug: resolvedUrl } },
+  });
 
-                    <div className='hero-image-large margin-tb--s borderradius--xxxs '>
-                        <Image className='center-image'
-                            src={props.pageData.image.url}
-                            alt={props.pageData.image.altText}
-                            fill={true} />
-                    </div>
-                )}
+  return (
+    data && (
+      <RootLayout
+        footerMenuData={null}
+        tabTitle={data?.news?.title}
+        resolvedUrl={resolvedUrl}
+        language='en_GB'
+      >
+        <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+          {data?.news?.image?.url && (
+            <div className='hero-image-large margin-tb--s borderradius--xxxs '>
+              <Image
+                className='center-image'
+                src={data.news.image.url}
+                alt={data.news.image.altText}
+                fill={true}
+              />
+            </div>
+          )}
 
-                {(props.pageData.newsCategory.categoryTitle || props.pageData.title) && <div className='margin-lr--m'>
-                    {props.pageData.newsCategory.categoryTitle &&
-                        <p className='max-width-60 margin--zero full-width-height color-yellow-600 sub-heading-m'>
-                            {props.pageData.newsCategory.categoryTitle}
-                        </p>
-                    }
+          {(data?.news?.newsCategory?.categoryTitle || data?.news?.title) && (
+            <div className='margin-lr--m'>
+              {data.news.newsCategory.categoryTitle && (
+                <p className='max-width-60 margin--zero full-width-height color-yellow-600 sub-heading-m'>
+                  {data.news.newsCategory.categoryTitle}
+                </p>
+              )}
 
-                    {props.pageData.title &&
-                        <h1 className='max-width-60 margin--zero'>
-                            {props.pageData.title}
-                        </h1>
-                    }
-                </div>}
+              {data.news.title && (
+                <h1 className='max-width-60 margin--zero'>{data.news.title}</h1>
+              )}
+            </div>
+          )}
 
-                {props.pageData.sections && props.pageData.sections.map((section, index) => (
-                    <SectionRender key={index} section={section} />
-                ))}
-                {resources ? <Resources
-                    resources={resources}
-                    title={props?.pageData?.resourcesTitle}
-                    preamble={props?.pageData?.resourcesPreamble}
-                /> : null}
-            </main>
-        </RootLayout>
+          {data?.news?.sections &&
+            data.news.sections.map((section, index) => (
+              <SectionRender key={index} section={section} />
+            ))}
+          {data?.news?.resources ? (
+            <Resources
+              resources={data.news.resources}
+              title={data.news?.resourcesTitle}
+              preamble={data.news?.resourcesPreamble}
+            />
+          ) : null}
+        </main>
+      </RootLayout>
     )
+  );
 }
 
-export async function getServerSideProps({ resolvedUrl }) {
-    try {
-        const pageData = await fetchGetNewsItemBySlugData(resolvedUrl);
-        const navMenuData = await fetchMainMenuData();
-        const footerMenuData = await fetchFooterMenuData();
+export async function getServerSideProps({ req, params }) {
+  const apolloClient = initializeApollo();
+  const resolvedUrl = `/news/${params.slug}`;
 
-        return { props: { navMenuData, footerMenuData, pageData } };
+  try {
+    await apolloClient.query({
+      query: GET_NEWS_ITEM_BY_SLUG_QUERY,
+      variables: { where: { slug: resolvedUrl } },
+    });
 
-    } catch (error) {
-        console.error("(news/[slug].jsx) Error fetching data:", error)
-        return null;
-    }
+    return addApolloState(apolloClient, {
+      props: { resolvedUrl },
+    });
+  } catch (error) {
+    console.error('(news/[slug].jsx) Error fetching data:', error);
+    return null;
+  }
 }

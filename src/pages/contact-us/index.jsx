@@ -1,31 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import RootLayout from '../../app/layout';
-import { AppContext } from '../_app';
+
 import ContactForm from '../../themes/components/contact-us-form';
 
-import { fetchMainMenuData, fetchFooterMenuData } from '../../graphql'
-export default function ContactUs(props) {
-    
-
-    return (
-        <RootLayout navMenuData={props.navMenuData} footerMenuData={null} tabTitle={null} resolvedUrl={props.resolvedUrl} language="en_GB">
-            <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-
-                <ContactForm />
-
-            </main>
-        </RootLayout >
-    );
-}
-
-export async function getServerSideProps({ resolvedUrl }) {
-    try {
-
-        const navMenuData = await fetchMainMenuData();
-        const footerMenuData = await fetchFooterMenuData();
-        return { props: { navMenuData, footerMenuData, resolvedUrl } };
-    } catch (error) {
-        console.error("(index.jsx) Error fetching data:", error);
-        return { notFound: true };
-    }
+export default function ContactUs() {
+  return (
+    <RootLayout tabTitle={null} language='en_GB'>
+      <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+        <ContactForm />
+      </main>
+    </RootLayout>
+  );
 }

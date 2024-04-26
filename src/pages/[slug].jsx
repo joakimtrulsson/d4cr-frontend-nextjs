@@ -14,62 +14,42 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 import PrimaryButton from '../themes/components/buttons/primary-button';
 import SecondaryButton from '../themes/components/buttons/secondary-button';
 import RootLayout from '../app/layout';
+
+import { useQuery } from '@apollo/client';
+import { initializeApollo, addApolloState } from '../data/apollo-client';
+import { GET_PAGE_BY_SLUG_QUERY } from '../data/queries.jsx';
 import { ensureValidUrl } from '../themes/sources/js/modal-functions.js'
 
 
-export default function SlugPage(props) {
-  const pageData = props.pageData
-  const url1 = pageData?.ctaOneUrl && ensureValidUrl(pageData.ctaOneUrl)
-  const url2 = pageData?.ctaTwoUrl && ensureValidUrl(pageData.ctaTwoUrl)
+export default function SlugPage({ resolvedUrl }) {
+  const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
+    variables: { where: { slug: resolvedUrl } },
+  });
 
-
-  const [isClicked, setIsClicked] = useState(false)
-  const [slideOut, setSlideOut] = useState(false)
-  const [shareOrSlack, setShareOrSlack] = useState('')
-
-  function clickedBtnCTA1() {
-    setShareOrSlack(url1)
-    setIsClicked(true);
-  }
-  function clickedBtnCTA2() {
-    setShareOrSlack(url2)
-    setIsClicked(true);
-  }
-  function exitModal() {
-    setSlideOut(true);
-    setTimeout(() => {
-      setIsClicked(false);
-      setSlideOut(false);
-    }, 500);
-  }
-
-
-
-  const title = props.pageData ? props.pageData.title : 'Default Title';
-
-  if (!props.navMenuData || (!props.pageData && !props.allCasesData)) { // add footerMenuData here please!
-    return notFound();
-  }
+  const title = data.page ? data.page.title : 'Default Title';
 
   return (
-    <RootLayout
-      navMenuData={props.navMenuData}
-      footerMenuData={null}
-      tabTitle={title}
-      resolvedUrl={props.resolvedUrl}
-      language='en_GB'
-    >
+    <RootLayout tabTitle={title} resolvedUrl={resolvedUrl} language='en_GB'>
+      {RenderPageDataContent(data.page)}
+    </RootLayout>
+  );
+}
 
-      <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-        {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
+function RenderPageDataContent(pageData) {
+  // if (!pageData) {
+  //   return notFound();
+  // }
+  return (
+    <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+      {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
 
         {(pageData?.heroPreamble ||
           pageData?.ctaOneAnchorText ||
           pageData?.ctaTwoUrlAnchorText) && (
-            <div className='flex flex-column flex-align-center flex-justify-center margin-b--xl width--m max-width-40 text-align-center'>
-              {pageData.heroPreamble && (
-                <DocumentRenderer document={pageData.heroPreamble.document} />
-              )}
+          <div className='flex flex-column flex-align-center flex-justify-center margin-b--xl width--m max-width-40 text-align-center'>
+            {pageData.heroPreamble && (
+              <DocumentRenderer document={pageData.heroPreamble.document} />
+            )}
 
 
               <nav className='flex flex-row'>
@@ -133,20 +113,19 @@ export default function SlugPage(props) {
   );
 }
 
+export async function getServerSideProps({ params }) {
+  const resolvedUrl = `/${params.slug}`;
+  const apolloClient = initializeApollo();
 
-async function fetchMenuData() {
-  const navMenuData = await fetchMainMenuData();
-  const footerMenuData = await fetchFooterMenuData();
-  return { navMenuData, footerMenuData };
-}
-
-export async function getServerSideProps({ resolvedUrl }) {
   try {
-    const { navMenuData, footerMenuData } = await fetchMenuData();
+    await apolloClient.query({
+      query: GET_PAGE_BY_SLUG_QUERY,
+      variables: { where: { slug: resolvedUrl } },
+    });
 
-    const pageData = await fetchGetPageBySlugData(resolvedUrl);
-
-    return { props: { navMenuData, footerMenuData, resolvedUrl, pageData } };
+    return addApolloState(apolloClient, {
+      props: { resolvedUrl },
+    });
   } catch (error) {
     console.error('([slug].jsx) Error fetching data:', error);
     return { props: { error: error.message } };

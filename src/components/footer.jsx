@@ -46,7 +46,7 @@ export default function Footer() {
           <div className='flex flex-column full-width-height'>
             <div
               className='flex flex-row flex-justify-between flex-align-start 
-                                padding-t--xxxl padding-b--xxl margin-lr--xxl'
+                                padding-t--xxxl padding-b--s'
             >
               <div className='margin-b--m'>
                 <Image src={Icon} width={160} height={50} alt='D4CR' />
@@ -63,7 +63,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className='flex flex-row flex-justify-end'>
+              <div className='menu-footer flex flex-row flex-justify-end'>
                 {mainMenuContent &&
                   mainMenuContent.navigation &&
                   mainMenuContent.navigation.map((group, index) => (
@@ -112,7 +112,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <nav className='margin-b--xxl margin-lr--xxl flex flex-row'>
+            <nav className='margin-b--xxl  flex flex-row'>
               {footerMenuContent &&
                 footerMenuContent.navigation &&
                 footerMenuContent.navigation.map((link, index) => (

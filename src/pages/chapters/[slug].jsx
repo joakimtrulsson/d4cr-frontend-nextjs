@@ -6,38 +6,30 @@ import AnimationRight from '../../themes/sources/assets/graphics/animation.gif';
 import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif';
 import RootLayout from '../../app/layout.jsx';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import {
-  fetchChapterSlugData,
-  fetchMainMenuData,
-  fetchFooterMenuData,
- 
-} from '../../graphql.js';
 
-export default function ChapterSlugPage({
-  navMenuData,
-  footerMenuData,
-  chapters,
-  resolvedUrl,
-  
-}) {
+import { useQuery } from '@apollo/client';
+import { initializeApollo, addApolloState } from '../../data/apollo-client';
+import { CHAPTER_SLUG_QUERY } from '../../data/queries.jsx';
 
+export default function ChapterSlugPage({ resolvedUrl }) {
+  const { loading, error, data } = useQuery(CHAPTER_SLUG_QUERY, {
+    variables: { slug: resolvedUrl },
+  });
 
+  const chapters = data?.chapters[0] || null;
 
-
-  // Get current chapter
   const currentLanguage = {
     chapterLanguage: chapters.chapterLanguage,
     slug: chapters.slug,
   };
 
-  // Get the translated chapters
-  const chapterLanguages = chapters.translatedChapters?.filter(
-    (chapter) =>
-      chapter.status === 'published' && chapter.chapterLanguage && chapter.slug
-  )
+  const chapterLanguages = chapters.translatedChapters
+    ?.filter(
+      (chapter) =>
+        chapter.status === 'published' && chapter.chapterLanguage && chapter.slug
+    )
     .map((chapter) => ({ chapterLanguage: chapter.chapterLanguage, slug: chapter.slug }));
 
-  // Check if the current chapter is not in the array, and if it isn't, then add it
   if (
     currentLanguage &&
     !chapterLanguages.some(
@@ -49,26 +41,23 @@ export default function ChapterSlugPage({
     chapterLanguages.push(currentLanguage);
   }
 
-  // Sort the chapterLanguages array alphabetically based on chapterLanguage
-  chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage)); //
+  chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage));
 
   return (
-    //<></>
     <RootLayout
-      navMenuData={navMenuData}
-      footerMenuData={null}
       tabTitle={chapters.title}
       resolvedUrl={resolvedUrl}
       language={currentLanguage.chapterLanguage}
     >
       <main className='site-content chapter-main flex flex-column flex-align-center flex-justify-start'>
-        {chapterLanguages.length > 1 && ( // add buttons to the translated chapters if exists
+        {chapterLanguages.length > 1 && (
           <div className='language-tabs margin-tb--s'>
             {chapterLanguages.map((chapter, index) => (
               <Link href={chapter.slug} key={index}>
                 <button
-                  className={`lang-btn ${index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''
-                    }
+                  className={`lang-btn ${
+                    index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''
+                  }
                 ${index === 0 ? 'lang-btn-left' : ''}
                 ${chapter.slug === currentLanguage.slug ? 'lang-btn-active' : ''}`}
                 >
@@ -87,7 +76,7 @@ export default function ChapterSlugPage({
           <Image src={AnimationRight} alt='Animated GIF' />
         </div>
 
-        {chapters.heroImage.url && ( // show hero image if exists
+        {chapters.heroImage.url && (
           <div className='hero-image-medium margin-t--s borderradius--xxxs'>
             <Image
               className='center-image'
@@ -111,28 +100,29 @@ export default function ChapterSlugPage({
         </div>
 
         {chapters.sections &&
-          chapters.sections.map(
-            (
-              section,
-              index // Render all this chapter's sections
-            ) => (
-              <section key={index} className='margin-tb--xs'>
-                <SectionRender section={section} />
-              </section>
-            )
-          )}
+          chapters.sections.map((section, index) => (
+            <section key={index} className='margin-tb--xs'>
+              <SectionRender section={section} />
+            </section>
+          ))}
       </main>
     </RootLayout>
   );
 }
 
-export async function getServerSideProps({ resolvedUrl }) {
+export async function getServerSideProps({ params }) {
+  const apolloClient = initializeApollo();
+  const resolvedUrl = `/chapters/${params.slug}`;
+
   try {
-    const chapters = await fetchChapterSlugData(resolvedUrl);
-    const navMenuData = await fetchMainMenuData();
-    const footerMenuData = await fetchFooterMenuData();
-    
-    return { props: { navMenuData, footerMenuData, chapters, resolvedUrl } };
+    await apolloClient.query({
+      query: CHAPTER_SLUG_QUERY,
+      variables: { slug: resolvedUrl },
+    });
+
+    return addApolloState(apolloClient, {
+      props: { resolvedUrl },
+    });
   } catch (error) {
     console.error('(chapters/[slug].jsx) Error fetching data:', error);
     return null;
