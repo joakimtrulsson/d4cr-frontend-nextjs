@@ -10,6 +10,9 @@ import { ArrowRightSvg } from './svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MenuContext from '../context/MenuContext';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import SlackForm from '../themes/components/popup-form-slack';
+import PopupForm from '../themes/components/popup-form-share';
+import { useState } from 'react'
 
 export default function Footer() {
   const menuContext = useContext(MenuContext);
@@ -26,7 +29,7 @@ export default function Footer() {
     footerJoinUs: joinUsContent,
     footerMenu: footerMenuContent,
   } = menuContext;
-
+  //console.log(footerMenuContent.navigation)
   const rightArrowIcon = { width: '16', height: '14', color: getColorCode('') };
 
   const urlIconPairs = [];
@@ -87,11 +90,10 @@ export default function Footer() {
                               >
                                 <button className='button color-orange-50 flex flex-row'>
                                   <span
-                                    className={`${
-                                      hoveredItem === key
-                                        ? 'margin-r--xs'
-                                        : 'margin-r--xxs'
-                                    }`}
+                                    className={`${hoveredItem === key
+                                      ? 'margin-r--xs'
+                                      : 'margin-r--xxs'
+                                      }`}
                                   >
                                     {link.anchorText}
                                   </span>
@@ -127,21 +129,66 @@ export default function Footer() {
 }
 
 const FooterMenuLink = ({ url, anchorText }) => {
+  console.log(url, anchorText)
   const rightArrowIcon = { width: '16', height: '14', color: getColorCode('') };
 
-  return (
-    <Link href={url} className='color-orange-50 margin-r--xs no-decoration'>
-      <button className='button color-orange-50 flex flex-row'>
-        <span className='margin-r--xxs'>{anchorText}</span>
-        <div className='icon-wrapper'>
-          <ArrowRightSvg
-            width={rightArrowIcon.width}
-            height={rightArrowIcon.height}
-            color={rightArrowIcon.color}
-          />
+
+  const [isClicked, setIsClicked] = useState(false)
+  const [slideOut, setSlideOut] = useState(false)
+  const [shareOrSlack, setShareOrSlack] = useState('')
+
+  function clickedBtnCTA1(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('clicked')
+    setShareOrSlack(url)
+    setIsClicked(true);
+  }
+
+  function exitModal() {
+    setSlideOut(true);
+    setTimeout(() => {
+      setIsClicked(false);
+      setSlideOut(false);
+    }, 500);
+  }
+  return (<>
+    {(url === 'share' || url === 'slack') ? (
+      <div className='color-orange-50 margin-r--xs no-decoration'>
+        <button className='button color-orange-50 flex flex-row' onClick={clickedBtnCTA1}>
+          <span className='margin-r--xxs'>{anchorText}</span>
+          <div className='icon-wrapper'>
+            <ArrowRightSvg
+              width={rightArrowIcon.width}
+              height={rightArrowIcon.height}
+              color={rightArrowIcon.color}
+            />
+          </div>
+        </button>
+      </div>
+    ) : (
+      <Link href={url} className='color-orange-50 margin-r--xs no-decoration'>
+        <button className='button color-orange-50 flex flex-row'>
+          <span className='margin-r--xxs'>{anchorText}</span>
+          <div className='icon-wrapper'>
+            <ArrowRightSvg
+              width={rightArrowIcon.width}
+              height={rightArrowIcon.height}
+              color={rightArrowIcon.color}
+            />
+          </div>
+        </button>
+      </Link>)}
+    < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
+      <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
+        <button onClick={exitModal} className="btn-exit-video">X</button>
+        <div className="box">
+          {shareOrSlack === 'slack' && <SlackForm />}
+          {shareOrSlack === 'share' && <PopupForm />}
         </div>
-      </button>
-    </Link>
+      </div>
+    </div>
+  </>
   );
 };
 

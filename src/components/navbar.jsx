@@ -14,7 +14,7 @@ import { ensureValidUrl } from '../../src/themes/sources/js/modal-functions.js'
 export default function NavBar() {
   const menuContext = useContext(MenuContext);
   const data = menuContext ? menuContext.mainMenu : null;
-  console.log('dito', data)
+ 
 
   const url = data?.ctaUrl && ensureValidUrl(data.ctaUrl);
   const [isClicked, setIsClicked] = useState(false)
