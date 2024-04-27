@@ -12,6 +12,7 @@
 .text-and-media-container {
   max-width: $max-width-content-desktop-large;
   width: 100%;
+  gap: 2rem;
 
   .text-content {
     height: auto;
