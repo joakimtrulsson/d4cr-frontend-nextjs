@@ -14,9 +14,9 @@ export default function NewsPage() {
   const title = 'News';
 
   return (
-    <RootLayout tabTitle={title} language='en_GB'>
-      <RenderAllNews allNews={data.newsItems} newsCategories={data.newsCategories} />
-    </RootLayout>
+    // <RootLayout tabTitle={title} language='en_GB'>
+    <RenderAllNews allNews={data.newsItems} newsCategories={data.newsCategories} />
+    // </RootLayout>
   );
 }
 
