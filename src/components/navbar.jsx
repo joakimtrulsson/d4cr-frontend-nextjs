@@ -73,15 +73,16 @@ export default function NavBar() {
   }
 
   return (
-    <header
-      ref={menuRef}
-      className='navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs  bg-white'
-    >
-      <div className='navbar-icon'>
-        <Link className='pointer' href='/'>
-          <Image src={Icon} width={150} height={42} alt='D4CR' />
-        </Link>
-      </div>
+    <div className='navbar-background'>
+      <header
+        ref={menuRef}
+        className='navbar flex flex-row flex-justify-between flex-align-center padding-tb--xs  bg-white'
+      >
+        <div className='navbar-icon'>
+          <Link className='pointer' href='/'>
+            <Image src={Icon} width={150} height={42} alt='D4CR' />
+          </Link>
+        </div>
 
       <nav className='flex flex-row flex-align-center'>
         {data &&

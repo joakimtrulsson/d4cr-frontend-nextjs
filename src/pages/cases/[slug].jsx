@@ -30,11 +30,9 @@ export default function CasesPage({ resolvedUrl }) {
                 <DocumentRenderer document={data.cases[0].preamble?.document} />
               </div>
               <div className='flex flex-column flex-align-center'>
-                {data.cases.sections &&
+                {data.cases[0].sections &&
                   data.cases[0].sections.map((section, index) => (
-                    <div key={index} className='renderer'>
-                      <SectionRenderer section={section} />
-                    </div>
+                    <SectionRenderer key={index} section={section} />
                   ))}
                 <div className='renderer'>
                   {data.cases[0].resources.length > 0 ? (

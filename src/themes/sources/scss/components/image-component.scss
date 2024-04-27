@@ -1,35 +1,95 @@
-.image-container {
+@import '../variables/layout-variables.scss';
 
-    &-1 {
-        .image-wrapper {
-            width: 50rem;
-            height: 25rem;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-            overflow: hidden;
-            position: relative; 
-        }
-    }
+@import '../variables/layout-variables.scss';
 
-    &-2 {
-        .image-wrapper {
-            width: 24.5rem;
-            height: 20rem;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-            overflow: hidden;
-            position: relative; 
-        }
-    }
+// .image-container {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
 
-    &-3 {
-        .image-wrapper {
-            width: 16rem;
-            height: 16rem;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-            overflow: hidden;
-            position: relative; 
-        }
-    }    
+//   &-1 {
+//     .image-wrapper {
+//       width: 50rem;
+//       height: 25rem;
+//       margin-left: 0.5rem;
+//       margin-right: 0.5rem;
+//       overflow: hidden;
+//       position: relative;
+//     }
+//   }
+
+//   &-2 {
+//     .image-wrapper {
+//       width: 24.5rem;
+//       height: 20rem;
+//       margin-left: 0.5rem;
+//       margin-right: 0.5rem;
+//       overflow: hidden;
+//       position: relative;
+//     }
+//   }
+
+//   &-3 {
+//     .image-wrapper {
+//       width: 16rem;
+//       height: 16rem;
+//       margin-left: 0.5rem;
+//       margin-right: 0.5rem;
+//       overflow: hidden;
+//       position: relative;
+//     }
+//   }
+// }
+
+.image-section {
+  max-width: 1400px;
+}
+
+.image-container-1 {
+  display: flex;
+  justify-content: center;
+  width: 1400px;
+}
+
+.section-image-1 {
+  max-height: 38.5rem; /* Sätt en maximal höjd */
+  max-width: 77rem; /* Sätt en maximal bredd */
+  width: 100%; /* Tillåt bilden att krympa */
+  height: auto;
+}
+
+.image-container-2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.section-image-2 {
+  height: 27rem;
+  width: 37rem;
+
+  @media (max-width: 1215px) {
+    height: 24rem;
+    width: 32rem;
+  }
+
+  @media (max-width: 600px) {
+    height: 24rem;
+    width: 32rem;
+  }
+}
+
+.image-container-3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.section-image-3 {
+  height: 24rem;
+  width: 24rem;
 }

@@ -23,14 +23,14 @@ export default function ResourcesPage() {
   const title = 'Resources';
 
   return (
-    <RootLayout
-      //   navMenuData={props.navMenuData}
-      //   footerMenuData={null}
-      tabTitle={title}
-      language='en_GB'
-    >
-      <RenderResourcesContent resourcesCat={data?.resources} />
-    </RootLayout>
+    // <RootLayout
+    //   //   navMenuData={props.navMenuData}
+    //   //   footerMenuData={null}
+    //   tabTitle={title}
+    //   language='en_GB'
+    // >
+    <RenderResourcesContent resourcesCat={data?.resources} />
+    // </RootLayout>
   );
 }
 

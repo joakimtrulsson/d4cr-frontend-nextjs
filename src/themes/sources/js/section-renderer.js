@@ -14,25 +14,57 @@ import WYSIWYG from '../../components/wysiwyg.jsx';
 export default function sectionRenderer({ section }) {
   switch (section.sectionType) {
     case 'ACCORDION':
-      return <AccordionSection content={section} />;
+      return (
+        <section className='flex'>
+          <AccordionSection content={section} />
+        </section>
+      );
     case 'BANNER':
-      return <BannerSection content={section} />;
+      return (
+        <section className='flex'>
+          <BannerSection content={section} />
+        </section>
+      );
     case 'CHAPTERTEASER':
-      return <ChapterSection content={section} />;
+      return (
+        <section className='flex full-site-container-width'>
+          <ChapterSection content={section} />
+        </section>
+      );
     case 'IMAGE':
-      return <ImagesSection content={section} />;
+      return (
+        <section className='flex'>
+          <ImagesSection content={section} />
+        </section>
+      );
     case 'BULLETLIST':
       return <LargeBulletListSection content={section} />;
     case 'MEDIATEXT':
-      return <MediaTextSection content={section} />;
+      return (
+        <section className='flex full-site-container-width'>
+          <MediaTextSection content={section} />
+        </section>
+      );
     case 'NEWSTEASER':
-      return <NewsTeaserSection content={section} />;
+      return (
+        <section className='flex'>
+          <NewsTeaserSection content={section} />
+        </section>
+      );
     case 'PRINCIPLES':
-      return <PrinciplesSection content={section} />;
-    case 'RESOURCES':
-      return <ResourcesSection content={section} />;
+      return (
+        <section className='flex'>
+          <PrinciplesSection content={section} />
+        </section>
+      );
+    // case 'RESOURCES':
+    //   return <ResourcesSection content={section} />;
     case 'PEOPLE':
-      return <PeopleSection content={section} />;
+      return (
+        <section className='flex'>
+          <PeopleSection content={section} />
+        </section>
+      );
 
     case 'WYSIWYG':
       return (

@@ -10,7 +10,7 @@ export default function RenderAllCasesContent() {
   const title = 'Cases';
 
   return (
-    <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+    <main className='site-content  flex flex-column flex-align-center flex-justify-start'>
       <h1 className='heading-background'>{title}</h1>
       {data.cases &&
         data.cases.map((caseData) => {

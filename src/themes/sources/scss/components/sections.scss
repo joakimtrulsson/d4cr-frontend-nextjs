@@ -1,4 +1,14 @@
+@import '../variables/layout-variables.scss';
+
 .text-media-section {
-        width: 100%;
-        height: auto;
+  //   max-width: $max-width-content-desktop-large;
+  //   //   min-width: 100vw;
+  min-width: 100%;
+  height: auto;
+}
+
+.full-site-container-width {
+  max-width: $max-width-desktop-large;
+  width: 100%;
+  //   border: 1px solid red;
 }

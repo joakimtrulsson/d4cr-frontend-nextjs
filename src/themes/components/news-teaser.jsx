@@ -61,10 +61,7 @@ export default function NewsTeaser({ content }) {
             />
           </div>
 
-          <div
-            className='news-card-container  margin-tb--s flex flex-row
-            flex-justify-center flex-align-center'
-          >
+          <div className='news-card-container  margin-tb--s flex flex-row'>
             {data?.newsItems?.slice(0, 3).map((item) => (
               <Newscard
                 key={item.id}

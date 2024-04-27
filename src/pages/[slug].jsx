@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PopupForm from '../themes/components/popup-form-share.jsx'
-import SlackForm from '../themes/components/popup-form-slack.jsx'
+import PopupForm from '../themes/components/popup-form-share.jsx';
+import SlackForm from '../themes/components/popup-form-slack.jsx';
 
 import SectionRender from '../themes/sources/js/section-renderer';
 import { notFound } from 'next/navigation';
@@ -13,28 +13,27 @@ import RootLayout from '../app/layout';
 import { useQuery } from '@apollo/client';
 import { initializeApollo, addApolloState } from '../data/apollo-client';
 import { GET_PAGE_BY_SLUG_QUERY } from '../data/queries.jsx';
-import { ensureValidUrl } from '../themes/sources/js/modal-functions.js'
-
+import { ensureValidUrl } from '../themes/sources/js/modal-functions.js';
 
 export default function SlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
     variables: { where: { slug: resolvedUrl } },
   });
   //console.log(data.page)
-  const pageData = data.page
-  const url1 = pageData?.ctaOneUrl && ensureValidUrl(pageData.ctaOneUrl)
-  const url2 = pageData?.ctaTwoUrl && ensureValidUrl(pageData.ctaTwoUrl)
+  const pageData = data.page;
+  const url1 = pageData?.ctaOneUrl && ensureValidUrl(pageData.ctaOneUrl);
+  const url2 = pageData?.ctaTwoUrl && ensureValidUrl(pageData.ctaTwoUrl);
 
-  const [isClicked, setIsClicked] = useState(false)
-  const [slideOut, setSlideOut] = useState(false)
-  const [shareOrSlack, setShareOrSlack] = useState('')
+  const [isClicked, setIsClicked] = useState(false);
+  const [slideOut, setSlideOut] = useState(false);
+  const [shareOrSlack, setShareOrSlack] = useState('');
 
   function clickedBtnCTA1() {
-    setShareOrSlack(url1)
+    setShareOrSlack(url1);
     setIsClicked(true);
   }
   function clickedBtnCTA2() {
-    setShareOrSlack(url2)
+    setShareOrSlack(url2);
     setIsClicked(true);
   }
   function exitModal() {
@@ -50,9 +49,8 @@ export default function SlugPage({ resolvedUrl }) {
   }
   return (
     <RootLayout tabTitle={title} resolvedUrl={resolvedUrl} language='en_GB'>
-      
       <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-      {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
+        {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
 
         {(pageData?.heroPreamble ||
           pageData?.ctaOneAnchorText ||
@@ -62,49 +60,73 @@ export default function SlugPage({ resolvedUrl }) {
               <DocumentRenderer document={pageData.heroPreamble.document} />
             )}
 
+            <nav className='flex flex-row'>
+              {pageData.ctaOneAnchorText &&
+                url1 &&
+                (url1 === 'share' || url1 === 'slack' ? (
+                  <>
+                    <PrimaryButton
+                      className='margin-r--xxs'
+                      title={pageData.ctaOneAnchorText}
+                      onClick={clickedBtnCTA1}
+                    />
+                  </>
+                ) : url1.startsWith('/') ? (
+                  <Link href={url1} passHref className='margin-lr--xxxs'>
+                    <PrimaryButton title={pageData.ctaOneAnchorText} />
+                  </Link>
+                ) : (
+                  <Link
+                    href={url1}
+                    className='margin-r--xxxs'
+                    rel='noopener noreferrer'
+                    target='_blank'
+                  >
+                    <PrimaryButton title={pageData.ctaOneAnchorText} />
+                  </Link>
+                ))}
 
-              <nav className='flex flex-row'>
-                {pageData.ctaOneAnchorText && url1 && (
-                  (url1 === 'share' || url1 === 'slack') ? (
-                    <>
-                      <PrimaryButton className='margin-r--xxs' title={pageData.ctaOneAnchorText} onClick={clickedBtnCTA1} />
-                    </>
-                  ) : (
-                    url1.startsWith("/") ? (
-                      <Link href={url1} passHref className='margin-lr--xxxs'>
-                        <PrimaryButton title={pageData.ctaOneAnchorText} />
-                      </Link>) :
-                      (< Link href={url1} className='margin-r--xxxs' rel="noopener noreferrer" target="_blank">
-                        <PrimaryButton title={pageData.ctaOneAnchorText} />
-                      </Link>)
-                  )
-                )}
-
-                {pageData.ctaTwoUrlAnchorText && url2 && (
-                  (url2 === 'share' || url2 === 'slack') ? (<>
-                    <SecondaryButton className='margin-r--xxs' title={pageData.ctaTwoUrlAnchorText} onClick={clickedBtnCTA2} />
-                  </>) : (
-                    url2.startsWith("/") ? (
-                      <Link
-                        href={url2}
-                        passHref
-                        className='no-decoration margin-lr--xxxs'
-                      >
-                        <SecondaryButton title={pageData.ctaTwoUrlAnchorText} />
-                      </Link>) : (< Link href={url2} className='margin-r--xxxs' rel="noopener noreferrer" target="_blank">
-                        <PrimaryButton title={pageData.ctaTwoUrlAnchorText} />
-                      </Link>)
-                  )
-                )}
-              </nav>
-
-
-            </div>
-          )}
-        < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
-          <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
-            <button onClick={exitModal} className="btn-exit-video">X</button>
-            <div className="box">
+              {pageData.ctaTwoUrlAnchorText &&
+                url2 &&
+                (url2 === 'share' || url2 === 'slack' ? (
+                  <>
+                    <SecondaryButton
+                      className='margin-r--xxs'
+                      title={pageData.ctaTwoUrlAnchorText}
+                      onClick={clickedBtnCTA2}
+                    />
+                  </>
+                ) : url2.startsWith('/') ? (
+                  <Link href={url2} passHref className='no-decoration margin-lr--xxxs'>
+                    <SecondaryButton title={pageData.ctaTwoUrlAnchorText} />
+                  </Link>
+                ) : (
+                  <Link
+                    href={url2}
+                    className='margin-r--xxxs'
+                    rel='noopener noreferrer'
+                    target='_blank'
+                  >
+                    <PrimaryButton title={pageData.ctaTwoUrlAnchorText} />
+                  </Link>
+                ))}
+            </nav>
+          </div>
+        )}
+        <div
+          className={` ${isClicked ? 'clicked' : 'not-clicked'} ${
+            slideOut ? 'clicked-exit' : ''
+          }`}
+        >
+          <div
+            className={`modal flex flex-column flex-align-center ${
+              slideOut ? 'slide-out' : ''
+            }`}
+          >
+            <button onClick={exitModal} className='btn-exit-video'>
+              X
+            </button>
+            <div className='box'>
               {shareOrSlack === 'slack' && <SlackForm />}
               {shareOrSlack === 'share' && <PopupForm />}
             </div>

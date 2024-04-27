@@ -101,9 +101,9 @@ export default function ChapterSlugPage({ resolvedUrl }) {
 
         {chapters.sections &&
           chapters.sections.map((section, index) => (
-            <section key={index} className='margin-tb--xs'>
-              <SectionRender section={section} />
-            </section>
+            // <section key={index} className='margin-tb--xs'>
+            <SectionRender key={index} section={section} />
+            // </section>
           ))}
       </main>
     </RootLayout>

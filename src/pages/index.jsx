@@ -22,12 +22,18 @@ export default function FrontPage() {
 
       {data.frontPage.sections &&
         data.frontPage.sections.map((section, index) => (
-          <section
-            key={index}
-            className='flex flex-column flex-align-center flex-justify-center'
-          >
-            <SectionRenderer key={index} section={section} />
-          </section>
+          // Detta borde kunna bo i SectionRenderer istället för på alla pages.
+          // <section
+          //   key={index}
+          //   className={`flex  ${
+          //     section.sectionType === 'MEDIATEXT' ||
+          //     section.sectionType === 'CHAPTERTEASER'
+          //       ? 'full-site-container-width'
+          //       : ''
+          //   }`}
+          // >
+          <SectionRenderer key={index} section={section} />
+          // </section>
         ))}
     </main>
     // </RootLayout>

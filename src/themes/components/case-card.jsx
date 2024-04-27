@@ -34,35 +34,37 @@ const CaseCard = ({ link, quote, title, img, linkType }) => {
           <p className='quote'>{quote}</p>
         </div>
       </div>
-      {link &&
-        (linkType === 'external' ? (
-          <a
-            href={`https://${link}`}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='link-div'
-          >
-            <p className='text-link small-text'>{linkText}</p>
-            <Image
-              className='img-link'
-              height={13}
-              width={13}
-              src={ArrowRight}
-              alt='an arrow symbol for the link'
-            />
-          </a>
-        ) : (
-          <Link href={link} className='link-div'>
-            <p className='text-link small-text'>{linkText}</p>
-            <Image
-              className='img-link'
-              height={13}
-              width={13}
-              src={ArrowRight}
-              alt='an arrow symbol for the link'
-            />
-          </Link>
-        ))}
+      <div className='link-container'>
+        {link &&
+          (linkType === 'external' ? (
+            <a
+              href={`https://${link}`}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='link-div'
+            >
+              <p className='text-link small-text'>{linkText}</p>
+              <Image
+                className='img-link'
+                height={13}
+                width={13}
+                src={ArrowRight}
+                alt='an arrow symbol for the link'
+              />
+            </a>
+          ) : (
+            <Link href={link} className='link-div'>
+              <p className='text-link small-text'>{linkText}</p>
+              <Image
+                className='img-link'
+                height={13}
+                width={13}
+                src={ArrowRight}
+                alt='an arrow symbol for the link'
+              />
+            </Link>
+          ))}
+      </div>
     </div>
   );
 };

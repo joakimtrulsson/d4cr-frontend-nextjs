@@ -1,15 +1,23 @@
 .slug-resources-outer-container {
   color: $-grey-700;
-  width: 100vw;
-  max-width: 100%;
+  max-width: $max-width-content-desktop-large;
+  // width: 100%;
+  display: flex;
+  justify-content: center;
 
   .slug-resources-inner-container {
-    border: solid $-grey-100 1px;
-    margin: 2%;
-    padding-top: 1.5%;
-    padding-left: 0.8%;
-    padding-right: 0.8%;
-    width: 95%;
+    max-width: $max-width-content-desktop-large;
+    // border: solid $-grey-100 1px;
+    // margin: 2%;
+    // padding-top: 1.5%;
+    // padding-left: 0.8%;
+    // padding-right: 0.8%;
+    // width: 100%;
+    // width: 100%;
+    display: flex;
+    // justify-content: center;
+    gap: 1.8rem;
+    padding: 2rem 2rem;
   }
 
   .pagination-buttons {
@@ -40,18 +48,20 @@
 
 .slug-news-outer-container {
   color: $-grey-700;
-  width: 100vw;
-  max-width: 100%;
+  // width: 100vw;
+  // max-width: 100%;
+  max-width: $max-width-content-desktop-large;
 
   .slug-news-inner-container {
+    margin-top: $-spacing-4;
     // border: solid $-grey-100 1px;
-    margin: 2%;
+    // max-width: $max-width-content-desktop-large;
+    // margin: 2%;
     padding-top: 1.5%;
-    padding-left: 0.8%;
-    padding-right: 0.8%;
-    width: 95%;
+    // padding-left: 0.8%;
+    // padding-right: 0.8%;
+    // width: 95%;
     gap: 20px;
-    
   }
 
   .pagination-buttons {

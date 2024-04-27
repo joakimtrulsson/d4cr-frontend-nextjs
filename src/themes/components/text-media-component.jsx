@@ -20,35 +20,35 @@ export default function TextMediaComponent({ content }) {
     const [slideOut, setSlideOut] = useState(false)
     const [shareOrSlack, setShareOrSlack] = useState('')
 
-    function clickedBtnCTA1() {
-        setShareOrSlack(url1)
-        setIsClicked(true);
-    }
-    function clickedBtnCTA2() {
-        setShareOrSlack(url2)
-        setIsClicked(true);
-    }
-    function exitVideo() {
-        setSlideOut(true); // Start the slide-out animation
-        // Wait for the animation to complete before hiding the modal
-        setTimeout(() => {
-            setIsClicked(false);
-            setSlideOut(false);
-        }, 500);
-    }
-    var bgColorClass, fillColorCode
+  function clickedBtnCTA1() {
+    setShareOrSlack(url1);
+    setIsClicked(true);
+  }
+  function clickedBtnCTA2() {
+    setShareOrSlack(url2);
+    setIsClicked(true);
+  }
+  function exitVideo() {
+    setSlideOut(true); // Start the slide-out animation
+    // Wait for the animation to complete before hiding the modal
+    setTimeout(() => {
+      setIsClicked(false);
+      setSlideOut(false);
+    }, 500);
+  }
+  var bgColorClass, fillColorCode;
 
-    /* "bg" is for the body, and "fill" is for the svg in waves */
-    if (content.backgroundColor === 'ORANGE') {
-        bgColorClass = 'bg-orange-50'
-        fillColorCode = getColorCode('orange-50')
-    } else if (content.backgroundColor === 'YELLOW') {
-        bgColorClass = 'bg-yellow-50'
-        fillColorCode = getColorCode('yellow-50')
-    } else {
-        bgColorClass = 'bg-purple-50'
-        fillColorCode = getColorCode('fill-purple-50')
-    }
+  /* "bg" is for the body, and "fill" is for the svg in waves */
+  if (content.backgroundColor === 'ORANGE') {
+    bgColorClass = 'bg-orange-50';
+    fillColorCode = getColorCode('orange-50');
+  } else if (content.backgroundColor === 'YELLOW') {
+    bgColorClass = 'bg-yellow-50';
+    fillColorCode = getColorCode('yellow-50');
+  } else {
+    bgColorClass = 'bg-purple-50';
+    fillColorCode = getColorCode('fill-purple-50');
+  }
 
     return (
         <div className="text-media-section bg-transparent" >
@@ -109,33 +109,47 @@ export default function TextMediaComponent({ content }) {
                                 )}
                             </nav>
 
-                            <> < div className={` ${isClicked ? 'clicked' : 'not-clicked'} ${slideOut ? 'clicked-exit' : ''}`}>
-                                <div className={`modal flex flex-column flex-align-center ${slideOut ? 'slide-out' : ''}`}>
-                                    <button onClick={exitVideo} className="btn-exit-video">X</button>
-                                    <div className="box">
-                                        {shareOrSlack === 'slack' && <SlackForm />}
-                                        {shareOrSlack === 'share' && <PopupForm />}
-                                    </div>
-                                </div>
-                            </div>
-                            </>
-                        </>
-                    )}
+                <>
+                  <div
+                    className={` ${isClicked ? 'clicked' : 'not-clicked'} ${
+                      slideOut ? 'clicked-exit' : ''
+                    }`}
+                  >
+                    <div
+                      className={`modal flex flex-column flex-align-center ${
+                        slideOut ? 'slide-out' : ''
+                      }`}
+                    >
+                      <button onClick={exitVideo} className='btn-exit-video'>
+                        X
+                      </button>
+                      <div className='box'>
+                        {shareOrSlack === 'slack' && <SlackForm />}
+                        {shareOrSlack === 'share' && <PopupForm />}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              </>
+            )}
+          </div>
+          <div className='media-content flex flex-justify-center flex-align-center borderradius--xs'>
+            {/* media content */}
+            {content.image && content.image.url && (
+              <Image
+                className='center-image'
+                src={content.image.url}
+                alt={content.image.altText}
+                fill={true}
+              />
+            )}
+          </div>
+        </div>
+      </div>
 
-                </div>
-
-                <div className='media-content flex flex-justify-center flex-align-center borderradius--xs'> { /* media content */}
-                    {(content.image && content.image.url) && <Image className='center-image' src={content.image.url} alt={content.image.altText} fill={true} />}
-                </div>
-
-
-            </div>
-
-            {
-                (content.border === 'BOTTOM' || content.border === 'TOPBOTTOM') && // bottom wave
-                <BottomWave fillColorCode={fillColorCode} />
-            }
-
-        </div >
-    )
+      {(content.border === 'BOTTOM' || content.border === 'TOPBOTTOM') && ( // bottom wave
+        <BottomWave fillColorCode={fillColorCode} />
+      )}
+    </div>
+  );
 }

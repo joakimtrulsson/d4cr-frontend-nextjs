@@ -1,14 +1,12 @@
 @import '../variables/color-variables.scss';
 
 .news-card {
-  width: 26%;
-//   min-width: 26%;
-// max-width: 26%;
+  flex: 1;
   border-radius: 0.5rem;
-
+  min-width: 400px;
+  max-width: 600px;
   position: relative;
-  margin-left: 2%;
-  margin-right: 2%;
+  min-height: 400px;
   margin-bottom: 1.5%;
   transition: transform 0.2s ease-in-out;
   background-color: $-yellow-50;
@@ -30,8 +28,6 @@
     }
 
     .title-link {
-
-
       .title-div {
         color: $-orange-700;
         text-decoration: underline;
@@ -46,11 +42,11 @@
     .title-div {
       color: $-grey-700;
       max-width: 100%;
-      padding-bottom: 30px;
+      // padding-bottom: 30px;
+      min-height: 200px;
       line-height: 30px;
       font-weight: 600;
       margin-top: 10px;
-      
     }
   }
 
@@ -78,6 +74,7 @@
     object-fit: cover;
     object-position: center center;
     width: 100%;
+    height: 270px;
     border-radius: 0.5rem 0.5rem 0 0;
   }
 }

@@ -21,9 +21,8 @@ function MyApp({ Component, pageProps }) {
       <ApolloProvider client={apolloClient}>
         <MenuProvider>
           <div className='site-container'>
+            <NavBar />
             <div className='site-content'>
-              <NavBar />
-
               <Component {...pageProps} />
             </div>
             <Footer />

@@ -1,11 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import RootLayout from '../../app/layout.jsx';
-import {
-  fetchMainMenuData,
-  fetchFooterMenuData,
-  fetchPrinciplesSortedByNumber,
-} from '../../graphql';
 import LargeBulletList from '../../themes/components/large-bullet-list.jsx';
 import ButtonDown from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-default.svg';
 import ButtonDownHover from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-hover.svg';

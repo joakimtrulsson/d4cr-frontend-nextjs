@@ -1,16 +1,25 @@
 @import '../variables/color-variables.scss';
 @import '../variables/layout-variables.scss';
 
-.navbar {
+.navbar-background {
+  background-color: $-background-color;
+  max-width: $max-width-desktop-large;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
-  // height: 11.5vh;
   position: sticky;
   z-index: $-z-index-navbar;
+}
+
+.navbar {
   background-color: $-background-color;
   margin-bottom: 0;
+  width: 100%;
+  max-width: $max-width-content-desktop-large;
 
-  .secondary-button {
+  min .secondary-button {
     scale: 1.05;
 
     &:hover {

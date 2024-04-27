@@ -1,7 +1,17 @@
 @import '../variables/color-variables.scss';
+@import '../variables/layout-variables.scss';
+
+.text-media-background-bg-orange-50 {
+  background-color: $-orange-50;
+}
+
+.text-media-background-bg-yellow-50 {
+  background-color: $-yellow-50;
+}
 
 .text-and-media-container {
-  gap: 4rem;
+  max-width: $max-width-content-desktop-large;
+  width: 100%;
 
   .text-content {
     height: auto;
