@@ -12,7 +12,6 @@ import { FRONT_PAGE_QUERY } from '../graphql/queries.jsx';
 
 export default function FrontPage() {
   const { loading, error, data } = useQuery(FRONT_PAGE_QUERY);
-  //console.log('index', data.frontPage, data.frontPage)
 
   return (
     // <RootLayout tabTitle={null} language='en_GB'>

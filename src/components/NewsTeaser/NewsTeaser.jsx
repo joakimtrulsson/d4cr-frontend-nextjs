@@ -41,7 +41,6 @@ export default function NewsTeaser({ content }) {
 
     fetchData();
   }, [newsVar.chapter, newsVar.category]);
-  console.log(data);
 
   return (
     <>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const CaseCard = ({ link, quote, title, img, linkType }) => {
   let linkText = '';
-  // console.log(link);
+
   if (linkType === 'internal') {
     linkText = 'Read our case';
   } else if (linkType === 'external') {

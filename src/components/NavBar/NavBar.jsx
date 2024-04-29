@@ -24,13 +24,11 @@ export default function NavBar() {
   function clickedBtnCTA1(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log('clicked');
     setShareOrSlack(url);
     setIsClicked(true);
   }
 
   function clickedBtnMenuIfOnlyOne(url) {
-    console.log('clicked');
     setShareOrSlack(url);
     setIsClicked(true);
   }

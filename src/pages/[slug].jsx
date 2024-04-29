@@ -18,7 +18,7 @@ export default function SlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
     variables: { where: { slug: resolvedUrl } },
   });
-  //console.log(data.page)
+
   const pageData = data.page;
   const url1 = pageData?.ctaOneUrl && ensureValidUrl(pageData.ctaOneUrl);
   const url2 = pageData?.ctaTwoUrl && ensureValidUrl(pageData.ctaTwoUrl);

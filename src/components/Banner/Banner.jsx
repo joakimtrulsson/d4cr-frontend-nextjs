@@ -8,6 +8,7 @@ import SlackForm from '../SlackForm/SlackForm.jsx';
 import PopupForm from '../ShareForm/ShareForm.jsx';
 import Link from 'next/link';
 import { ensureValidUrl } from '../../utils/modalFunctions.js';
+import { set } from 'lodash';
 
 export default function Banner({ content }) {
   const { library } = require('@fortawesome/fontawesome-svg-core');
@@ -22,8 +23,14 @@ export default function Banner({ content }) {
   function clickedBtnCTA1(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log('clicked');
-    setShareOrSlack(url);
+
+    if (url === 'share' || url === 'slack') {
+      setShareOrSlack(url);
+    } else if (url === undefined) {
+      setShareOrSlack('slack');
+    }
+    // setShareOrSlack(url);
+
     setIsClicked(true);
   }
 
@@ -34,6 +41,7 @@ export default function Banner({ content }) {
       setSlideOut(false);
     }, 500);
   }
+
   return (
     <>
       <div
@@ -71,6 +79,8 @@ export default function Banner({ content }) {
               <PrimaryButton title={content.cta?.anchorText} />
             </Link>
           ))}
+
+        {!url && <PrimaryButton title='Fill out form' onClick={clickedBtnCTA1} />}
       </div>
 
       <div

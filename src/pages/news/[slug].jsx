@@ -12,8 +12,6 @@ export default function NewsSlugPage({ resolvedUrl }) {
     variables: { where: { slug: resolvedUrl } },
   });
 
-  console.log(data.news.sections);
-
   return (
     data && (
       // <RootLayout

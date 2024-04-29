@@ -14,7 +14,7 @@ import { ensureValidUrl } from '../../utils/modalFunctions.js';
 export default function TextMediaComponent({ content }) {
   const url1 = content.cta1?.url ? ensureValidUrl(content.cta1?.url) : content.cta1?.page;
   const url2 = content.cta2?.url ? ensureValidUrl(content.cta2?.url) : content.cta2?.page;
-  //console.log(content.cta1 , url1)
+
   const [isClicked, setIsClicked] = useState(false);
   const [slideOut, setSlideOut] = useState(false);
   const [shareOrSlack, setShareOrSlack] = useState('');

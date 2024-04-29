@@ -26,7 +26,6 @@ export default function Footer() {
   function clickedBtnMenu(url, e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log('clicked');
     setShareOrSlack(url);
     setIsClicked(true);
   }
@@ -212,7 +211,7 @@ const FooterMenuLink = ({ url, anchorText }) => {
   function clickedBtnCTA1(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log('clicked');
+
     setShareOrSlack(url);
     setIsClicked(true);
   }

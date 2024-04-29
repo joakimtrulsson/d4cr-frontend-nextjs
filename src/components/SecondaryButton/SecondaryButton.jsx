@@ -3,7 +3,6 @@ import ArrowLeft from '../../styles/assets/graphics/buttons/secondary-btn-arrow-
 import ArrowRight from '../../styles/assets/graphics/buttons/secondary-btn-arrow-right.svg';
 
 export default function SecondaryButton({ className, title, onClick }) {
-  // console.log(onClick)
   return (
     <div
       className={`secondary-button flex flex-row flex-nowrap ${className}`}
