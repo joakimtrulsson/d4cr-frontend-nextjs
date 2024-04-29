@@ -1,9 +1,8 @@
 import React from 'react';
-import CaseCard from '../../themes/components/case-card';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { CASES_ALL_DESC_QUERY } from '../../data/queries';
+import CaseCard from '../../components/CaseCard/CaseCard';
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { CASES_ALL_DESC_QUERY } from '../../graphql/queries';
 
 export default function RenderAllCasesContent() {
   const { loading, error, data } = useQuery(CASES_ALL_DESC_QUERY);

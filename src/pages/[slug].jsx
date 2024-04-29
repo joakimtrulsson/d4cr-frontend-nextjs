@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import PopupForm from '../themes/components/popup-form-share.jsx';
-import SlackForm from '../themes/components/popup-form-slack.jsx';
-
-import SectionRender from '../themes/sources/js/section-renderer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
-import PrimaryButton from '../themes/components/buttons/primary-button';
-import SecondaryButton from '../themes/components/buttons/secondary-button';
-import RootLayout from '../app/layout';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../data/apollo-client';
-import { GET_PAGE_BY_SLUG_QUERY } from '../data/queries.jsx';
-import { ensureValidUrl } from '../themes/sources/js/modal-functions.js';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
+import ShareForm from '../components/ShareForm/ShareForm.jsx';
+import SlackForm from '../components/SlackForm/SlackForm.jsx';
+import SectionRender from '../components/SectionRenderer/SectionRenderer.jsx';
+import PrimaryButton from '../components/PrimaryButton/PrimaryButton.jsx';
+import SecondaryButton from '../components/SecondaryButton/SecondaryButton.jsx';
+// import RootLayout from '../app/layout';
+
+import { initializeApollo, addApolloState } from '../graphql/apolloClient.js';
+import { GET_PAGE_BY_SLUG_QUERY } from '../graphql/queries.jsx';
+import { ensureValidUrl } from '../utils/modalFunctions.js';
 
 export default function SlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(GET_PAGE_BY_SLUG_QUERY, {
@@ -128,7 +127,7 @@ export default function SlugPage({ resolvedUrl }) {
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}
-            {shareOrSlack === 'share' && <PopupForm />}
+            {shareOrSlack === 'share' && <ShareForm />}
           </div>
         </div>
       </div>

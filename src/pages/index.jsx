@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
-// import { fetchFrontPageData } from '../graphql';
-import HeroComponent from '../themes/components/hero-frontpage';
-import SectionRenderer from '../themes/sources/js/section-renderer';
-import RootLayout from '../app/layout';
-import PrimaryButton from '../themes/components/buttons/primary-button.jsx'
-import SecondaryButton from '../themes/components/buttons/secondary-button.jsx'
-import Link from 'next/link'
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../data/apollo-client';
-import { FRONT_PAGE_QUERY } from '../data/queries';
+// import { fetchFrontPageData } from '../graphql';
+import HeroFrontPage from '../components/HeroFrontPage/HeroFrontPage.jsx';
+import SectionRenderer from '../components/SectionRenderer/SectionRenderer.jsx';
+// import RootLayout from '../app/layout';
+// import PrimaryButton from '../themes/components/buttons/primary-button.jsx';
+// import SecondaryButton from '../themes/components/buttons/secondary-button.jsx';
+import { initializeApollo, addApolloState } from '../graphql/apolloClient.js';
+import { FRONT_PAGE_QUERY } from '../graphql/queries.jsx';
 
 export default function FrontPage() {
   const { loading, error, data } = useQuery(FRONT_PAGE_QUERY);
   //console.log('index', data.frontPage, data.frontPage)
-  
- 
+
   return (
     // <RootLayout tabTitle={null} language='en_GB'>
     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-      {data.frontPage ? <HeroComponent prop={data.frontPage} /> : null}
+      {data.frontPage ? <HeroFrontPage prop={data.frontPage} /> : null}
 
       {data.frontPage.sections &&
         data.frontPage.sections.map((section, index) => (

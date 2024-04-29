@@ -1,0 +1,16 @@
+@import '../../styles/scss/variables/colorVariables.scss';
+
+.principles {
+  .principles-container {
+    align-items: stretch;
+    height: auto;
+  }
+}
+
+@media (min-width: 1300px) {
+  .principles {
+    .principles-container {
+      width: 90vw;
+    }
+  }
+}

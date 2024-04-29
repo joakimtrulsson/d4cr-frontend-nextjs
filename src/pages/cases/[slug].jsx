@@ -1,11 +1,11 @@
-import SectionRenderer from '../../themes/sources/js/section-renderer.js';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import ResourcesSection from '../../themes/components/resource-section.jsx';
+import { useQuery } from '@apollo/client';
+import SectionRenderer from '../../components/SectionRenderer/SectionRenderer.jsx';
+import Resources from '../../components/Resources/Resources.jsx';
 import RootLayout from '../../app/layout.jsx';
 
-import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { CASE_ITEM_BY_SLUG_QUERY } from '../../data/queries.jsx';
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { CASE_ITEM_BY_SLUG_QUERY } from '../../graphql/queries.jsx';
 
 export default function CasesPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(CASE_ITEM_BY_SLUG_QUERY, {
@@ -36,7 +36,7 @@ export default function CasesPage({ resolvedUrl }) {
                   ))}
                 <div className='renderer'>
                   {data.cases[0].resources.length > 0 ? (
-                    <ResourcesSection
+                    <Resources
                       resources={data.cases[0].resources}
                       title={data.cases[0].resourcesTitle}
                       preamble={data.cases[0].resourcesPreamble}

@@ -1,0 +1,17 @@
+.chapter-main {
+  position: relative;
+  overflow: hidden;
+
+  .hero-image-medium {
+    width: 85%;
+    max-width: 60rem;
+    height: 20rem;
+    overflow: hidden;
+    position: relative;
+    object-fit: cover;
+  }
+
+  .animation-background-right {
+    right: -10%;
+  }
+}

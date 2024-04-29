@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import {
-  fetchMainMenuData,
-  fetchFooterMenuData,
-  fetchGetPageBySlugData,
-  fetchGetAllCases,
-  fetchResourcesCategories,
-} from '../../graphql';
-import { notFound } from 'next/navigation';
-import RootLayout from '../../app/layout';
-import ResourceCard from '../../themes/components/resource-card';
-import DropdownMenu from '../../themes/components/drop-down';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { RESOURCES } from '../../data/queries';
+// import {
+//   fetchMainMenuData,
+//   fetchFooterMenuData,
+//   fetchGetPageBySlugData,
+//   fetchGetAllCases,
+//   fetchResourcesCategories,
+// } from '../../graphql';
+// import { notFound } from 'next/navigation';
+// import RootLayout from '../../app/layout';
+import ResourceCard from '../../components/ResourceCard/ResourceCard.jsx';
+import DropdownMenu from '../../components/DropDown/DropDown.jsx';
+
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { RESOURCES } from '../../graphql/queries';
 
 export default function ResourcesPage() {
   const { loading, error, data } = useQuery(RESOURCES, {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import RootLayout from '../../app/layout';
-import Newscard from '../../themes/components/news-card';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { GET_ALL_NEWS_QUERY } from '../../data/queries';
+import Newscard from '../../components/NewsCard/NewsCard';
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { GET_ALL_NEWS_QUERY } from '../../graphql/queries';
+
+// import RootLayout from '../../app/layout';
 
 export default function NewsPage() {
   const { loading, error, data } = useQuery(GET_ALL_NEWS_QUERY, {

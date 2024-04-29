@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import SectionRender from '../../themes/sources/js/section-renderer.js';
-import RootLayout from '../../app/layout.jsx';
-import Resources from '../../themes/components/resource-section.jsx';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { GET_NEWS_ITEM_BY_SLUG_QUERY } from '../../data/queries.jsx';
+import SectionRender from '../../components/SectionRenderer/SectionRenderer.js';
+import Resources from '../../components/Resources/Resources.jsx';
+// import RootLayout from '../../app/layout.jsx';
+
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { GET_NEWS_ITEM_BY_SLUG_QUERY } from '../../graphql/queries.jsx';
 
 export default function NewsSlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(GET_NEWS_ITEM_BY_SLUG_QUERY, {

@@ -1,12 +1,12 @@
-import '../themes/sources/scss/app.scss';
-import MenuProvider from '../context/MenuProvider';
-import NavBar from '../components/navbar';
-import Footer from '../components/footer';
-
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../data/apollo-client';
-import MetaHeader from '../components/meta-header';
-import '../themes/sources/scss/app.scss';
+import MenuProvider from '../context/MenuProvider';
+import NavBar from '../components/NavBar/NavBar.jsx';
+import Footer from '../components/Footer/Footer.jsx';
+
+import { useApollo } from '../graphql/apolloClient.js';
+import MetaHeader from '../components/MetaHeader/MetaHeader';
+import '../styles/scss/app.scss';
+// import '../sty/sources/scss/app.scss';
 
 function MyApp({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);

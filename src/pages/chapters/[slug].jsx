@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import getLanguageName from '../../themes/sources/js/language-code.js';
-import SectionRender from '../../themes/sources/js/section-renderer.js';
-import AnimationRight from '../../themes/sources/assets/graphics/animation.gif';
-import AnimationLeft from '../../themes/sources/assets/graphics/animation-2.gif';
-import RootLayout from '../../app/layout.jsx';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { CHAPTER_SLUG_QUERY } from '../../data/queries.jsx';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
+import getLanguageName from '../../utils/languageCode.js';
+import SectionRender from '../../components/SectionRenderer/SectionRenderer.jsx';
+import AnimationRight from '../../styles/assets/graphics/animation.gif';
+import AnimationLeft from '../../styles/assets/graphics/animation-2.gif';
+import RootLayout from '../../app/layout.jsx';
+
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { CHAPTER_SLUG_QUERY } from '../../graphql/queries.jsx';
 
 export default function ChapterSlugPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(CHAPTER_SLUG_QUERY, {

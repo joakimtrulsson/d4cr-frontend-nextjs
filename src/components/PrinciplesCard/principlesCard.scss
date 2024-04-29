@@ -1,0 +1,172 @@
+@import '../../styles/scss/variables/colorVariables.scss';
+@import '../../styles/scss/variables/layoutVariables.scss';
+
+.principles-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+  width: 24rem;
+  margin: 0.5rem;
+  border: 2px solid transparent;
+  transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+
+  .img-container {
+    height: 100%;
+    width: 30%;
+    background-color: #efefef;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+
+    .img-size {
+      height: 50%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+
+  .text-container {
+    flex: 1;
+    margin: 1.5rem 0;
+
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .arrow-text {
+      margin: 0 0 1rem 1rem;
+
+      a {
+        border-bottom: 1.8px $-orange-500 solid;
+        text-decoration: none;
+        display: inline-flex;
+        flex-flow: row;
+
+        align-items: center;
+        height: 100%;
+        width: auto;
+
+        p {
+          font-size: 15px;
+          color: $-orange-500;
+          font-weight: 600;
+          margin: 0 0 0 0;
+          line-height: 1.6rem;
+        }
+
+        .arrow-right {
+          height: 30%;
+          margin-left: 0.7rem;
+          transition: margin-left 0.2s ease-in-out;
+        }
+      }
+    }
+
+    .title-text {
+      margin: 0.9rem 1rem 0 1rem;
+      width: 90%;
+      height: auto;
+
+      a {
+        h4 {
+          margin: 0;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .sub-header {
+      margin: 1rem 0 1rem 1rem;
+      width: 90%;
+      height: auto;
+
+      a {
+        p {
+          margin: 0;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $-orange-100;
+
+    border-color: $-orange-500;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+
+    .arrow-text {
+      transition: margin-left 0.2s ease-in-out;
+
+      a {
+        .arrow-right {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    .img-container {
+      background-color: $-orange-100;
+      transition: background-color 0.2s ease-in-out;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .principles-card {
+    align-items: space-between;
+    width: 23rem;
+    margin: 2rem;
+
+    .text-container {
+      .arrow-text {
+        a {
+          p {
+            font-size: 15px;
+            color: $-orange-500;
+            font-weight: 600;
+            margin: 0 0 0 0;
+            line-height: 1.6rem;
+          }
+
+          .arrow-right {
+            height: 30%;
+            margin-left: 0.7rem;
+            transition: margin-left 0.2s ease-in-out;
+          }
+        }
+      }
+
+      .title-text {
+        margin: 0.9rem 1rem 0 1rem;
+        width: 90%;
+        height: auto;
+
+        a {
+          h4 {
+            margin: 0;
+            font-size: 20px;
+          }
+        }
+      }
+
+      .sub-header {
+        margin: 1rem 0 1rem 1rem;
+        width: 90%;
+        height: auto;
+
+        a {
+          p {
+            margin: 0;
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+}

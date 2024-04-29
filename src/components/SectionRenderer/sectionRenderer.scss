@@ -1,0 +1,15 @@
+@import '../../styles/scss/variables/colorVariables.scss';
+@import '../../styles/scss/variables/layoutVariables.scss';
+
+.text-media-section {
+  //   max-width: $max-width-content-desktop-large;
+  //   //   min-width: 100vw;
+  min-width: 100%;
+  height: auto;
+}
+
+.full-site-container-width {
+  max-width: $max-width-desktop-large;
+  width: 100%;
+  //   border: 1px solid red;
+}

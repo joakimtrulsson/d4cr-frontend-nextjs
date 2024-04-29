@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import LargeBulletList from '../../themes/components/large-bullet-list.jsx';
-import ButtonDown from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-default.svg';
-import ButtonDownHover from '../../themes/sources/assets/graphics/buttons/btn-scroll-down-hover.svg';
-import BottomWave from '../../themes/components/waves/bottom-wave.jsx';
-import AnimationLeft from '../../themes/sources/assets/graphics/buttons/left-gif-turqouise.gif';
-import AnimationRight from '../../themes/sources/assets/graphics/buttons/right-gif-turqouise.gif';
-import Resources from '../../themes/components/resource-section.jsx';
-import getColorCode from '../../themes/sources/js/color-code.js';
-
 import { useQuery } from '@apollo/client';
-import { initializeApollo, addApolloState } from '../../data/apollo-client';
-import { PRINCIPLES_BY_NUMBER } from '../../data/queries.jsx';
+import LargeBulletList from '../../components/LargeBulletList/LargeBulletList.jsx';
+import ButtonDown from '../../styles/assets/graphics/buttons/btn-scroll-down-default.svg';
+import ButtonDownHover from '../../styles/assets/graphics/buttons/btn-scroll-down-hover.svg';
+import BottomWave from '../../components/BottomWave/BottomWave.jsx';
+import AnimationLeft from '../../styles/assets/graphics/buttons/left-gif-turqouise.gif';
+import AnimationRight from '../../styles/assets/graphics/buttons/right-gif-turqouise.gif';
+import Resources from '../../components/Resources/Resources.jsx';
+import getColorCode from '../../utils/colorCode.js';
+
+import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
+import { PRINCIPLES_BY_NUMBER } from '../../graphql/queries.jsx';
 
 export default function PrinciplesPage({ resolvedUrl }) {
   const { loading, error, data } = useQuery(PRINCIPLES_BY_NUMBER, {

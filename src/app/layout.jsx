@@ -1,5 +1,5 @@
-import MetaHeader from '../components/meta-header';
-import '../themes/sources/scss/app.scss';
+import MetaHeader from '../components/MetaHeader/MetaHeader';
+import '../styles/scss/app.scss';
 
 export default function RootLayout({ children, tabTitle, resolvedUrl, language }) {
   return (
