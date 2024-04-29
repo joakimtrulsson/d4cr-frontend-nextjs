@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
-import SectionRender from '../../components/SectionRenderer/SectionRenderer.js';
+import SectionRenderer from '../../components/SectionRenderer/SectionRenderer.jsx';
 import Resources from '../../components/Resources/Resources.jsx';
 // import RootLayout from '../../app/layout.jsx';
 
@@ -50,7 +50,7 @@ export default function NewsSlugPage({ resolvedUrl }) {
 
         {data?.news?.sections &&
           data.news.sections.map((section, index) => (
-            <SectionRender key={index} section={section} />
+            <SectionRenderer key={index} section={section} />
           ))}
         {data?.news?.resources ? (
           <Resources
