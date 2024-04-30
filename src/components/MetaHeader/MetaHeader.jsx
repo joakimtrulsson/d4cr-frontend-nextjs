@@ -90,7 +90,7 @@ export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted
           src='https://www.googletagmanager.com/ns.html?id=GTM-KJG5LFFZ'
           height='0'
           width='0'
-          style='display:none;visibility:hidden'
+          style={{ display: 'none', visibility: 'hidden' }}
         ></iframe>
       </noscript>
     </>
