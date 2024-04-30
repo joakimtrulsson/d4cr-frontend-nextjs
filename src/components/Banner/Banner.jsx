@@ -53,7 +53,7 @@ export default function Banner({ content }) {
              borderradius--half padding--s margin-l--xxs'
         >
           <FontAwesomeIcon
-            icon={['fas', 'star']}
+            icon={['fas', content.iconName ? content.iconName : 'star']}
             color={getColorCode('orange-500')}
             size='lg'
           />
