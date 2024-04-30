@@ -7,10 +7,8 @@ import { metadata } from '../../graphql/metaData';
     #### Component for managing metadata, including the webpage title, URL, and language, commonly used by search engines and browsers.
     */
 export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted }) {
-  // Generate full URL for meta property
   const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${resolvedUrl}`;
 
-  // Ensure tabTitle doesn't show undefined or null
   tabTitle =
     tabTitle === undefined || !tabTitle
       ? metadata.title
@@ -57,42 +55,25 @@ export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted
           content='https://www.facebook.com/designingforchildren/'
         ></meta>
       </Head>
-      {/* {isAccepted && (
-        <>
-          <Script
-            strategy='afterInteractive'
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-          />
 
-          <Script id='google-analytics' strategy='afterInteractive'>
-            {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
-        `}
-          </Script>
-        </>
-      )} */}
-
-      {/* <Script id='gtm' strategy='afterInteractive'>
+      <Script id='gtm' strategy='afterInteractive'>
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-KJG5LFFZ');
+          })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GOOGLE_TAG_ID}');
         `}
       </Script>
 
       <noscript>
         <iframe
-          src='https://www.googletagmanager.com/ns.html?id=GTM-KJG5LFFZ'
+          src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_ID}`}
           height='0'
           width='0'
           style={{ display: 'none', visibility: 'hidden' }}
         ></iframe>
-      </noscript> */}
+      </noscript>
     </>
   );
 }
