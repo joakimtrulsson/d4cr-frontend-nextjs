@@ -1,6 +1,10 @@
 @import '../../styles/scss/variables/colorVariables.scss';
 
 .principles {
+  h4 {
+    margin-bottom: -1rem;
+    text-transform: uppercase;
+  }
   .principles-container {
     align-items: stretch;
     height: auto;

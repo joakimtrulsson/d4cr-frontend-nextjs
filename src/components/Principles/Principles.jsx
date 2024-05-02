@@ -71,7 +71,11 @@ export default function Principles({ content }) {
                       sortedPrinciples.principlesByCategory[categoryTitle];
                     return (
                       <div key={index}>
-                        <h4 className={'color-grey-400 text-align-center'}>
+                        <h4
+                          className={
+                            'principles-categorytitle sub-heading-m color-grey-400 text-align-center margin-t--s margin--zero'
+                          }
+                        >
                           {categoryTitle}
                         </h4>
                         <div className='principles-container flex flex-row flex-wrap flex-justify-center flex-align-center'>
