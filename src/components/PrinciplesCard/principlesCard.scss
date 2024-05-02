@@ -5,8 +5,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: auto;
-  width: 24rem;
+  // height: auto;
+  // width: 4480px;
+  // width: 30px;
+  background-color: $-yellow-50;
   // margin: 0.5rem;
   border: 2px solid transparent;
   transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
@@ -14,7 +16,8 @@
   .img-container {
     height: 100%;
     width: 30%;
-    background-color: #efefef;
+    // background-color: #efefef;
+    background-color: $-yellow-100;
     transition: background-color 0.2s ease-in-out;
     display: flex;
     align-items: center;
@@ -120,8 +123,9 @@
 @media (min-width: 1300px) {
   .principles-card {
     align-items: space-between;
-    width: 23rem;
-    margin: 2rem;
+    max-width: 448px;
+    width: 100%;
+    margin: 1rem;
 
     .text-container {
       .arrow-text {
@@ -150,7 +154,7 @@
         a {
           h4 {
             margin: 0;
-            font-size: 20px;
+            font-size: 18px;
           }
         }
       }
