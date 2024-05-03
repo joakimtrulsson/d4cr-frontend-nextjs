@@ -255,6 +255,9 @@ export const RESOURCES = gql`
       }
       createdAt
     }
+    resourceTypes {
+      type
+    }
   }
 `;
 

@@ -3,9 +3,6 @@ import Script from 'next/script';
 import Icon from '../../styles/assets/graphics/d4cr-icon-OG.png';
 import { metadata } from '../../graphql/metaData';
 
-/**
-    #### Component for managing metadata, including the webpage title, URL, and language, commonly used by search engines and browsers.
-    */
 export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted }) {
   const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${resolvedUrl}`;
 

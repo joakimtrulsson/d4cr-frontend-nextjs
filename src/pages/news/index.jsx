@@ -1,26 +1,11 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
 import Newscard from '../../components/NewsCard/NewsCard';
 import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
 import { GET_ALL_NEWS_QUERY } from '../../graphql/queries';
 
-// import RootLayout from '../../app/layout';
-
-export default function NewsPage() {
-  const { loading, error, data } = useQuery(GET_ALL_NEWS_QUERY, {
-    variables: { orderBy: { createdAt: 'desc' } },
-  });
-
+export default function NewsPage({ allNews, newsCategories }) {
   const title = 'News';
 
-  return (
-    // <RootLayout tabTitle={title} language='en_GB'>
-    <RenderAllNews allNews={data.newsItems} newsCategories={data.newsCategories} />
-    // </RootLayout>
-  );
-}
-
-function RenderAllNews({ allNews, newsCategories }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [showType, setShowType] = useState(
     newsCategories.map((category) => category.categoryTitle)
@@ -66,7 +51,7 @@ function RenderAllNews({ allNews, newsCategories }) {
 
   return (
     <main className='slug-news-outer-container flex flex-column flex-align-center'>
-      <h1 className='heading-background margin-b--xxl'>News</h1>
+      <h1 className='heading-background margin-b--xxl'>{title}</h1>
       <div
         className='flex flex-row flex-justify-start flex-align-between gap'
         style={{ gap: '1rem' }}
@@ -153,13 +138,17 @@ function RenderAllNews({ allNews, newsCategories }) {
 export async function getServerSideProps({ resolvedUrl }) {
   const apolloClient = initializeApollo();
   try {
-    await apolloClient.query({
+    const { data } = await apolloClient.query({
       query: GET_ALL_NEWS_QUERY,
       variables: { orderBy: { createdAt: 'desc' } },
     });
 
     return addApolloState(apolloClient, {
-      props: {},
+      props: {
+        allNews: data.newsItems,
+        newsCategories: data.newsCategories,
+        tabTitle: 'News',
+      },
     });
   } catch (error) {
     console.error('Error fetching data:', error);

@@ -85,7 +85,7 @@ export default function NavBar() {
           {data &&
             data.navigation &&
             data.navigation.map((group, index) => (
-              <>
+              <React.Fragment key={index}>
                 {group.links.length === 1 ? (
                   <div key={index}>
                     {group.links[0].url === 'share' || group.links[0].url === 'slack' ? (
@@ -236,7 +236,7 @@ export default function NavBar() {
                     )}
                   </div>
                 )}
-              </>
+              </React.Fragment>
             ))}
           {data &&
             data.ctaAnchorText &&

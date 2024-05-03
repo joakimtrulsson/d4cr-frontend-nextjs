@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useQuery } from '@apollo/client';
 import LargeBulletList from '../../components/LargeBulletList/LargeBulletList.jsx';
 import ButtonDown from '../../styles/assets/graphics/buttons/btn-scroll-down-default.svg';
 import ButtonDownHover from '../../styles/assets/graphics/buttons/btn-scroll-down-hover.svg';
@@ -12,17 +11,18 @@ import getColorCode from '../../utils/colorCode.js';
 
 import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
 import { PRINCIPLES_BY_NUMBER } from '../../graphql/queries.jsx';
+import NotFound from '../../components/NotFound/NotFound.jsx';
 
-export default function PrinciplesPage({ resolvedUrl }) {
-  const { loading, error, data } = useQuery(PRINCIPLES_BY_NUMBER, {
-    variables: { where: { slug: resolvedUrl } },
-  });
-
-  const principleNumber = data.principleNumbers;
+export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
   const [logoSrc, setLogoSrc] = useState(ButtonDown);
+  const principleExists = principleNumber.some(
+    (principle) => principle.principles.slug === resolvedUrl
+  );
 
-  //Toplinks
-  // Find the index of the current principle in the principlesNumber array
+  if (!principleExists) {
+    return <NotFound />;
+  }
+
   const currentIndex = principleNumber.findIndex(
     (numbers) => numbers.principles.slug === resolvedUrl
   );
@@ -39,21 +39,18 @@ export default function PrinciplesPage({ resolvedUrl }) {
   //Change props to work in large-bullet list
   const transformedSubPrinciples = Array.isArray(useIndex?.subPrinciples)
     ? useIndex.subPrinciples.map((subPrinciple) => {
-        // Check if subPrinciple.text is an array and not undefined or null
         const bodyText = Array.isArray(subPrinciple.text)
           ? subPrinciple.text.map((textItem) => {
-              // Check each textItem for 'children' array existence
               return {
                 type: 'paragraph',
                 children: Array.isArray(textItem.children)
                   ? textItem.children.map((child) => {
-                      // Assuming 'child.text' is always present if 'child' exists, but you could add more checks here if needed
                       return { text: child.text };
                     })
-                  : [], // Return an empty array if 'children' does not exist or is not an array
+                  : [],
               };
             })
-          : []; // Return an empty array if 'text' does not exist or is not an array
+          : [];
 
         return {
           bodyText: bodyText,
@@ -72,14 +69,6 @@ export default function PrinciplesPage({ resolvedUrl }) {
       : null;
 
   return (
-    // <RootLayout
-    //   className="navmenu"
-    //   navMenuData={props.navMenuData}
-    //   footerMenuData={null}
-    //   tabTitle={useIndex?.title}
-    //   resolvedUrl={props.resolvedUrl}
-    //   language='en_GB'
-    // >
     <main className='outer-main-principle'>
       <div className='flex flex-row bg-turquoise-100 flex-justify-center navbar-principle-links'>
         {previousSlug ? (
@@ -214,7 +203,6 @@ export default function PrinciplesPage({ resolvedUrl }) {
                     />
                   ) : (
                     <div className='no-image-placeholder'>No Image</div>
-                    // Ändra till null eller exempelbild?
                   )}
                 </div>
               </div>
@@ -253,35 +241,23 @@ export default function PrinciplesPage({ resolvedUrl }) {
         ) : null}
       </>
     </main>
-    //</RootLayout>
   );
 }
 
 export async function getServerSideProps({ params }) {
-  // const slug = '/' + resolvedUrl.split('/').pop();
   const apolloClient = initializeApollo();
   const resolvedUrl = `/${params.slug}`;
   try {
-    // const principleNumbersData = await fetchPrinciplesSortedByNumber();
-    // const navMenuData = await fetchMainMenuData();
-    // const footerMenuData = await fetchFooterMenuData();
-
-    await apolloClient.query({
+    const { data } = await apolloClient.query({
       query: PRINCIPLES_BY_NUMBER,
-      // variables: { where: { slug: resolvedUrl } },
     });
 
-    // return {
-    //   props: {
-    //     slug: slug,
-    //     principleNumbers: principleNumbersData,
-    //     // navMenuData,
-    //     // footerMenuData,
-    //     resolvedUrl,
-    //   },
-    // };
     return addApolloState(apolloClient, {
-      props: { resolvedUrl },
+      props: {
+        principleNumber: data.principleNumbers || null,
+        resolvedUrl,
+        tabTitle: 'Principles',
+      },
     });
   } catch (error) {
     console.error('Error fetching data:', error);

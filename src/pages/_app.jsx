@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }) {
         tabTitle={pageProps.tabTitle}
         resolvedUrl={pageProps.resolvedUrl}
         language={pageProps.language}
-        // acceptsCookies={isAccepted}
       />
       <ApolloProvider client={apolloClient}>
         <MenuProvider>

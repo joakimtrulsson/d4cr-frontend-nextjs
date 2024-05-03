@@ -1,37 +1,11 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
-// import {
-//   fetchMainMenuData,
-//   fetchFooterMenuData,
-//   fetchGetPageBySlugData,
-//   fetchGetAllCases,
-//   fetchResourcesCategories,
-// } from '../../graphql';
-// import { notFound } from 'next/navigation';
-// import RootLayout from '../../app/layout';
 import ResourceCard from '../../components/ResourceCard/ResourceCard.jsx';
 import DropdownMenu from '../../components/DropDown/DropDown.jsx';
-
 import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
 import { RESOURCES } from '../../graphql/queries';
 
-export default function ResourcesPage() {
-  const { loading, error, data } = useQuery(RESOURCES, {
-    variables: { orderBy: { createdAt: 'desc' } },
-  });
-
-  const title = 'Resources';
-
-  return (
-    // <RootLayout
-    //   //   navMenuData={props.navMenuData}
-    //   //   footerMenuData={null}
-    //   tabTitle={title}
-    //   language='en_GB'
-    // >
-    <RenderResourcesContent resourcesCat={data?.resources} />
-    // </RootLayout>
-  );
+export default function ResourcesPage({ allResources }) {
+  return <RenderResourcesContent resourcesCat={allResources} />;
 }
 
 function RenderResourcesContent(resourcesCat) {
@@ -156,31 +130,16 @@ function RenderResourcesContent(resourcesCat) {
   );
 }
 
-// This async function fetches both main and footer menu data.
-// async function fetchMenuData() {
-//   const navMenuData = await fetchMainMenuData();
-//   const footerMenuData = await fetchFooterMenuData();
-//   return { navMenuData, footerMenuData };
-// }
-
-// getServerSideProps fetches different pieces of data based on the URL.
-// Since this example is tailored for '/resources', we fetch resource categories data.
 export async function getServerSideProps({ resolvedUrl }) {
   const apolloClient = initializeApollo();
   try {
-    // Fetch menu data.
-    await apolloClient.query({
+    const { data } = await apolloClient.query({
       query: RESOURCES,
       variables: { orderBy: { createdAt: 'desc' } },
     });
 
-    // Since the URL is known to be '/resources', fetch the relevant data for that page.
-    // Adjust according to your actual data fetching needs.
-    // const resourcesCat = await fetchResourcesCategories();
-
-    // Combine and return all fetched data as props.
     return addApolloState(apolloClient, {
-      props: {},
+      props: { allResources: data.resources, tabTitle: 'Supporting resources' },
     });
   } catch (error) {
     console.error('Error fetching data:', error);
