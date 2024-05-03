@@ -60,10 +60,8 @@ export default function TextMediaComponent({ content }) {
                 padding-tb--l padding-lr--xl margin-tb--xxxs-negative ${bgColorClass} 
                 ${content.imagePosition === 'LEFT' && 'flex-reverse-row'}`}
         >
-          {' '}
           {/* check media's position */}
           <div className='text-content flex flex-column flex-nowrap width--s'>
-            {' '}
             {/* text content */}
             <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>
               {content.subHeading}

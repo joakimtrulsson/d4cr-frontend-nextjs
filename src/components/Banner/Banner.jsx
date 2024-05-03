@@ -41,17 +41,14 @@ export default function Banner({ content }) {
     }, 500);
   }
 
-  let bgColorClass, fillColorCode;
+  let bgColorClass;
 
   if (content.backgroundColor === 'ORANGE') {
     bgColorClass = 'bg-orange-50';
-    fillColorCode = getColorCode('orange-50');
   } else if (content.backgroundColor === 'YELLOW') {
     bgColorClass = 'bg-yellow-50';
-    fillColorCode = getColorCode('yellow-50');
   } else {
     bgColorClass = 'bg-orange-50';
-    fillColorCode = getColorCode('orange-50');
   }
 
   return (
@@ -61,7 +58,7 @@ export default function Banner({ content }) {
         padding--s width--l min-width-35 borderradius--xxs`}
       >
         <div
-          className={`icon-wrapper flex flex-justify-center flex-align-center ${bgColorClass} 
+          className={`icon-wrapper flex flex-justify-center flex-align-center bg-orange-100
              borderradius--half padding--s margin-l--xxs`}
         >
           <FontAwesomeIcon
