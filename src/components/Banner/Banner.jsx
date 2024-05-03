@@ -8,7 +8,6 @@ import SlackForm from '../SlackForm/SlackForm.jsx';
 import PopupForm from '../ShareForm/ShareForm.jsx';
 import Link from 'next/link';
 import { ensureValidUrl } from '../../utils/modalFunctions.js';
-import { set } from 'lodash';
 
 export default function Banner({ content }) {
   const { library } = require('@fortawesome/fontawesome-svg-core');
@@ -42,15 +41,28 @@ export default function Banner({ content }) {
     }, 500);
   }
 
+  let bgColorClass, fillColorCode;
+
+  if (content.backgroundColor === 'ORANGE') {
+    bgColorClass = 'bg-orange-50';
+    fillColorCode = getColorCode('orange-50');
+  } else if (content.backgroundColor === 'YELLOW') {
+    bgColorClass = 'bg-yellow-50';
+    fillColorCode = getColorCode('yellow-50');
+  } else {
+    bgColorClass = 'bg-orange-50';
+    fillColorCode = getColorCode('orange-50');
+  }
+
   return (
     <>
       <div
-        className='banner flex flex-row flex-justify-between flex-align-center bg-orange-50 
-        padding--s width--l min-width-35 borderradius--xxs'
+        className={`banner flex flex-row flex-justify-between flex-align-center ${bgColorClass} 
+        padding--s width--l min-width-35 borderradius--xxs`}
       >
         <div
-          className='icon-wrapper flex flex-justify-center flex-align-center bg-orange-100 
-             borderradius--half padding--s margin-l--xxs'
+          className={`icon-wrapper flex flex-justify-center flex-align-center ${bgColorClass} 
+             borderradius--half padding--s margin-l--xxs`}
         >
           <FontAwesomeIcon
             icon={['fas', content.iconName ? content.iconName : 'star']}

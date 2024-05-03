@@ -35,9 +35,8 @@ export default function TextMediaComponent({ content }) {
       setSlideOut(false);
     }, 500);
   }
-  var bgColorClass, fillColorCode;
+  let bgColorClass, fillColorCode;
 
-  /* "bg" is for the body, and "fill" is for the svg in waves */
   if (content.backgroundColor === 'ORANGE') {
     bgColorClass = 'bg-orange-50';
     fillColorCode = getColorCode('orange-50');
@@ -50,11 +49,6 @@ export default function TextMediaComponent({ content }) {
   }
 
   return (
-    // <div className='text-media-section bg-transparent'>
-    //   {(content.border === 'TOP' || content.border === 'TOPBOTTOM') && ( // top wave
-    //     <TopWave fillColorCode={fillColorCode} />
-    //   )}
-
     <div className='text-media-section'>
       {(content.border === 'TOP' || content.border === 'TOPBOTTOM') && ( // top wave
         <TopWave fillColorCode={fillColorCode} />
