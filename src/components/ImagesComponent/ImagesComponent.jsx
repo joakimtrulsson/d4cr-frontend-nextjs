@@ -55,10 +55,7 @@ export default function ImagesComponent({ content }) {
 
   return (
     <div className='image-section'>
-      <div
-        className={`${containerClass} 
-    padding-tb--m `}
-      >
+      <div className={`${containerClass}`}>
         {content.images.map((image, index) => (
           <>
             <img

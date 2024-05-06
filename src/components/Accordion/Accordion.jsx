@@ -14,10 +14,7 @@ export default function Accordion({ content }) {
   }, [clickedValue, content.fields]);
 
   return (
-    <div
-      className='accordion-container animation-background-container flex flex-column flex-justify-center flex-align-center 
-        padding-tb--xxl'
-    >
+    <div className='accordion-container animation-background-container flex flex-column flex-justify-center flex-align-center'>
       <div className='animation-background-left-large'>
         <Image src={Animation} alt='Animated GIF' />
       </div>

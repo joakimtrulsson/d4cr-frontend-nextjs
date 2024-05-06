@@ -5,32 +5,44 @@ import NotFound from '../../components/NotFound/NotFound.jsx';
 
 import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
 import { CASE_ITEM_BY_SLUG_QUERY } from '../../graphql/queries.jsx';
+import { markConsecutiveMediaTextSections } from '../../utils/markConsecutiveMediaTextSections.js';
 
 export default function CasesPage({ pageData }) {
-  if (pageData.length === 0) {
+  if (!pageData) {
     return <NotFound />;
+  }
+
+  let checkIfMultipleTextMediaSections;
+  if (pageData?.sections) {
+    checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+      pageData?.sections
+    );
   }
 
   return (
     <main className='flex flex-column container-cases'>
-      {pageData && pageData.length > 0 ? (
+      {pageData ? (
         <>
           <div className='title-container'>
             <h4 className='sub-heading-m case'>CASE</h4>
-            <h1 className='heading-1'>{pageData[0].title}</h1>
-            <DocumentRenderer document={pageData[0].preamble?.document} />
+            <h1 className='heading-1'>{pageData.title}</h1>
+            <DocumentRenderer document={pageData.preamble?.document} />
           </div>
           <div className='flex flex-column flex-align-center'>
-            {pageData[0].sections &&
-              pageData[0].sections.map((section, index) => (
-                <SectionRenderer key={index} section={section} />
+            {pageData.sections &&
+              pageData.sections.map((section, index) => (
+                <SectionRenderer
+                  key={index}
+                  section={section}
+                  multipleTextMedia={checkIfMultipleTextMediaSections[index]}
+                />
               ))}
             <div className='renderer'>
-              {pageData[0].resources.length > 0 ? (
+              {pageData.resources.length > 0 ? (
                 <Resources
-                  resources={pageData[0].resources}
-                  title={pageData[0].resourcesTitle}
-                  preamble={pageData[0].resourcesPreamble}
+                  resources={pageData.resources}
+                  title={pageData.resourcesTitle}
+                  preamble={pageData.resourcesPreamble}
                 />
               ) : null}
             </div>
@@ -56,9 +68,17 @@ export async function getServerSideProps({ params }) {
       },
     });
 
+    if (!data.cases.length > 0) {
+      return {
+        props: {
+          tabTitle: 'Page not found',
+        },
+      };
+    }
+
     return addApolloState(apolloClient, {
       props: {
-        pageData: data.cases,
+        pageData: data.cases[0] || [],
         tabTitle: data.cases[0].title,
       },
     });

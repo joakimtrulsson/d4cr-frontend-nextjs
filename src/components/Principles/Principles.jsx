@@ -4,29 +4,6 @@ import PrinciplesCard from '../PrinciplesCard/PrinciplesCard.jsx';
 export default function Principles({ content }) {
   const [sortedPrinciples, setSortedPrinciples] = useState([]);
 
-  // useEffect(() => {
-  //   const sortedPrinciples = [...content.principles].sort((a, b) => {
-  //     if (a.principleCategory.title < b.principleCategory.title) {
-  //       return -1;
-  //     }
-  //     if (a.principleCategory.title > b.principleCategory.title) {
-  //       return 1;
-  //     }
-  //     return a.principleNumber.number - b.principleNumber.number;
-  //   });
-
-  //   const principlesByCategory = sortedPrinciples.reduce((acc, principle) => {
-  //     const categoryTitle = principle.principleCategory.title;
-  //     if (!acc[categoryTitle]) {
-  //       acc[categoryTitle] = [];
-  //     }
-  //     acc[categoryTitle].push(principle);
-  //     return acc;
-  //   }, {});
-
-  //   setSortedPrinciples(principlesByCategory);
-  // }, [content]);
-
   useEffect(() => {
     const principlesByCategory = content.principles.reduce((acc, principle) => {
       const categoryTitle = principle.principleCategory.title;
@@ -49,7 +26,7 @@ export default function Principles({ content }) {
   }, [content]);
 
   return (
-    <main className='flex flex-column flex-align-center principles margin-t--s'>
+    <main className='flex flex-column flex-align-center principles'>
       {content && content?.principles?.length > 0 ? (
         <>
           <div className='text-align-center'>

@@ -1,6 +1,8 @@
 @import '../../styles/scss/variables/layoutVariables.scss';
 
 .site-footer {
+  margin-top: auto;
+
   .clicked {
     position: fixed;
     z-index: 100;

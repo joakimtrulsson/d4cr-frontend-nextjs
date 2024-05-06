@@ -9,6 +9,7 @@ import NotFound from '../../components/NotFound/NotFound.jsx';
 
 import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
 import { CHAPTER_SLUG_QUERY } from '../../graphql/queries.jsx';
+import { markConsecutiveMediaTextSections } from '../../utils/markConsecutiveMediaTextSections.js';
 
 export default function ChapterSlugPage({ chapterData }) {
   if (!chapterData) {
@@ -36,6 +37,10 @@ export default function ChapterSlugPage({ chapterData }) {
   }
 
   chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage));
+
+  const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+    chapterData.sections
+  );
 
   return (
     <main className='site-content chapter-main flex flex-column flex-align-center flex-justify-start'>
@@ -90,7 +95,11 @@ export default function ChapterSlugPage({ chapterData }) {
 
       {chapterData.sections &&
         chapterData.sections.map((section, index) => (
-          <SectionRender key={index} section={section} />
+          <SectionRender
+            key={index}
+            section={section}
+            multipleTextMedia={checkIfMultipleTextMediaSections[index]}
+          />
         ))}
     </main>
   );
@@ -109,7 +118,7 @@ export async function getServerSideProps({ params }) {
     return addApolloState(apolloClient, {
       props: {
         chapterData: data.chapters[0] || null,
-        tabTitle: data.chapters[0]?.title || null,
+        tabTitle: data.chapters[0]?.title || 'Page not found',
       },
     });
   } catch (error) {

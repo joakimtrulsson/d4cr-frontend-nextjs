@@ -11,6 +11,7 @@ import NotFound from '../components/NotFound/NotFound.jsx';
 import { initializeApollo, addApolloState } from '../graphql/apolloClient.js';
 import { GET_PAGE_BY_SLUG_QUERY } from '../graphql/queries.jsx';
 import { ensureValidUrl } from '../utils/modalFunctions.js';
+import { markConsecutiveMediaTextSections } from '../utils/markConsecutiveMediaTextSections.js';
 
 export default function SlugPage({ pageData }) {
   const [isClicked, setIsClicked] = useState(false);
@@ -39,6 +40,10 @@ export default function SlugPage({ pageData }) {
       setSlideOut(false);
     }, 500);
   }
+
+  const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+    pageData.sections
+  );
 
   return (
     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
@@ -126,7 +131,11 @@ export default function SlugPage({ pageData }) {
       </div>
       {pageData?.sections &&
         pageData?.sections.map((section, index) => (
-          <SectionRender key={index} section={section} />
+          <SectionRender
+            key={index}
+            section={section}
+            multipleTextMedia={checkIfMultipleTextMediaSections[index]}
+          />
         ))}
     </main>
   );
@@ -145,7 +154,7 @@ export async function getServerSideProps({ params }) {
     return addApolloState(apolloClient, {
       props: {
         pageData: data.page,
-        tabTitle: data.page?.title,
+        tabTitle: data.page?.title || 'Page not found',
       },
     });
   } catch (error) {

@@ -4,11 +4,16 @@ import Resources from '../../components/Resources/Resources.jsx';
 import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
 import { GET_NEWS_ITEM_BY_SLUG_QUERY } from '../../graphql/queries.jsx';
 import NotFound from '../../components/NotFound/NotFound.jsx';
+import { markConsecutiveMediaTextSections } from '../../utils/markConsecutiveMediaTextSections.js';
 
 export default function NewsSlugPage({ newsData }) {
   if (!newsData) {
     return <NotFound />;
   }
+
+  const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+    newsData.sections
+  );
 
   return (
     <main className='site-content news-slug-container flex flex-column flex-align-center flex-justify-start'>
@@ -39,7 +44,11 @@ export default function NewsSlugPage({ newsData }) {
 
       {newsData.sections &&
         newsData.sections.map((section, index) => (
-          <SectionRenderer key={index} section={section} />
+          <SectionRenderer
+            key={index}
+            section={section}
+            multipleTextMedia={checkIfMultipleTextMediaSections[index]}
+          />
         ))}
       {newsData.resources ? (
         <Resources

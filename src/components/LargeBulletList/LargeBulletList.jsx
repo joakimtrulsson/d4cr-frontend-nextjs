@@ -8,7 +8,7 @@ export default function LargeBulletList({ content }) {
   library.add(fas);
 
   return (
-    <div className='large-bullet-list-container min-width-25 flex flex-column  flex-align-center'>
+    <div className='large-bullet-list-container min-width-25 flex flex-column flex-align-center'>
       {content.title && <h2>{content.title}</h2>}
       {content.subHeader && <p className='large-text'>{content.subHeader}</p>}
 
@@ -19,17 +19,19 @@ export default function LargeBulletList({ content }) {
                     bg-grey-25 borderradius--xxs padding--xs'
             key={index}
           >
-            {content.listType === 'UNORDERED' ? (
-              <FontAwesomeIcon
-                icon={['fas', 'arrow-right']}
-                color={getColorCode('orange-500')}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={['fas', `${index + 1}`]}
-                color={getColorCode('orange-500')}
-              />
-            )}
+            <div className='circle-icon'>
+              {content.listType === 'UNORDERED' ? (
+                <FontAwesomeIcon
+                  icon={['fas', 'arrow-right']}
+                  color={getColorCode('orange-500')}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={['fas', `${index + 1}`]}
+                  color={getColorCode('orange-500')}
+                />
+              )}
+            </div>
             <DocumentRenderer document={bullet.bodyText} />
           </div>
         );

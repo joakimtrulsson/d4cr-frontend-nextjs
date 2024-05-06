@@ -8,3 +8,11 @@ export default function ContactUs() {
     </main>
   );
 }
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      tabTitle: 'Contact us',
+    },
+  };
+}

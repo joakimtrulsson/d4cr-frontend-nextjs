@@ -17,8 +17,8 @@ export default function PeopleSection({ content }) {
 
   return (
     <div>
-      <div className=' text-align-center heading-text'>
-        <h2 className='margin-t--xl margin--zero'>{content.title}</h2>
+      <div className='text-align-center heading-text'>
+        <h2 className='margin--zero'>{content.title}</h2>
         <DocumentRenderer document={content.preamble} />
       </div>
 

@@ -70,10 +70,7 @@ export default function TextMediaComponent({ content }) {
             <DocumentRenderer document={content.preamble} />
             {(content.cta1 || content.cta2) && (
               <>
-                <nav
-                  className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center 
-                            margin-tb--xxxs'
-                >
+                <nav className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center'>
                   {content.cta1 &&
                     url1 &&
                     content.cta1.anchorText &&

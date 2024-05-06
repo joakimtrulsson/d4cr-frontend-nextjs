@@ -13,7 +13,7 @@
 
       .left-absolute {
         position: absolute;
-        left: -15%;
+        left: -8%;
         width: auto;
         height: 100%;
         z-index: 1;
@@ -21,7 +21,7 @@
 
       .right-absolute {
         position: absolute;
-        right: -5%;
+        right: 0%;
         width: auto;
         height: 92%;
         z-index: 1;
@@ -126,10 +126,8 @@
     position: -webkit-sticky;
     /* For Safari */
     position: sticky;
-    top: 7vh;
-    /* Adjust this value as needed */
+    top: 5rem;
     z-index: 18;
-    /* Ensures the navbar stays on top of other content */
     padding: 10px;
 
     .links {

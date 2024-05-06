@@ -2,6 +2,10 @@
   position: relative;
   overflow: hidden;
 
+  .animation-background-left {
+    left: 12%;
+  }
+
   .hero-image-medium {
     width: 85%;
     max-width: 60rem;
@@ -12,6 +16,6 @@
   }
 
   .animation-background-right {
-    right: -10%;
+    right: 12%;
   }
 }

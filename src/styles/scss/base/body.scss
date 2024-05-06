@@ -8,28 +8,18 @@ body {
 }
 
 .site-container {
-  // display: flex;
-  // flex-direction: column;
-  // margin-left: auto;
-  // margin-right: auto;
-  margin: 0 auto;
-  // justify-content: center;
-  // align-items: center;
+  display: flex;
+  flex-direction: column;
   max-width: $max-width-desktop-large;
-  width: 100%;
+  min-height: 100vh;
 }
 
 .site-content {
   margin: 0 auto;
-  // margin-right: auto;
-  // margin-left: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: auto;
-  // max-width: $max-width-content-desktop-large;
-  min-height: 100vh;
 
   .clicked {
     position: fixed;

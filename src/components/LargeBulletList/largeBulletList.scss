@@ -1,11 +1,10 @@
 @import '../../styles/scss/variables/colorVariables.scss';
 
 .large-bullet-list-container {
-  margin: 2rem 12rem 3rem 12rem;
-
   h2 {
     color: $-grey-700;
     margin-bottom: 0rem;
+    margin-top: 0rem;
   }
 
   p {
@@ -16,13 +15,20 @@
   .bullet-content {
     margin: 0.3rem 0;
 
-    svg {
-      width: 1.2rem;
-      height: 1.2rem;
-      padding: 0.8rem;
-      margin-right: 1rem;
+    .circle-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: $-orange-100;
-      border-radius: 50%;
+      border-radius: 999px;
+      min-width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+
+      svg {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
     }
 
     p {

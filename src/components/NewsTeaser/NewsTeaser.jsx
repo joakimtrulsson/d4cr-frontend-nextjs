@@ -45,10 +45,7 @@ export default function NewsTeaser({ content }) {
   return (
     <>
       {data ? (
-        <div
-          className='news-teaser-container flex flex-column flex-justify-center flex-align-center 
-        padding-tb--xxl'
-        >
+        <div className='news-teaser-container flex flex-column flex-justify-center flex-align-center'>
           <div className='animation-background'>
             <Image src={Animation} alt='Animated GIF' />
           </div>
@@ -72,7 +69,7 @@ export default function NewsTeaser({ content }) {
             ))}
           </div>
 
-          <div className='button-wrapper margin-tb--s'>
+          <div className='button-wrapper margin-t--s'>
             <Link className='no-decoration' href='../news'>
               <SecondaryButton title={'SEE ALL'} />
             </Link>

@@ -115,10 +115,8 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
                 href={!isActive ? `.${numbers.principles.slug}` : null}
                 className={`links`}
               >
-                {' '}
                 <h2 className={`numbers ${isActive ? 'active-link' : ''}`}>
-                  {' '}
-                  {numbers.number}{' '}
+                  {numbers.number}
                 </h2>
               </a>
             </div>
@@ -228,7 +226,7 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
           className='bottom-wave'
         />
       </div>
-      <div id='target-section' className='bullet-div'>
+      <div id='target-section' className='bullet-div margin-b--xxl'>
         <LargeBulletList content={contentForLargeBulletList} />
       </div>
       <>
