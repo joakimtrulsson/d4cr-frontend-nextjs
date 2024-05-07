@@ -10,8 +10,6 @@ import PeopleSection from '../People/People.jsx';
 import WYSIWYG from '../Wysiwyg/Wysiwyg.jsx';
 
 export default function SectionRenderer({ section, multipleTextMedia }) {
-  console.log('SectionRenderer section:', multipleTextMedia);
-
   switch (section.sectionType) {
     case 'ACCORDION':
       return (

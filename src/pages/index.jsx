@@ -8,19 +8,20 @@ import { initializeApollo, addApolloState } from '../graphql/apolloClient.js';
 import { FRONT_PAGE_QUERY } from '../graphql/queries.jsx';
 import { markConsecutiveMediaTextSections } from '../utils/markConsecutiveMediaTextSections.js';
 
-export default function FrontPage() {
-  const { loading, error, data } = useQuery(FRONT_PAGE_QUERY);
-
-  const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
-    data.frontPage.sections
-  );
+export default function FrontPage({ pageData }) {
+  let checkIfMultipleTextMediaSections;
+  if (pageData.sections) {
+    checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+      pageData.sections
+    );
+  }
 
   return (
     <main className='site-content flex flex-column flex-align-center flex-justify-start'>
-      {data.frontPage ? <HeroFrontPage prop={data.frontPage} /> : null}
+      {pageData ? <HeroFrontPage prop={pageData} /> : null}
 
-      {data.frontPage.sections &&
-        data.frontPage.sections.map((section, index) => (
+      {pageData.sections &&
+        pageData.sections.map((section, index) => (
           <SectionRenderer
             key={index}
             section={section}
@@ -34,12 +35,14 @@ export default function FrontPage() {
 export async function getServerSideProps({ resolvedUrl }) {
   const apolloClient = initializeApollo();
   try {
-    await apolloClient.query({
+    const { data } = await apolloClient.query({
       query: FRONT_PAGE_QUERY,
     });
 
     return addApolloState(apolloClient, {
-      props: {},
+      props: {
+        pageData: data.frontPage,
+      },
     });
   } catch (error) {
     console.error('(index.jsx) Error fetching data:', error);
