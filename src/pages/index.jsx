@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 
 import HeroFrontPage from '../components/HeroFrontPage/HeroFrontPage.jsx';
 import SectionRenderer from '../components/SectionRenderer/SectionRenderer.jsx';
