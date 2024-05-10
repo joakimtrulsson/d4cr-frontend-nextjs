@@ -61,7 +61,7 @@ function RenderResourcesContent(resourcesCat) {
   const totalPageCount = Math.ceil(numberOfCards / itemsPerPage);
 
   return (
-    <main className='slug-resources-outer-container flex flex-column flex-align-center'>
+    <main className='site-content slug-resources-outer-container flex flex-column flex-align-center'>
       <h1 className='heading-background'>Supporting resources</h1>
 
       <DropdownMenu

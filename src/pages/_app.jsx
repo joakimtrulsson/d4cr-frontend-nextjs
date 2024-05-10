@@ -2,7 +2,6 @@ import { ApolloProvider } from '@apollo/client';
 import MenuProvider from '../context/MenuProvider';
 import NavBar from '../components/NavBar/NavBar.jsx';
 import Footer from '../components/Footer/Footer.jsx';
-// import CookieBanner from '../components/CookieBanner/CookieBanner.jsx';
 
 import { useApollo } from '../graphql/apolloClient.js';
 import MetaHeader from '../components/MetaHeader/MetaHeader';
@@ -22,7 +21,6 @@ function MyApp({ Component, pageProps }) {
         <MenuProvider>
           <div className='site-container'>
             <NavBar />
-            {/* <CookieBanner /> */}
             <div className='site-content'>
               <Component {...pageProps} />
             </div>

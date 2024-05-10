@@ -50,7 +50,7 @@ export default function NewsPage({ allNews, newsCategories }) {
   };
 
   return (
-    <main className='slug-news-outer-container flex flex-column flex-align-center'>
+    <main className='site-content slug-news-outer-container flex flex-column flex-align-center'>
       <h1 className='heading-background margin-b--xxl'>{title}</h1>
       <div
         className='flex flex-row flex-justify-start flex-align-between gap'

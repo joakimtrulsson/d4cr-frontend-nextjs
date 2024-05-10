@@ -69,7 +69,7 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
       : null;
 
   return (
-    <main className='outer-main-principle'>
+    <main className='site-content outer-main-principle'>
       <div className='flex flex-row bg-turquoise-100 flex-justify-center navbar-principle-links'>
         {previousSlug ? (
           <a href={`./${previousSlug}`} className='links image-arrows'>

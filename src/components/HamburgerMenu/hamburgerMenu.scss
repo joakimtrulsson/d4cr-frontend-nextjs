@@ -1,0 +1,193 @@
+.navbar-container {
+  display: none;
+  top: 0;
+  left: 0;
+  position: sticky;
+  z-index: 999;
+  background-color: $-background-color;
+
+  @media screen and (max-width: 780px) {
+    display: block;
+  }
+
+  .navbar-items {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: #fff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+
+    .navbar-header {
+      height: 4rem;
+      border-bottom: 1px solid $-orange-100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .navbar-logo {
+        padding-left: 1rem;
+        padding-top: 0.5rem;
+      }
+
+      .close-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: none;
+        background-color: transparent;
+        height: 2rem;
+        width: 6rem;
+        cursor: pointer;
+
+        .close-icon {
+          height: 21px;
+          width: 21px;
+          color: $-orange-500;
+        }
+
+        p {
+          font-size: 0.8rem;
+          color: $-orange-500;
+        }
+      }
+    }
+
+    .navbar-item-container {
+      height: 3rem;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid $-orange-100;
+
+      .navbar-item-title {
+        height: 100%;
+        padding-left: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: $-orange-500;
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+          background-color: $-orange-200;
+        }
+
+        .expand-icon {
+          border-left: 1px solid $-orange-100;
+          padding-left: 1rem;
+          margin-right: 2rem;
+          height: 32px;
+          width: 32px;
+          color: $-orange-500;
+        }
+      }
+
+      .navbar-single-link {
+        cursor: pointer;
+        padding-left: 1rem;
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        border-bottom: 1px solid $-orange-100;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $-orange-200;
+        }
+
+        &.active {
+          background-color: $-orange-100;
+        }
+
+        .link {
+          color: $-orange-500;
+          font-size: 1rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .navbar-multiple-items {
+      display: flex;
+      flex-direction: column;
+
+      .navbar-multiple-item {
+        border-bottom: 1px solid $-orange-100;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        text-decoration: none;
+
+        .link {
+          color: $-orange-500;
+          font-size: 1rem;
+          text-decoration: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+
+        .bullet {
+          margin-right: 0.7rem;
+          display: flex;
+          align-items: center;
+          color: $-orange-500;
+        }
+
+        &.active {
+          background-color: $-orange-100;
+        }
+
+        &:hover {
+          background-color: $-orange-200;
+        }
+      }
+    }
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  .navbar-open-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem 0.5rem;
+
+    .navbar-open-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .navbar-open-button {
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border: none;
+      background-color: transparent;
+      height: 2rem;
+
+      .navbar-open-icon {
+        height: 21px;
+        width: 21px;
+        color: $-orange-500;
+        margin-right: 0.3rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+        color: $-orange-500;
+      }
+    }
+  }
+}

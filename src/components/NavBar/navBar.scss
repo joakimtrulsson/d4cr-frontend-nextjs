@@ -13,6 +13,13 @@
   z-index: $-z-index-navbar;
 }
 
+// media qyeries for navbar
+@media (max-width: 781px) {
+  .navbar-background {
+    display: none;
+  }
+}
+
 .navbar {
   background-color: $-background-color;
   margin-bottom: 0;
@@ -156,13 +163,5 @@
 
   100% {
     width: 100%;
-  }
-}
-
-// media qyeries for navbar
-@media (max-width: $display-xxxl) {
-  .navbar {
-    padding-left: $-spacing;
-    padding-right: $-spacing;
   }
 }
