@@ -52,12 +52,14 @@
 
   .slug-news-inner-container {
     margin-top: $-spacing-4;
-    // padding-top: 1.5%;
-    gap: 1rem;
+    gap: 2rem;
+    max-width: $max-width-content-desktop-medium;
     width: 100%;
   }
 
   .pagination-buttons {
+    margin-top: 3rem;
+
     .page-button {
       width: 36px;
       height: 36px;
