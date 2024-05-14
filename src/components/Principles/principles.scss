@@ -1,19 +1,21 @@
 @import '../../styles/scss/variables/colorVariables.scss';
+@import '../../styles/scss/variables/layoutVariables.scss';
 
 .principles {
+  max-width: $max-width-content-desktop-medium;
+
+  @media (max-width: $display-m) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   h4 {
     text-transform: uppercase;
+    margin-bottom: 0.5rem;
   }
   .principles-container {
     align-items: stretch;
     height: auto;
-  }
-}
-
-@media (min-width: 1300px) {
-  .principles {
-    .principles-container {
-      width: 90vw;
-    }
+    gap: 2rem;
   }
 }
