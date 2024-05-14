@@ -53,7 +53,7 @@ export default function NewsPage({ allNews, newsCategories }) {
     <main className='site-content slug-news-outer-container flex flex-column flex-align-center'>
       <h1 className='heading-background margin-b--xxl'>{title}</h1>
       <div
-        className='flex flex-row flex-justify-start flex-align-between gap'
+        className='flex flex-row flex-justify-start flex-align-between news-categories-container'
         style={{ gap: '1rem' }}
       >
         {newsCategories &&
