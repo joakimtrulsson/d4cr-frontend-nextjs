@@ -10,3 +10,10 @@
   max-width: $max-width-desktop-large;
   width: 100%;
 }
+
+.section {
+  @media (max-width: $display-m) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}

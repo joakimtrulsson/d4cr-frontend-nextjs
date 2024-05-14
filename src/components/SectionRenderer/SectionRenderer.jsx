@@ -13,31 +13,31 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
   switch (section.sectionType) {
     case 'ACCORDION':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section flex margin-tb--xxl'>
           <AccordionSection content={section} />
         </section>
       );
     case 'BANNER':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section  flex margin-tb--xxl'>
           <BannerSection content={section} />
         </section>
       );
     case 'CHAPTERTEASER':
       return (
-        <section className='flex full-site-container-width margin-tb--xxl'>
+        <section className='section flex full-site-container-width margin-tb--xxl'>
           <ChapterSection content={section} />
         </section>
       );
     case 'IMAGE':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section flex margin-tb--xxl'>
           <ImagesSection content={section} />
         </section>
       );
     case 'BULLETLIST':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section flex margin-tb--xxl'>
           <LargeBulletListSection content={section} />;
         </section>
       );
@@ -66,13 +66,13 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
       );
     case 'NEWSTEASER':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section flex margin-tb--xxl'>
           <NewsTeaserSection content={section} />
         </section>
       );
     case 'PRINCIPLES':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section  flex margin-tb--xxl'>
           <PrinciplesSection content={section} />
         </section>
       );
@@ -80,14 +80,14 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
     //   return <ResourcesSection content={section} />;
     case 'PEOPLE':
       return (
-        <section className='flex margin-tb--xxl'>
+        <section className='section flex margin-tb--xxl'>
           <PeopleSection content={section} />
         </section>
       );
 
     case 'WYSIWYG':
       return (
-        <div className='margin-lr--xxxl max-width-60 margin-tb--xxl'>
+        <div className='section margin-lr--xxxl max-width-60 margin-tb--xxl'>
           <WYSIWYG content={section.preamble} />
         </div>
       );

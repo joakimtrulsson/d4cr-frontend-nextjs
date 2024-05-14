@@ -81,7 +81,7 @@ const VideoPlayer = ({ video }) => {
           }`}
         >
           <button onClick={exitVideo} className='btn-exit-video'>
-            X
+            x
           </button>
           <video className={`video-player-popup`} width='640' height='520' controls>
             <source src={videoData.url} type='video/mp4' />

@@ -40,10 +40,7 @@ const HeroFrontPage = ({ prop }) => {
           </h4>
           <div className='buttons-bottom flex flex-row'>
             {(prop.ctaTwoUrl || prop.ctaOneUrl) && (
-              <nav
-                className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center 
-                            margin-tb--xxxs'
-              >
+              <nav className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center margin-tb--xxxs'>
                 {url1 === 'share' || url1 === 'slack' ? (
                   <>
                     <SecondaryButton
