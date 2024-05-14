@@ -8,15 +8,14 @@ export default function LargeBulletList({ content }) {
   library.add(fas);
 
   return (
-    <div className='large-bullet-list-container min-width-25 flex flex-column flex-align-center'>
+    <div className='large-bullet-list-container flex flex-column flex-align-center'>
       {content.title && <h2>{content.title}</h2>}
       {content.subHeader && <p className='large-text'>{content.subHeader}</p>}
 
       {content.bullets.map((bullet, index) => {
         return (
           <div
-            className='bullet-content full-width-height max-width-45 flex flex-row flex-align-center flex-justify-start 
-                    bg-grey-25 borderradius--xxs padding--xs'
+            className='bullet-content max-width-45 flex flex-row flex-align-center bg-grey-25 borderradius--xxs padding--xs'
             key={index}
           >
             <div className='circle-icon'>

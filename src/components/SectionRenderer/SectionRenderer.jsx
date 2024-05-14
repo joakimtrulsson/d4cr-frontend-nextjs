@@ -38,7 +38,7 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
     case 'BULLETLIST':
       return (
         <section className='section flex margin-tb--xxl'>
-          <LargeBulletListSection content={section} />;
+          <LargeBulletListSection content={section} />
         </section>
       );
     case 'MEDIATEXT':
