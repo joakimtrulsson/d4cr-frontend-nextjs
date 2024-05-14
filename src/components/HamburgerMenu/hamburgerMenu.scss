@@ -1,13 +1,13 @@
 .navbar-container {
   display: none;
-  top: 0;
-  left: 0;
-  position: sticky;
-  z-index: 999;
   background-color: $-background-color;
 
   @media screen and (max-width: 780px) {
     display: block;
+    top: 0;
+    left: 0;
+    position: sticky;
+    z-index: 1000;
   }
 
   .navbar-items {

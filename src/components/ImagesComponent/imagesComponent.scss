@@ -1,94 +1,73 @@
 @import '../../styles/scss/variables/colorVariables.scss';
 @import '../../styles/scss/variables/layoutVariables.scss';
 
-// .image-container {
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-
-//   &-1 {
-//     .image-wrapper {
-//       width: 50rem;
-//       height: 25rem;
-//       margin-left: 0.5rem;
-//       margin-right: 0.5rem;
-//       overflow: hidden;
-//       position: relative;
-//     }
-//   }
-
-//   &-2 {
-//     .image-wrapper {
-//       width: 24.5rem;
-//       height: 20rem;
-//       margin-left: 0.5rem;
-//       margin-right: 0.5rem;
-//       overflow: hidden;
-//       position: relative;
-//     }
-//   }
-
-//   &-3 {
-//     .image-wrapper {
-//       width: 16rem;
-//       height: 16rem;
-//       margin-left: 0.5rem;
-//       margin-right: 0.5rem;
-//       overflow: hidden;
-//       position: relative;
-//     }
-//   }
-// }
-
 .image-section {
-  max-width: 1400px;
+  max-width: 1168px;
+  max-height: 600px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 100%;
+  height: 100%;
 }
 
 .image-container-1 {
-  display: flex;
-  justify-content: center;
-  width: 1400px;
-}
-
-.section-image-1 {
-  max-height: 38.5rem; /* Sätt en maximal höjd */
-  max-width: 77rem; /* Sätt en maximal bredd */
-  width: 100%; /* Tillåt bilden att krympa */
   height: auto;
+
+  .section-image-1 {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 .image-container-2 {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   width: 100%;
-}
 
-.section-image-2 {
-  height: 27rem;
-  width: 37rem;
-
-  @media (max-width: 1215px) {
-    height: 24rem;
-    width: 32rem;
+  @media (max-width: $display-xl) {
+    flex-direction: column;
+    align-items: center;
   }
 
-  @media (max-width: 600px) {
-    height: 24rem;
-    width: 32rem;
+  .section-image-2 {
+    object-fit: cover;
+    width: 100%;
+
+    @media (max-width: 600px) {
+      height: 22rem;
+      width: 32rem;
+    }
+    @media (max-width: 540px) {
+      width: 26rem;
+      height: 18rem;
+    }
+
+    @media (max-width: 480px) {
+      width: 20rem;
+      height: 14rem;
+    }
   }
 }
 
 .image-container-3 {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   width: 100%;
-}
 
-.section-image-3 {
-  height: 24rem;
-  width: 24rem;
+  @media (max-width: $display-xl) {
+    flex-direction: column;
+  }
+
+  .section-image-3 {
+    min-height: 24rem;
+    object-fit: cover;
+
+    @media (max-width: $display-xl) {
+      min-height: 14rem;
+      max-width: 100%;
+    }
+  }
 }

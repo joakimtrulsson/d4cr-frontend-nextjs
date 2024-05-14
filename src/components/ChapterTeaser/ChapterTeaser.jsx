@@ -5,6 +5,11 @@ import CountryCard from '../CountryCard/CountryCard';
 export default function ChapterTeaser({ content }) {
   const title = 'Our local chapters';
 
+  const baseSlugs = content.chapters
+    .map((item) => item.slug.split('-')[0])
+    .filter((value, index, self) => self.indexOf(value) === index);
+  console.log(baseSlugs);
+
   return (
     <div className='chapter-teaser-section'>
       <div className='chapter-teaser-container '>
@@ -15,9 +20,22 @@ export default function ChapterTeaser({ content }) {
         <div className='text-container'>
           <h1 className='heading-2'>{title}</h1>
           <div className='country-card-container'>
-            {content.chapters.map((item, index) => {
+            {/* {content.chapters.map((item, index) => {
               return <CountryCard key={index} item={item} />;
-            })}
+            })} */}
+            {content.chapters
+              .filter((item) => {
+                const [baseSlug] = item.slug.split('-');
+                return !content.chapters.some(
+                  (otherItem) =>
+                    otherItem !== item &&
+                    otherItem.slug.split('-')[0] === baseSlug &&
+                    !otherItem.slug.includes('-')
+                );
+              })
+              .map((item, index) => {
+                return <CountryCard key={index} item={item} />;
+              })}
           </div>
         </div>
       </div>

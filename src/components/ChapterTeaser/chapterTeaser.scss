@@ -4,7 +4,7 @@
 
 .chapter-teaser-container {
   max-width: $max-width-content-desktop-large;
-  width: 100%;
+  // width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -19,10 +19,24 @@
 
   .image-container {
     margin: 0 8rem;
+
+    // Media query
+    @media (max-width: $display-m) {
+      margin: 0 6rem;
+    }
+
+    @media (max-width: $display-sm) {
+      margin: 0 4rem;
+    }
+
+    @media (max-width: $display-s) {
+      margin: 0 2rem;
+    }
   }
 
   .text-container {
-    padding: 0 10rem 6rem 10rem;
+    // padding: 0 10rem 6rem 10rem;
+    margin-bottom: 3rem;
 
     /* flexbox */
     display: flex;

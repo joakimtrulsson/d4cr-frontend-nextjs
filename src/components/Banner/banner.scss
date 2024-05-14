@@ -123,3 +123,49 @@
     }
   }
 }
+
+@media (max-width: $display-sm) {
+  .banner {
+    flex-direction: column;
+    margin: 0 1rem 0 1rem;
+    // padding-left: 0rem;
+    // padding: 0.rem 1rem 0.7rem 1rem;
+
+    .icon-wrapper {
+      margin-bottom: 0.5rem;
+      // margin-right: auto;
+      // height: 2rem;
+      // display: none;
+
+      svg {
+        width: 1remrem;
+        height: 1.5rem;
+      }
+    }
+
+    .banner-text {
+      margin: 0 0 0 0;
+
+      .banner-title {
+        margin-bottom: 0.5rem;
+      }
+
+      h4 {
+        text-align: center;
+      }
+
+      .banner-preamble {
+        text-align: center;
+      }
+    }
+    .banner-button {
+      margin-top: $-spacing-3;
+    }
+  }
+}
+
+@media (max-width: $display-xxl) {
+  .banner {
+    margin: 0 1rem 0 1rem;
+  }
+}

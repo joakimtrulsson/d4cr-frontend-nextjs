@@ -55,7 +55,7 @@ export default function Banner({ content }) {
     <>
       <div
         className={`banner flex flex-row flex-justify-between flex-align-center ${bgColorClass} 
-        padding--s width--l min-width-35 borderradius--xxs`}
+        padding--xs borderradius--xxs`}
       >
         <div
           className={`icon-wrapper flex flex-justify-center flex-align-center bg-orange-100
@@ -68,28 +68,36 @@ export default function Banner({ content }) {
           />
         </div>
 
-        <div className='margin-lr--s'>
-          <h4 className='margin--zero color-grey-700'>{content.title}</h4>
-          <DocumentRenderer
-            document={
-              content.preamble.document ? content.preamble.document : content.preamble
-            }
-          />
+        <div className='banner-text margin-lr--s'>
+          <h4 className='banner-title margin--zero color-grey-700'>{content.title}</h4>
+          <div className='banner-preamble'>
+            <DocumentRenderer
+              document={
+                content.preamble.document ? content.preamble.document : content.preamble
+              }
+            />
+          </div>
         </div>
         {url &&
           (url === 'share' || url === 'slack' ? (
             <PrimaryButton
-              className='margin-r--xxs'
+              className='banner-button margin-r--xxs'
               title={content.cta?.anchorText}
               onClick={clickedBtnCTA1}
             />
           ) : (
-            <Link href={url} className='margin-r--xxs'>
+            <Link href={url} className='banner-button margin-r--xxs'>
               <PrimaryButton title={content.cta?.anchorText} />
             </Link>
           ))}
 
-        {!url && <PrimaryButton title='Fill out form' onClick={clickedBtnCTA1} />}
+        {!url && (
+          <PrimaryButton
+            className='banner-button'
+            title='Fill out form'
+            onClick={clickedBtnCTA1}
+          />
+        )}
       </div>
 
       <div

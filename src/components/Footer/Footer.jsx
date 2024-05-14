@@ -64,15 +64,12 @@ export default function Footer() {
       <div className='bg-grey-700 full-width-height'>
         <div className='site-footer__content'>
           <div className='flex flex-column full-width-height'>
-            <div
-              className='flex flex-row flex-justify-between flex-align-start 
-                                padding-t--xxxl padding-b--s'
-            >
-              <div className='margin-b--m'>
+            <div className='site-footer__mobile flex flex-row flex-justify-between flex-align-start padding-t--xxxl padding-b--s'>
+              <div className='site-footer__logo margin-b--m'>
                 <Image src={Icon} width={160} height={50} alt='D4CR' />
 
-                <div className='flex flex-column margin-t--xl margin-b--m '>
-                  <p className='color-orange-400 padding-l--xs semibold margin--zero margin-b--xxs'>
+                <div className='site-footer__joincontainer flex flex-column margin-t--xl margin-b--m '>
+                  <p className='site-footer_jointitle color-orange-400 padding-l--xs semibold margin--zero margin-b--xxs'>
                     Join us
                   </p>
                   <nav className='footer__social-links flex flex-justify-center flex-align-center'>
@@ -168,7 +165,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <nav className='margin-b--xxl  flex flex-row'>
+            <nav className='footer-submenu margin-b--xxl  flex flex-row'>
               {footerMenuContent &&
                 footerMenuContent.navigation &&
                 footerMenuContent.navigation.map((link, index) => (
