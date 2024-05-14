@@ -20,6 +20,11 @@
       top: -100px;
       left: -60px;
     }
+
+    @media (max-width: 420px) {
+      top: -100px;
+      left: -90px;
+    }
   }
 
   .heading-text {
