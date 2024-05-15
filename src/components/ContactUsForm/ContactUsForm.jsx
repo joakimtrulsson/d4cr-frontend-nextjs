@@ -12,9 +12,7 @@ export default function ContactUsForm() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionError, setSubmissionError] = useState(
-    'There was an issue submitting the form. Please try again later.'
-  );
+  const [submissionError, setSubmissionError] = useState('');
   const initialFormData = {
     name: '',
     contactEmail: '',
