@@ -10,20 +10,36 @@
 }
 
 .text-and-media-container {
+  display: flex;
+  flex-direction: column-reverse;
   max-width: $max-width-content-desktop-large;
   width: 100%;
   gap: 2rem;
   margin-top: 1px;
 
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+
+    &.flex--reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
   .text-content {
     height: auto;
+    max-width: 760px;
+
+    @media screen and (min-width: 1024px) {
+      max-width: none;
+    }
 
     p {
       color: $-grey-500;
-      font-size: 1.1rem;
-      line-height: 1.7rem;
-      letter-spacing: 0.03rem;
+      font-size: 1.125rem;
+      line-height: 2rem;
+      letter-spacing: 0.36px;
       font-weight: 400;
+      margin-bottom: 2.5rem;
     }
 
     a {
@@ -31,7 +47,7 @@
     }
 
     .primary-button {
-      margin-right: 0.45rem;
+      margin-right: 0.5rem;
     }
 
     .clicked {
@@ -102,12 +118,15 @@
   }
 
   .media-content {
-    width: 50%;
-    height: 25rem;
-    max-width: 53rem;
+    width: 100%;
     overflow: hidden;
     position: relative;
-    object-fit: cover;
+
+    img {
+      height: auto;
+      min-height: 300px;
+      object-fit: cover;
+    }
   }
 }
 
