@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import chevronDown from '../../styles/assets/graphics/icons/chevron-down-grey-500.svg';
 import Animation from '../../styles/assets/graphics/animation.gif';
 import WYSIWYG from '../Wysiwyg/Wysiwyg';
 
@@ -24,7 +25,7 @@ export default function Accordion({ content }) {
       </div>
 
       <div className='accordion-content flex flex-row max-width-60 min-width-30 margin-lr--xs'>
-        <div className='content-list width--m'>
+        <div className='content-list'>
           <ul className='no-bullets'>
             {content.fields.map((field, index) => (
               <li
@@ -37,7 +38,15 @@ export default function Accordion({ content }) {
                 key={index}
                 onClick={() => setClickedValue(index)}
               >
-                {field.heading}
+                <span class="accordion__title">
+                  {field.heading}
+                  <Image src={chevronDown} alt='arrow down' />
+                </span>
+                <div className='content-text bg-yellow-200'>
+                  {selectedField.bodyText && (
+                  <WYSIWYG key={documentKey} content={selectedField.bodyText} />
+                  )}
+                </div>
               </li>
             ))}
           </ul>
