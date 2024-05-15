@@ -262,13 +262,13 @@ export default function NavBar() {
               url &&
               (url === 'share' || url === 'slack' ? (
                 <SecondaryButton
-                  className='margin-lr--m scale-up-l'
+                  className='margin-lr--m'
                   title={data.ctaAnchorText}
                   onClick={clickedBtnCTA1}
                 />
               ) : url.startsWith('/') ? (
                 <SecondaryButton
-                  className='margin-lr--m scale-up-l'
+                  className='margin-lr--m'
                   title={data.ctaAnchorText}
                   onClick={handleSecondaryButtonClick}
                 />
@@ -280,7 +280,7 @@ export default function NavBar() {
                   target='_blank'
                 >
                   <SecondaryButton
-                    className='margin-lr--m scale-up-l'
+                    className='margin-lr--m'
                     title={data.ctaAnchorText}
                   />
                 </Link>

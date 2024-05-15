@@ -35,17 +35,20 @@ export default function TextMediaComponent({ content }) {
       setSlideOut(false);
     }, 500);
   }
-  let bgColorClass, fillColorCode;
+  let bgColorClass, fillColorCode, textColor;
 
   if (content.backgroundColor === 'ORANGE') {
     bgColorClass = 'bg-orange-50';
     fillColorCode = getColorCode('orange-50');
+    textColor = 'color-orange-600';
   } else if (content.backgroundColor === 'YELLOW') {
     bgColorClass = 'bg-yellow-50';
     fillColorCode = getColorCode('yellow-50');
+    textColor = 'color-yellow-600';
   } else {
     bgColorClass = 'bg-purple-50';
     fillColorCode = getColorCode('fill-purple-50');
+    textColor = 'color-orange-600';
   }
 
   return (
@@ -54,16 +57,13 @@ export default function TextMediaComponent({ content }) {
         <TopWave fillColorCode={fillColorCode} />
       )}
 
-      <div className={`text-media-background-${bgColorClass} flex flex-justify-center`}>
+      <div className={`text-media-background-${bgColorClass} flex flex-justify-center padding-lr--xs`}>
         <div
-          className={`text-and-media-container flex flex-row flex-nowrap flex-justify-center flex-align-center 
-                padding-tb--l padding-lr--xl margin-tb--xxxs-negative ${bgColorClass} 
-                ${content.imagePosition === 'LEFT' && 'flex-reverse-row'}`}
-        >
+          className={`text-and-media-container flex-align-center padding-tb--l padding-lr--xl margin-tb--xxxs-negative ${bgColorClass} ${content.imagePosition === 'LEFT' && 'flex--reverse'}`}>
           {/* check media's position */}
-          <div className='text-content flex flex-column flex-nowrap width--s'>
+          <div className='text-content flex flex-column flex-nowrap'>
             {/* text content */}
-            <h2 className='sub-heading-m margin-t--xxxs margin-b--zero color-orange-600'>
+            <h2 className={`sub-heading-m margin-t--zero margin-b--xxs ${textColor}`}>
               {content.subHeading}
             </h2>
             <h3 className='heading-2 margin--zero color-orange-800'>{content.title}</h3>
@@ -146,14 +146,15 @@ export default function TextMediaComponent({ content }) {
               </>
             )}
           </div>
-          <div className='media-content flex flex-justify-center flex-align-center borderradius--xs'>
+          <div className='media-content flex flex-justify-center flex-align-center'>
             {/* media content */}
             {content.image && content.image.url && (
               <Image
-                className='center-image'
+                className='borderradius--xs'
                 src={content.image.url}
                 alt={content.image.altText}
-                fill={true}
+                width={760}
+                height={400}
               />
             )}
           </div>
