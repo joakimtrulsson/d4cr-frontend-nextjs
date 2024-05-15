@@ -135,3 +135,11 @@
     border-width: 0 2px 2px 0;
   }
 }
+
+.cases-container {
+  max-width: $max-width-content-desktop-large;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+  width: 100%;
+}

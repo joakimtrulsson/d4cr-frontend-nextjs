@@ -7,22 +7,24 @@ export default function RenderAllCasesContent({ caseData }) {
   const title = 'Cases';
 
   return (
-    <main className='site-content  flex flex-column flex-align-center flex-justify-start'>
+    <main className='site-content flex flex-column flex-align-center flex-justify-center'>
       <h1 className='heading-background'>{title}</h1>
-      {caseData &&
-        caseData.map((caseData) => {
-          return (
-            <CaseCard
-              linkType={caseData.linkType}
-              link={caseData.url}
-              quote={caseData.quote}
-              title={caseData.title}
-              className='flex flex-column'
-              key={caseData.id}
-              img={caseData.caseImage?.url}
-            />
-          );
-        })}
+      <div className='cases-container'>
+        {caseData &&
+          caseData.map((caseData) => {
+            return (
+              <CaseCard
+                linkType={caseData.linkType}
+                link={caseData.url}
+                quote={caseData.quote}
+                title={caseData.title}
+                className='flex flex-column'
+                key={caseData.id}
+                img={caseData.caseImage?.url}
+              />
+            );
+          })}
+      </div>
     </main>
   );
 }
