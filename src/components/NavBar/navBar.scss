@@ -13,7 +13,6 @@
   z-index: $-z-index-navbar;
 }
 
-// media qyeries for navbar
 @media (max-width: 781px) {
   .navbar-background {
     display: none;
@@ -32,6 +31,12 @@
 
     &:hover {
       scale: 1.1;
+    }
+  }
+
+  @media (max-width: 1600px) {
+    .navbar-icon {
+      margin-left: 1rem;
     }
   }
 

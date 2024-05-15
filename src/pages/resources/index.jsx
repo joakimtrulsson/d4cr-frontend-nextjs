@@ -61,7 +61,7 @@ function RenderResourcesContent(resourcesCat) {
   const totalPageCount = Math.ceil(numberOfCards / itemsPerPage);
 
   return (
-    <main className='site-content slug-resources-outer-container flex flex-column flex-align-center'>
+    <main className='site-content slug-resources-outer-container flex flex-column flex-align-center flex-justify-center'>
       <h1 className='heading-background'>Supporting resources</h1>
 
       <DropdownMenu
@@ -72,7 +72,7 @@ function RenderResourcesContent(resourcesCat) {
         setShowType={setShowType}
         setCurrentPage={setCurrentPage}
       />
-      <div className='slug-resources-inner-container  flex flex-row flex-wrap flex-justify-start flex-align-between '>
+      <div className='slug-resources-inner-container'>
         {currentItems.map((resource) => (
           <ResourceCard
             key={resource.id}

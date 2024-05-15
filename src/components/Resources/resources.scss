@@ -1,22 +1,22 @@
 .resources-outer-container {
   // color: $-grey-700;
   // width: 100vw;
-
+  // display: flex;
+  // justify-content: center;
   max-width: $max-width-content-desktop-large;
-  // width: 100%;
+  width: 100%;
 
   .resources-inner-container {
-    // border: solid $-grey-100 1px;
-    // margin: 2%;
-    // padding-top: 1.5%;
-    // padding-left: 0.8%;
-    // padding-right: 0.8%;
-    // padding: 1rem;
     // width: 100%;
-    display: flex;
     // justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem 0;
+    // align-items: center;
+    // gap: 1.5rem;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    grid-gap: 1.8rem;
+    padding: 2rem 0rem;
+    justify-items: center;
   }
 
   .button {

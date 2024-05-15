@@ -1,14 +1,27 @@
 .slug-resources-outer-container {
   color: $-grey-700;
   max-width: $max-width-content-desktop-large;
-  display: flex;
-  justify-content: center;
+  max-width: 100%;
+
+  // .slug-resources-inner-container {
+  //   max-width: 100%;
+  //   display: flex;
+  //   gap: 1.8rem;
+  //   padding: 2rem 0rem;
+  //   width: 100%;
+
+  //   @media (max-width: $display-xl) {
+  //     justify-content: center;
+  //   }
+  // }
 
   .slug-resources-inner-container {
-    max-width: $max-width-content-desktop-large;
-    display: flex;
-    gap: 1.8rem;
-    padding: 2rem 2rem;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    grid-gap: 1.8rem;
+    padding: 2rem 0rem;
+    justify-items: center;
   }
 
   .pagination-buttons {
