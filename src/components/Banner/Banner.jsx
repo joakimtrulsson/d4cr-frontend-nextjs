@@ -54,12 +54,12 @@ export default function Banner({ content }) {
   return (
     <>
       <div
-        className={`banner flex flex-row flex-justify-between flex-align-center ${bgColorClass} 
+        className={`banner ${bgColorClass} 
         padding--xl borderradius--xxs`}
       >
         <div
           className={`icon-wrapper flex flex-justify-center flex-align-center bg-orange-100
-             borderradius--half padding--s margin-l--xxs`}
+             borderradius--half  margin-l--xxs`}
         >
           <FontAwesomeIcon
             icon={['fas', content.iconName ? content.iconName : 'star']}
@@ -68,36 +68,38 @@ export default function Banner({ content }) {
           />
         </div>
 
-        <div className='banner-text margin-lr--s'>
-          <h4 className='banner-title margin--zero color-grey-700'>{content.title}</h4>
-          <div className='banner-preamble'>
-            <DocumentRenderer
-              document={
-                content.preamble.document ? content.preamble.document : content.preamble
-              }
-            />
+        <div className='banner-text-and-button-container'>
+          <div className='banner-text margin-lr--s'>
+            <h4 className='banner-title margin--zero color-grey-700'>{content.title}</h4>
+            <div className='banner-preamble'>
+              <DocumentRenderer
+                document={
+                  content.preamble.document ? content.preamble.document : content.preamble
+                }
+              />
+            </div>
           </div>
-        </div>
-        {url &&
-          (url === 'share' || url === 'slack' ? (
+          {url &&
+            (url === 'share' || url === 'slack' ? (
+              <PrimaryButton
+                className='banner-button margin-r--xxs'
+                title={content.cta?.anchorText}
+                onClick={clickedBtnCTA1}
+              />
+            ) : (
+              <Link href={url} className='banner-button margin-r--xxs'>
+                <PrimaryButton title={content.cta?.anchorText} />
+              </Link>
+            ))}
+
+          {!url && (
             <PrimaryButton
-              className='banner-button margin-r--xxs'
-              title={content.cta?.anchorText}
+              className='banner-button'
+              title='Fill out form'
               onClick={clickedBtnCTA1}
             />
-          ) : (
-            <Link href={url} className='banner-button margin-r--xxs'>
-              <PrimaryButton title={content.cta?.anchorText} />
-            </Link>
-          ))}
-
-        {!url && (
-          <PrimaryButton
-            className='banner-button'
-            title='Fill out form'
-            onClick={clickedBtnCTA1}
-          />
-        )}
+          )}
+        </div>
       </div>
 
       <div

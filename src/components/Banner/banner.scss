@@ -3,9 +3,12 @@
 
 .banner {
   transition: transform 0.2s ease-in-out;
-  max-width: $max-width-content-desktop-large;
+  max-width: 1168px;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
   p {
     margin: $-spacing-1 0 $-spacing-1 0;
@@ -16,18 +19,27 @@
     shape-outside: circle();
     clip-path: circle();
     transition: all 0.2s ease-in-out;
+    padding: 20px;
+
+    svg {
+      min-width: 2rem;
+      min-height: 2rem;
+      transition: scale 200ms ease-in-out;
+    }
   }
 
-  .primary-button {
-    transition: all 0.2s ease-in-out;
-  }
+  .banner-text-and-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-  svg {
-    width: 2.2rem;
-    height: 2.2rem;
-    transition: scale 200ms ease-in-out;
+    .primary-button {
+      transition: all 0.2s ease-in-out;
+      background-color: $-orange-200;
+      scale: 1.1;
+      transition: all 0.2s ease-in-out;
+    }
   }
-
   &:hover,
   &:focus {
     transform: scale(1.04);
@@ -35,6 +47,7 @@
 
     .icon-wrapper {
       background-color: $-orange-200;
+      transition: all 0.2s ease-in-out;
 
       svg {
         scale: 1.5;
@@ -80,7 +93,6 @@
       top: -2%;
       right: -2%;
       height: 1.8em;
-
       width: 1.8em;
       font-size: 1.1em;
       line-height: 1em;
@@ -124,39 +136,45 @@
   }
 }
 
-@media (max-width: $display-sm) {
+@media (max-width: 768px) {
   .banner {
-    flex-direction: column;
-    margin: 0 1rem 0 1rem;
-    padding: 1rem 1rem 0.7rem 1rem;
+    margin: 10rem 1rem 0 1rem;
+    padding: 2rem 1rem 2rem 1rem;
 
     .icon-wrapper {
-      margin-bottom: 1rem;
-      padding: 1rem;
+      margin-bottom: auto;
+      margin-top: 0;
+      padding: 1.2rem;
 
       svg {
-        width: 1.5rem;
-        height: 1.5rem;
+        min-width: 16px;
+        min-height: 16px;
       }
     }
 
-    .banner-text {
-      margin: 0 0 0 0;
+    .banner-text-and-button-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: 1rem;
 
-      .banner-title {
-        margin-bottom: 0.5rem;
-      }
+      .banner-text {
+        margin: 0 0 0 0;
 
-      h4 {
-        text-align: center;
-      }
+        .banner-title {
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          text-align: left;
+        }
 
-      .banner-preamble {
-        text-align: center;
+        .banner-preamble {
+          text-align: left;
+        }
       }
-    }
-    .banner-button {
-      margin-top: $-spacing-3;
+      .banner-button {
+        margin-top: $-spacing-3;
+        margin-left: -5rem;
+      }
     }
   }
 }

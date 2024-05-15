@@ -8,7 +8,6 @@ export default function ChapterTeaser({ content }) {
   const baseSlugs = content.chapters
     .map((item) => item.slug.split('-')[0])
     .filter((value, index, self) => self.indexOf(value) === index);
-  console.log(baseSlugs);
 
   return (
     <div className='chapter-teaser-section'>
