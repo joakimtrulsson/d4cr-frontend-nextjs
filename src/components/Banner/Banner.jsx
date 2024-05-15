@@ -55,7 +55,7 @@ export default function Banner({ content }) {
     <>
       <div
         className={`banner flex flex-row flex-justify-between flex-align-center ${bgColorClass} 
-        padding--xs borderradius--xxs`}
+        padding--xl borderradius--xxs`}
       >
         <div
           className={`icon-wrapper flex flex-justify-center flex-align-center bg-orange-100

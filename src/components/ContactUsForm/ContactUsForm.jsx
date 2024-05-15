@@ -12,7 +12,9 @@ export default function ContactUsForm() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionError, setSubmissionError] = useState('');
+  const [submissionError, setSubmissionError] = useState(
+    'There was an issue submitting the form. Please try again later.'
+  );
   const initialFormData = {
     name: '',
     contactEmail: '',
@@ -132,7 +134,7 @@ export default function ContactUsForm() {
             instead.
           </p>
         </div>
-        <form onSubmit={handleSubmit} noValidate>
+        <form className='form' onSubmit={handleSubmit} noValidate>
           <div className='name-email-div'>
             <div className='left'>
               <input
@@ -201,6 +203,12 @@ export default function ContactUsForm() {
             <p>Sending..</p>
           )}
 
+          {successMessage && (
+            <p role='alert' className='success-message'>
+              {successMessage}
+            </p>
+          )}
+
           <div className='recaptcha-div'>
             <ReCAPTCHA
               ref={recaptcha}
@@ -208,11 +216,7 @@ export default function ContactUsForm() {
             />
           </div>
         </form>
-        {successMessage && (
-          <p role='alert' className='success-message'>
-            {successMessage}
-          </p>
-        )}
+
         {submissionError && !successMessage ? (
           <p role='alert' className='submission-error'>
             {submissionError}
