@@ -1,14 +1,11 @@
 .contact-us-form-container {
   position: relative;
-  //   max-width: 100%;
   max-width: $max-width-content-desktop-large;
   width: 100%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  //   min-height: 100vh;
-  //   margin-bottom: 10vh;
 
   .left-absolute {
     position: absolute;
@@ -18,7 +15,6 @@
     z-index: 1;
 
     @media (max-width: 680px) {
-      //   left: -20%;
       display: none;
     }
   }
@@ -34,12 +30,10 @@
     @media (max-width: 680px) {
       right: 10%;
       top: 10%;
-      //   display: none;
     }
   }
 
   .form-div {
-    // position: relative;
     z-index: 2;
 
     display: flex;
@@ -69,7 +63,6 @@
     }
 
     .verify-error {
-      //   margin: 0;
       font-size: small;
     }
 
@@ -93,7 +86,6 @@
         overflow: hidden;
         margin: 0 auto;
         margin-top: 2rem;
-        // border: 1px solid red;
       }
     }
 
@@ -122,40 +114,23 @@
     }
 
     .name-email-div {
-      //   max-width: 100%;
       max-width: 610px;
       display: flex;
       gap: 2rem;
-      //   border: 1px solid red;
       flex-wrap: wrap;
       flex-direction: row;
-      //   justify-content: space-between;
 
       @media (max-width: $display-sm) {
         flex-direction: column;
         gap: 0rem;
-
-        //   .left,
-        //   .right {
-        //     width: 100% !important;
-        //     align-items: flex-start !important;
-        //     input {
-        //       width: 100% !important;
-        //     }
-        //   }
       }
 
       .left {
-        // width: 50%;
         flex: 1;
         display: flex;
         flex-flow: column;
-        // gap: 1rem;
-        // justify-content: flex-start;
-        // align-items: flex-start;
 
         input {
-          //   width: 100%;
           font-size: medium;
           font-weight: 600;
           border: solid $-grey-300 1.7px;
@@ -170,16 +145,11 @@
       }
 
       .right {
-        // width: 100%;
         flex: 1;
         display: flex;
         flex-flow: column;
-        // gap: 1rem;
-        // justify-content: flex-start;
-        // align-items: flex-end;
 
         input {
-          //   width: 100%;
           font-size: medium;
           font-weight: 600;
           border: solid $-grey-300 1.7px;
@@ -197,13 +167,10 @@
     .text-area-div {
       display: flex;
       flex-flow: column;
-      //   justify-content: flex-start;
-      //   align-items: flex-start;
       width: 100%;
       max-width: 610px;
 
       textarea {
-        // width: 100%;
         min-height: 200px;
         font-size: medium;
         font-weight: 600;
