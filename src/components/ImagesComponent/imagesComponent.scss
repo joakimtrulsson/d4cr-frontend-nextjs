@@ -11,63 +11,70 @@
 }
 
 .image-container-1 {
-  height: auto;
+  width: 100%;
 
   .section-image-1 {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: 600px;
     object-fit: cover;
+
+    @media (max-width: 600px) {
+      max-height: 400px;
+    }
+
+    @media (max-width: 436px) {
+      max-height: 300px;
+    }
   }
 }
 
 .image-container-2 {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
   width: 100%;
-
-  @media (max-width: $display-xl) {
-    flex-direction: column;
-    align-items: center;
-  }
+  max-width: 1168px;
 
   .section-image-2 {
+    flex: 1;
+    height: 100%;
     object-fit: cover;
-    width: 100%;
+  }
 
-    @media (max-width: 600px) {
-      height: 22rem;
-      width: 32rem;
-    }
-    @media (max-width: 540px) {
-      width: 26rem;
-      height: 18rem;
-    }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
 
-    @media (max-width: 480px) {
-      width: 20rem;
-      height: 14rem;
+    .section-image-2 {
+      width: 100%;
+      height: 400px;
     }
   }
 }
 
 .image-container-3 {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
-  width: 100%;
-
-  @media (max-width: $display-xl) {
-    flex-direction: column;
-  }
+  max-width: 1168px;
 
   .section-image-3 {
-    min-height: 24rem;
+    flex: 1;
+    height: 100%;
     object-fit: cover;
+  }
 
-    @media (max-width: $display-xl) {
-      min-height: 14rem;
-      max-width: 100%;
+  @media (max-width: 478px) {
+    flex-direction: column;
+    min-height: 933px;
+
+    .section-image-3 {
+      min-height: 300px;
+      max-height: 300px;
+      width: 90vw;
     }
   }
 }
