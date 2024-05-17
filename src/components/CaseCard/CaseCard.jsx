@@ -14,7 +14,15 @@ const CaseCard = ({ link, quote, title, img, linkType }) => {
   return (
     <div className='case-card-container'>
       <div className='img-div'>
-        <Image src={img} width={80} height={80} alt='showing the logo for the case' />
+        <Image
+          className='case-img'
+          src={img}
+          layout='responsive'
+          width={100}
+          height={80}
+          objectFit='cover'
+          alt='showing the logo for the case'
+        />
       </div>
       <div className='case-card-right'>
         <div className='text-div'>
