@@ -49,14 +49,14 @@ export default function SlugPage({ pageData }) {
   }
 
   return (
-    <main className='site-content flex flex-column flex-align-center flex-justify-start'>
+    <main className='site-content page-container flex flex-column flex-align-center flex-justify-start'>
       {pageData?.title && <h1 className='heading-background'>{pageData.title}</h1>}
 
       {((pageData.heroPreamble.document[0].children[0].text !== '' &&
         pageData.heroPreamble.document.length >= 1) ||
         pageData?.ctaOneAnchorText ||
         pageData?.ctaTwoUrlAnchorText) && (
-        <div className='flex flex-column flex-align-center flex-justify-center margin-b--xl width--m max-width-40 text-align-center'>
+        <div className='page-preamble flex flex-column flex-align-center flex-justify-center margin-b--xl max-width-40 text-align-center'>
           {pageData.heroPreamble && (
             <DocumentRenderer document={pageData.heroPreamble.document} />
           )}

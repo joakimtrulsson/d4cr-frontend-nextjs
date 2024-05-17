@@ -1,22 +1,33 @@
 .container-cases {
+  .title-container {
+    max-width: $display-l;
+
+    @media (max-width: $display-l) {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    .case {
+      color: $-yellow-600;
+      font-weight: 700;
+      margin-bottom: 1%;
+      margin-top: 5%;
+    }
+
+    .heading-1 {
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    @media (max-width: 768px) {
+      .case,
+      .heading-1 {
+        text-align: center;
+      }
+    }
+  }
+
   .renderer {
     margin-bottom: 5%;
-  }
-
-  .case {
-    color: $-yellow-600;
-    font-weight: 700;
-    margin-bottom: 1%;
-    margin-top: 5%;
-  }
-
-  .heading-1 {
-    font-weight: 700;
-    margin-top: 0;
-  }
-
-  .title-container {
-    margin-left: 25%;
-    margin-right: 25%;
   }
 }

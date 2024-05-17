@@ -16,28 +16,30 @@ export default function NewsSlugPage({ newsData }) {
   );
 
   return (
-    <main className='site-content news-slug-container flex flex-column flex-align-center flex-justify-start'>
+    <main className='site-content news-slug-container flex flex-column flex-align-center flex-justify-center'>
       {newsData.image?.url && (
-        <div className='hero-image-large margin-tb--s borderradius--xxs '>
+        <div className='hero-image-container margin-tb--s borderradius--xxs '>
           <Image
-            className='center-image'
+            className=' hero-image borderradius--xxs'
             src={newsData.image.url}
             alt={newsData.image.altText}
-            fill={true}
+            width='1400'
+            height='600'
+            objectFit='cover'
           />
         </div>
       )}
 
       {(newsData.newsCategory?.categoryTitle || newsData.title) && (
-        <div className='margin-lr--m'>
+        <div className='news-header margin-lr--m'>
           {newsData.newsCategory.categoryTitle && (
-            <p className='max-width-60 margin--zero full-width-height color-yellow-600 sub-heading-m'>
+            <p className='news-category max-width-60 margin--zero full-width-height color-yellow-600 sub-heading-m'>
               {newsData.newsCategory.categoryTitle}
             </p>
           )}
 
           {newsData.title && (
-            <h1 className='max-width-60 margin--zero'>{newsData.title}</h1>
+            <h1 className='news-title max-width-60 margin--zero'>{newsData.title}</h1>
           )}
         </div>
       )}

@@ -20,7 +20,7 @@ export default function CasesPage({ pageData }) {
   }
 
   return (
-    <main className='flex flex-column container-cases'>
+    <main className='flex flex-column flex-justify-center flex-align-center container-cases'>
       {pageData ? (
         <>
           <div className='title-container'>

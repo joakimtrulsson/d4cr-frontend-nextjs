@@ -143,3 +143,13 @@
   box-sizing: border-box;
   width: 100%;
 }
+
+.page-container {
+  .page-preamble {
+    @media (max-width: 768px) {
+      text-align: center;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+}

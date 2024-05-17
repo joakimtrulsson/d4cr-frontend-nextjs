@@ -1,12 +1,6 @@
 @import '../../styles/scss/variables/colorVariables.scss';
 
 .large-bullet-list-container {
-  @media (max-width: $display-m) {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    max-width: 100%;
-  }
-
   h2 {
     color: $-grey-700;
     margin-bottom: 0rem;
@@ -18,9 +12,21 @@
     color: $-grey-700;
   }
 
+  .bullet-preamble {
+    @media (max-width: 768px) {
+      text-align: center;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+
   .bullet-content {
-    margin: 0.3rem 0;
-    width: 100%;
+    margin-bottom: 1rem;
+
+    @media (max-width: $display-m) {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
 
     .circle-icon {
       display: flex;
@@ -31,11 +37,6 @@
       min-width: 3rem;
       height: 3rem;
       margin-right: 1rem;
-
-      @media (max-width: $display-s) {
-        // margin-bottom: auto;
-        // margin-top: 0.4rem;
-      }
 
       svg {
         width: 1.2rem;

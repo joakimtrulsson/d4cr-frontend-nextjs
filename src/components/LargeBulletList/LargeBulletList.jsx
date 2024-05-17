@@ -10,7 +10,9 @@ export default function LargeBulletList({ content }) {
   return (
     <div className='large-bullet-list-container flex flex-column flex-align-center'>
       {content.title && <h2>{content.title}</h2>}
-      {content.subHeader && <p className='large-text'>{content.subHeader}</p>}
+      {content.subHeader && (
+        <p className='bullet-preamble large-text'>{content.subHeader}</p>
+      )}
 
       {content.bullets.map((bullet, index) => {
         return (

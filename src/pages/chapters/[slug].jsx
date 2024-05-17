@@ -43,54 +43,58 @@ export default function ChapterSlugPage({ chapterData }) {
   );
 
   return (
-    <main className='site-content chapter-main flex flex-column flex-align-center flex-justify-start'>
-      {chapterLanguages.length > 1 && (
-        <div className='language-tabs margin-tb--s'>
-          {chapterLanguages.map((chapter, index) => (
-            <Link href={chapter.slug} key={index}>
-              <button
-                className={`lang-btn ${
-                  index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''
-                }
+    <main className='site-content chapter-main flex flex-column flex-align-center flex-align-center'>
+      <div className='chapter-hero'>
+        {chapterLanguages.length > 1 && (
+          <div className='language-tabs margin-tb--s'>
+            {chapterLanguages.map((chapter, index) => (
+              <Link href={chapter.slug} key={index}>
+                <button
+                  className={`lang-btn ${
+                    index === chapterLanguages.length - 1 ? 'lang-btn-right' : ''
+                  }
                 ${index === 0 ? 'lang-btn-left' : ''}
                 ${chapter.slug === currentLanguage.slug ? 'lang-btn-active' : ''}`}
-              >
-                {getLanguageName(chapter.chapterLanguage)}
-              </button>
-            </Link>
-          ))}
-        </div>
-      )}
-
-      <div className='animation-background-left'>
-        <Image src={AnimationLeft} alt='Animated GIF' />
-      </div>
-
-      <div className='animation-background-right'>
-        <Image src={AnimationRight} alt='Animated GIF' />
-      </div>
-
-      {chapterData.heroImage.url && (
-        <div className='hero-image-medium margin-t--s borderradius--xxxs'>
-          <Image
-            className='center-image'
-            src={chapterData.heroImage.url}
-            alt={chapterData.heroImage.alt}
-            fill={true}
-          />
-        </div>
-      )}
-
-      <p className='sub-heading-m color-yellow-600 margin-t--s'>D4CR PRESENTS</p>
-
-      {chapterData.title && (
-        <h1 className='heading-background margin-t--zero'>{chapterData.title}</h1>
-      )}
-
-      <div className='max-width-45 text-align-center margin-lr--xxxl'>
-        {chapterData.preamble.document && (
-          <DocumentRenderer document={chapterData.preamble.document} />
+                >
+                  {getLanguageName(chapter.chapterLanguage)}
+                </button>
+              </Link>
+            ))}
+          </div>
         )}
+        <div className='animation-background-left'>
+          <Image src={AnimationLeft} alt='Animated GIF' />
+        </div>
+        {chapterData.heroImage.url && (
+          <div className='hero-image-medium margin-t--s borderradius--xxxs'>
+            <Image
+              className='chapter-hero-image borderradius--xxxs'
+              src={chapterData.heroImage.url}
+              alt={chapterData.heroImage.alt}
+              width='900'
+              height='300'
+              // layout='responsive'
+              objectFit='cover'
+            />
+          </div>
+        )}
+        <div className='animation-background-right'>
+          <Image src={AnimationRight} alt='Animated GIF' />
+        </div>
+
+        <p className='chapter-subheader sub-heading-m color-yellow-600 margin-t--s'>
+          D4CR PRESENTS
+        </p>
+
+        {chapterData.title && (
+          <h1 className='heading-background margin-t--zero'>{chapterData.title}</h1>
+        )}
+
+        <div className='max-width-45 text-align-center'>
+          {chapterData.preamble.document && (
+            <DocumentRenderer document={chapterData.preamble.document} />
+          )}
+        </div>
       </div>
 
       {chapterData.sections &&
