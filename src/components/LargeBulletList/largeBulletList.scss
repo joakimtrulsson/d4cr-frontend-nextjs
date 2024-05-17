@@ -1,6 +1,13 @@
 @import '../../styles/scss/variables/colorVariables.scss';
 
 .large-bullet-list-container {
+  width: 100%;
+  align-items: center;
+
+  @media (max-width: $display-m) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
   h2 {
     color: $-grey-700;
     margin-bottom: 0rem;
@@ -22,11 +29,8 @@
 
   .bullet-content {
     margin-bottom: 1rem;
-
-    @media (max-width: $display-m) {
-      margin-left: 1rem;
-      margin-right: 1rem;
-    }
+    width: 100%;
+    box-sizing: border-box;
 
     .circle-icon {
       display: flex;

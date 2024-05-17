@@ -8,7 +8,7 @@ export default function LargeBulletList({ content }) {
   library.add(fas);
 
   return (
-    <div className='large-bullet-list-container flex flex-column flex-align-center'>
+    <div className='large-bullet-list-container flex flex-column '>
       {content.title && <h2>{content.title}</h2>}
       {content.subHeader && (
         <p className='bullet-preamble large-text'>{content.subHeader}</p>

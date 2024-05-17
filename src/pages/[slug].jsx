@@ -56,12 +56,12 @@ export default function SlugPage({ pageData }) {
         pageData.heroPreamble.document.length >= 1) ||
         pageData?.ctaOneAnchorText ||
         pageData?.ctaTwoUrlAnchorText) && (
-        <div className='page-preamble flex flex-column flex-align-center flex-justify-center margin-b--xl max-width-40 text-align-center'>
+        <div className='page-hero flex flex-column flex-align-center flex-justify-center margin-b--xl max-width-40 text-align-center'>
           {pageData.heroPreamble && (
             <DocumentRenderer document={pageData.heroPreamble.document} />
           )}
 
-          <nav className='flex flex-row'>
+          <nav className='page-hero-buttons flex flex-row'>
             {pageData.ctaOneAnchorText &&
               url1 &&
               (url1 === 'share' || url1 === 'slack' ? (
