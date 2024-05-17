@@ -40,26 +40,20 @@ const HeroFrontPage = ({ prop }) => {
           </h4>
           <div className='buttons-bottom flex flex-row'>
             {(prop.ctaTwoUrl || prop.ctaOneUrl) && (
-              <nav className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center margin-tb--xxxs'>
+              <nav className='button-container flex margin-tb--xxxs'>
                 {url1 === 'share' || url1 === 'slack' ? (
                   <>
                     <SecondaryButton
-                      className='margin-r--xxs'
                       title={prop.ctaOneAnchorText}
                       onClick={clickedBtnCTA1}
                     />
                   </>
                 ) : url1.startsWith('/') ? (
-                  <Link href={url1} className='margin-r--xxs'>
+                  <Link href={url1}>
                     <PrimaryButton title={prop.ctaOneAnchorText} />
                   </Link>
                 ) : (
-                  <Link
-                    href={url1}
-                    className='margin-r--xxxs'
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
+                  <Link href={url1} rel='noopener noreferrer' target='_blank'>
                     <PrimaryButton title={prop.ctaOneAnchorText} />
                   </Link>
                 )}
