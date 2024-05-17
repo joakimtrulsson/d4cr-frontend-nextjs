@@ -76,8 +76,6 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
           <PrinciplesSection content={section} />
         </section>
       );
-    // case 'RESOURCES':
-    //   return <ResourcesSection content={section} />;
     case 'PEOPLE':
       return (
         <section className='section flex margin-tb--xxl'>
@@ -87,7 +85,7 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
 
     case 'WYSIWYG':
       return (
-        <div className='section margin-lr--xxxl max-width-60 margin-tb--xxl'>
+        <div className='section wysiwyg-container max-width-60 margin-tb--xxl'>
           <WYSIWYG content={section.preamble} />
         </div>
       );

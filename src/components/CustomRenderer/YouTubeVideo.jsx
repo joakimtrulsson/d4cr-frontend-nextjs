@@ -3,8 +3,7 @@ export function YouTubeVideo({ url, altText = 'Embedded YouTube video' }) {
 
   return (
     <iframe
-      width='100%'
-      height='480'
+      className='youtube-video-iframe'
       style={{
         left: 0,
         top: 0,

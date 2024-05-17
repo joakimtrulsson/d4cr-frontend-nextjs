@@ -6,12 +6,18 @@ import { SpotifyPlayer } from './SpotifyPlayer';
 
 const customComponentRenderers = {
   youtubeVideo: (props) => {
-    return <YouTubeVideo {...props} />;
+    return (
+      <div className='youtube-container'>
+        <YouTubeVideo {...props} />
+      </div>
+    );
   },
   spotifyPlayer: (props) => {
     return (
       <React.Fragment>
-        <SpotifyPlayer {...props} />
+        <div className='spotify-container'>
+          <SpotifyPlayer {...props} />
+        </div>
       </React.Fragment>
     );
   },
@@ -20,11 +26,17 @@ const customComponentRenderers = {
 const defaultElementRenderers = {
   block: {
     paragraph: ({ children, textAlign }) => {
+      return <p style={{ textAlign }}>{children}</p>;
+    },
+    layout: ({ layout, children }) => {
+      const gridTemplateColumns = layout.map(() => '1fr').join(' ');
+      const className = `layout-container-${layout.length}`;
       return (
-        <p style={{ textAlign }}>
-          {/* <p className='bg-yellow-100' style={{ textAlign }}> */}
-          {children}
-        </p>
+        <div className={className} style={{ display: 'grid', gridTemplateColumns }}>
+          {children.map((column, index) => (
+            <div key={index}>{column}</div>
+          ))}
+        </div>
       );
     },
   },
