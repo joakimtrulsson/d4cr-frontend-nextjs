@@ -8,6 +8,7 @@ import SlackForm from '../SlackForm/SlackForm.jsx';
 import PopupForm from '../ShareForm/ShareForm.jsx';
 import Link from 'next/link';
 import { ensureValidUrl } from '../../utils/modalFunctions.js';
+import CloseIcon from '../CloseIcon/CloseIcon.jsx';
 
 export default function Banner({ content }) {
   const { library } = require('@fortawesome/fontawesome-svg-core');
@@ -113,7 +114,8 @@ export default function Banner({ content }) {
           }`}
         >
           <button onClick={exitModal} className='btn-exit-video'>
-            X
+            {/* X */}
+            <CloseIcon />
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}

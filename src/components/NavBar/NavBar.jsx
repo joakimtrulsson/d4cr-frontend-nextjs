@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SlackForm from '../SlackForm/SlackForm.jsx';
 import PopupForm from '../ShareForm/ShareForm.jsx';
+import CloseIcon from '../CloseIcon/CloseIcon.jsx';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu.jsx';
 import MenuContext from '../../context/MenuContext.js';
 import Icon from '../../styles/assets/graphics/icons/d4cr-icon.png';
@@ -279,10 +280,7 @@ export default function NavBar() {
                   rel='noopener noreferrer'
                   target='_blank'
                 >
-                  <SecondaryButton
-                    className='margin-lr--m'
-                    title={data.ctaAnchorText}
-                  />
+                  <SecondaryButton className='margin-lr--m' title={data.ctaAnchorText} />
                 </Link>
               ))}
           </nav>
@@ -297,7 +295,7 @@ export default function NavBar() {
               }`}
             >
               <button onClick={exitModal} className='btn-exit-video'>
-                X
+                <CloseIcon />
               </button>
               <div className='box'>
                 {shareOrSlack === 'slack' && <SlackForm />}

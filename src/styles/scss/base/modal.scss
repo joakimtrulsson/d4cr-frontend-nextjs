@@ -1,3 +1,71 @@
+.clicked {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: fadeInBackground 0.5s ease-out forwards;
+
+  .modal {
+    position: fixed;
+    top: 4rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 800px;
+    min-width: 300px;
+    z-index: 100999;
+
+    animation: slideInFromBottomForm 0.5s ease-out forwards;
+
+    .box {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background-color: white;
+    }
+
+    .btn-exit-video {
+      position: absolute;
+      top: -2%;
+      right: -2%;
+      background-color: transparent;
+      border: none;
+      transform: scale(1);
+      transition: transform 0.4s ease-in-out;
+      z-index: 3;
+
+      @media (max-width: 661px) {
+        top: -1%;
+        right: -3%;
+
+        svg {
+          width: 2.2rem;
+          height: 2.2rem;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        transform: scale(1.1);
+        transition: transform 0.4s ease-in-out;
+        background-color: transparent;
+      }
+    }
+
+    &.slide-out {
+      animation: slideOutForm 0.5s ease-out forwards;
+    }
+  }
+
+  &.clicked-exit {
+    animation: fadeOutBackground 0.5s ease-in forwards;
+  }
+}
+
 .popup-form-container {
   overflow: hidden;
   padding: 2rem 2rem;
@@ -144,10 +212,13 @@
         align-items: flex-start;
 
         input {
-          width: 100%;
-          height: 2.6rem;
           box-sizing: border-box;
-          font-weight: bold;
+          width: 100%;
+          font-size: medium;
+          font-weight: 600;
+          border: solid $-grey-300 1.7px;
+          border-radius: 2px;
+          height: 2.6rem;
           padding-left: 1rem;
         }
 

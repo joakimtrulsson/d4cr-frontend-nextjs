@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import ShareForm from '../components/ShareForm/ShareForm.jsx';
 import SlackForm from '../components/SlackForm/SlackForm.jsx';
+import CloseIcon from '../components/CloseIcon/CloseIcon.jsx';
 import SectionRender from '../components/SectionRenderer/SectionRenderer.jsx';
 import PrimaryButton from '../components/PrimaryButton/PrimaryButton.jsx';
 import SecondaryButton from '../components/SecondaryButton/SecondaryButton.jsx';
@@ -125,7 +126,7 @@ export default function SlugPage({ pageData }) {
           }`}
         >
           <button onClick={exitModal} className='btn-exit-video'>
-            X
+            <CloseIcon />
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}

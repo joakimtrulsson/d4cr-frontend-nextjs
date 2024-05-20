@@ -5,6 +5,7 @@ import PrimaryButton from '../PrimaryButton/PrimaryButton.jsx';
 import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
 import PopupForm from '../ShareForm/ShareForm.jsx';
 import SlackForm from '../SlackForm/SlackForm.jsx';
+import CloseIcon from '../CloseIcon/CloseIcon.jsx';
 import { ensureValidUrl } from '../../utils/modalFunctions.js';
 
 const HeroFrontPage = ({ prop }) => {
@@ -93,7 +94,8 @@ const HeroFrontPage = ({ prop }) => {
                 }`}
               >
                 <button onClick={exitModal} className='btn-exit-video'>
-                  X
+                  {/* X */}
+                  <CloseIcon />
                 </button>
                 <div className='box'>
                   {shareOrSlack === 'slack' && <SlackForm />}

@@ -19,81 +19,67 @@ body {
   margin: 0 auto;
   width: 100%;
 
-  .clicked {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    animation: fadeInBackground 0.5s ease-out forwards;
+  // .clicked {
+  //   position: fixed;
+  //   z-index: 1000;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: rgba(0, 0, 0, 0.4);
+  //   animation: fadeInBackground 0.5s ease-out forwards;
 
-    .modal {
-      position: fixed;
-      top: 4rem;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 95%;
-      max-width: 800px;
-      min-width: 300px;
-      z-index: 1002;
+  //   .modal {
+  //     position: fixed;
+  //     top: 4rem;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+  //     width: 95%;
+  //     max-width: 800px;
+  //     min-width: 300px;
+  //     z-index: 1002;
 
-      animation: slideInFromBottomForm 0.5s ease-out forwards;
+  //     animation: slideInFromBottomForm 0.5s ease-out forwards;
 
-      .box {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        background-color: white;
-      }
+  //     .box {
+  //       box-sizing: border-box;
+  //       width: 100%;
+  //       height: 100%;
+  //       border-radius: 10px;
+  //       background-color: white;
+  //     }
 
-      .btn-exit-video {
-        position: absolute;
-        top: -2%;
-        right: -2%;
-        height: 1.8em;
-        width: 1.8em;
-        font-size: 1.1em;
-        line-height: 1em;
-        border-radius: 50%;
-        background-color: #d4eae9;
-        border: none;
-        transform: scale(1);
-        text-align: center;
-        transition: background-color 0.4s ease-in-out, transform 0.4s ease-in-out;
-        font-weight: 600;
-        font-family: Courier 'Courier New';
-        z-index: 3;
+  //     // .btn-exit-video {
+  //     //   position: absolute;
+  //     //   top: -2%;
+  //     //   right: -2%;
+  //     //   background-color: transparent;
+  //     //   border: none;
+  //     //   transform: scale(1);
 
-        @media (max-width: 868px) {
-          right: 0;
-        }
+  //     //   transition: 0.4s ease-in-out, transform 0.4s ease-in-out;
 
-        &:hover,
-        &:focus {
-          transform: scale(1.1);
-          transition: transform 0.4s ease-in-out;
-          background-color: #b7f0ee;
-        }
-      }
+  //     //   z-index: 3;
 
-      &.slide-out {
-        animation: slideOutForm 0.5s ease-out forwards;
-      }
-    }
+  //     //   @media (max-width: 868px) {
+  //     //     right: 0;
+  //     //   }
 
-    &.clicked-exit {
-      animation: fadeOutBackground 0.5s ease-in forwards;
-    }
-  }
+  //     //   &:hover,
+  //     //   &:focus {
+  //     //     transform: scale(1.1);
+  //     //     transition: transform 0.4s ease-in-out;
+  //     //     background-color: transparent;
+  //     //   }
+  //     // }
 
-  .not-clicked {
-    display: none;
-  }
+  //     // &.slide-out {
+  //     //   animation: slideOutForm 0.5s ease-out forwards;
+  //     // }
+  //   }
 
-  .not-clicked {
-    display: none;
-  }
+  //   // &.clicked-exit {
+  //   //   animation: fadeOutBackground 0.5s ease-in forwards;
+  //   // }
+  // }
 }

@@ -13,6 +13,8 @@ import SlackForm from '../SlackForm/SlackForm';
 import PopupForm from '../ShareForm/ShareForm';
 import MenuContext from '../../context/MenuContext';
 
+import CloseIcon from '../CloseIcon/CloseIcon';
+
 export default function Footer() {
   const menuContext = useContext(MenuContext);
   const [hoveredItem, setHoveredItem] = React.useState({ index: null, key: null });
@@ -186,7 +188,7 @@ export default function Footer() {
           }`}
         >
           <button onClick={exitModal} className='btn-exit-video'>
-            X
+            <CloseIcon />
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}

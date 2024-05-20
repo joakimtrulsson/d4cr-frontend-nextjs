@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PlayBtn from '../../styles/assets/graphics/buttons/play.png';
 import PlayBg from '../../styles//assets/graphics/buttons/play-bg.png';
+import CloseIcon from '../CloseIcon/CloseIcon';
 
 const VideoPlayer = ({ video }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -25,15 +26,15 @@ const VideoPlayer = ({ video }) => {
   const handleMouseLeave = () => {
     const timeoutId = setTimeout(() => {
       setIsHovered(false);
-    }, 600); // 600ms is the duration of the jelly-hover animation
+    }, 600);
     setLeaveTimeout(timeoutId);
   };
   function clickedVideo() {
     setIsClicked(true);
   }
   function exitVideo() {
-    setSlideOut(true); // Start the slide-out animation
-    // Wait for the animation to complete before hiding the modal
+    setSlideOut(true);
+
     setTimeout(() => {
       setIsClicked(false);
       setSlideOut(false);
@@ -81,7 +82,7 @@ const VideoPlayer = ({ video }) => {
           }`}
         >
           <button onClick={exitVideo} className='btn-exit-video'>
-            x
+            <CloseIcon />
           </button>
           <video className={`video-player-popup`} width='640' height='520' controls>
             <source src={videoData.url} type='video/mp4' />

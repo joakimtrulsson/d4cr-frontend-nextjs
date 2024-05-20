@@ -1,0 +1,158 @@
+@keyframes slideInFromBottomForm {
+  from {
+    transform: translate(-50%, 100vh);
+  }
+
+  to {
+    transform: translate(-50%, 0vh);
+  }
+}
+
+@keyframes slideOutForm {
+  from {
+    transform: translate(-50%);
+  }
+
+  to {
+    transform: translate(-50%, 100vh);
+  }
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fadeInBackground {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes fadeOutBackground {
+  from {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translate(-50%, 100vh);
+  }
+
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translate(-50%);
+  }
+
+  to {
+    transform: translate(-50%, 100vh);
+  }
+}
+
+//when hovering it is wobbling like jelly
+@keyframes jelly-hover {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.06);
+  }
+
+  50% {
+    transform: scale(1.045);
+  }
+
+  75% {
+    transform: scale(1.055);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes jelly-btn-hover {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(0.89);
+  }
+
+  50% {
+    transform: scale(0.91);
+  }
+
+  75% {
+    transform: scale(0.89);
+  }
+
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes jelly-back {
+  0% {
+    transform: scale(1.05);
+  }
+
+  25% {
+    transform: scale(0.99);
+  }
+
+  50% {
+    transform: scale(1.005);
+  }
+
+  75% {
+    transform: scale(0.995);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes jelly-btn-back {
+  0% {
+    transform: scale(0.9);
+  }
+
+  25% {
+    transform: scale(1.01);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  75% {
+    transform: scale(1.005);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

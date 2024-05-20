@@ -8,6 +8,7 @@ import PrimaryButton from '../PrimaryButton/PrimaryButton.jsx';
 import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
 import PopupForm from '../ShareForm/ShareForm.jsx';
 import SlackForm from '../SlackForm/SlackForm.jsx';
+import CloseIcon from '../CloseIcon/CloseIcon.jsx';
 import getColorCode from '../../utils/colorCode.js';
 import { ensureValidUrl } from '../../utils/modalFunctions.js';
 
@@ -57,9 +58,14 @@ export default function TextMediaComponent({ content }) {
         <TopWave fillColorCode={fillColorCode} />
       )}
 
-      <div className={`text-media-background-${bgColorClass} flex flex-justify-center padding-lr--xs`}>
+      <div
+        className={`text-media-background-${bgColorClass} flex flex-justify-center padding-lr--xs`}
+      >
         <div
-          className={`text-and-media-container flex-align-center padding-tb--l padding-lr--xl margin-tb--xxxs-negative ${bgColorClass} ${content.imagePosition === 'LEFT' && 'flex--reverse'}`}>
+          className={`text-and-media-container flex-align-center padding-tb--l padding-lr--xl margin-tb--xxxs-negative ${bgColorClass} ${
+            content.imagePosition === 'LEFT' && 'flex--reverse'
+          }`}
+        >
           {/* check media's position */}
           <div className='text-content flex flex-column flex-nowrap'>
             {/* text content */}
@@ -134,7 +140,7 @@ export default function TextMediaComponent({ content }) {
                       }`}
                     >
                       <button onClick={exitVideo} className='btn-exit-video'>
-                        X
+                        <CloseIcon />
                       </button>
                       <div className='box'>
                         {shareOrSlack === 'slack' && <SlackForm />}
@@ -147,7 +153,6 @@ export default function TextMediaComponent({ content }) {
             )}
           </div>
           <div className='media-content flex flex-justify-center flex-align-center'>
-            {/* media content */}
             {content.image && content.image.url && (
               <Image
                 className='borderradius--xs'
@@ -160,7 +165,7 @@ export default function TextMediaComponent({ content }) {
           </div>
         </div>
       </div>
-      {(content.border === 'BOTTOM' || content.border === 'TOPBOTTOM') && ( // bottom wave
+      {(content.border === 'BOTTOM' || content.border === 'TOPBOTTOM') && (
         <BottomWave fillColorCode={fillColorCode} />
       )}
     </div>
