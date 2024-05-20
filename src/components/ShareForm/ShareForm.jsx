@@ -45,11 +45,10 @@ export default function ShareForm() {
 
     setData((prevData) => ({ ...prevData, [name]: inputValue }));
 
-    // Check and remove the error message for the field if it exists.
     if (errorMessage.hasOwnProperty(name)) {
       setErrorMessage((prevMessages) => {
         const newMessages = { ...prevMessages };
-        delete newMessages[name]; // Remove the key entirely
+        delete newMessages[name];
         return newMessages;
       });
     }
@@ -142,7 +141,7 @@ export default function ShareForm() {
                 name='name'
                 id='name'
                 placeholder='Name'
-                value={data.name} // Bind input value to state
+                value={data.name}
                 onChange={handleChange}
                 aria-required='true'
                 aria-invalid={errorMessage?.name ? 'true' : 'false'}
@@ -161,7 +160,7 @@ export default function ShareForm() {
                 placeholder='E-mail'
                 type='email'
                 className=''
-                value={data.contactEmail} // Bind input value to state
+                value={data.contactEmail}
                 onChange={handleChange}
                 aria-required='true'
                 aria-invalid={errorMessage.contactEmail ? 'true' : 'false'}
@@ -181,7 +180,7 @@ export default function ShareForm() {
               placeholder='LinkedIn'
               type='text'
               className=''
-              value={data.linkedIn || ''} // Bind input value to state
+              value={data.linkedIn || ''}
               onChange={handleChange}
               aria-required='true'
               aria-invalid={errorMessage.linkedIn ? 'true' : 'false'}
@@ -199,7 +198,7 @@ export default function ShareForm() {
               id='message'
               placeholder='Message'
               className=''
-              value={data.message} // Bind input value to state
+              value={data.message}
               onChange={handleChange}
               aria-required='true'
               aria-invalid={errorMessage.message ? 'true' : 'false'}
