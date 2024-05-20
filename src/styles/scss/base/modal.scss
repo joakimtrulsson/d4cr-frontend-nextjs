@@ -26,6 +26,8 @@
       height: 100%;
       border-radius: 10px;
       background-color: white;
+      overflow-y: auto;
+      max-height: 100vh;
     }
 
     .btn-exit-video {
@@ -99,7 +101,6 @@
     }
 
     form {
-      // width: 90%;
       width: 100%;
       max-width: 632px;
 
@@ -107,12 +108,11 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 4rem;
+        gap: 2rem;
         justify-content: space-between;
 
         .left {
           min-width: 250px;
-          // width: 40%;
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -139,7 +139,6 @@
         .right {
           min-width: 250px;
           flex: 1;
-          // width: 44%;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -237,7 +236,8 @@
 
         textarea {
           width: 100%;
-          height: 20vh;
+          // height: 20vh;
+          height: 200px;
           font-size: medium;
           font-weight: 600;
           // margin-bottom: 0;
@@ -284,7 +284,6 @@
     }
   }
 }
-// }
 
 @media (max-width: 661px) {
   .popup-form-container {
@@ -320,6 +319,12 @@
             input {
               box-sizing: border-box;
             }
+          }
+        }
+
+        .text-area-div {
+          textarea {
+            height: 175px;
           }
         }
       }

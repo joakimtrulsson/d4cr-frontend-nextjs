@@ -26,6 +26,7 @@ const HeroFrontPage = ({ prop }) => {
   }
   function exitModal() {
     setSlideOut(true);
+    document.body.style.overflow = '';
     setTimeout(() => {
       setIsClicked(false);
       setSlideOut(false);
