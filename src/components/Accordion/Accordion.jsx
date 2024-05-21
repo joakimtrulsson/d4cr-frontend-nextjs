@@ -24,7 +24,7 @@ export default function Accordion({ content }) {
         <h2 className='margin-t--xxs '>{content.title}</h2>
       </div>
 
-      <div className='accordion-content flex flex-row max-width-60 min-width-30 margin-lr--xs'>
+      <div className='accordion-content flex flex-row max-width-60 margin-lr--xs'>
         <div className='content-list'>
           <ul className='no-bullets'>
             {content.fields.map((field, index) => (
