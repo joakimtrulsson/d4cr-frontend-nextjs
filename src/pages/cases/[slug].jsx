@@ -22,7 +22,7 @@ export default function CasesPage({ pageData }) {
   }
 
   return (
-    <main className='flex flex-column flex-justify-center flex-align-center container-cases'>
+    <main className='site-content container-cases flex flex-column flex-justify-center flex-align-center '>
       {pageData ? (
         <>
           <div className='title-container'>
@@ -30,25 +30,23 @@ export default function CasesPage({ pageData }) {
             <h1 className='heading-1'>{pageData.title}</h1>
             <DocumentRenderer document={pageData.preamble?.document} />
           </div>
-          <div className='flex flex-column flex-align-center'>
-            {pageData.sections &&
-              pageData.sections.map((section, index) => (
-                <SectionRenderer
-                  key={index}
-                  section={section}
-                  multipleTextMedia={checkIfMultipleTextMediaSections[index]}
-                />
-              ))}
-            <div className='renderer'>
-              {pageData.resources.length > 0 ? (
-                <Resources
-                  resources={pageData.resources}
-                  title={pageData.resourcesTitle}
-                  preamble={pageData.resourcesPreamble}
-                />
-              ) : null}
-            </div>
-          </div>
+
+          {pageData.sections &&
+            pageData.sections.map((section, index) => (
+              <SectionRenderer
+                key={index}
+                section={section}
+                multipleTextMedia={checkIfMultipleTextMediaSections[index]}
+              />
+            ))}
+
+          {pageData.resources.length > 0 ? (
+            <Resources
+              resources={pageData.resources}
+              title={pageData.resourcesTitle}
+              preamble={pageData.resourcesPreamble}
+            />
+          ) : null}
         </>
       ) : null}
     </main>

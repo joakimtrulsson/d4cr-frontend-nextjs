@@ -1,7 +1,4 @@
 .news-slug-container {
-  width: 100%;
-  max-width: $max-width-content-desktop-large;
-
   .news-header {
     @media (max-width: 768px) {
       .news-category {
@@ -26,7 +23,8 @@
   .hero-image-container {
     height: auto;
     width: 100%;
-    max-height: 800px;
+    max-height: 600px;
+    max-width: $display-xxl;
     overflow: hidden;
     object-fit: cover;
     display: flex;
@@ -43,12 +41,20 @@
       height: auto;
       object-fit: cover;
 
-      @media (max-width: 900px) {
-        max-height: 17rem;
+      @media (max-width: 1200px) {
+        max-height: 500px;
+      }
+
+      @media (max-width: 1000px) {
+        max-height: 400px;
+      }
+
+      @media (max-width: 768px) {
+        max-height: 300px;
       }
 
       @media (max-width: 575px) {
-        max-height: 12rem;
+        max-height: 200px;
       }
     }
   }
