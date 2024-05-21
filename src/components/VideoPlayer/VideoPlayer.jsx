@@ -52,7 +52,7 @@ const VideoPlayer = ({ video }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <video className={`video-player`} width='320' height='260'>
+        <video className={`video-player`} width='320' height='260' muted controls>
           <source src={videoData.url} type='video/mp4' />
           Your browser does not support the video tag.
         </video>
