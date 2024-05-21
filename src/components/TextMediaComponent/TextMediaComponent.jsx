@@ -2,15 +2,17 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import TopWave from '../TopWave/TopWave.jsx';
-import BottomWave from '../BottomWave/BottomWave.jsx';
-import PrimaryButton from '../PrimaryButton/PrimaryButton.jsx';
-import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
-import PopupForm from '../ShareForm/ShareForm.jsx';
-import SlackForm from '../SlackForm/SlackForm.jsx';
-import CloseIcon from '../CloseIcon/CloseIcon.jsx';
-import getColorCode from '../../utils/colorCode.js';
-import { ensureValidUrl } from '../../utils/modalFunctions.js';
+
+import {
+  BottomWave,
+  TopWave,
+  PrimaryButton,
+  SecondaryButton,
+  ShareForm,
+  SlackForm,
+  CloseIcon,
+} from '../index.js';
+import { ensureValidUrl, getColorCode } from '../../utils/index.js';
 
 export default function TextMediaComponent({ content }) {
   const url1 = content.cta1?.url ? ensureValidUrl(content.cta1?.url) : content.cta1?.page;
@@ -144,7 +146,7 @@ export default function TextMediaComponent({ content }) {
                       </button>
                       <div className='box'>
                         {shareOrSlack === 'slack' && <SlackForm />}
-                        {shareOrSlack === 'share' && <PopupForm />}
+                        {shareOrSlack === 'share' && <ShareForm />}
                       </div>
                     </div>
                   </div>

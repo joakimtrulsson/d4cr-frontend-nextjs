@@ -1,9 +1,8 @@
 import React from 'react';
-import PrimaryButton from '../PrimaryButton/PrimaryButton';
-import SecondaryButton from '../SecondaryButton/SecondaryButton';
 import Cookies from 'js-cookie';
-
 import CookieConsent from 'react-cookie-consent';
+
+import { PrimaryButton, SecondaryButton } from '../index.js';
 
 function CookieBanner({ isAccepted, setIsAccepted, setIsDeclined }) {
   const handleAcceptCookies = () => {

@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import ArrowRight from '../../styles/assets/graphics/icons/arrow-right.svg';
 import Link from 'next/link';
+
+import ArrowRight from '../../styles/assets/graphics/icons/arrow-right.svg';
 
 const CaseCard = ({ link, quote, title, img, linkType }) => {
   let linkText = '';

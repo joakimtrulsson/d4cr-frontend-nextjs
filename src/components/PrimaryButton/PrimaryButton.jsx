@@ -1,4 +1,4 @@
-import SecondaryButton from '../SecondaryButton/SecondaryButton';
+import { SecondaryButton } from '../index';
 
 export default function PrimaryButton({
   title,

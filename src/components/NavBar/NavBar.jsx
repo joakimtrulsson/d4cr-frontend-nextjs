@@ -2,17 +2,22 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import SlackForm from '../SlackForm/SlackForm.jsx';
-import PopupForm from '../ShareForm/ShareForm.jsx';
-import CloseIcon from '../CloseIcon/CloseIcon.jsx';
-import HamburgerMenu from '../HamburgerMenu/HamburgerMenu.jsx';
+
+import {
+  CloseIcon,
+  HamburgerMenu,
+  SecondaryButton,
+  SlackForm,
+  ShareForm,
+} from '../index.js';
+import { ensureValidUrl } from '../../utils/index.js';
+
 import MenuContext from '../../context/MenuContext.js';
+
 import Icon from '../../styles/assets/graphics/icons/d4cr-icon.png';
-import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
 import chevronRight from '../../styles/assets/graphics/icons/chevron-right-orange-500.svg';
 import chevronUp from '../../styles/assets/graphics/icons/chevron-up-orange-500.svg';
 import chevronDown from '../../styles/assets/graphics/icons/chevron-down-grey-500.svg';
-import { ensureValidUrl } from '../../utils/modalFunctions.js';
 
 export default function NavBar() {
   const menuContext = useContext(MenuContext);
@@ -299,7 +304,7 @@ export default function NavBar() {
               </button>
               <div className='box'>
                 {shareOrSlack === 'slack' && <SlackForm />}
-                {shareOrSlack === 'share' && <PopupForm />}
+                {shareOrSlack === 'share' && <ShareForm />}
               </div>
             </div>
           </div>

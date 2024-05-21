@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import PeopleCard from '../PeopleCard/PeopleCard';
-import { fetchPeopleByIds } from '../../graphql/dataFetches';
+
+import { PeopleCard } from '../index.js';
+
+import { fetchPeopleByIds } from '../../graphql/index';
 
 export default function PeopleSection({ content }) {
   const [peopleList, setPeopleList] = useState(null);

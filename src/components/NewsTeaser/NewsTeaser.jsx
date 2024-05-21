@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { NewsCard, SecondaryButton, WYSIWYG } from '../index.js';
+
 import Animation from '../../styles/assets/graphics/animation.gif';
-import Newscard from '../NewsCard/NewsCard.jsx';
-import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
-import WYSIWYG from '../Wysiwyg/Wysiwyg.jsx';
+
 import {
   fetchGetNewsItemByChapter,
   fetchAllNews,
   fetchGetNewsItemByCategory,
   fetchGetNewsItemByCategoryAndChapter,
-} from '../../graphql/dataFetches.js';
+} from '../../graphql/index.js';
 
 export default function NewsTeaser({ content }) {
   const newsVar = content.selectedNews;
@@ -59,7 +60,7 @@ export default function NewsTeaser({ content }) {
 
           <div className='news-card-container  margin-tb--s flex flex-row'>
             {data?.newsItems?.slice(0, 3).map((item) => (
-              <Newscard
+              <NewsCard
                 key={item.id}
                 type={item.newsCategory.categoryTitle}
                 title={item.title}

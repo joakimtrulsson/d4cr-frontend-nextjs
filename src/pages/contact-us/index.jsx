@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactUsForm from '../../components/ContactUsForm/ContactUsForm.jsx';
+import { ContactUsForm } from '../../components/index.js';
 
 export default function ContactUs() {
   return (

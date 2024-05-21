@@ -1,7 +1,7 @@
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import getColorCode from '../../utils/colorCode';
+import { getColorCode } from '../../utils/index.js';
 
 export default function LargeBulletList({ content }) {
   const { library, config } = require('@fortawesome/fontawesome-svg-core');

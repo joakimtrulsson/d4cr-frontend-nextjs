@@ -1,36 +1,41 @@
 import Head from 'next/head';
 import Script from 'next/script';
 import Icon from '../../styles/assets/graphics/d4cr-icon-OG.png';
-import { metadata } from '../../graphql/metaData';
+import metaData from './metaData';
 
 export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted }) {
   const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${resolvedUrl}`;
 
   tabTitle =
     tabTitle === undefined || !tabTitle
-      ? metadata.title
-      : `${tabTitle} | ${metadata.title}`;
+      ? metaData.title
+      : `${tabTitle} | ${metaData.title}`;
 
   return (
     <>
       <Head>
-        {tabTitle ? <title>{tabTitle}</title> : <title>{metadata.title}</title>}
+        {tabTitle ? <title>{tabTitle}</title> : <title>{metaData.title}</title>}
 
         <link rel='canonical' href={fullUrl} />
 
-        <link rel='icon' href='../icon.png' type='image/png' sizes='any' />
-
         <link
-          rel='apple-touch-icon'
-          href='../apple-icon.png'
+          rel='icon'
+          href='../styles/graphics/assets/icon.png'
           type='image/png'
           sizes='any'
         />
 
-        <meta name='description' content={metadata.description} />
+        <link
+          rel='apple-touch-icon'
+          href='../styles/graphics/assets/apple-icon.png'
+          type='image/png'
+          sizes='any'
+        />
+
+        <meta name='description' content={metaData.description} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta property='og:title' content={tabTitle} />
-        <meta property='og:site_name' content={metadata.title}></meta>
+        <meta property='og:site_name' content={metaData.title}></meta>
         {fullUrl && <meta property='og:url' content={fullUrl} />}
 
         {Icon && (

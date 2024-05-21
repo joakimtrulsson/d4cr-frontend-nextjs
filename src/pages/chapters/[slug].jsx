@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import getLanguageName from '../../utils/languageCode.js';
-import SectionRender from '../../components/SectionRenderer/SectionRenderer.jsx';
+
+import { SectionRenderer, NotFound } from '../../components/index.js';
+import { markConsecutiveMediaTextSections, getLanguageName } from '../../utils/index.js';
+import {
+  initializeApollo,
+  addApolloState,
+  CHAPTER_SLUG_QUERY,
+} from '../../graphql/index.js';
+
 import AnimationRight from '../../styles/assets/graphics/animation.gif';
 import AnimationLeft from '../../styles/assets/graphics/animation-2.gif';
-import NotFound from '../../components/NotFound/NotFound.jsx';
-
-import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
-import { CHAPTER_SLUG_QUERY } from '../../graphql/queries.jsx';
-import { markConsecutiveMediaTextSections } from '../../utils/markConsecutiveMediaTextSections.js';
 
 export default function ChapterSlugPage({ chapterData }) {
   if (!chapterData) {
@@ -73,7 +75,6 @@ export default function ChapterSlugPage({ chapterData }) {
               alt={chapterData.heroImage.alt}
               width='900'
               height='300'
-              // layout='responsive'
               objectFit='cover'
             />
           </div>
@@ -99,7 +100,7 @@ export default function ChapterSlugPage({ chapterData }) {
 
       {chapterData.sections &&
         chapterData.sections.map((section, index) => (
-          <SectionRender
+          <SectionRenderer
             key={index}
             section={section}
             multipleTextMedia={checkIfMultipleTextMediaSections[index]}

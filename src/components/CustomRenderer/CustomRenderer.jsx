@@ -1,14 +1,13 @@
 import React from 'react';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 
-import { YouTubeVideo } from './YouTubeVideo';
-import { SpotifyPlayer } from './SpotifyPlayer';
+import { YoutubeVideo, SpotifyPlayer } from '../index.js';
 
 const customComponentRenderers = {
   youtubeVideo: (props) => {
     return (
       <div className='youtube-container'>
-        <YouTubeVideo {...props} />
+        <YoutubeVideo {...props} />
       </div>
     );
   },
@@ -42,7 +41,7 @@ const defaultElementRenderers = {
   },
 };
 
-export function CustomRenderer({ document }) {
+export default function CustomRenderer({ document }) {
   return (
     <DocumentRenderer
       renderers={defaultElementRenderers}

@@ -4,16 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import getColorCode from '../../utils/colorCode';
-import Icon from '../../styles/assets/graphics/icons/d4cr-icon.png';
-import TopWave from '../TopWave/TopWave';
-import Banner from '../Banner/Banner';
-import { ArrowRightSvg } from '../SvgIcons/SvgIcons';
-import SlackForm from '../SlackForm/SlackForm';
-import PopupForm from '../ShareForm/ShareForm';
-import MenuContext from '../../context/MenuContext';
 
-import CloseIcon from '../CloseIcon/CloseIcon';
+import {
+  TopWave,
+  Banner,
+  SlackForm,
+  ShareForm,
+  CloseIcon,
+  ArrowRightSvg,
+} from '../index.js';
+import { getColorCode } from '../../utils/index.js';
+
+import Icon from '../../styles/assets/graphics/icons/d4cr-icon.png';
+
+import MenuContext from '../../context/MenuContext';
 
 export default function Footer() {
   const menuContext = useContext(MenuContext);
@@ -192,7 +196,7 @@ export default function Footer() {
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}
-            {shareOrSlack === 'share' && <PopupForm />}
+            {shareOrSlack === 'share' && <ShareForm />}
           </div>
         </div>
       </div>
@@ -269,7 +273,7 @@ const FooterMenuLink = ({ url, anchorText }) => {
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}
-            {shareOrSlack === 'share' && <PopupForm />}
+            {shareOrSlack === 'share' && <ShareForm />}
           </div>
         </div>
       </div>

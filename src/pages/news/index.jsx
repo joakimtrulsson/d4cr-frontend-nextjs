@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import Newscard from '../../components/NewsCard/NewsCard';
-import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
-import { GET_ALL_NEWS_QUERY } from '../../graphql/queries';
+
+import { NewsCard } from '../../components/index.js';
+
+import {
+  initializeApollo,
+  addApolloState,
+  GET_ALL_NEWS_QUERY,
+} from '../../graphql/index';
 
 export default function NewsPage({ allNews, newsCategories }) {
   const title = 'News';
@@ -76,7 +81,7 @@ export default function NewsPage({ allNews, newsCategories }) {
         ) : (
           currentItems &&
           currentItems.map((news) => (
-            <Newscard
+            <NewsCard
               key={news.id}
               imageUrl={news.image?.url}
               type={news.newsCategory.categoryTitle}

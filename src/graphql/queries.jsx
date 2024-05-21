@@ -241,7 +241,7 @@ export const CASES_ALL_DESC_QUERY = gql`
   }
 `;
 
-export const RESOURCES = gql`
+export const ALL_RESOURCES = gql`
   query Resources($orderBy: [ResourceOrderByInput!]!) {
     resources(orderBy: $orderBy) {
       id

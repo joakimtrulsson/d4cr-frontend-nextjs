@@ -1,4 +1,4 @@
-export function ensureValidUrl(url) {
+export default function ensureValidUrl(url) {
   if (/^https?:\/\//i.test(url)) {
     return url;
   } else if (url.startsWith('www.')) {

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import ArrowRight from '../../styles/assets/graphics/icons/arrow-right.svg';
 
 export default function CountryCard({ item }) {

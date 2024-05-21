@@ -1,10 +1,9 @@
 import React from 'react';
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import Image from 'next/image';
-import Link from 'next/link';
-import getColorCode from '../../utils/colorCode.js';
-import abbreviateWord from '../../utils/abbreviaWord.js';
+
+import { getColorCode, abbreviateWord } from '../../utils/index.js';
 
 export default function PeopleCard({ data }) {
   const { library, config } = require('@fortawesome/fontawesome-svg-core');

@@ -1,10 +1,12 @@
 import Image from 'next/image';
-import SectionRenderer from '../../components/SectionRenderer/SectionRenderer.jsx';
-import Resources from '../../components/Resources/Resources.jsx';
-import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
-import { GET_NEWS_ITEM_BY_SLUG_QUERY } from '../../graphql/queries.jsx';
-import NotFound from '../../components/NotFound/NotFound.jsx';
-import { markConsecutiveMediaTextSections } from '../../utils/markConsecutiveMediaTextSections.js';
+
+import { SectionRenderer, Resources, NotFound } from '../../components/index.js';
+import { markConsecutiveMediaTextSections } from '../../utils/index.js';
+import {
+  initializeApollo,
+  addApolloState,
+  GET_NEWS_ITEM_BY_SLUG_QUERY,
+} from '../../graphql/index';
 
 export default function NewsSlugPage({ newsData }) {
   if (!newsData) {

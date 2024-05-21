@@ -1,4 +1,4 @@
-export const markConsecutiveMediaTextSections = (sections) => {
+const markConsecutiveMediaTextSections = (sections) => {
   let mediaTextGroupCount = 0;
   let currentGroupStart = null;
   let tempSections = [...sections];
@@ -30,3 +30,5 @@ export const markConsecutiveMediaTextSections = (sections) => {
 
   return tempSections;
 };
+
+export default markConsecutiveMediaTextSections;

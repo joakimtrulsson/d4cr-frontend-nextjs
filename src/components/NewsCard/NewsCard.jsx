@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import getColorCode from '../../utils/colorCode';
+
 import ArrowRight from '../../styles/assets/graphics/icons/arrow-right.svg';
 import placeholder from '../../styles/assets/graphics/placeholder/dummy-image1.svg';
 
-const Newscard = ({ type, title, url, imageUrl }) => {
+const NewsCard = ({ type, title, url, imageUrl }) => {
   const { library, config } = require('@fortawesome/fontawesome-svg-core');
   library.add(fas);
 
@@ -36,4 +35,4 @@ const Newscard = ({ type, title, url, imageUrl }) => {
   );
 };
 
-export default Newscard;
+export default NewsCard;

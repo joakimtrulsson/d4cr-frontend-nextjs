@@ -1,44 +1,46 @@
-import AccordionSection from '../Accordion/Accordion.jsx';
-import BannerSection from '../Banner/Banner.jsx';
-import ChapterSection from '../ChapterTeaser/ChapterTeaser.jsx';
-import ImagesSection from '../ImagesComponent/ImagesComponent.jsx';
-import LargeBulletListSection from '../LargeBulletList/LargeBulletList.jsx';
-import MediaTextSection from '../TextMediaComponent/TextMediaComponent.jsx';
-import NewsTeaserSection from '../NewsTeaser/NewsTeaser.jsx';
-import PrinciplesSection from '../Principles/Principles.jsx';
-import PeopleSection from '../People/People.jsx';
-import WYSIWYG from '../Wysiwyg/Wysiwyg.jsx';
+import {
+  Accordion,
+  Banner,
+  ChapterTeaser,
+  ImagesComponent,
+  LargeBulletList,
+  TextMediaComponent,
+  NewsTeaser,
+  Principles,
+  People,
+  WYSIWYG,
+} from '../index.js';
 
 export default function SectionRenderer({ section, multipleTextMedia }) {
   switch (section.sectionType) {
     case 'ACCORDION':
       return (
         <section className='section flex margin-tb--xxl'>
-          <AccordionSection content={section} />
+          <Accordion content={section} />
         </section>
       );
     case 'BANNER':
       return (
         <section className='section  flex margin-tb--xxl'>
-          <BannerSection content={section} />
+          <Banner content={section} />
         </section>
       );
     case 'CHAPTERTEASER':
       return (
         <section className='section flex full-site-container-width margin-tb--xxl'>
-          <ChapterSection content={section} />
+          <ChapterTeaser content={section} />
         </section>
       );
     case 'IMAGE':
       return (
         <section className='section flex margin-tb--xxl'>
-          <ImagesSection content={section} />
+          <ImagesComponent content={section} />
         </section>
       );
     case 'BULLETLIST':
       return (
         <section className='section flex margin-tb--xxl'>
-          <LargeBulletListSection content={section} />
+          <LargeBulletList content={section} />
         </section>
       );
     case 'MEDIATEXT':
@@ -61,25 +63,25 @@ export default function SectionRenderer({ section, multipleTextMedia }) {
 
       return (
         <section className={`flex full-site-container-width ${className}`}>
-          <MediaTextSection content={section} />
+          <TextMediaComponent content={section} />
         </section>
       );
     case 'NEWSTEASER':
       return (
         <section className='section flex margin-tb--xxl'>
-          <NewsTeaserSection content={section} />
+          <NewsTeaser content={section} />
         </section>
       );
     case 'PRINCIPLES':
       return (
         <section className='section  flex margin-tb--xxl'>
-          <PrinciplesSection content={section} />
+          <Principles content={section} />
         </section>
       );
     case 'PEOPLE':
       return (
         <section className='section flex margin-tb--xxl'>
-          <PeopleSection content={section} />
+          <People content={section} />
         </section>
       );
 

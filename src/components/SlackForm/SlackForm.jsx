@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import PrimaryButton from '../PrimaryButton/PrimaryButton.jsx';
+
+import { PrimaryButton } from '../index.js';
 
 export default function SlackForm() {
   const typeForm = 'slack';

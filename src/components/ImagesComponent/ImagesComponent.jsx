@@ -27,7 +27,6 @@ export default function ImagesComponent({ content }) {
             height={imageSize}
             width={imageSize}
             objectFit='cover'
-            // layout='responsive'
           />
         </>
       ))}

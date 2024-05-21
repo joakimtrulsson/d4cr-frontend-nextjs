@@ -1,10 +1,9 @@
 import { ApolloProvider } from '@apollo/client';
-import MenuProvider from '../context/MenuProvider';
-import NavBar from '../components/NavBar/NavBar.jsx';
-import Footer from '../components/Footer/Footer.jsx';
 
-import { useApollo } from '../graphql/apolloClient.js';
-import MetaHeader from '../components/MetaHeader/MetaHeader';
+import MenuProvider from '../context/MenuProvider';
+import { NavBar, Footer, MetaHeader } from '../components/index.js';
+import { useApollo } from '../graphql/index.js';
+
 import '../styles/scss/app.scss';
 
 function MyApp({ Component, pageProps }) {

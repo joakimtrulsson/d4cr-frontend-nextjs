@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import PrimaryButton from '../PrimaryButton/PrimaryButton.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import getColorCode from '../../utils/colorCode.js';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
-import SlackForm from '../SlackForm/SlackForm.jsx';
-import PopupForm from '../ShareForm/ShareForm.jsx';
 import Link from 'next/link';
-import { ensureValidUrl } from '../../utils/modalFunctions.js';
-import CloseIcon from '../CloseIcon/CloseIcon.jsx';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
+
+import { PrimaryButton, SlackForm, ShareForm, CloseIcon } from '../index.js';
+import { getColorCode, ensureValidUrl } from '../../utils/index.js';
 
 export default function Banner({ content }) {
   const { library } = require('@fortawesome/fontawesome-svg-core');
@@ -119,7 +116,7 @@ export default function Banner({ content }) {
           </button>
           <div className='box'>
             {shareOrSlack === 'slack' && <SlackForm />}
-            {shareOrSlack === 'share' && <PopupForm />}
+            {shareOrSlack === 'share' && <ShareForm />}
           </div>
         </div>
       </div>

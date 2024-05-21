@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Mapbase from '../../styles/assets/graphics/mapbase.png';
-import CountryCard from '../CountryCard/CountryCard';
+import { CountryCard } from '../index.js';
 
 export default function ChapterTeaser({ content }) {
   const title = 'Our local chapters';

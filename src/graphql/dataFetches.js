@@ -1,4 +1,4 @@
-import client from './apolloClientFetch';
+import { client } from './index';
 import {
   MAIN_MENU_QUERY,
   FOOTER_MENU_QUERY,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import ReCAPTCHA from 'react-google-recaptcha';
+
+import { PrimaryButton } from '../index.js';
 
 export default function ShareForm() {
   const recaptcha = React.useRef(null);

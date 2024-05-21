@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import VideoPlayer from '../VideoPlayer/VideoPlayer.jsx';
-import PrimaryButton from '../PrimaryButton/PrimaryButton.jsx';
-import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
-import PopupForm from '../ShareForm/ShareForm.jsx';
-import SlackForm from '../SlackForm/SlackForm.jsx';
-import CloseIcon from '../CloseIcon/CloseIcon.jsx';
-import { ensureValidUrl } from '../../utils/modalFunctions.js';
+
+import {
+  CloseIcon,
+  VideoPlayer,
+  PrimaryButton,
+  SecondaryButton,
+  ShareForm,
+  SlackForm,
+} from '../index.js';
+
+import { ensureValidUrl } from '../../utils/index.js';
 
 const HeroFrontPage = ({ prop }) => {
   const url1 = prop.ctaOneUrl && ensureValidUrl(prop.ctaOneUrl);
@@ -100,7 +104,7 @@ const HeroFrontPage = ({ prop }) => {
                 </button>
                 <div className='box'>
                   {shareOrSlack === 'slack' && <SlackForm />}
-                  {shareOrSlack === 'share' && <PopupForm />}
+                  {shareOrSlack === 'share' && <ShareForm />}
                 </div>
               </div>
             </div>

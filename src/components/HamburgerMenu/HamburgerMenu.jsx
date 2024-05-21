@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -7,10 +9,10 @@ import {
   faChevronDown,
   faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
-import Link from 'next/link';
+
+import { SecondaryButton } from '../index.js';
+
 import Icon from '../../styles/assets/graphics/icons/d4cr-icon.png';
-import SecondaryButton from '../SecondaryButton/SecondaryButton';
 
 export default function HamburgerMenu({ groups, ctaAnchorText, ctaUrl }) {
   const router = useRouter();

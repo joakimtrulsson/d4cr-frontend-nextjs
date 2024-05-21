@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+
+import { CloseIcon } from '../index.js';
+
 import PlayBtn from '../../styles/assets/graphics/buttons/play.png';
 import PlayBg from '../../styles//assets/graphics/buttons/play-bg.png';
-import CloseIcon from '../CloseIcon/CloseIcon';
 
 const VideoPlayer = ({ video }) => {
   const [isHovered, setIsHovered] = useState(false);

@@ -1,7 +1,11 @@
 import React from 'react';
-import CaseCard from '../../components/CaseCard/CaseCard';
-import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
-import { CASES_ALL_DESC_QUERY } from '../../graphql/queries';
+
+import { CaseCard } from '../../components/index.js';
+import {
+  initializeApollo,
+  addApolloState,
+  CASES_ALL_DESC_QUERY,
+} from '../../graphql/index';
 
 export default function RenderAllCasesContent({ caseData }) {
   const title = 'Cases';

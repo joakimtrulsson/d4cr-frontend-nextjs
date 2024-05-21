@@ -1,11 +1,8 @@
 import React from 'react';
 
-import HeroFrontPage from '../components/HeroFrontPage/HeroFrontPage.jsx';
-import SectionRenderer from '../components/SectionRenderer/SectionRenderer.jsx';
-
-import { initializeApollo, addApolloState } from '../graphql/apolloClient.js';
-import { FRONT_PAGE_QUERY } from '../graphql/queries.jsx';
-import { markConsecutiveMediaTextSections } from '../utils/markConsecutiveMediaTextSections.js';
+import { HeroFrontPage, SectionRenderer } from '../components/index.js';
+import { markConsecutiveMediaTextSections } from '../utils/index.js';
+import { initializeApollo, addApolloState, FRONT_PAGE_QUERY } from '../graphql/index.js';
 
 export default function FrontPage({ pageData }) {
   let checkIfMultipleTextMediaSections;

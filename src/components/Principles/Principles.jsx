@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import PrinciplesCard from '../PrinciplesCard/PrinciplesCard.jsx';
+
+import { PrinciplesCard } from '../index.js';
 
 export default function Principles({ content }) {
   const [sortedPrinciples, setSortedPrinciples] = useState([]);

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import ResourceCard from '../ResourceCard/ResourceCard.jsx';
-import SecondaryButton from '../SecondaryButton/SecondaryButton.jsx';
+
+import { ResourceCard, SecondaryButton } from '../index';
 
 export default function Resources({ resources, title, preamble }) {
   return (

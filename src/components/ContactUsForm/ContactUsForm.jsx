@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+import { PrimaryButton } from '../index.js';
+
 import AnimationLeft from '../../styles/assets/graphics/animation.gif';
 import AnimationRight from '../../styles/assets/graphics/animation-2.gif';
-import PrimaryButton from '../PrimaryButton/PrimaryButton';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function ContactUsForm() {
   const recaptcha = React.useRef(null);

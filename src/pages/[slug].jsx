@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
-import ShareForm from '../components/ShareForm/ShareForm.jsx';
-import SlackForm from '../components/SlackForm/SlackForm.jsx';
-import CloseIcon from '../components/CloseIcon/CloseIcon.jsx';
-import SectionRender from '../components/SectionRenderer/SectionRenderer.jsx';
-import PrimaryButton from '../components/PrimaryButton/PrimaryButton.jsx';
-import SecondaryButton from '../components/SecondaryButton/SecondaryButton.jsx';
-import NotFound from '../components/NotFound/NotFound.jsx';
 
-import { initializeApollo, addApolloState } from '../graphql/apolloClient.js';
-import { GET_PAGE_BY_SLUG_QUERY } from '../graphql/queries.jsx';
-import { ensureValidUrl } from '../utils/modalFunctions.js';
-import { markConsecutiveMediaTextSections } from '../utils/markConsecutiveMediaTextSections.js';
+import {
+  CloseIcon,
+  NotFound,
+  PrimaryButton,
+  SecondaryButton,
+  ShareForm,
+  SlackForm,
+  SectionRender,
+} from '../components/index.js';
+import { ensureValidUrl, markConsecutiveMediaTextSections } from '../utils/index.js';
+import {
+  initializeApollo,
+  addApolloState,
+  GET_PAGE_BY_SLUG_QUERY,
+} from '../graphql/index.js';
 
 export default function SlugPage({ pageData }) {
   const [isClicked, setIsClicked] = useState(false);

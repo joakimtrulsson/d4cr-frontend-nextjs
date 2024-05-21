@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ResourceCard from '../../components/ResourceCard/ResourceCard.jsx';
-import DropdownMenu from '../../components/DropDown/DropDown.jsx';
-import { initializeApollo, addApolloState } from '../../graphql/apolloClient';
-import { RESOURCES } from '../../graphql/queries';
+
+import { ResourceCard, DropDown } from '../../components/index.js';
+
+import { initializeApollo, addApolloState, ALL_RESOURCES } from '../../graphql/index.js';
 
 export default function ResourcesPage({ allResources }) {
   return <RenderResourcesContent resourcesCat={allResources} />;
@@ -64,7 +64,7 @@ function RenderResourcesContent(resourcesCat) {
     <main className='site-content slug-resources-outer-container flex flex-column flex-align-center flex-justify-center'>
       <h1 className='heading-background'>Supporting resources</h1>
 
-      <DropdownMenu
+      <DropDown
         className='margin-tb--m'
         showType={showType}
         currentPage={currentPage}
@@ -134,7 +134,7 @@ export async function getServerSideProps({ resolvedUrl }) {
   const apolloClient = initializeApollo();
   try {
     const { data } = await apolloClient.query({
-      query: RESOURCES,
+      query: ALL_RESOURCES,
       variables: { orderBy: { createdAt: 'desc' } },
     });
 

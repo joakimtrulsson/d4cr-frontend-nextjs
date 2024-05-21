@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function DropdownMenu(prop) {
+export default function DropDown(prop) {
   const { showType, groupsBtn, setCurrentPage, setShowType } = prop;
 
   const [showDropdown, setShowDropdown] = useState(false);

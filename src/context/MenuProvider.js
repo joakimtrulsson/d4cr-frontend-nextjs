@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import MenuContext from './MenuContext';
-import { fetchAllMenuData } from '.././graphql/dataFetches.js';
+import { fetchAllMenuData } from '.././graphql/index.js';
 
 function MenuProvider({ children }) {
   const [allData, setAllData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      // const navbarData = await fetchMainMenuData();
       const data = await fetchAllMenuData();
 
       setAllData(data);
