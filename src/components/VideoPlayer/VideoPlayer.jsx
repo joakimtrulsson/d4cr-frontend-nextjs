@@ -52,7 +52,7 @@ const VideoPlayer = ({ video }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <video className={`video-player`} width='320' height='260' muted controls>
+        <video className={`video-player`} width='320' height='260' muted playsInline>
           <source src={videoData.url} type='video/mp4' />
           Your browser does not support the video tag.
         </video>
@@ -86,7 +86,13 @@ const VideoPlayer = ({ video }) => {
           <button onClick={exitVideo} className='btn-exit-video'>
             <CloseIcon />
           </button>
-          <video className={`video-player-popup`} width='640' height='520' controls>
+          <video
+            className={`video-player-popup`}
+            width='640'
+            height='520'
+            controls
+            playsInline
+          >
             <source src={videoData.url} type='video/mp4' />
             Your browser does not support the video tag.
           </video>

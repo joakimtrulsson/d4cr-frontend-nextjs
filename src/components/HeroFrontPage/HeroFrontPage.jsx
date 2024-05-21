@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 
@@ -116,11 +116,11 @@ const HeroFrontPage = ({ prop }) => {
           <div className='ball-3'></div>
           <div className='ball-2'></div>
 
-          {
-            prop.heroVideo && (
+          {prop.heroVideo && (
+            <Suspense fallback={<p>Loading...</p>}>
               <VideoPlayer video={prop.heroVideo} />
-            ) /* la till denna funktion så det går att deploya webbsidan */
-          }
+            </Suspense>
+          )}
         </div>
       </div>
     </main>
