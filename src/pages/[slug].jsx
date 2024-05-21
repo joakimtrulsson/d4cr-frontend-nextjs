@@ -9,7 +9,7 @@ import {
   SecondaryButton,
   ShareForm,
   SlackForm,
-  SectionRender,
+  SectionRenderer,
 } from '../components/index.js';
 import { ensureValidUrl, markConsecutiveMediaTextSections } from '../utils/index.js';
 import {
@@ -140,7 +140,7 @@ export default function SlugPage({ pageData }) {
       </div>
       {pageData?.sections &&
         pageData?.sections.map((section, index) => (
-          <SectionRender
+          <SectionRenderer
             key={index}
             section={section}
             multipleTextMedia={checkIfMultipleTextMediaSections[index]}

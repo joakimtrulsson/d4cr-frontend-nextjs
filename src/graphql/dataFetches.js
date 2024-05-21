@@ -9,7 +9,7 @@ import {
   FRONT_PAGE_QUERY,
   CASE_ITEM_BY_SLUG_QUERY,
   CASES_ALL_DESC_QUERY,
-  RESOURCES,
+  ALL_RESOURCES,
   PRINCIPLES_BY_NUMBER,
   ALL_MENU_DATA,
   GET_ALL_NEWS_QUERY,
@@ -176,7 +176,7 @@ export async function fetchGetAllCases() {
 export async function fetchResourcesCategories() {
   try {
     const { data } = await client.query({
-      query: RESOURCES,
+      query: ALL_RESOURCES,
       variables: { orderBy: { createdAt: 'desc' } },
     });
     return data?.resources || null;
