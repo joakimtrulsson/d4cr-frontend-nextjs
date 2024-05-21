@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
 
 import {
   CloseIcon,
@@ -42,7 +43,7 @@ const HeroFrontPage = ({ prop }) => {
         <div className='text-div'>
           <h1 className='title text-align-start'>{prop.heroTitle}</h1>
           <h4 className='preamble text-align-start'>
-            {prop.heroPreamble.document[0].children[0].text}
+            <DocumentRenderer document={prop.heroPreamble.document} />
           </h4>
           <div className='buttons-bottom flex flex-row'>
             {(prop.ctaTwoUrl || prop.ctaOneUrl) && (
