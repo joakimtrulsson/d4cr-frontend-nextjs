@@ -64,7 +64,7 @@ export default function TextMediaComponent({ content }) {
         className={`text-media-background-${bgColorClass} flex flex-justify-center padding-lr--xs`}
       >
         <div
-          className={`text-and-media-container flex-align-center padding-tb--l padding-lr--xl margin-tb--xxxs-negative ${bgColorClass} ${
+          className={`text-and-media-container flex-align-center padding-tb--l  margin-tb--xxxs-negative ${bgColorClass} ${
             content.imagePosition === 'LEFT' && 'flex--reverse'
           }`}
         >
