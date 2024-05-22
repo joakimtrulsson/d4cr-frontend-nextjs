@@ -99,6 +99,9 @@ const VideoPlayer = ({ video }) => {
             height='520'
             controls
             playsInline
+            muted
+            preload='metadata'
+            autoPlay={true}
           >
             <source src={videoData.url} type='video/mp4' />
             Your browser does not support the video tag.
