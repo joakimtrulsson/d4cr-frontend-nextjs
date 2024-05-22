@@ -17,7 +17,7 @@ const PrinciplesDropDown = ({ principleNumber, resolvedUrl }) => {
           ? 'Select Principle'
           : `Principle ${currentPrinciple?.number} - ${abbreviateWord(
               currentPrinciple?.principles.title,
-              24
+              23
             )}`}
         <svg
           className='dropClick'
@@ -51,7 +51,7 @@ c
               >
                 {`Principle ${numbers.number} - ${abbreviateWord(
                   numbers?.principles.title,
-                  25
+                  23
                 )}`}
               </p>
             );
