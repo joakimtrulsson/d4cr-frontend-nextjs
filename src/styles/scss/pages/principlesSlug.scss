@@ -168,6 +168,7 @@
 
   .navbar-principle-links {
     width: 100%;
+    box-sizing: border-box;
     position: -webkit-sticky;
     /* For Safari */
     position: sticky;
