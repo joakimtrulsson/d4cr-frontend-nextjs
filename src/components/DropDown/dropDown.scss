@@ -27,10 +27,12 @@
 
   /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
+    margin-top: 2px;
     padding-top: 6px;
     position: absolute;
     background-color: $-yellow-300;
-    min-width: 400px;
+    // min-width: 400px;
+    width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 

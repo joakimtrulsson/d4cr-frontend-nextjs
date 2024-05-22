@@ -1,0 +1,7 @@
+.principles-dropdown {
+  height: 3rem;
+
+  @media (min-width: 811px) {
+    display: none;
+  }
+}
