@@ -22,9 +22,19 @@ export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted
 
         <link rel='canonical' href={fullUrl} />
 
-        <link rel='icon' href={Icon} type='image/png' sizes='any' />
+        <link
+          rel='icon'
+          href='../../styles/assets/graphics/icon.png'
+          type='image/png'
+          sizes='any'
+        />
 
-        <link rel='apple-touch-icon' href={appleicon} type='image/png' sizes='any' />
+        <link
+          rel='apple-touch-icon'
+          href="'../../styles/assets/graphics/apple-icon.png'"
+          type='image/png'
+          sizes='any'
+        />
 
         <meta name='description' content={metaData.description} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
