@@ -1337,14 +1337,15 @@ ol {
   cursor: pointer;
   border: none;
   white-space: nowrap;
-  clip-path: polygon(
-    calc(0% + 10px) 0,
-    calc(100% - 10px) 0,
-    100% 50%,
-    calc(100% - 10px) 100%,
-    calc(0% + 10px) 100%,
-    0% 50%
-  );
+  // clip-path: polygon(
+  //   calc(0% + 10px) 0,
+  //   calc(100% - 10px) 0,
+  //   100% 50%,
+  //   calc(100% - 10px) 100%,
+  //   calc(0% + 10px) 100%,
+  //   0% 50%
+  // );
+  border-radius: 99px;
   transition: scale 200ms ease-in-out;
 
   /* font style*/
@@ -1366,7 +1367,7 @@ ol {
 
   img {
     height: 55px;
-    display: block;
+    display: none;
     margin: 0;
   }
 
@@ -1378,12 +1379,14 @@ ol {
     cursor: pointer;
     padding: 18px 20px 17px;
     background-color: transparent;
-    border-top: 2px solid $-orange-200;
-    border-bottom: 2px solid $-orange-200;
-    border-left: none;
-    border-right: none;
-    margin-left: -2px;
-    margin-right: -2px;
+    border: 2px solid $-orange-200;
+    border-radius: 99px;
+    // border-top: 2px solid $-orange-200;
+    // border-bottom: 2px solid $-orange-200;
+    // border-left: none;
+    // border-right: none;
+    // margin-left: -2px;
+    // margin-right: -2px;
 
     /* font style*/
     white-space: nowrap;
