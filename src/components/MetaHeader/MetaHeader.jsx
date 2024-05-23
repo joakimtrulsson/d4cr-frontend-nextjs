@@ -2,6 +2,10 @@ import Head from 'next/head';
 import Script from 'next/script';
 import Icon from '../../styles/assets/graphics/d4cr-icon-OG.png';
 import metaData from './metaData';
+import favicon from '../../styles/assets/graphics/icon.png';
+import appleicon from '../../styles/assets/graphics/apple-icon.png';
+
+<link rel='icon' href={favicon} type='image/png' sizes='any' />;
 
 export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted }) {
   const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${resolvedUrl}`;
@@ -20,14 +24,14 @@ export default function MetaHeader({ tabTitle, resolvedUrl, language, isAccepted
 
         <link
           rel='icon'
-          href='../styles/graphics/assets/icon.png'
+          href='../../styles/assets/graphics/icon.png'
           type='image/png'
           sizes='any'
         />
 
         <link
           rel='apple-touch-icon'
-          href='../styles/graphics/assets/apple-icon.png'
+          href="'../../styles/assets/graphics/apple-icon.png'"
           type='image/png'
           sizes='any'
         />

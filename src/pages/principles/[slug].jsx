@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 
 import {
@@ -6,8 +6,6 @@ import {
   BottomWave,
   Resources,
   NotFound,
-  ArrowLeftSvg,
-  ArrowRightSvg,
   QuoteMarksSvg,
   ButtonDown,
   PrinciplesNavigation,
@@ -24,8 +22,9 @@ import AnimationLeft from '../../styles/assets/graphics/buttons/left-gif-turqoui
 import AnimationRight from '../../styles/assets/graphics/buttons/right-gif-turqouise.gif';
 
 export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
-  const [logoSrc, setLogoSrc] = useState(ButtonDown);
+  const largeBulletListRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+
   const principleExists = principleNumber.some(
     (principle) => principle.principles.slug === resolvedUrl
   );
@@ -95,47 +94,6 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
           previousSlug={previousSlug}
           nextSlug={nextSlug}
         />
-        {/* 
-        {previousSlug ? (
-          <a href={`./${previousSlug}`} className='links image-arrows'>
-            <ArrowLeftSvg width='20' height='18' color={getColorCode('grey-900')} />
-            <p>Previous</p>
-          </a>
-        ) : (
-          <div className='links image-arrows'>
-            <ArrowLeftSvg width='20' height='18' color={getColorCode('grey-200')} />
-            <p className='link-no-previous'>Previous</p>
-          </div>
-        )}
-
-        {principleNumber.map((numbers) => {
-          const isActive = resolvedUrl === numbers.principles.slug;
-          return (
-            <div key={numbers.principles.id}>
-              <a
-                href={!isActive ? `.${numbers.principles.slug}` : null}
-                className={`links`}
-              >
-                <h2 className={`numbers ${isActive ? 'active-link' : ''}`}>
-                  {numbers.number}
-                </h2>
-              </a>
-            </div>
-          );
-        })}
-
-        {nextSlug ? (
-          <a href={`./${nextSlug}`} className='links image-arrows'>
-            <p>Next</p>
-
-            <ArrowRightSvg width='20' height='18' color={getColorCode('grey-900')} />
-          </a>
-        ) : (
-          <div className='links image-arrows'>
-            <p className='link-no-previous'>Next</p>
-            <ArrowRightSvg width='20' height='18' color={getColorCode('grey-200')} />
-          </div>
-        )} */}
       </div>
       <div>
         <div className='bg-turquoise-50 margin-tb--xxxs-negative main-container'>
@@ -198,24 +156,27 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
             />
           </a>
         </div>
+        <div id='target-section'></div>
         <BottomWave
           fillColorCode={getColorCode('turquoise-50')}
           className='bottom-wave'
         />
       </div>
 
-      {/* <div id='target-section' className='bullet-div'> */}
-      <LargeBulletList className='subprinciples' content={contentForLargeBulletList} />
-      {/* </div> */}
-      <div className='principles-resources'>
-        {resources ? (
-          <Resources
-            resources={resources}
-            title={principleNumber[currentIndex].principles.resourcesTitle}
-            preamble={principleNumber[currentIndex].principles.resourcesPreamble}
-          />
-        ) : null}
-      </div>
+      <LargeBulletList
+        ref={largeBulletListRef}
+        id='target-section'
+        className='subprinciples'
+        content={contentForLargeBulletList}
+      />
+
+      {resources ? (
+        <Resources
+          resources={resources}
+          title={principleNumber[currentIndex].principles.resourcesTitle}
+          preamble={principleNumber[currentIndex].principles.resourcesPreamble}
+        />
+      ) : null}
     </main>
   );
 }
@@ -240,63 +201,3 @@ export async function getServerSideProps({ params }) {
     return { props: { principleNumbers: null } };
   }
 }
-
-// const PrinciplesDropDown = ({ principleNumber, resolvedUrl, previousSlug, nextSlug }) => {
-//   const [showDropdown, setShowDropdown] = useState(false);
-//   const toggleDropdown = () => setShowDropdown(!showDropdown);
-
-//   const handleChange = (event) => {
-//     const url = event.target.value;
-
-//     if (url) {
-//       window.location.href = url;
-//     }
-//   };
-
-//   const currentPrinciple = principleNumber.find(
-//     (numbers) => numbers.principles.slug === resolvedUrl
-//   );
-
-//   return (
-//     <div className='dropdown '>
-//       <button onClick={toggleDropdown} className='dropbtn dropClick'>
-//         {showDropdown ? 'Select Principle' : `Principle ${currentPrinciple?.number}`}
-//         <svg
-//           className='dropClick'
-//           width='12'
-//           height='12'
-//           xmlns='http://www.w3.org/2000/svg'
-//           viewBox='0 0 512 512'
-//           fill='#2D2D2D'
-//         >
-//           <path
-//             className='dropClick'
-//             d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-
-// c
-
-// 12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'
-//           />
-//         </svg>
-//       </button>
-
-//       {showDropdown && (
-//         <div className='dropdown-content'>
-//           {principleNumber.map((numbers) => {
-//             const isActive = resolvedUrl === numbers.principles.slug;
-//             return (
-//               <p
-//                 key={numbers.principles.id}
-//                 onClick={() =>
-//                   !isActive && (window.location.href = `.${numbers.principles.slug}`)
-//                 }
-//               >
-//                 {`Principle ${numbers.number}`}
-//               </p>
-//             );
-//           })}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-const PrinciplesDropDown = ({ principleNumber, resolvedUrl, previousSlug, nextSlug }) => {
+import { abbreviateWord } from '../../utils';
+
+const PrinciplesDropDown = ({ principleNumber, resolvedUrl }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
@@ -11,7 +13,12 @@ const PrinciplesDropDown = ({ principleNumber, resolvedUrl, previousSlug, nextSl
   return (
     <div className='dropdown principles-dropdown'>
       <button onClick={toggleDropdown} className='dropbtn dropClick'>
-        {showDropdown ? 'Select Principle' : `Principle ${currentPrinciple?.number}`}
+        {showDropdown
+          ? 'Select Principle'
+          : `Principle ${currentPrinciple?.number} - ${abbreviateWord(
+              currentPrinciple?.principles.title,
+              23
+            )}`}
         <svg
           className='dropClick'
           width='12'
@@ -42,7 +49,10 @@ c
                   !isActive && (window.location.href = `.${numbers.principles.slug}`)
                 }
               >
-                {`Principle ${numbers.number}`}
+                {`Principle ${numbers.number} - ${abbreviateWord(
+                  numbers?.principles.title,
+                  23
+                )}`}
               </p>
             );
           })}

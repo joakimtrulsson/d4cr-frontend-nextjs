@@ -44,6 +44,12 @@ const VideoPlayer = ({ video }) => {
   }
   const videoData = video;
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    setIsSmallScreen(window.innerWidth < 500);
+  }, []);
+
   return (
     <main className='main'>
       <div
@@ -52,17 +58,31 @@ const VideoPlayer = ({ video }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <video
-          className={`video-player`}
-          width='320'
-          height='260'
-          muted
-          preload='metadata'
-          autoPlay={true}
-        >
-          <source src={videoData.url} type='video/mp4' />
-          Your browser does not support the video tag.
-        </video>
+        {isSmallScreen ? (
+          <video
+            className={`video-player`}
+            width='320'
+            height='260'
+            muted
+            preload='metadata'
+            autoPlay={true}
+          >
+            <source src={videoData.url} type='video/mp4' />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <video
+            className={`video-player`}
+            width='320'
+            height='260'
+            muted
+            preload='metadata'
+          >
+            <source src={videoData.url} type='video/mp4' />
+            Your browser does not support the video tag.
+          </video>
+        )}
+
         <button className='custom-play-button'>
           <Image
             className='play-btn'

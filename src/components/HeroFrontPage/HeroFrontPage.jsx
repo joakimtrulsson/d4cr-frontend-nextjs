@@ -41,8 +41,8 @@ const HeroFrontPage = ({ prop }) => {
     <main>
       <div className='hero-container'>
         <div className='text-div'>
-          <h1 className='title text-align-start'>{prop.heroTitle}</h1>
-          <h4 className='preamble text-align-start'>
+          <h1 className='title'>{prop.heroTitle}</h1>
+          <h4 className='preamble'>
             <DocumentRenderer document={prop.heroPreamble.document} />
           </h4>
           <div className='buttons-bottom flex flex-row'>
