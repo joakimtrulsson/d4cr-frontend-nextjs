@@ -102,7 +102,7 @@
 
       .title {
         font-size: 56px;
-        text-align: flex-start;
+        text-align: left;
         font-weight: 700;
         margin-bottom: 10px;
         margin-top: 0;
@@ -111,7 +111,7 @@
       .preamble {
         font-weight: normal;
         font-size: medium;
-        text-align: flex-start;
+        text-align: left;
         margin-bottom: 50px;
         color: $-grey-700;
         margin-left: 0;
@@ -156,6 +156,19 @@
         border-radius: 50%;
         opacity: 90%;
         mix-blend-mode: darken;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    .text-div {
+      .title {
+        text-align: center;
+      }
+      .preamble {
+        text-align: center;
       }
     }
   }
