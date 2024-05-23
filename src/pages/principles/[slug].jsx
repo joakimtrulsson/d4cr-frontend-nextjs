@@ -92,6 +92,8 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
         <PrinciplesNavigation
           principleNumber={principleNumber}
           resolvedUrl={resolvedUrl}
+          previousSlug={previousSlug}
+          nextSlug={nextSlug}
         />
         {/* 
         {previousSlug ? (

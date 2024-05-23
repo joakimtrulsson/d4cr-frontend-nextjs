@@ -13,12 +13,12 @@
       line-height: 64px;
       font-weight: 700;
       margin-bottom: 15px;
-      text-align: center;
+      text-align: left;
     }
 
     .preamble {
       font-size: medium;
-      text-align: center;
+      text-align: left;
       line-height: 32px;
       margin-bottom: 50px;
       color: $-grey-700;
@@ -102,7 +102,7 @@
 
       .title {
         font-size: 56px;
-        text-align: flex-start;
+        text-align: left;
         font-weight: 700;
         margin-bottom: 10px;
         margin-top: 0;
@@ -161,11 +161,25 @@
   }
 }
 
+@media (max-width: 768px) {
+  .hero-container {
+    .text-div {
+      .title {
+        text-align: center;
+      }
+      .preamble {
+        text-align: center;
+      }
+    }
+  }
+}
+
 @media (max-width: $display-sm) {
   .hero-container {
     .text-div {
       .title {
         line-height: 42px;
+        text-align: center;
         margin-bottom: 0rem;
         margin-left: 1rem;
         margin-right: 1rem;
@@ -173,6 +187,7 @@
 
       .preamble {
         line-height: 24px;
+        text-align: center;
         margin-bottom: 2rem;
       }
     }
