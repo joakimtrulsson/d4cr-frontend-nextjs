@@ -39,7 +39,6 @@
       line-height: 2rem;
       letter-spacing: 0.36px;
       font-weight: 400;
-      // margin-bottom: 2.5rem;
     }
 
     a {
@@ -52,6 +51,7 @@
   }
 
   .media-content {
+    flex: 0 0 40%;
     width: 100%;
     overflow: hidden;
     position: relative;
