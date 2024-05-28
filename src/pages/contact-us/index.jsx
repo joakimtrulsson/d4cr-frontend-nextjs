@@ -9,7 +9,7 @@ export default function ContactUs() {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   return {
     props: {
       tabTitle: 'Contact us',

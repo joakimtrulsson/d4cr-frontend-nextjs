@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 import { ResourceCard, DropDown } from '../../components/index.js';
-
-import { initializeApollo, addApolloState, ALL_RESOURCES } from '../../graphql/index.js';
+import { ALL_RESOURCES, initializeApollo } from '../../graphql/index.js';
 
 export default function ResourcesPage({ allResources }) {
   return <RenderResourcesContent resourcesCat={allResources} />;
@@ -12,7 +11,6 @@ function RenderResourcesContent(resourcesCat) {
   const [showType, setShowType] = useState('All areas');
   const [currentPage, setCurrentPage] = useState(1);
 
-  //dela upp hela resources array till sina typer
   const groupedByType = resourcesCat.resourcesCat.reduce((acc, resource) => {
     const type = resource.resourceType.type;
 
@@ -130,7 +128,7 @@ function RenderResourcesContent(resourcesCat) {
   );
 }
 
-export async function getServerSideProps({ resolvedUrl }) {
+export async function getStaticProps() {
   const apolloClient = initializeApollo();
   try {
     const { data } = await apolloClient.query({
@@ -138,9 +136,10 @@ export async function getServerSideProps({ resolvedUrl }) {
       variables: { orderBy: { createdAt: 'desc' } },
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: { allResources: data.resources, tabTitle: 'Supporting resources' },
-    });
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
   } catch (error) {
     console.error('Error fetching data:', error);
     return { props: { error: error.message } };

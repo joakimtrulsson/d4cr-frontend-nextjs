@@ -4,9 +4,9 @@ import { SectionRenderer, Resources, NotFound } from '../../components/index.js'
 import { markConsecutiveMediaTextSections } from '../../utils/index.js';
 
 import {
-  initializeApollo,
-  addApolloState,
   CASE_ITEM_BY_SLUG_QUERY,
+  GET_ALL_CASES_SLUG,
+  initializeApollo,
 } from '../../graphql/index';
 
 export default function CasesPage({ pageData }) {
@@ -53,9 +53,10 @@ export default function CasesPage({ pageData }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const apolloClient = initializeApollo();
   const resolvedUrl = `/cases/${params.slug}`;
+
   try {
     const { data } = await apolloClient.query({
       query: CASE_ITEM_BY_SLUG_QUERY,
@@ -68,7 +69,7 @@ export async function getServerSideProps({ params }) {
       },
     });
 
-    if (!data.cases.length > 0) {
+    if (!data.cases) {
       return {
         props: {
           tabTitle: 'Page not found',
@@ -76,12 +77,36 @@ export async function getServerSideProps({ params }) {
       };
     }
 
-    return addApolloState(apolloClient, {
+    return {
       props: {
         pageData: data.cases[0] || [],
         tabTitle: data.cases[0].title,
       },
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
+  } catch (error) {
+    console.error('(cases/[slug].jsx) Error fetching data:', error);
+    return null;
+  }
+}
+
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo();
+  try {
+    const { data } = await apolloClient.query({
+      query: GET_ALL_CASES_SLUG,
     });
+
+    const paths = data.cases
+      .filter((page) => page.url.startsWith('/cases/') && page.linkType === 'internal')
+      .map((page) => ({
+        params: { slug: page.url },
+      }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
   } catch (error) {
     console.error('(cases/[slug].jsx) Error fetching data:', error);
     return null;

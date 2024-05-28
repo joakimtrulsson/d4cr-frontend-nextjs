@@ -9,9 +9,6 @@ const PrinciplesNavigation = ({
   principleNumber,
   resolvedUrl,
 }) => {
-  console.log('principleNumber', principleNumber);
-  console.log('previousSlug', previousSlug);
-  console.log('nextSlug', nextSlug);
   return (
     <>
       {previousSlug ? (

@@ -13,7 +13,7 @@ import {
 } from '../../components/index.js';
 import {
   initializeApollo,
-  addApolloState,
+  GET_ALL_PRINCIPLES_SLUG,
   PRINCIPLES_BY_NUMBER,
 } from '../../graphql/index.js';
 import { getColorCode } from '../../utils/index.js';
@@ -181,23 +181,49 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const apolloClient = initializeApollo();
   const resolvedUrl = `/${params.slug}`;
+
   try {
     const { data } = await apolloClient.query({
       query: PRINCIPLES_BY_NUMBER,
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: {
         principleNumber: data.principleNumbers || null,
         resolvedUrl,
         tabTitle: 'Principles',
       },
-    });
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
   } catch (error) {
-    console.error('Error fetching data:', error);
-    return { props: { principleNumbers: null } };
+    console.error('([slug].jsx) Error fetching data:', error);
+    return { props: { error: error.message } };
+  }
+}
+
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo();
+  try {
+    const { data } = await apolloClient.query({
+      query: GET_ALL_PRINCIPLES_SLUG,
+    });
+
+    const paths = data.principles
+      // .filter((page) => page.slug.startsWith('/principles/'))
+      .map((page) => ({
+        // params: { slug: page.slug.replace('/cases/', '') },
+        params: { slug: page.slug },
+      }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
+  } catch (error) {
+    console.error('(principles/[slug].jsx) Error fetching data:', error);
+    return null;
   }
 }

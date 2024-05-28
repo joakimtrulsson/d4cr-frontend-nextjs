@@ -13,9 +13,9 @@ import {
 } from '../components/index.js';
 import { ensureValidUrl, markConsecutiveMediaTextSections } from '../utils/index.js';
 import {
-  initializeApollo,
-  addApolloState,
   GET_PAGE_BY_SLUG_QUERY,
+  GET_ALL_PAGES_SLUG,
+  initializeApollo,
 } from '../graphql/index.js';
 
 export default function SlugPage({ pageData }) {
@@ -150,24 +150,39 @@ export default function SlugPage({ pageData }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
-  const resolvedUrl = `/${params.slug}`;
+export async function getStaticProps({ params }) {
   const apolloClient = initializeApollo();
+  const resolvedUrl = `/${params.slug}`;
 
   try {
-    const { data, error } = await apolloClient.query({
+    const { data } = await apolloClient.query({
       query: GET_PAGE_BY_SLUG_QUERY,
       variables: { where: { slug: resolvedUrl } },
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: {
         pageData: data.page,
         tabTitle: data.page?.title || 'Page not found',
       },
-    });
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
   } catch (error) {
     console.error('([slug].jsx) Error fetching data:', error);
     return { props: { error: error.message } };
   }
+}
+
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo();
+
+  const { data } = await apolloClient.query({
+    query: GET_ALL_PAGES_SLUG,
+  });
+
+  const paths = data.pages.map((page) => ({
+    params: { slug: page.slug },
+  }));
+
+  return { paths, fallback: 'blocking' };
 }

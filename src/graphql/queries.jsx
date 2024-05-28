@@ -417,3 +417,43 @@ export const GET_PEOPLE_BY_IDS = gql`
     }
   }
 `;
+
+export const GET_ALL_PAGES_SLUG = gql`
+  query Pages {
+    pages {
+      slug
+    }
+  }
+`;
+
+export const GET_ALL_CASES_SLUG = gql`
+  query Cases {
+    cases {
+      url
+    }
+  }
+`;
+
+export const GET_ALL_CHAPTERS_SLUG = gql`
+  query Chapters {
+    chapters {
+      slug
+    }
+  }
+`;
+
+export const GET_ALL_NEWS_SLUG = gql`
+  query NewsItems {
+    newsItems {
+      slug
+    }
+  }
+`;
+
+export const GET_ALL_PRINCIPLES_SLUG = gql`
+  query Principles {
+    principles {
+      slug
+    }
+  }
+`;

@@ -4,15 +4,14 @@ import { SectionRenderer, Resources, NotFound } from '../../components/index.js'
 import { markConsecutiveMediaTextSections } from '../../utils/index.js';
 import {
   initializeApollo,
-  addApolloState,
   GET_NEWS_ITEM_BY_SLUG_QUERY,
+  GET_ALL_NEWS_SLUG,
 } from '../../graphql/index';
 
 export default function NewsSlugPage({ newsData }) {
   if (!newsData) {
     return <NotFound />;
   }
-
   const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
     newsData.sections
   );
@@ -65,7 +64,7 @@ export default function NewsSlugPage({ newsData }) {
   );
 }
 
-export async function getServerSideProps({ req, params }) {
+export async function getStaticProps({ params }) {
   const apolloClient = initializeApollo();
   const resolvedUrl = `/news/${params.slug}`;
 
@@ -75,12 +74,45 @@ export async function getServerSideProps({ req, params }) {
       variables: { where: { slug: resolvedUrl } },
     });
 
-    return addApolloState(apolloClient, {
+    if (!data.news) {
+      return {
+        props: {
+          tabTitle: 'Page not found',
+        },
+      };
+    }
+
+    return {
       props: {
         newsData: data.news || null,
         tabTitle: data.news?.title || null,
       },
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
+  } catch (error) {
+    console.error('(news/[slug].jsx) StaticProps Error fetching data:', error);
+    return null;
+  }
+}
+
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo();
+  try {
+    const { data } = await apolloClient.query({
+      query: GET_ALL_NEWS_SLUG,
     });
+
+    const paths = data.newsItems
+      // .filter((page) => page.slug.startsWith('/news/'))
+      .map((page) => ({
+        // params: { slug: page.slug.replace('/news/', '') },
+        params: { slug: page.slug },
+      }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
   } catch (error) {
     console.error('(news/[slug].jsx) Error fetching data:', error);
     return null;

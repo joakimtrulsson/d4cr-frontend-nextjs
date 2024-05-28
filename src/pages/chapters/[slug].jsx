@@ -5,9 +5,9 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 import { SectionRenderer, NotFound } from '../../components/index.js';
 import { markConsecutiveMediaTextSections, getLanguageName } from '../../utils/index.js';
 import {
-  initializeApollo,
-  addApolloState,
   CHAPTER_SLUG_QUERY,
+  GET_ALL_CHAPTERS_SLUG,
+  initializeApollo,
 } from '../../graphql/index.js';
 
 import AnimationRight from '../../styles/assets/graphics/animation.gif';
@@ -110,7 +110,7 @@ export default function ChapterSlugPage({ chapterData }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const apolloClient = initializeApollo();
   const resolvedUrl = `/chapters/${params.slug}`;
 
@@ -120,12 +120,34 @@ export async function getServerSideProps({ params }) {
       variables: { slug: resolvedUrl },
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: {
         chapterData: data.chapters[0] || null,
         tabTitle: data.chapters[0]?.title || 'Page not found',
       },
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
+  } catch (error) {
+    console.error('(chapters/[slug].jsx) Error fetching data:', error);
+    return null;
+  }
+}
+
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo();
+  try {
+    const { data } = await apolloClient.query({
+      query: GET_ALL_CHAPTERS_SLUG,
     });
+
+    const paths = data.chapters.map((page) => ({
+      params: { slug: page.slug },
+    }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
   } catch (error) {
     console.error('(chapters/[slug].jsx) Error fetching data:', error);
     return null;

@@ -1,5 +1,8 @@
+// Den här filen måste refaktoreras!
+
 import { initializeApollo, addApolloState, useApollo } from './apolloClient';
 import client from './apolloClientFetch';
+import createApolloClient from './createApolloClient';
 
 import {
   fetchMainMenuData,
@@ -31,9 +34,15 @@ import {
   ALL_RESOURCES,
   GET_PAGE_BY_SLUG_QUERY,
   FRONT_PAGE_QUERY,
+  GET_ALL_PAGES_SLUG,
+  GET_ALL_CASES_SLUG,
+  GET_ALL_CHAPTERS_SLUG,
+  GET_ALL_NEWS_SLUG,
+  GET_ALL_PRINCIPLES_SLUG,
 } from './queries';
 
 export {
+  createApolloClient,
   initializeApollo,
   addApolloState,
   useApollo,
@@ -64,4 +73,9 @@ export {
   ALL_RESOURCES,
   GET_PAGE_BY_SLUG_QUERY,
   FRONT_PAGE_QUERY,
+  GET_ALL_PAGES_SLUG,
+  GET_ALL_CASES_SLUG,
+  GET_ALL_CHAPTERS_SLUG,
+  GET_ALL_NEWS_SLUG,
+  GET_ALL_PRINCIPLES_SLUG,
 };

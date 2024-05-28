@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 
 import { NewsCard } from '../../components/index.js';
-
-import {
-  initializeApollo,
-  addApolloState,
-  GET_ALL_NEWS_QUERY,
-} from '../../graphql/index';
+import { initializeApollo, GET_ALL_NEWS_QUERY } from '../../graphql/index';
 
 export default function NewsPage({ allNews, newsCategories }) {
   const title = 'News';
@@ -140,7 +135,7 @@ export default function NewsPage({ allNews, newsCategories }) {
   );
 }
 
-export async function getServerSideProps({ resolvedUrl }) {
+export async function getStaticProps() {
   const apolloClient = initializeApollo();
   try {
     const { data } = await apolloClient.query({
@@ -148,15 +143,16 @@ export async function getServerSideProps({ resolvedUrl }) {
       variables: { orderBy: { createdAt: 'desc' } },
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: {
         allNews: data.newsItems,
         newsCategories: data.newsCategories,
         tabTitle: 'News',
       },
-    });
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('([index].jsx) Error fetching data:', error);
     return { props: { error: error.message } };
   }
 }

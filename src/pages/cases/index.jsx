@@ -1,11 +1,7 @@
 import React from 'react';
 
 import { CaseCard } from '../../components/index.js';
-import {
-  initializeApollo,
-  addApolloState,
-  CASES_ALL_DESC_QUERY,
-} from '../../graphql/index';
+import { CASES_ALL_DESC_QUERY, initializeApollo } from '../../graphql/index';
 
 export default function RenderAllCasesContent({ caseData }) {
   const title = 'Cases';
@@ -33,16 +29,17 @@ export default function RenderAllCasesContent({ caseData }) {
   );
 }
 
-export async function getServerSideProps({ resolvedUrl }) {
+export async function getStaticProps() {
   const apolloClient = initializeApollo();
   try {
     const { data } = await apolloClient.query({
       query: CASES_ALL_DESC_QUERY,
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: { caseData: data.cases, tabTitle: 'Cases' },
-    });
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
   } catch (error) {
     console.error('([slug].jsx) Error fetching data:', error);
     return { props: { error: error.message } };

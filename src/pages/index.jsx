@@ -2,7 +2,7 @@ import React from 'react';
 
 import { HeroFrontPage, SectionRenderer } from '../components/index.js';
 import { markConsecutiveMediaTextSections } from '../utils/index.js';
-import { initializeApollo, addApolloState, FRONT_PAGE_QUERY } from '../graphql/index.js';
+import { FRONT_PAGE_QUERY, initializeApollo } from '../graphql/index.js';
 
 export default function FrontPage({ pageData }) {
   let checkIfMultipleTextMediaSections;
@@ -28,18 +28,20 @@ export default function FrontPage({ pageData }) {
   );
 }
 
-export async function getServerSideProps({ resolvedUrl }) {
-  const apolloClient = initializeApollo();
+export async function getStaticProps() {
   try {
+    const apolloClient = initializeApollo();
+
     const { data } = await apolloClient.query({
       query: FRONT_PAGE_QUERY,
     });
 
-    return addApolloState(apolloClient, {
+    return {
       props: {
         pageData: data.frontPage,
       },
-    });
+      revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
+    };
   } catch (error) {
     console.error('(index.jsx) Error fetching data:', error);
     return { notFound: true };
