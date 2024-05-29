@@ -1,0 +1,46 @@
+.youtube-video-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+
+  .youtube-video-preview {
+    position: relative;
+
+    .custom-play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      cursor: pointer;
+
+      .play-btn {
+        position: absolute;
+        top: -40px;
+        left: -40px;
+        z-index: 6;
+      }
+
+      .play-bg {
+        position: absolute;
+        top: -40px;
+        left: -40px;
+        z-index: 5;
+      }
+    }
+  }
+  &.hovered {
+    animation: jelly-back 0.6s ease-in-out forwards;
+
+    .custom-play-button {
+      animation: jelly-btn-back 0.6s ease-in-out forwards;
+    }
+
+    &:hover,
+    &:focus {
+      animation: jelly-hover 0.6s ease-in-out forwards;
+
+      .custom-play-button {
+        animation: jelly-btn-hover 0.6s ease-in-out forwards;
+      }
+    }
+  }
+}
