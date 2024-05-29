@@ -6,6 +6,7 @@ export default function YoutubeVideo({ url, altText = 'Embedded YouTube video' }
   return (
     <iframe
       className='youtube-video-iframe'
+      loading='lazy'
       style={{
         left: 0,
         top: 0,
