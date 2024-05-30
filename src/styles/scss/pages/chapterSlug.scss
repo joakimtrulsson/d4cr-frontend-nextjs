@@ -9,6 +9,12 @@
     align-items: center;
     position: relative;
 
+    .language-tabs {
+      @media (max-width: 575px) {
+        margin-bottom: -1rem;
+      }
+    }
+
     .animation-background-left {
       position: absolute;
       left: -30%;
