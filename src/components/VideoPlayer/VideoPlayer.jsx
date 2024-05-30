@@ -47,6 +47,7 @@ const VideoPlayer = ({ video }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
+    console.log(window.innerWidth);
     setIsSmallScreen(window.innerWidth < 500);
   }, []);
 
@@ -65,9 +66,10 @@ const VideoPlayer = ({ video }) => {
             height='260'
             muted
             preload='metadata'
-            autoPlay={true}
+            // autoPlay={true}
+            playsInline
           >
-            <source src={videoData.url} type='video/mp4' />
+            <source src={`${videoData.url}#t=0.001`} type='video/mp4' />
             Your browser does not support the video tag.
           </video>
         ) : (
@@ -78,7 +80,7 @@ const VideoPlayer = ({ video }) => {
             muted
             preload='metadata'
           >
-            <source src={videoData.url} type='video/mp4' />
+            <source src={`${videoData.url}#t=0.001`} type='video/mp4' />
             Your browser does not support the video tag.
           </video>
         )}
@@ -121,7 +123,7 @@ const VideoPlayer = ({ video }) => {
             playsInline
             muted
             preload='metadata'
-            autoPlay={true}
+            // autoPlay={true}
           >
             <source src={videoData.url} type='video/mp4' />
             Your browser does not support the video tag.
