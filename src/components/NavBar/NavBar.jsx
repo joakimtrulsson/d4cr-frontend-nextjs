@@ -57,7 +57,7 @@ export default function NavBar() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setActiveDropdownIndex(null); // Close the menu
+        setActiveDropdownIndex(null);
       }
     }
 

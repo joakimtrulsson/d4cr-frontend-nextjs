@@ -88,7 +88,9 @@ export default function ChapterSlugPage({ chapterData }) {
         </p>
 
         {chapterData.title && (
-          <h1 className='heading-background margin-t--zero'>{chapterData.title}</h1>
+          <h1 className='heading-background margin-t--zero'>
+            {chapterData.title.replace(/-\w{2,3}$/, '')}
+          </h1>
         )}
 
         <div className='max-width-45 text-align-center'>
