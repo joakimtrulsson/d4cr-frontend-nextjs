@@ -56,6 +56,12 @@
       @media (max-width: 575px) {
         max-height: 12rem;
       }
+
+      .chapter-hero-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
     }
 
     .chapter-subheader {

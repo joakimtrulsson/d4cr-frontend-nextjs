@@ -68,16 +68,16 @@ export default function ChapterSlugPage({ chapterData }) {
           <Image src={AnimationLeft} alt='Animated GIF' />
         </div>
         {chapterData.heroImage.url && (
-          <>
+          <div className='hero-image-medium margin-t--s borderradius--xxxs'>
             <Image
-              className='hero-image-medium borderradius--xxxs'
+              className='chapter-hero-image borderradius--xxxs'
               src={chapterData.heroImage.url}
               alt={chapterData.heroImage.alt}
               width='928'
               height='320'
               objectFit='cover'
             />
-          </>
+          </div>
         )}
         <div className='animation-background-right'>
           <Image src={AnimationRight} alt='Animated GIF' />
