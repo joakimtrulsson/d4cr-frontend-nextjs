@@ -123,7 +123,7 @@ const VideoPlayer = ({ video }) => {
             playsInline
             muted
             preload='metadata'
-            // autoPlay={true}
+            autoPlay={true}
           >
             <source src={videoData.url} type='video/mp4' />
             Your browser does not support the video tag.
