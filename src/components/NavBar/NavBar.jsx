@@ -9,15 +9,13 @@ import {
   SecondaryButton,
   SlackForm,
   ShareForm,
+  ChevronDownSvg,
+  ChevronUpSvg,
+  ChevronRightSvg,
 } from '../index.js';
 import { ensureValidUrl } from '../../utils/index.js';
-
 import MenuContext from '../../context/MenuContext.js';
-
 import Icon from '../../styles/assets/graphics/icons/d4cr-icon.png';
-import chevronRight from '../../styles/assets/graphics/icons/chevron-right-orange-500.svg';
-import chevronUp from '../../styles/assets/graphics/icons/chevron-up-orange-500.svg';
-import chevronDown from '../../styles/assets/graphics/icons/chevron-down-grey-500.svg';
 
 export default function NavBar() {
   const menuContext = useContext(MenuContext);
@@ -172,9 +170,11 @@ export default function NavBar() {
                       >
                         {group.groupTitle}{' '}
                         {activeDropdownIndex === index ? (
-                          <Image src={chevronUp} alt='arrow up' />
+                          <ChevronUpSvg />
                         ) : (
-                          <Image src={chevronDown} alt='arrow down' />
+                          <ChevronDownSvg
+                            color={hoveredButton === index ? '#FC7C37' : '#2D2D2D'}
+                          />
                         )}
                       </button>
 
@@ -211,12 +211,10 @@ export default function NavBar() {
                                           hoveredItem === key ? 'margin-r--xxs' : ''
                                         }`}
                                       >
-                                        <Image
+                                        <ChevronRightSvg
                                           className={`fa-icon ${
-                                            hoveredItem === key ? '' : 'opacity-0'
+                                            hoveredItem === key ? '' : 'invisible'
                                           }`}
-                                          src={chevronRight}
-                                          alt='right arrow'
                                         />
                                       </div>
                                       {link.anchorText}
@@ -242,14 +240,13 @@ export default function NavBar() {
                                           hoveredItem === key ? 'margin-r--xxs' : ''
                                         }`}
                                       >
-                                        <Image
+                                        <ChevronRightSvg
                                           className={`fa-icon ${
-                                            hoveredItem === key ? '' : 'opacity-0'
+                                            hoveredItem === key ? '' : 'invisible'
                                           }`}
-                                          src={chevronRight}
-                                          alt='right arrow'
                                         />
                                       </div>
+
                                       {link.anchorText}
                                     </li>
                                   </Link>

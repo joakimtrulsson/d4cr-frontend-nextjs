@@ -877,6 +877,10 @@ body {
   display: none;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 /* headings */
 
 h1,
@@ -1334,6 +1338,15 @@ ol {
   font-weight: 500;
   border: none;
   line-height: 2.1rem;
+
+  &:hover {
+    color: $-orange-500;
+    transition: all 200ms ease-in-out;
+
+    img {
+      transition: all 200ms ease-in-out;
+    }
+  }
 }
 
 .primary-button {
@@ -1351,7 +1364,6 @@ ol {
   //   0% 50%
   // );
   border-radius: 99px;
-  transition: scale 200ms ease-in-out;
 
   /* font style*/
   white-space: nowrap;
@@ -1361,13 +1373,17 @@ ol {
   letter-spacing: 0.5px;
   text-transform: uppercase;
 
+  .button-text {
+    font-size: 0.9rem;
+  }
+
   &:hover {
-    scale: 1.05;
-    animation: jelly-hover 0.6s ease-in-out forwards;
+    animation: jelly-btn-hover 0.6s ease forwards,
+      jelly-background-orange 0.6s ease-in forwards !important;
   }
 
   &:not(:hover) {
-    animation: jelly-back 0.6s ease-in-out forwards;
+    animation: jelly-btn-back 0.6s ease forwards;
   }
 }
 
@@ -1383,7 +1399,7 @@ ol {
 
   &:hover {
     scale: 1.05;
-    animation: jelly-hover 0.6s ease-in-out forwards;
+    animation: jelly-btn-hover 0.6s ease forwards !important;
   }
 
   button {
@@ -1406,9 +1422,13 @@ ol {
     font-size: 0.875rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+
+    &:hover {
+      animation: jelly-background-secondary 0.6s ease-in-out forwards;
+    }
   }
 
   &:not(:hover) {
-    animation: jelly-back 0.6s ease-in-out forwards;
+    animation: jelly-btn-back 0.6s ease forwards;
   }
 }

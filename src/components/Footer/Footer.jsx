@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
   TopWave,
@@ -12,6 +11,8 @@ import {
   ShareForm,
   CloseIcon,
   ArrowRightSvg,
+  SocialMediaLink,
+  FooterMenuLink,
 } from '../index.js';
 import { getColorCode } from '../../utils/index.js';
 
@@ -203,112 +204,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-const FooterMenuLink = ({ url, anchorText }) => {
-  const rightArrowIcon = { width: '16', height: '14', color: getColorCode('') };
-
-  const [isClicked, setIsClicked] = useState(false);
-  const [slideOut, setSlideOut] = useState(false);
-  const [shareOrSlack, setShareOrSlack] = useState('');
-
-  function clickedBtnCTA1(e) {
-    e.stopPropagation();
-    e.preventDefault();
-
-    setShareOrSlack(url);
-    setIsClicked(true);
-  }
-
-  function exitModal() {
-    setSlideOut(true);
-    setTimeout(() => {
-      setIsClicked(false);
-      setSlideOut(false);
-    }, 500);
-  }
-  return (
-    <>
-      {url === 'share' || url === 'slack' ? (
-        <div className='color-orange-50 margin-r--xs no-decoration'>
-          <button
-            className='button color-orange-50 flex flex-row'
-            onClick={clickedBtnCTA1}
-          >
-            <span className='margin-r--xxs'>{anchorText}</span>
-            <div className='icon-wrapper'>
-              <ArrowRightSvg
-                width={rightArrowIcon.width}
-                height={rightArrowIcon.height}
-                color={rightArrowIcon.color}
-              />
-            </div>
-          </button>
-        </div>
-      ) : (
-        <Link href={url} className='color-orange-50 margin-r--xs no-decoration'>
-          <button className='button color-orange-50 flex flex-row'>
-            <span className='margin-r--xxs'>{anchorText}</span>
-            <div className='icon-wrapper'>
-              <ArrowRightSvg
-                width={rightArrowIcon.width}
-                height={rightArrowIcon.height}
-                color={rightArrowIcon.color}
-              />
-            </div>
-          </button>
-        </Link>
-      )}
-      <div
-        className={` ${isClicked ? 'clicked' : 'not-clicked'} ${
-          slideOut ? 'clicked-exit' : ''
-        }`}
-      >
-        <div
-          className={`modal flex flex-column flex-align-center ${
-            slideOut ? 'slide-out' : ''
-          }`}
-        >
-          <button onClick={exitModal} className='btn-exit-video'>
-            X
-          </button>
-          <div className='box'>
-            {shareOrSlack === 'slack' && <SlackForm />}
-            {shareOrSlack === 'share' && <ShareForm />}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const SocialMediaLink = ({ url, icon }) => {
-  const socialplatformIcons = {
-    width: '28',
-    height: '30',
-    color: getColorCode('turquoise-600'),
-  };
-
-  const fullUrl =
-    url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`;
-
-  return (
-    <a
-      href={fullUrl}
-      target='_blank'
-      rel='noopener noreferrer'
-      className='flex flex-justify-center flex-align-center no-decoration borderradius--half 
-                  margin--xxs padding--xs bg-turquoise-50'
-    >
-      {icon && icon.iconName && (
-        <FontAwesomeIcon
-          icon={['fab', `${icon.iconName}`]}
-          style={{
-            width: socialplatformIcons.width,
-            height: socialplatformIcons.height,
-            color: socialplatformIcons.color,
-          }}
-        />
-      )}
-    </a>
-  );
-};

@@ -16,7 +16,7 @@ export default function PrimaryButton({
         onClick={onClick}
         className={`primary-button uppercase ${className}`}
       >
-        {title}
+        <span className='button-text'>{title}</span>
       </button>
     </div>
   ) : (

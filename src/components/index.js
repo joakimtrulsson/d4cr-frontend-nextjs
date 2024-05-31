@@ -10,6 +10,7 @@ export { default as CountryCard } from './CountryCard/CountryCard.jsx';
 export { default as CustomRenderer } from './CustomRenderer/CustomRenderer.jsx';
 export { default as DropDown } from './DropDown/DropDown.jsx';
 export { default as Footer } from './Footer/Footer.jsx';
+export { default as FooterMenuLink } from './FooterMenuLink/FooterMenuLink.jsx';
 export { default as HamburgerMenu } from './HamburgerMenu/HamburgerMenu.jsx';
 export { default as HeroFrontPage } from './HeroFrontPage/HeroFrontPage.jsx';
 export { default as ImagesComponent } from './ImagesComponent/ImagesComponent.jsx';
@@ -32,6 +33,7 @@ export { default as SecondaryButton } from './SecondaryButton/SecondaryButton.js
 export { default as SectionRenderer } from './SectionRenderer/SectionRenderer.jsx';
 export { default as ShareForm } from './ShareForm/ShareForm.jsx';
 export { default as SlackForm } from './SlackForm/SlackForm.jsx';
+export { default as SocialMediaLink } from './SocialMediaLink/SocialMediaLink.jsx';
 export { SpotifyPlayer } from './SpotifyPlayer/SpotifyPlayer.jsx';
 export { default as TextMediaComponent } from './TextMediaComponent/TextMediaComponent.jsx';
 export { default as TopWave } from './TopWave/TopWave.jsx';
@@ -43,4 +45,7 @@ export {
   ArrowRightSvg,
   ButtonDown,
   QuoteMarksSvg,
+  ChevronDownSvg,
+  ChevronUpSvg,
+  ChevronRightSvg,
 } from './SvgIcons/SvgIcons.jsx';

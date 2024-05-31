@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import chevronDown from '../../styles/assets/graphics/icons/chevron-down-grey-500.svg';
+
 import Animation from '../../styles/assets/graphics/animation.gif';
 import { WYSIWYG } from '../index.js';
 
@@ -38,10 +38,7 @@ export default function Accordion({ content }) {
                 key={index}
                 onClick={() => setClickedValue(index)}
               >
-                <span class='accordion__title'>
-                  {field.heading}
-                  <Image src={chevronDown} alt='arrow down' />
-                </span>
+                <span class='accordion__title'>{field.heading}</span>
                 <div className='content-text bg-yellow-200'>
                   {selectedField.bodyText && (
                     <WYSIWYG key={documentKey} content={selectedField.bodyText} />
