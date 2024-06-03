@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { PrimaryButton } from '../index.js';
+import { PrimaryButton, WYSIWYG } from '../index.js';
+import ModalPreambleContext from '../../context/ModalPreambleContext.js';
 
 export default function ShareForm() {
+  const preambleContext = useContext(ModalPreambleContext);
+  const preambleText = preambleContext[0].shareStoryPreamble.document;
   const recaptcha = React.useRef(null);
   const [reCAPTCHAError, setReCAPTCHAError] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -129,10 +132,9 @@ export default function ShareForm() {
     <div className='popup-form-container'>
       <div className='form-div'>
         <h3>Tell us your story</h3>
-        <p className='preamble'>
-          Would you like to share your story and inspire others? We’d love to hear about
-          it.
-        </p>
+        <div className='preamble'>
+          {preambleText && <WYSIWYG content={preambleText} />}
+        </div>
 
         <form onSubmit={handleSubmit} noValidate>
           <div className='name-email-div'>
@@ -238,6 +240,29 @@ export default function ShareForm() {
               </label>
             </div>
           </div>
+
+          {successMessage && (
+            <p role='alert' className='success-message'>
+              {successMessage}
+            </p>
+          )}
+
+          {submissionError && !successMessage ? (
+            <p role='alert' className='submission-error'>
+              {submissionError}
+            </p>
+          ) : null}
+          {reCAPTCHAError && (
+            <p className='verify-error'>Please verify that you are human</p>
+          )}
+
+          <div className='recaptcha-div'>
+            <ReCAPTCHA
+              ref={recaptcha}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            />
+          </div>
+
           {!isSubmitting ? (
             <PrimaryButton
               type='submit'
@@ -247,27 +272,7 @@ export default function ShareForm() {
           ) : (
             <p>Sending..</p>
           )}
-
-          <div className='recaptcha-div'>
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            />
-          </div>
         </form>
-        {successMessage && (
-          <p role='alert' className='success-message'>
-            {successMessage}
-          </p>
-        )}
-        {submissionError && !successMessage ? (
-          <p role='alert' className='submission-error'>
-            {submissionError}
-          </p>
-        ) : null}
-        {reCAPTCHAError && (
-          <p className='verify-error'>Please verify that you are human</p>
-        )}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { ResourceCard, SecondaryButton } from '../index';
 
-export default function Resources({ resources, title, preamble }) {
+export default function Resources({ resources, title = 'Related Resources', preamble }) {
   return (
     <>
       <div className='resources-outer-container flex flex-column flex-align-center'>

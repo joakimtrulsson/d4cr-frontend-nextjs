@@ -1,4 +1,3 @@
-import { client } from './index';
 import {
   MAIN_MENU_QUERY,
   FOOTER_MENU_QUERY,
@@ -17,11 +16,28 @@ import {
   GET_ALL_NEWS_BY_CATEGORY,
   GET_ALL_NEWS_BY_CHAPTER,
   GET_PEOPLE_BY_IDS,
-} from './queries';
+  MODAL_CONTACT_PREAMBLE,
+  initializeApollo,
+} from './index';
+
+export async function fetchModalPreambles() {
+  const apolloClient = initializeApollo();
+  try {
+    const { data } = await apolloClient.query({
+      query: MODAL_CONTACT_PREAMBLE,
+    });
+
+    return data?.formEmails || null;
+  } catch (error) {
+    console.error('(graphql.jsx) Error fetching data:', error);
+    throw error;
+  }
+}
 
 export async function fetchMainMenuData() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: MAIN_MENU_QUERY,
     });
 
@@ -33,8 +49,9 @@ export async function fetchMainMenuData() {
 }
 
 export async function fetchFooterMenuData() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: FOOTER_MENU_QUERY,
     });
 
@@ -46,8 +63,9 @@ export async function fetchFooterMenuData() {
 }
 
 export async function fetchAllMenuData() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: ALL_MENU_DATA,
     });
 
@@ -59,8 +77,9 @@ export async function fetchAllMenuData() {
 }
 
 export async function fetchSteeringGroupMembersData() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: STEERING_GROUP_MEMBERS_QUERY,
     });
 
@@ -72,8 +91,9 @@ export async function fetchSteeringGroupMembersData() {
 }
 
 export async function fetchChapterSlugData(resolvedUrl) {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: CHAPTER_SLUG_QUERY,
       variables: { slug: resolvedUrl },
     });
@@ -86,8 +106,9 @@ export async function fetchChapterSlugData(resolvedUrl) {
 }
 
 export async function fetchGetPageBySlugData(resolvedUrl) {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: GET_PAGE_BY_SLUG_QUERY,
       variables: { where: { slug: resolvedUrl } },
     });
@@ -100,8 +121,9 @@ export async function fetchGetPageBySlugData(resolvedUrl) {
 }
 
 export async function fetchAllNews(resolvedUrl) {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: GET_ALL_NEWS_QUERY,
       variables: { orderBy: { createdAt: 'desc' } },
     });
@@ -114,8 +136,9 @@ export async function fetchAllNews(resolvedUrl) {
 }
 
 export async function fetchGetNewsItemBySlugData(resolvedUrl) {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: GET_NEWS_ITEM_BY_SLUG_QUERY,
       variables: { where: { slug: resolvedUrl } },
     });
@@ -128,8 +151,9 @@ export async function fetchGetNewsItemBySlugData(resolvedUrl) {
 }
 
 export async function fetchFrontPageData() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: FRONT_PAGE_QUERY,
     });
 
@@ -141,8 +165,9 @@ export async function fetchFrontPageData() {
 }
 
 export async function fetchCaseItemBySlug(resolvedUrl) {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: CASE_ITEM_BY_SLUG_QUERY,
       variables: {
         where: {
@@ -161,8 +186,9 @@ export async function fetchCaseItemBySlug(resolvedUrl) {
 }
 
 export async function fetchGetAllCases() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: CASES_ALL_DESC_QUERY,
     });
 
@@ -174,8 +200,9 @@ export async function fetchGetAllCases() {
 }
 
 export async function fetchResourcesCategories() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: ALL_RESOURCES,
       variables: { orderBy: { createdAt: 'desc' } },
     });
@@ -187,8 +214,9 @@ export async function fetchResourcesCategories() {
 }
 
 export async function fetchPrinciplesSortedByNumber() {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: PRINCIPLES_BY_NUMBER,
     });
     return data?.principleNumbers || null;
@@ -199,8 +227,9 @@ export async function fetchPrinciplesSortedByNumber() {
 }
 
 export async function fetchGetNewsItemByChapter(chapter) {
+  const apolloClient = initializeApollo();
   try {
-    const response = await client.query({
+    const response = await apolloClient.query({
       query: GET_ALL_NEWS_BY_CHAPTER,
       variables: {
         orderBy: [
@@ -228,8 +257,9 @@ export async function fetchGetNewsItemByChapter(chapter) {
 }
 
 export async function fetchGetNewsItemByCategory(category) {
+  const apolloClient = initializeApollo();
   try {
-    const response = await client.query({
+    const response = await apolloClient.query({
       query: GET_ALL_NEWS_BY_CATEGORY,
       variables: {
         orderBy: [
@@ -249,8 +279,9 @@ export async function fetchGetNewsItemByCategory(category) {
 }
 
 export async function fetchGetNewsItemByCategoryAndChapter(category, chapter) {
+  const apolloClient = initializeApollo();
   try {
-    const response = await client.query({
+    const response = await apolloClient.query({
       query: GET_ALL_NEWS_BY_CATEGORY_AND_CHAPTER,
       variables: {
         orderBy: [
@@ -271,8 +302,9 @@ export async function fetchGetNewsItemByCategoryAndChapter(category, chapter) {
 }
 
 export async function fetchPeopleByIds(ids) {
+  const apolloClient = initializeApollo();
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: GET_PEOPLE_BY_IDS,
       variables: {
         where: {

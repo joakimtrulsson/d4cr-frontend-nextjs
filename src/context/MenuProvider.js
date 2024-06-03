@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import MenuContext from './MenuContext';
-import { fetchAllMenuData } from '.././graphql/index.js';
+import { fetchAllMenuData, fetchModalPreambles } from '.././graphql/index.js';
 
 function MenuProvider({ children }) {
   const [allData, setAllData] = useState(null);

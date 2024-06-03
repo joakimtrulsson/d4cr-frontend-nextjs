@@ -12,9 +12,13 @@ export default function NewsSlugPage({ newsData }) {
   if (!newsData) {
     return <NotFound />;
   }
-  const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
-    newsData.sections
-  );
+
+  let checkIfMultipleTextMediaSections;
+  if (newsData?.sections) {
+    checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+      newsData?.sections
+    );
+  }
 
   return (
     <main className='site-content news-slug-container flex flex-column flex-align-center flex-justify-center'>
@@ -35,6 +39,7 @@ export default function NewsSlugPage({ newsData }) {
         <div className='news-header margin-lr--m'>
           {newsData.newsCategory.categoryTitle && (
             <p className='news-category max-width-60 margin--zero full-width-height color-yellow-600 sub-heading-m'>
+              {new Date(newsData.createdAt).toISOString().split('T')[0]} |{' '}
               {newsData.newsCategory.categoryTitle}
             </p>
           )}

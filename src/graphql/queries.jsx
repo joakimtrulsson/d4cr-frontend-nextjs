@@ -1,5 +1,28 @@
 import { gql } from '@apollo/client';
 
+export const CONTACT_US_PREAMBLE = gql`
+  query FormEmails {
+    formEmails {
+      contactUsPreamble {
+        document
+      }
+    }
+  }
+`;
+
+export const MODAL_CONTACT_PREAMBLE = gql`
+  query FormEmails {
+    formEmails {
+      joinSlackPreamble {
+        document
+      }
+      shareStoryPreamble {
+        document
+      }
+    }
+  }
+`;
+
 export const MAIN_MENU_QUERY = gql`
   query MainMenu {
     mainMenu {
@@ -117,8 +140,6 @@ export const GET_ALL_NEWS_QUERY = gql`
       relatedChapters {
         title
       }
-      resourcesTitle
-      resourcesPreamble
       resources {
         id
         title
@@ -148,8 +169,6 @@ export const GET_NEWS_ITEM_BY_SLUG_QUERY = gql`
       }
       image
       sections
-      resourcesTitle
-      resourcesPreamble
       resources {
         id
         title
@@ -195,8 +214,6 @@ export const CASE_ITEM_BY_SLUG_QUERY = gql`
       sections
       caseImage
       quote
-      resourcesTitle
-      resourcesPreamble
       resources {
         id
         title
@@ -225,8 +242,6 @@ export const CASES_ALL_DESC_QUERY = gql`
       sections
       caseImage
       quote
-      resourcesTitle
-      resourcesPreamble
       resources {
         id
         title
@@ -250,10 +265,8 @@ export const ALL_RESOURCES = gql`
       url
       image
       resourceType {
-        icon
         type
       }
-      createdAt
     }
     resourceTypes {
       type
@@ -278,8 +291,6 @@ export const PRINCIPLES_BY_NUMBER = gql`
         quote
         quoteAuthor
         subPrinciples
-        resourcesTitle
-        resourcesPreamble
         resources {
           id
           title
@@ -308,8 +319,6 @@ export const GET_ALL_NEWS_BY_CHAPTER = gql`
       newsCategory {
         categoryTitle
       }
-      resourcesTitle
-      resourcesPreamble
       resources {
         url
         title

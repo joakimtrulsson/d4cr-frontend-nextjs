@@ -54,7 +54,8 @@
       background-color: $-turquoise-200;
       max-width: 380px;
       margin: 0 auto;
-      margin-top: 1rem;
+      margin-top: 0rem;
+      margin-bottom: 1rem;
       padding: 0 8px 0 8px;
       border-radius: 3px;
       color: $-turquoise-700;
@@ -81,16 +82,14 @@
       }
 
       .recaptcha-div {
-        margin-top: 2rem;
-        max-width: 201px;
-        overflow: hidden;
-        margin: 0 auto;
-        margin-top: 2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
       }
     }
 
     .title-text-div {
-      margin-bottom: 5rem;
+      margin-bottom: 3rem;
       max-width: 700px;
 
       @media (max-width: $display-sm) {

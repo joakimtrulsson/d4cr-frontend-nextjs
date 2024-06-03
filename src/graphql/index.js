@@ -22,6 +22,7 @@ import {
   fetchGetNewsItemByCategory,
   fetchGetNewsItemByCategoryAndChapter,
   fetchPeopleByIds,
+  fetchModalPreambles,
 } from './dataFetches';
 
 import {
@@ -39,6 +40,9 @@ import {
   GET_ALL_CHAPTERS_SLUG,
   GET_ALL_NEWS_SLUG,
   GET_ALL_PRINCIPLES_SLUG,
+  ALL_MENU_DATA,
+  CONTACT_US_PREAMBLE,
+  MODAL_CONTACT_PREAMBLE,
 } from './queries';
 
 export {
@@ -64,6 +68,7 @@ export {
   fetchGetNewsItemByCategory,
   fetchGetNewsItemByCategoryAndChapter,
   fetchPeopleByIds,
+  fetchModalPreambles,
   CASE_ITEM_BY_SLUG_QUERY,
   CASES_ALL_DESC_QUERY,
   CHAPTER_SLUG_QUERY,
@@ -78,4 +83,7 @@ export {
   GET_ALL_CHAPTERS_SLUG,
   GET_ALL_NEWS_SLUG,
   GET_ALL_PRINCIPLES_SLUG,
+  ALL_MENU_DATA,
+  CONTACT_US_PREAMBLE,
+  MODAL_CONTACT_PREAMBLE,
 };

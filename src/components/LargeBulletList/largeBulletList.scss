@@ -31,6 +31,11 @@
     margin-bottom: 1rem;
     width: 100%;
     box-sizing: border-box;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      align-items: flex-start;
+    }
 
     .circle-icon {
       display: flex;
@@ -41,6 +46,10 @@
       min-width: 3rem;
       height: 3rem;
       margin-right: 1rem;
+
+      @media (max-width: 768px) {
+        margin-top: 9px;
+      }
 
       svg {
         width: 1.2rem;

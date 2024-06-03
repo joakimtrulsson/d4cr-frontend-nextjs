@@ -47,7 +47,6 @@ const VideoPlayer = ({ video }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    console.log(window.innerWidth);
     setIsSmallScreen(window.innerWidth < 500);
   }, []);
 

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { PrimaryButton } from '../index.js';
+import { PrimaryButton, WYSIWYG } from '../index.js';
+import ModalPreambleContext from '../../context/ModalPreambleContext.js';
 
 export default function SlackForm() {
+  const preambleContext = useContext(ModalPreambleContext);
+  const preambleText = preambleContext[0].joinSlackPreamble.document;
   const typeForm = 'slack';
   const recaptcha = React.useRef(null);
   const [reCAPTCHAError, setReCAPTCHAError] = useState(false);
@@ -131,10 +134,9 @@ export default function SlackForm() {
     <div className='popup-form-container'>
       <div className='form-div'>
         <h3>Join our Slack</h3>
-        <p className='preamble'>
-          Please fill out the following form to become an member. An annual membership fee
-          of 50€ and selection process applies.
-        </p>
+        <div className='preamble'>
+          <WYSIWYG content={preambleText} />
+        </div>
 
         <form onSubmit={handleSubmit} noValidate>
           <div className='name-email-div'>
@@ -214,6 +216,27 @@ export default function SlackForm() {
             )}
           </div>
 
+          {successMessage && (
+            <p role='alert' className='success-message'>
+              {successMessage}
+            </p>
+          )}
+          {submissionError && !successMessage ? (
+            <p role='alert' className='submission-error'>
+              {submissionError}
+            </p>
+          ) : null}
+          {reCAPTCHAError && (
+            <p className='verify-error'>Please verify that you are human</p>
+          )}
+
+          <div className='recaptcha-div'>
+            <ReCAPTCHA
+              ref={recaptcha}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            />
+          </div>
+
           {!isSubmitting ? (
             <PrimaryButton
               type='submit'
@@ -223,27 +246,7 @@ export default function SlackForm() {
           ) : (
             <p>Sending..</p>
           )}
-
-          <div className='recaptcha-div'>
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            />
-          </div>
         </form>
-        {successMessage && (
-          <p role='alert' className='success-message'>
-            {successMessage}
-          </p>
-        )}
-        {submissionError && !successMessage ? (
-          <p role='alert' className='submission-error'>
-            {submissionError}
-          </p>
-        ) : null}
-        {reCAPTCHAError && (
-          <p className='verify-error'>Please verify that you are human</p>
-        )}
       </div>
     </div>
   );

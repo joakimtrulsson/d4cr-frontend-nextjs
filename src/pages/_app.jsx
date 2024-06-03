@@ -1,6 +1,8 @@
 import { ApolloProvider } from '@apollo/client';
 
 import MenuProvider from '../context/MenuProvider';
+import ModalPreambleProvider from '../context/ModalPreambleProvider.js';
+import AppProvider from '../context/AppProvider.js';
 import { NavBar, Footer, MetaHeader } from '../components/index.js';
 import { useApollo } from '../graphql/index.js';
 
@@ -17,7 +19,7 @@ function MyApp({ Component, pageProps }) {
         language={pageProps.language}
       />
       <ApolloProvider client={apolloClient}>
-        <MenuProvider>
+        <AppProvider>
           <div className='site-container'>
             <NavBar />
             <div className='site-content'>
@@ -26,7 +28,7 @@ function MyApp({ Component, pageProps }) {
 
             <Footer />
           </div>
-        </MenuProvider>
+        </AppProvider>
       </ApolloProvider>
     </>
   );

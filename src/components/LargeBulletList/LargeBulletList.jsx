@@ -21,7 +21,7 @@ export default function LargeBulletList({ content, className, ref }) {
       {content.bullets.map((bullet, index) => {
         return (
           <div
-            className='bullet-content max-width-45 flex flex-row flex-align-center bg-grey-25 borderradius--xxs padding--xs'
+            className='bullet-content max-width-45 flex flex-row  bg-grey-25 borderradius--xxs padding--xs'
             key={index}
           >
             <div className='circle-icon'>
@@ -37,7 +37,9 @@ export default function LargeBulletList({ content, className, ref }) {
                 />
               )}
             </div>
-            <DocumentRenderer document={bullet.bodyText} />
+            <div className='bullet-text'>
+              <DocumentRenderer document={bullet.bodyText} />
+            </div>
           </div>
         );
       })}

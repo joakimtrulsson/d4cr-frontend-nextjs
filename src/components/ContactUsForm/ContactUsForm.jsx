@@ -3,12 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { PrimaryButton } from '../index.js';
+import { PrimaryButton, WYSIWYG } from '../index.js';
 
 import AnimationLeft from '../../styles/assets/graphics/animation.gif';
 import AnimationRight from '../../styles/assets/graphics/animation-2.gif';
 
-export default function ContactUsForm() {
+export default function ContactUsForm({ preamble }) {
   const recaptcha = React.useRef(null);
   const [reCAPTCHAError, setReCAPTCHAError] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -125,14 +125,9 @@ export default function ContactUsForm() {
           <h1>
             <span className='title-text heading-background'>Contact us</span>
           </h1>
-          <p className='preamble'>
-            Please fill out the following form and we’ll get in touch with you within a
-            couple of days. If you want to join us, use{' '}
-            <Link className='link' href=''>
-              this form
-            </Link>{' '}
-            instead.
-          </p>
+          <div className='preamble'>
+            <WYSIWYG content={preamble} />
+          </div>
         </div>
         <form className='form' onSubmit={handleSubmit} noValidate>
           <div className='name-email-div'>
@@ -193,6 +188,28 @@ export default function ContactUsForm() {
             )}
           </div>
 
+          {successMessage && (
+            <p role='alert' className='success-message'>
+              {successMessage}
+            </p>
+          )}
+
+          {submissionError && !successMessage ? (
+            <p role='alert' className='submission-error'>
+              {submissionError}
+            </p>
+          ) : null}
+          {reCAPTCHAError && (
+            <p className='verify-error'>Please verify that you are human</p>
+          )}
+
+          <div className='recaptcha-div'>
+            <ReCAPTCHA
+              ref={recaptcha}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            />
+          </div>
+
           {!isSubmitting ? (
             <PrimaryButton
               type='submit'
@@ -202,29 +219,7 @@ export default function ContactUsForm() {
           ) : (
             <p>Sending..</p>
           )}
-
-          {successMessage && (
-            <p role='alert' className='success-message'>
-              {successMessage}
-            </p>
-          )}
-
-          <div className='recaptcha-div'>
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            />
-          </div>
         </form>
-
-        {submissionError && !successMessage ? (
-          <p role='alert' className='submission-error'>
-            {submissionError}
-          </p>
-        ) : null}
-        {reCAPTCHAError && (
-          <p className='verify-error'>Please verify that you are human</p>
-        )}
       </div>
       <Image src={AnimationRight} alt='Animated GIF' className='right-absolute' />
     </div>
