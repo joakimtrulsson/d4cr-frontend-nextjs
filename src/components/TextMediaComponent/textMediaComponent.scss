@@ -29,6 +29,15 @@
     height: auto;
     max-width: 760px;
 
+    .preamble {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+
+      p {
+        margin: 0;
+      }
+    }
+
     @media screen and (min-width: 1024px) {
       max-width: none;
     }

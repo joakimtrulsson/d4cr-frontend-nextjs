@@ -75,7 +75,9 @@ export default function TextMediaComponent({ content }) {
               {content.subHeading}
             </h2>
             <h3 className='heading-2 margin--zero color-orange-800'>{content.title}</h3>
-            <DocumentRenderer document={content.preamble} />
+            <div className='preamble'>
+              <DocumentRenderer document={content.preamble} />
+            </div>
             {(content.cta1 || content.cta2) && (
               <>
                 <nav className='button-container flex flex-row flex-nowrap flex-justify-start flex-align-center'>
