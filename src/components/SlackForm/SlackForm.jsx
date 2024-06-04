@@ -70,11 +70,10 @@ export default function SlackForm() {
         ? 'Tell us a bit about yourself and why you’d like to join D4CR.'
         : '';
     if (!name.trim()) errorMessages.name = 'Name is required.';
+
     if (!contactEmail.trim() || !emailPattern.test(contactEmail))
       errorMessages.contactEmail = 'Valid email is required.';
-    if (!linkedIn.trim())
-      errorMessages.linkedIn =
-        'Please paste the URL to your company/initiative/institution’s profile.';
+
     if (!message.trim()) errorMessages.message = messageErrorMessage;
 
     if (Object.keys(errorMessages).length) {
@@ -147,16 +146,13 @@ export default function SlackForm() {
                 id='name'
                 placeholder='Name'
                 value={data.name}
+                className={errorMessage.name ? 'error-input' : ''}
                 onChange={handleChange}
                 aria-required='true'
                 aria-invalid={errorMessage?.name ? 'true' : 'false'}
                 aria-describedby='name-error'
               />
-              {errorMessage.name ? (
-                <p className='error'>{errorMessage.name}</p>
-              ) : (
-                <p className='error no-vis'>Not visible</p>
-              )}
+              {errorMessage.name && <p className='error'>{errorMessage.name}</p>}
             </div>
             <div className='right'>
               <input
@@ -164,17 +160,15 @@ export default function SlackForm() {
                 id='email'
                 placeholder='E-mail'
                 type='email'
-                className=''
+                className={errorMessage.contactEmail ? 'error-input' : ''}
                 value={data.contactEmail}
                 onChange={handleChange}
                 aria-required='true'
                 aria-invalid={errorMessage.contactEmail ? 'true' : 'false'}
                 aria-describedby='email-error'
               />
-              {errorMessage.contactEmail ? (
+              {errorMessage.contactEmail && (
                 <p className='error right'>{errorMessage.contactEmail}</p>
-              ) : (
-                <p className='error right no-vis'>Not visible</p>
               )}
             </div>
           </div>
@@ -182,38 +176,29 @@ export default function SlackForm() {
             <input
               name='linkedIn'
               id='linkedIn'
-              placeholder='LinkedIn'
+              placeholder='LinkedIn Url (optional)'
               type='text'
               className=''
               value={data.linkedIn || ''}
               onChange={handleChange}
-              aria-required='true'
-              aria-invalid={errorMessage.linkedIn ? 'true' : 'false'}
-              aria-describedby='linkedIn-error'
             />
-            {errorMessage.linkedIn ? (
-              <p className='error'>{errorMessage.linkedIn}</p>
-            ) : (
-              <p className='error no-vis'>Not visible</p>
-            )}
+            <p className='error'>Please paste the URL to your LinkedIn profile.</p>
           </div>
           <div className='text-area-div'>
             <textarea
               name='message'
               id='message'
               placeholder='Message'
-              className=''
+              className={errorMessage.message ? 'error-input' : ''}
               value={data.message}
               onChange={handleChange}
               aria-required='true'
               aria-invalid={errorMessage.message ? 'true' : 'false'}
               aria-describedby='message-error'
             />
-            {errorMessage.message ? (
-              <p className='message-error'>{errorMessage.message}</p>
-            ) : (
-              <p className='message-error no-vis'>Not visible</p>
-            )}
+            <p className='message-error'>
+              Tell us a bit about yourself and why you’d like to join D4CR.
+            </p>
           </div>
 
           {successMessage && (
