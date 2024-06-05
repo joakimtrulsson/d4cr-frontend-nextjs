@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { PrimaryButton, WYSIWYG } from '../index.js';
@@ -14,6 +14,7 @@ export default function SlackForm() {
   const [errorMessage, setErrorMessage] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
+  const [countdown, setCountdown] = useState(10);
 
   const initialFormData = {
     name: '',
@@ -25,6 +26,24 @@ export default function SlackForm() {
 
   const [data, setData] = useState(initialFormData);
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  useEffect(() => {
+    if (successMessage) {
+      setCountdown(10);
+      const timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000); // 1 second
+
+      const timeout = setTimeout(() => {
+        setSuccessMessage('');
+      }, 10000); // 10 seconds
+
+      return () => {
+        clearTimeout(timeout);
+        clearInterval(timer);
+      };
+    }
+  }, [successMessage]);
 
   const verifyCaptcha = async (captchaValue) => {
     const res = await fetch(
@@ -133,7 +152,7 @@ export default function SlackForm() {
     <div className='popup-form-container'>
       <div className='form-div'>
         <h3>Join our Slack</h3>
-        <div className='preamble'>
+        <div className='popup-preamble'>
           <WYSIWYG content={preambleText} />
         </div>
 
@@ -201,11 +220,6 @@ export default function SlackForm() {
             </p>
           </div>
 
-          {successMessage && (
-            <p role='alert' className='success-message'>
-              {successMessage}
-            </p>
-          )}
           {submissionError && !successMessage ? (
             <p role='alert' className='submission-error'>
               {submissionError}
@@ -222,15 +236,24 @@ export default function SlackForm() {
             />
           </div>
 
-          {!isSubmitting ? (
+          {successMessage ? (
+            <p role='alert' className='success-message'>
+              {successMessage} Disappearing in {countdown} seconds.
+            </p>
+          ) : !isSubmitting ? (
             <PrimaryButton
               type='submit'
-              title='SEND APPLICATION'
+              title='SEND MESSAGE'
               disabled={Object.keys(errorMessage).length > 0}
             />
           ) : (
             <p>Sending..</p>
           )}
+          {submissionError && !successMessage ? (
+            <p role='alert' className='submission-error'>
+              {submissionError}
+            </p>
+          ) : null}
         </form>
       </div>
     </div>
