@@ -19,7 +19,6 @@ export default function NewsSlugPage({ newsData }) {
       newsData?.sections
     );
   }
-  console.log('newsData.resources', newsData.resources);
 
   return (
     <main className='site-content news-slug-container flex flex-column flex-align-center flex-justify-center'>

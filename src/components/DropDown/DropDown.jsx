@@ -40,14 +40,14 @@ export default function DropDown(prop) {
 
       {showDropdown && (
         <div className='dropdown-content'>
-          {showType !== 'All areas' ? (
+          {showType !== 'All categories' ? (
             <p
               onClick={() => {
-                setShowType('All areas');
+                setShowType('All categories');
                 setCurrentPage(1);
               }}
             >
-              All areas
+              All categories
             </p>
           ) : null}
           {groupsBtn}

@@ -270,9 +270,15 @@ export const ALL_RESOURCES = gql`
       resourceType {
         type
       }
+      resourceCategory {
+        title
+      }
     }
     resourceTypes {
       type
+    }
+    resourceCategories {
+      title
     }
   }
 `;

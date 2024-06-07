@@ -1,92 +1,125 @@
 import React, { useState } from 'react';
 
-import { ResourceCard, DropDown } from '../../components/index.js';
+import { ResourceCard } from '../../components/index.js';
 import { ALL_RESOURCES, initializeApollo } from '../../graphql/index.js';
 
-export default function ResourcesPage({ allResources }) {
-  return <RenderResourcesContent resourcesCat={allResources} />;
+export default function ResourcesPage({ allResources, resourceCategories }) {
+  return (
+    <RenderResourcesContent
+      resourcesCat={allResources}
+      resourceCategories={resourceCategories}
+    />
+  );
 }
 
 function RenderResourcesContent(resourcesCat) {
-  const [showType, setShowType] = useState('All areas');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showType, setShowType] = useState(
+    resourcesCat.resourceCategories.map((category) => category.title)
+  );
 
-  const groupedByType = resourcesCat.resourcesCat.reduce((acc, resource) => {
-    const type = resource.resourceType.type;
+  const [itemsPerPage] = useState(9);
 
-    if (!acc[type]) {
-      acc[type] = [];
-    }
+  const filteredResources =
+    showType.length === 0
+      ? resourcesCat.resourcesCat
+      : resourcesCat.resourcesCat.filter((resource) =>
+          showType.includes(resource.resourceCategory.title)
+        );
 
-    acc[type].push(resource);
-    return acc;
-  }, {});
+  const totalPages = Math.ceil(filteredResources.length / itemsPerPage);
 
-  const groupsBtn = Object.entries(groupedByType).map(([type, resources]) => {
-    return (
-      <>
-        {type !== showType ? (
-          <p
-            key={type}
-            onClick={() => {
-              setShowType(type);
-              setCurrentPage(1);
-            }}
-          >
-            {type}
-          </p>
-        ) : null}
-      </>
-    );
-  });
+  const currentItems = filteredResources.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
-  let arrayToShow = resourcesCat.resourcesCat;
-  if (showType !== 'All areas') {
-    arrayToShow = groupedByType[showType];
-  }
-
-  //Bestäm hur många som visas på sidorna mm
-  const numberOfCards = arrayToShow.length;
-  const itemsPerPage = 20;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = arrayToShow.slice(startIndex, endIndex);
-  const goToNextPage = () => setCurrentPage((prev) => prev + 1);
-  const goToPreviousPage = () => setCurrentPage((prev) => prev - 1);
   const isFirstPage = currentPage === 1;
-  const isLastPage = endIndex >= arrayToShow.length;
-  const goToPage = (page) => setCurrentPage(page);
-  const totalPageCount = Math.ceil(numberOfCards / itemsPerPage);
+  const isLastPage = currentPage === totalPages;
+
+  const goToNextPage = () => {
+    setCurrentPage((page) => Math.min(page + 1, totalPages));
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage((page) => Math.max(page - 1, 1));
+  };
+
+  const goToPage = (number) => {
+    setCurrentPage(number);
+  };
+
+  const handleCheckboxChange = (categoryTitle) => {
+    if (showType.includes(categoryTitle)) {
+      setShowType(showType.filter((type) => type !== categoryTitle));
+    } else {
+      setShowType([...showType, categoryTitle]);
+    }
+    setCurrentPage(1);
+  };
+
+  const groupByCategory = (resources) => {
+    return resources.reduce((grouped, resource) => {
+      const key = resource.resourceCategory.title;
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
+      grouped[key].push(resource);
+      return grouped;
+    }, {});
+  };
 
   return (
     <main className='site-content slug-resources-outer-container flex flex-column flex-align-center flex-justify-center'>
-      <h1 className='heading-background'>Supporting resources</h1>
+      <h1 className='heading-background margin-b--xxl'>Supporting resources</h1>
 
-      <DropDown
-        className='margin-tb--m'
-        showType={showType}
-        currentPage={currentPage}
-        groupsBtn={groupsBtn}
-        setShowType={setShowType}
-        setCurrentPage={setCurrentPage}
-      />
-      <div className='slug-resources-inner-container'>
-        {currentItems.map((resource) => (
-          <ResourceCard
-            key={resource.id}
-            img={resource.image?.url || null}
-            url={resource.url}
-            title={resource.title}
-            resourceType={resource.resourceType?.type}
-          />
-        ))}
+      <div
+        className='flex flex-row flex-justify-start flex-align-between news-categories-container margin-b--l'
+        style={{ gap: '1rem' }}
+      >
+        {resourcesCat.resourceCategories &&
+          resourcesCat.resourceCategories.map((category) => (
+            <label key={category.title} className='checkbox-container '>
+              <input
+                checked={showType.includes(category.title)}
+                type='checkbox'
+                onChange={() => handleCheckboxChange(category.title)}
+              />
+              <span className='checkmark'></span>
+              <span className='heading-4'>{category.title}</span>
+            </label>
+          ))}
       </div>
-      {arrayToShow.length > 20 ? (
-        <div className='pagination-buttons flex flex-row flex-wrap flex-justify-start flex-align-between '>
+
+      {showType.length === 0 ? (
+        <p>Please select a category...</p>
+      ) : (
+        Object.entries(groupByCategory(currentItems)).map(([category, resources]) => (
+          <>
+            <h3 className='category-title sub-heading-m color-grey-400 text-align-center margin-t--s margin--zero'>
+              {category}
+            </h3>
+            <div className='slug-resources-inner-container'>
+              {resources.map((resource) => (
+                <ResourceCard
+                  key={resource.id}
+                  img={resource.image?.url || null}
+                  url={resource.url}
+                  title={resource.title}
+                  resourceType={resource.resourceType?.type}
+                />
+              ))}
+            </div>
+          </>
+        ))
+      )}
+
+      <div className='pagination-buttons flex flex-row flex-wrap flex-justify-start flex-align-between '>
+        <div>
           <button
             className='arrow-button'
-            onClick={goToPreviousPage}
             disabled={isFirstPage}
+            onClick={goToPreviousPage}
           >
             <svg
               width='12'
@@ -100,7 +133,7 @@ function RenderResourcesContent(resourcesCat) {
               </g>{' '}
             </svg>
           </button>
-          {Array.from({ length: totalPageCount }, (_, index) => (
+          {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}
               onClick={() => goToPage(index + 1)}
@@ -123,7 +156,7 @@ function RenderResourcesContent(resourcesCat) {
             </svg>
           </button>
         </div>
-      ) : null}
+      </div>
     </main>
   );
 }
@@ -137,7 +170,11 @@ export async function getStaticProps() {
     });
 
     return {
-      props: { allResources: data.resources, tabTitle: 'Supporting resources' },
+      props: {
+        allResources: data.resources,
+        resourceCategories: data.resourceCategories,
+        tabTitle: 'Supporting resources',
+      },
       revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
     };
   } catch (error) {
