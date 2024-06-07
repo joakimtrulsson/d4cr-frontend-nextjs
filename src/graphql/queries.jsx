@@ -75,6 +75,7 @@ export const STEERING_GROUP_MEMBERS_QUERY = gql`
     steeringGroupMembers {
       fullName
       role
+      company
       city
       country
       socialMediaUrl1
@@ -93,6 +94,7 @@ export const CHAPTER_SLUG_QUERY = gql`
       chapterLanguage
       status
       title
+      publicTitle
       heroImage
       sections
       preamble {
@@ -138,6 +140,7 @@ export const GET_ALL_NEWS_QUERY = gql`
         categoryTitle
       }
       relatedChapters {
+        publicTitle
         title
       }
       resources {
@@ -351,6 +354,7 @@ export const GET_ALL_NEWS_BY_CATEGORY = gql`
       }
       relatedChapters {
         title
+        publicTitle
       }
       resourcesTitle
       resourcesPreamble
@@ -392,6 +396,7 @@ export const GET_ALL_NEWS_BY_CATEGORY_AND_CHAPTER = gql`
       }
       relatedChapters {
         title
+        publicTitle
         slug
       }
       resourcesTitle
@@ -419,6 +424,7 @@ export const GET_PEOPLE_BY_IDS = gql`
       city
       country
       role
+      company
       socialMediaIcon1
       socialMediaUrl1
       socialMediaIcon2

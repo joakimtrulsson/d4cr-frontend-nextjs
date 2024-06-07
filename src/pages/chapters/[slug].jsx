@@ -40,9 +40,12 @@ export default function ChapterSlugPage({ chapterData }) {
 
   chapterLanguages.sort((a, b) => a.chapterLanguage.localeCompare(b.chapterLanguage));
 
-  const checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
-    chapterData.sections
-  );
+  let checkIfMultipleTextMediaSections;
+  if (chapterData?.sections) {
+    checkIfMultipleTextMediaSections = markConsecutiveMediaTextSections(
+      chapterData?.sections
+    );
+  }
 
   return (
     <main className='site-content chapter-main flex flex-column flex-align-center flex-align-center'>
@@ -87,9 +90,9 @@ export default function ChapterSlugPage({ chapterData }) {
           D4CR PRESENTS
         </p>
 
-        {chapterData.title && (
+        {chapterData.publicTitle && (
           <h1 className='heading-background margin-t--zero'>
-            {chapterData.title.replace(/-\w{2,3}$/, '')}
+            Chapter {chapterData.publicTitle}
           </h1>
         )}
 
@@ -125,7 +128,7 @@ export async function getStaticProps({ params }) {
     return {
       props: {
         chapterData: data.chapters[0] || null,
-        tabTitle: data.chapters[0]?.title || 'Page not found',
+        tabTitle: data.chapters[0]?.publicTitle || 'Page not found',
       },
       revalidate: Number(process.env.NEXT_PUBLIC_STATIC_REVALIDATE),
     };

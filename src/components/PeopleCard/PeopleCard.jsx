@@ -8,7 +8,7 @@ import { getColorCode, abbreviateWord } from '../../utils/index.js';
 export default function PeopleCard({ data }) {
   const { library, config } = require('@fortawesome/fontawesome-svg-core');
   library.add(fab);
-
+  console.log(data.company);
   return (
     <div className='people-card bg-yellow-50 borderradius--xxs margin--xs'>
       <div className='image-wrapper bg-yellow-100'>
@@ -30,11 +30,16 @@ export default function PeopleCard({ data }) {
           <p className='margin-tb--xxxs color-yellow-700'>
             {abbreviateWord(data.role, 20)}
           </p>
+          {data.company && (
+            <p className='margin-tb--xxxs color-yellow-700 company'>
+              {abbreviateWord(data.company, 20)}
+            </p>
+          )}
         </div>
 
         <div className=''>
-          <p className='margin--zero description-text'>
-            {abbreviateWord(`${data.country}, ${data.city}`, 30)}
+          <p className='description-text'>
+            {abbreviateWord(` ${data.city}, ${data.country}`, 30)}
           </p>
         </div>
         <div className=' flex flex-row flex-justify-end flex-align-center'>

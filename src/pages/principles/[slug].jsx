@@ -110,7 +110,7 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
                 </p>
               </div>
               <div className='flex flex-column right-part'>
-                <div className='quote-container'>
+                <div className={`quote-container ${!useIndex?.quote ? 'invisible' : ''}`}>
                   <div className='quote'>
                     <h4 className='quote-text'>{useIndex?.quote}</h4>
                     <p className='quote-author'>{useIndex?.quoteAuthor}</p>
@@ -121,6 +121,7 @@ export default function PrinciplesPage({ principleNumber, resolvedUrl }) {
                     />
                   </div>
                 </div>
+
                 <div className='width-full flex flex-justify-center flex-align-center'>
                   {useIndex?.image ? (
                     <Image
